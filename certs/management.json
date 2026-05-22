@@ -4,25 +4,32 @@
     "name": "PMI PMP (Project Management Professional)",
     "provider": "PMI",
     "industry": "management",
+    "subdomain": "project_management",
     "difficulty": 4,
-    "description": "Gold-standard project management certification recognized globally across industries.",
+    "description": "Gold-standard project management certification recognised globally across industries.",
     "official_url": "https://www.pmi.org/certifications/types/project-management-pmp",
-    "cost": "$555",
+    "cost": "$405–$555",
+    "cost_source": "PMI Official (May 2026) — $405 for PMI members, $555 for non-members. PMI membership ~$139/year.",
     "duration_weeks": 24,
     "study_hours": 120,
-    "exam_format": "Multiple Choice",
-    "exam_duration_minutes": 200,
-    "passing_score": "61%",
+    "exam_format": "180 questions — mix of multiple choice, multiple response, matching, hotspot, and fill-in-the-blank",
+    "exam_duration_minutes": 230,
+    "passing_score": 0,
+    "passing_score_note": "PMI does not publish a fixed passing score. Results reported as proficiency levels: Above Target, Target, Below Target, Needs Improvement.",
     "pass_rate_percent": 61,
+    "pass_rate_source": "Community estimate",
     "valid_years": 3,
     "renewal_required": true,
-    "renewal_cost": "275",
-    "salary_boost_low": "project management,agile,scrum,risk management,stakeholder management,budgeting,scheduling,leadership,Waterfall,PMBOK",
-    "salary_boost_high": "project management,leadership,risk management",
-    "worth_it_rating": "agile,scrum,stakeholder management,budgeting,scheduling,Waterfall,PMBOK",
-    "trending": false,
-    "data_confidence": "Management fundamentals",
-    "target_job_titles": ["Project Manager", "Program Manager", "PMO Director"],
+    "renewal_cost": "$60–$150",
+    "renewal_cost_note": "$60 for PMI members, $150 for non-members every 3 years",
+    "renewal_method": "Earn 60 PDUs (Professional Development Units) within 3-year cycle",
+    "salary_boost_low": 6000,
+    "salary_boost_high": 15000,
+    "salary_boost_source": "PMI Earning Power Salary Survey / Glassdoor (estimated)",
+    "worth_it_rating": 9.0,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
     "skills": [
       "project management",
       "leadership",
@@ -32,12 +39,45 @@
       "scheduling",
       "Waterfall",
       "PMBOK",
-      "resource management"
+      "resource management",
+      "agile",
+      "scrum"
     ],
     "primary_skills": [
-      "PgMP",
-      "CAPM",
-      "Agile certifications"
+      "project management",
+      "leadership",
+      "risk management"
+    ],
+    "secondary_skills": [
+      "stakeholder management",
+      "budgeting",
+      "scheduling",
+      "agile",
+      "scrum",
+      "PMBOK"
+    ],
+    "prerequisites": [
+      "High school diploma + 5 years PM experience + 35 contact hours OR 4-year degree + 3 years PM experience + 35 contact hours"
+    ],
+    "recommended_prior_knowledge": [
+      "PMBOK knowledge",
+      "Project management fundamentals",
+      "Agile/Scrum basics"
+    ],
+    "target_job_titles": [
+      "Project Manager",
+      "Program Manager",
+      "PMO Director",
+      "Delivery Manager",
+      "Technical Project Manager",
+      "Scrum Master",
+      "Portfolio Manager"
+    ],
+    "job_postings_count": 42000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "PgMP (Program Management Professional)",
+      "PMI-ACP (Agile Certified Practitioner)"
     ]
   }
 ]

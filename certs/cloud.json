@@ -4,20 +4,26 @@
     "name": "AWS Cloud Practitioner",
     "provider": "Amazon Web Services",
     "industry": "cloud",
+    "subdomain": "aws",
     "difficulty": 1,
     "description": "Entry-level AWS certification covering cloud concepts, core AWS services, security, and pricing.",
     "official_url": "https://aws.amazon.com/certification/certified-cloud-practitioner/",
     "cost": "$100",
+    "cost_source": "AWS Official (May 2026)",
     "duration_weeks": 4,
     "study_hours": 40,
-    "exam_format": "Multiple Choice",
+    "exam_format": "Multiple choice & multiple response, 65 questions",
     "exam_duration_minutes": 90,
-    "passing_score": "70%",
-    "pass_rate_percent": 78,
+    "passing_score": 700,
+    "passing_score_note": "Scaled score out of 1000",
+    "pass_rate_percent": 70,
+    "pass_rate_source": "Community estimate",
     "valid_years": 3,
-    "renewal_required": false,
+    "renewal_required": true,
+    "renewal_cost": "$100",
     "salary_boost_low": 2000,
     "salary_boost_high": 5000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
     "worth_it_rating": 8.5,
     "trending": true,
     "data_confidence": "high",
@@ -35,22 +41,28 @@
     "primary_skills": [
       "AWS",
       "cloud computing",
-      "infrastructure",
-      "EC2",
-      "S3"
+      "infrastructure"
     ],
     "secondary_skills": [
+      "EC2",
+      "S3",
       "IAM",
       "billing",
       "cloud services"
     ],
-    "recommended_prior_knowledge": "Basic cloud concepts",
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic cloud concepts"
+    ],
     "target_job_titles": [
       "Cloud Engineer",
       "AWS Developer",
-      "Solutions Architect"
+      "Solutions Architect",
+      "Cloud Support Associate",
+      "Junior Cloud Engineer"
     ],
     "job_postings_count": 50000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
       "AWS Solutions Architect Associate",
       "AWS Developer Associate"
@@ -61,20 +73,26 @@
     "name": "AWS Solutions Architect Associate",
     "provider": "Amazon Web Services",
     "industry": "cloud",
+    "subdomain": "aws",
     "difficulty": 3,
     "description": "Covers designing scalable, resilient, and cost-optimized architectures on AWS.",
     "official_url": "https://aws.amazon.com/certification/certified-solutions-architect-associate/",
-    "cost": "$300",
+    "cost": "$150",
+    "cost_source": "AWS Official (May 2026)",
     "duration_weeks": 8,
     "study_hours": 80,
-    "exam_format": "Multiple Choice",
+    "exam_format": "Multiple choice & multiple response, 65 questions",
     "exam_duration_minutes": 130,
-    "passing_score": "72%",
+    "passing_score": 720,
+    "passing_score_note": "Scaled score out of 1000",
     "pass_rate_percent": 65,
+    "pass_rate_source": "Community estimate",
     "valid_years": 3,
-    "renewal_required": false,
+    "renewal_required": true,
+    "renewal_cost": "$150",
     "salary_boost_low": 5000,
     "salary_boost_high": 12000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
     "worth_it_rating": 9.0,
     "trending": true,
     "data_confidence": "high",
@@ -94,28 +112,36 @@
     ],
     "primary_skills": [
       "AWS",
+      "cloud architecture",
       "VPC",
-      "EC2",
-      "RDS",
-      "security"
+      "scalability"
     ],
     "secondary_skills": [
       "IAM",
+      "EC2",
       "S3",
-      "scalability",
-      "cloud architecture"
+      "RDS",
+      "high availability"
     ],
-    "prerequisites": "AWS Cloud Practitioner or equivalent experience",
-    "recommended_prior_knowledge": "AWS core services,networking concepts",
+    "prerequisites": [
+      "AWS Cloud Practitioner or equivalent experience"
+    ],
+    "recommended_prior_knowledge": [
+      "AWS core services",
+      "networking concepts"
+    ],
     "target_job_titles": [
       "Solutions Architect",
+      "Cloud Architect",
       "Cloud Engineer",
-      "DevOps Engineer"
+      "Infrastructure Engineer",
+      "Senior Cloud Engineer"
     ],
     "job_postings_count": 45000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
       "AWS Solutions Architect Professional",
-      "AWS DevOps Engineer"
+      "AWS DevOps Engineer Professional"
     ]
   },
   {
@@ -123,20 +149,26 @@
     "name": "AWS Developer Associate",
     "provider": "Amazon Web Services",
     "industry": "cloud",
+    "subdomain": "aws",
     "difficulty": 3,
     "description": "Validates proficiency in developing and maintaining AWS-based applications.",
     "official_url": "https://aws.amazon.com/certification/certified-developer-associate/",
-    "cost": "$300",
+    "cost": "$150",
+    "cost_source": "AWS Official (May 2026)",
     "duration_weeks": 8,
     "study_hours": 80,
-    "exam_format": "Multiple Choice",
+    "exam_format": "Multiple choice & multiple response, 65 questions",
     "exam_duration_minutes": 130,
-    "passing_score": "62%",
+    "passing_score": 720,
+    "passing_score_note": "Scaled score out of 1000",
     "pass_rate_percent": 62,
+    "pass_rate_source": "Community estimate",
     "valid_years": 3,
-    "renewal_required": false,
+    "renewal_required": true,
+    "renewal_cost": "$150",
     "salary_boost_low": 4500,
     "salary_boost_high": 10000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
     "worth_it_rating": 8.8,
     "trending": true,
     "data_confidence": "high",
@@ -151,7 +183,6 @@
       "DevOps",
       "CI/CD",
       "serverless",
-      "software development",
       "Python",
       "Node.js"
     ],
@@ -168,17 +199,25 @@
       "Python",
       "Node.js"
     ],
-    "prerequisites": "AWS Cloud Practitioner or professional experience",
-    "recommended_prior_knowledge": "Programming basics,AWS core services",
+    "prerequisites": [
+      "AWS Cloud Practitioner or professional experience"
+    ],
+    "recommended_prior_knowledge": [
+      "Programming basics",
+      "AWS core services"
+    ],
     "target_job_titles": [
       "AWS Developer",
       "Backend Engineer",
-      "DevOps Engineer"
+      "DevOps Engineer",
+      "Software Engineer",
+      "Cloud Application Developer"
     ],
     "job_postings_count": 40000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "AWS Solutions Architect Associate",
-      "AWS DevOps Engineer"
+      "AWS Solutions Architect Professional",
+      "AWS DevOps Engineer Professional"
     ]
   },
   {
@@ -186,20 +225,27 @@
     "name": "Azure Fundamentals (AZ-900)",
     "provider": "Microsoft",
     "industry": "cloud",
+    "subdomain": "azure",
     "difficulty": 1,
     "description": "Foundation-level Microsoft Azure certification covering cloud concepts and core Azure services.",
     "official_url": "https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/",
-    "cost": "$165",
+    "cost": "$99",
+    "cost_source": "Microsoft Official (May 2026)",
     "duration_weeks": 3,
     "study_hours": 30,
-    "exam_format": "Multiple Choice",
-    "exam_duration_minutes": 85,
-    "passing_score": "700",
+    "exam_format": "Multiple choice, ~40 questions",
+    "exam_duration_minutes": 45,
+    "passing_score": 700,
+    "passing_score_note": "Scaled score out of 1000",
     "pass_rate_percent": 81,
+    "pass_rate_source": "Community estimate",
     "valid_years": 1,
-    "renewal_required": false,
+    "renewal_required": true,
+    "renewal_cost": "$0",
+    "renewal_cost_note": "Free annual renewal via Microsoft Learn assessment",
     "salary_boost_low": 1500,
     "salary_boost_high": 4000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
     "worth_it_rating": 8.2,
     "trending": true,
     "data_confidence": "high",
@@ -217,24 +263,30 @@
     "primary_skills": [
       "Azure",
       "cloud computing",
-      "virtual machines",
-      "storage"
+      "virtual machines"
     ],
     "secondary_skills": [
+      "storage",
       "networking",
       "security",
       "cloud services"
     ],
-    "recommended_prior_knowledge": "Basic IT knowledge",
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic IT knowledge"
+    ],
     "target_job_titles": [
       "Cloud Engineer",
       "Azure Developer",
-      "Systems Administrator"
+      "Systems Administrator",
+      "Cloud Support Associate",
+      "Junior Cloud Engineer"
     ],
     "job_postings_count": 35000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "Azure Administrator",
-      "Azure Solutions Architect"
+      "Azure Administrator Associate (AZ-104)",
+      "Azure Security Engineer Associate (AZ-500)"
     ]
   },
   {
@@ -242,20 +294,26 @@
     "name": "Google Associate Cloud Engineer",
     "provider": "Google",
     "industry": "cloud",
+    "subdomain": "gcp",
     "difficulty": 3,
     "description": "Validates ability to deploy and manage Google Cloud applications and infrastructure.",
     "official_url": "https://cloud.google.com/certification/cloud-engineer",
-    "cost": "$200",
+    "cost": "$125",
+    "cost_source": "Google Cloud Official (May 2026)",
     "duration_weeks": 8,
     "study_hours": 80,
-    "exam_format": "Multiple Choice",
+    "exam_format": "Multiple choice & scenario-based, 50–60 questions",
     "exam_duration_minutes": 120,
-    "passing_score": "70%",
+    "passing_score": 70,
+    "passing_score_note": "Approximate — Google does not publish exact passing score",
     "pass_rate_percent": 68,
-    "valid_years": 3,
-    "renewal_required": false,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 2,
+    "renewal_required": true,
+    "renewal_cost": "$125",
     "salary_boost_low": 3000,
     "salary_boost_high": 8000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
     "worth_it_rating": 8.0,
     "trending": true,
     "data_confidence": "high",
@@ -273,26 +331,35 @@
     ],
     "primary_skills": [
       "GCP",
+      "Google Cloud",
       "Kubernetes",
-      "deployment",
-      "storage"
+      "deployment"
     ],
     "secondary_skills": [
-      "Networking",
-      "security",
-      "Cloud SQL"
+      "Compute Engine",
+      "networking",
+      "storage",
+      "security"
     ],
-    "prerequisites": "GCP Cloud Fundamentals",
-    "recommended_prior_knowledge": "Linux basics,networking concepts",
+    "prerequisites": [
+      "GCP Cloud Fundamentals recommended"
+    ],
+    "recommended_prior_knowledge": [
+      "Linux basics",
+      "networking concepts"
+    ],
     "target_job_titles": [
       "Cloud Engineer",
       "DevOps Engineer",
-      "Infrastructure Engineer"
+      "Infrastructure Engineer",
+      "Site Reliability Engineer",
+      "GCP Cloud Engineer"
     ],
     "job_postings_count": 30000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "Google Cloud Architect",
-      "Google Cloud Data Engineer"
+      "Google Cloud Professional Architect",
+      "Google Cloud Professional Data Engineer"
     ]
   },
   {
@@ -300,49 +367,301 @@
     "name": "CompTIA Network+",
     "provider": "CompTIA",
     "industry": "cloud",
+    "subdomain": "networking",
     "difficulty": 2,
     "description": "Validates foundational networking skills across infrastructure and protocols.",
     "official_url": "https://www.comptia.org/certifications/network",
-    "cost": "$338",
+    "cost": "$369",
+    "cost_source": "CompTIA Official N10-009 (May 2026)",
     "duration_weeks": 8,
     "study_hours": 80,
-    "exam_format": "Multiple Choice",
+    "exam_format": "Multiple choice & performance-based, max 90 questions",
     "exam_duration_minutes": 90,
-    "passing_score": "720",
+    "passing_score": 720,
+    "passing_score_note": "Scaled score out of 900",
     "pass_rate_percent": 65,
+    "pass_rate_source": "Community estimate",
     "valid_years": 3,
     "renewal_required": true,
-    "renewal_cost": "169",
-    "salary_boost_low": "Network fundamentals",
-    "salary_boost_high": "networking,TCP/IP,DNS,routing,switching,firewalls,network security,VPN,wireless,troubleshooting",
-    "worth_it_rating": "networking,TCP/IP,routing",
+    "renewal_cost": "$369",
+    "salary_boost_low": 2000,
+    "salary_boost_high": 5000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 7.9,
     "trending": false,
-    "data_confidence": "CompTIA A+",
-    "target_job_titles": [
-      "Network Administrator",
-      "Network Engineer",
-      "IT Support Technician",
-      "Systems Administrator"
-    ],
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
     "skills": [
       "networking",
       "TCP/IP",
       "DNS",
       "routing",
+      "switching",
       "firewalls",
       "VPN",
       "network security",
-      "switching",
+      "wireless",
       "troubleshooting"
     ],
     "primary_skills": [
       "networking",
       "TCP/IP",
-      "firewalls"
+      "firewalls",
+      "routing"
     ],
     "secondary_skills": [
+      "DNS",
+      "VPN",
+      "switching",
+      "wireless",
+      "troubleshooting"
+    ],
+    "prerequisites": [
+      "CompTIA A+ recommended"
+    ],
+    "recommended_prior_knowledge": [
+      "Basic IT support",
+      "OSI model"
+    ],
+    "target_job_titles": [
+      "Network Administrator",
+      "Network Engineer",
+      "IT Support Technician",
+      "Systems Administrator",
+      "Infrastructure Engineer"
+    ],
+    "job_postings_count": 22000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
       "CompTIA Security+",
       "Cisco CCNA"
+    ]
+  },
+  {
+    "id": 21,
+    "name": "AWS DevOps Engineer Professional",
+    "provider": "Amazon Web Services",
+    "industry": "cloud",
+    "subdomain": "devops",
+    "difficulty": 4,
+    "description": "Validates technical expertise in provisioning, operating, and managing distributed application systems on AWS.",
+    "official_url": "https://aws.amazon.com/certification/certified-devops-engineer-professional/",
+    "cost": "$300",
+    "cost_source": "AWS Official (May 2026) — Professional-level exams are $300",
+    "duration_weeks": 12,
+    "study_hours": 120,
+    "exam_format": "Multiple choice & multiple response, 75 questions",
+    "exam_duration_minutes": 180,
+    "passing_score": 750,
+    "passing_score_note": "Scaled score out of 1000",
+    "pass_rate_percent": 55,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$300",
+    "salary_boost_low": 10000,
+    "salary_boost_high": 22000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 9.1,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "AWS",
+      "CI/CD",
+      "DevOps",
+      "CloudFormation",
+      "CodePipeline",
+      "CodeDeploy",
+      "monitoring",
+      "automation",
+      "infrastructure as code",
+      "Kubernetes",
+      "Docker",
+      "Lambda"
+    ],
+    "primary_skills": [
+      "AWS",
+      "CI/CD",
+      "DevOps",
+      "infrastructure as code"
+    ],
+    "secondary_skills": [
+      "CloudFormation",
+      "CodePipeline",
+      "monitoring",
+      "automation",
+      "Docker"
+    ],
+    "prerequisites": [
+      "AWS Developer Associate or AWS Solutions Architect Associate"
+    ],
+    "recommended_prior_knowledge": [
+      "2+ years AWS experience",
+      "CI/CD concepts",
+      "Scripting"
+    ],
+    "target_job_titles": [
+      "DevOps Engineer",
+      "Platform Engineer",
+      "Site Reliability Engineer",
+      "Cloud Engineer",
+      "Release Engineer"
+    ],
+    "job_postings_count": 35000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "AWS Solutions Architect Professional",
+      "Certified Kubernetes Administrator"
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Certified Kubernetes Administrator (CKA)",
+    "provider": "Cloud Native Computing Foundation (CNCF)",
+    "industry": "cloud",
+    "subdomain": "devops",
+    "difficulty": 4,
+    "description": "Validates skills, knowledge, and competency to perform the responsibilities of Kubernetes administrators.",
+    "official_url": "https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/",
+    "cost": "$395",
+    "cost_source": "Linux Foundation Official (May 2026)",
+    "duration_weeks": 12,
+    "study_hours": 100,
+    "exam_format": "Performance-based, hands-on tasks in a live Kubernetes environment, ~17 tasks",
+    "exam_duration_minutes": 120,
+    "passing_score": 66,
+    "passing_score_note": "66% required to pass",
+    "pass_rate_percent": 55,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$395",
+    "salary_boost_low": 8000,
+    "salary_boost_high": 20000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 9.0,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "Kubernetes",
+      "container orchestration",
+      "Docker",
+      "cluster management",
+      "networking",
+      "storage",
+      "security",
+      "deployment",
+      "Linux",
+      "troubleshooting"
+    ],
+    "primary_skills": [
+      "Kubernetes",
+      "container orchestration",
+      "cluster management"
+    ],
+    "secondary_skills": [
+      "Docker",
+      "networking",
+      "storage",
+      "Linux",
+      "deployment"
+    ],
+    "prerequisites": [
+      "Linux fundamentals",
+      "Basic Kubernetes knowledge"
+    ],
+    "recommended_prior_knowledge": [
+      "Docker",
+      "Linux command line",
+      "Networking basics"
+    ],
+    "target_job_titles": [
+      "Kubernetes Administrator",
+      "DevOps Engineer",
+      "Platform Engineer",
+      "Cloud Engineer",
+      "Site Reliability Engineer",
+      "Infrastructure Engineer"
+    ],
+    "job_postings_count": 28000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Certified Kubernetes Application Developer (CKAD)",
+      "AWS DevOps Engineer Professional"
+    ]
+  },
+  {
+    "id": 23,
+    "name": "HashiCorp Terraform Associate",
+    "provider": "HashiCorp",
+    "industry": "cloud",
+    "subdomain": "devops",
+    "difficulty": 2,
+    "description": "Validates foundational knowledge of infrastructure as code concepts and the Terraform ecosystem.",
+    "official_url": "https://developer.hashicorp.com/certifications/infrastructure-automation",
+    "cost": "$70",
+    "cost_source": "HashiCorp Official (May 2026)",
+    "duration_weeks": 6,
+    "study_hours": 50,
+    "exam_format": "Multiple choice & true/false, ~57 questions",
+    "exam_duration_minutes": 60,
+    "passing_score": 70,
+    "passing_score_note": "Approximately 70% required",
+    "pass_rate_percent": 70,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 2,
+    "renewal_required": true,
+    "renewal_cost": "$70",
+    "salary_boost_low": 5000,
+    "salary_boost_high": 12000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.7,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "Terraform",
+      "infrastructure as code",
+      "cloud provisioning",
+      "AWS",
+      "Azure",
+      "GCP",
+      "automation",
+      "DevOps",
+      "version control",
+      "modules"
+    ],
+    "primary_skills": [
+      "Terraform",
+      "infrastructure as code",
+      "cloud provisioning"
+    ],
+    "secondary_skills": [
+      "automation",
+      "DevOps",
+      "AWS",
+      "Azure",
+      "GCP"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic cloud concepts",
+      "Command line experience"
+    ],
+    "target_job_titles": [
+      "DevOps Engineer",
+      "Cloud Engineer",
+      "Infrastructure Engineer",
+      "Platform Engineer",
+      "Site Reliability Engineer"
+    ],
+    "job_postings_count": 30000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Certified Kubernetes Administrator",
+      "AWS DevOps Engineer Professional"
     ]
   }
 ]

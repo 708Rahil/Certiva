@@ -4,25 +4,31 @@
     "name": "CompTIA Security+",
     "provider": "CompTIA",
     "industry": "cybersecurity",
+    "subdomain": "defensive",
     "difficulty": 2,
     "description": "Core cybersecurity certification covering threats, vulnerabilities, and security architecture.",
     "official_url": "https://www.comptia.org/certifications/security",
-    "cost": "$370",
+    "cost": "$425",
+    "cost_source": "CompTIA Official SY0-701 (May 2026)",
     "duration_weeks": 10,
     "study_hours": 100,
-    "exam_format": "Multiple Choice",
+    "exam_format": "Multiple choice & performance-based, max 90 questions",
     "exam_duration_minutes": 90,
-    "passing_score": "750",
+    "passing_score": 750,
+    "passing_score_note": "Scaled score out of 900",
     "pass_rate_percent": 58,
+    "pass_rate_source": "Community estimate",
     "valid_years": 3,
     "renewal_required": true,
-    "renewal_cost": "165",
-    "salary_boost_low": "cybersecurity,network security,cryptography,risk management,threat analysis,incident response,identity management,security policies,vulnerability",
-    "salary_boost_high": "cybersecurity,network security,incident response",
-    "worth_it_rating": "cryptography,risk management,threat analysis,security policies,vulnerability",
-    "trending": false,
-    "data_confidence": "IT fundamentals,networking basics",
-    "target_job_titles": ["Security Engineer", "IT Security Analyst", "Network Administrator"],
+    "renewal_cost": "$150",
+    "renewal_cost_note": "$50/year for 3 years via CompTIA CertMaster CE or CEUs",
+    "salary_boost_low": 3500,
+    "salary_boost_high": 8000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.7,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
     "skills": [
       "cybersecurity",
       "network security",
@@ -35,9 +41,38 @@
       "vulnerability assessment"
     ],
     "primary_skills": [
+      "cybersecurity",
+      "network security",
+      "threat analysis"
+    ],
+    "secondary_skills": [
+      "cryptography",
+      "risk management",
+      "incident response",
+      "identity management",
+      "security policies"
+    ],
+    "prerequisites": [
+      "CompTIA Network+ or 2 years IT admin experience recommended"
+    ],
+    "recommended_prior_knowledge": [
+      "Networking fundamentals",
+      "System administration basics"
+    ],
+    "target_job_titles": [
+      "Security Engineer",
+      "IT Security Analyst",
+      "Network Administrator",
+      "Cybersecurity Analyst",
+      "SOC Analyst",
+      "Security Administrator"
+    ],
+    "job_postings_count": 35000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
       "CISSP",
       "CEH",
-      "Google Cybersecurity Certificate"
+      "CompTIA CySA+"
     ]
   },
   {
@@ -45,24 +80,31 @@
     "name": "CEH (Certified Ethical Hacker)",
     "provider": "EC-Council",
     "industry": "cybersecurity",
+    "subdomain": "offensive",
     "difficulty": 4,
     "description": "Advanced certification for ethical hackers covering attack techniques and countermeasures.",
     "official_url": "https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/",
-    "cost": "$1099",
+    "cost": "$950–$1,199",
+    "cost_source": "EC-Council Official CEH v13 (May 2026) — $950 via ECC remote proctoring, $1,199 via Pearson VUE",
     "duration_weeks": 16,
     "study_hours": 150,
-    "exam_format": "Multiple Choice",
-    "exam_duration_minutes": 125,
-    "passing_score": "70%",
+    "exam_format": "Multiple choice, 125 questions",
+    "exam_duration_minutes": 240,
+    "passing_score": 70,
+    "passing_score_note": "Varies by exam form — typically 60–85%; no fixed cutoff published",
     "pass_rate_percent": 45,
+    "pass_rate_source": "Community estimate",
     "valid_years": 3,
-    "renewal_required": false,
-    "salary_boost_low": "ethical hacking,penetration testing,vulnerability assessment,network scanning,exploits,malware,cryptography,footprinting,cybersecurity",
-    "salary_boost_high": "ethical hacking,penetration testing,exploits",
-    "worth_it_rating": "vulnerability assessment,network scanning,malware,cryptography,footprinting",
-    "trending": false,
-    "data_confidence": "Networking,operating systems,programming basics",
-    "target_job_titles": ["Penetration Tester", "Security Researcher", "Ethical Hacker"],
+    "renewal_required": true,
+    "renewal_cost": "$1,199",
+    "renewal_cost_note": "Or earn 120 ECE credits within 3 years",
+    "salary_boost_low": 8000,
+    "salary_boost_high": 18000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.6,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
     "skills": [
       "ethical hacking",
       "penetration testing",
@@ -75,31 +117,70 @@
       "cybersecurity"
     ],
     "primary_skills": [
+      "penetration testing",
+      "ethical hacking",
+      "vulnerability assessment"
+    ],
+    "secondary_skills": [
+      "network scanning",
+      "exploits",
+      "malware analysis",
+      "cryptography",
+      "footprinting"
+    ],
+    "prerequisites": [
+      "2 years security experience OR completion of official EC-Council CEH training"
+    ],
+    "recommended_prior_knowledge": [
+      "Networking",
+      "operating systems",
+      "programming basics"
+    ],
+    "target_job_titles": [
+      "Penetration Tester",
+      "Security Researcher",
+      "Ethical Hacker",
+      "Red Team Analyst",
+      "Vulnerability Analyst",
+      "Offensive Security Engineer"
+    ],
+    "job_postings_count": 15000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
       "OSCP",
-      "GPEN",
-      "CompTIA CySA+"
+      "CEH Master",
+      "CISSP"
     ]
   },
   {
     "id": 9,
     "name": "Google Cybersecurity Certificate",
-    "provider": "Google",
+    "provider": "Google / Coursera",
     "industry": "cybersecurity",
+    "subdomain": "defensive",
     "difficulty": 1,
     "description": "Entry-level cybersecurity program covering security operations, threat response, and tools.",
     "official_url": "https://www.coursera.org/professional-certificates/google-cybersecurity",
-    "cost": "$49/mo",
+    "cost": "$49/month",
+    "cost_source": "Coursera Official (May 2026)",
     "duration_weeks": 20,
     "study_hours": 40,
-    "exam_format": "Coursework & Labs",
-    "passing_score": "75%",
+    "exam_format": "Coursework, labs & graded assessments — no standalone timed exam",
+    "exam_duration_minutes": 0,
+    "passing_score": 80,
+    "passing_score_note": "80% required on each graded assessment",
     "pass_rate_percent": 72,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 3,
     "renewal_required": false,
-    "salary_boost_low": "cybersecurity,SIEM,Linux,SQL,network security,incident response,threat analysis,Python,security operations",
-    "salary_boost_high": "cybersecurity,SIEM,incident response",
-    "worth_it_rating": "Linux,SQL,Python,threat analysis,network security",
-    "data_confidence": "Basic IT or computer fundamentals",
-    "target_job_titles": ["Security Analyst", "SOC Analyst", "Cybersecurity Specialist"],
+    "renewal_cost": "$0",
+    "salary_boost_low": 2000,
+    "salary_boost_high": 6000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.3,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
     "skills": [
       "cybersecurity",
       "SIEM",
@@ -112,9 +193,279 @@
       "security operations"
     ],
     "primary_skills": [
+      "cybersecurity",
+      "SIEM",
+      "incident response"
+    ],
+    "secondary_skills": [
+      "Linux",
+      "SQL",
+      "Python",
+      "threat analysis",
+      "network security"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic IT or computer fundamentals"
+    ],
+    "target_job_titles": [
+      "Security Analyst",
+      "SOC Analyst",
+      "Cybersecurity Specialist",
+      "Junior Security Engineer",
+      "Incident Response Analyst"
+    ],
+    "job_postings_count": 28000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
       "CompTIA Security+",
-      "Splunk Certified User",
-      "Google Cloud Security Certificate"
+      "CEH"
+    ]
+  },
+  {
+    "id": 24,
+    "name": "CISSP (Certified Information Systems Security Professional)",
+    "provider": "ISC2",
+    "industry": "cybersecurity",
+    "subdomain": "governance",
+    "difficulty": 5,
+    "description": "The gold-standard security certification covering 8 domains including risk management, cryptography, and security architecture. Required or preferred for most senior security roles.",
+    "official_url": "https://www.isc2.org/certifications/cissp",
+    "cost": "$749",
+    "cost_source": "ISC2 Official (May 2026)",
+    "duration_weeks": 24,
+    "study_hours": 250,
+    "exam_format": "Computerized Adaptive Testing (CAT), 125–175 questions",
+    "exam_duration_minutes": 240,
+    "passing_score": 700,
+    "passing_score_note": "Scaled score out of 1000",
+    "pass_rate_percent": 40,
+    "pass_rate_source": "Community estimate — ISC2 does not publish official pass rates",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$125",
+    "renewal_cost_note": "Annual AMF (Annual Maintenance Fee) of $125 + 120 CPE credits over 3 years",
+    "salary_boost_low": 15000,
+    "salary_boost_high": 35000,
+    "salary_boost_source": "ISC2 Cybersecurity Workforce Study / Glassdoor (estimated)",
+    "worth_it_rating": 9.4,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "security architecture",
+      "risk management",
+      "cryptography",
+      "network security",
+      "identity management",
+      "security operations",
+      "software security",
+      "asset security",
+      "governance",
+      "compliance",
+      "incident response",
+      "cloud security"
+    ],
+    "primary_skills": [
+      "security architecture",
+      "risk management",
+      "governance"
+    ],
+    "secondary_skills": [
+      "cryptography",
+      "network security",
+      "identity management",
+      "compliance",
+      "cloud security"
+    ],
+    "prerequisites": [
+      "5 years paid work experience in 2+ of the 8 CISSP domains"
+    ],
+    "recommended_prior_knowledge": [
+      "Network security",
+      "Risk management",
+      "Security architecture"
+    ],
+    "target_job_titles": [
+      "Chief Information Security Officer",
+      "Security Manager",
+      "IT Director",
+      "Security Architect",
+      "Senior Security Engineer",
+      "Security Consultant"
+    ],
+    "job_postings_count": 42000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "CISM",
+      "SABSA",
+      "CCSP"
+    ]
+  },
+  {
+    "id": 25,
+    "name": "CCSP (Certified Cloud Security Professional)",
+    "provider": "ISC2",
+    "industry": "cybersecurity",
+    "subdomain": "cloud_security",
+    "difficulty": 4,
+    "description": "Advanced cloud security certification covering cloud architecture, data security, platform security, and compliance. Frequently listed alongside CISSP for senior cloud security roles.",
+    "official_url": "https://www.isc2.org/certifications/ccsp",
+    "cost": "$599",
+    "cost_source": "ISC2 Official (May 2026)",
+    "duration_weeks": 16,
+    "study_hours": 150,
+    "exam_format": "Multiple choice, 125 questions",
+    "exam_duration_minutes": 240,
+    "passing_score": 700,
+    "passing_score_note": "Scaled score out of 1000",
+    "pass_rate_percent": 47,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$125",
+    "renewal_cost_note": "Annual AMF of $125 + 90 CPE credits over 3 years",
+    "salary_boost_low": 12000,
+    "salary_boost_high": 28000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 9.1,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "cloud security",
+      "cloud architecture",
+      "data security",
+      "risk management",
+      "compliance",
+      "identity management",
+      "security operations",
+      "Azure",
+      "AWS",
+      "GCP",
+      "governance",
+      "incident response",
+      "encryption"
+    ],
+    "primary_skills": [
+      "cloud security",
+      "cloud architecture",
+      "risk management"
+    ],
+    "secondary_skills": [
+      "data security",
+      "compliance",
+      "governance",
+      "identity management",
+      "encryption"
+    ],
+    "prerequisites": [
+      "5 years IT experience including 3 years in information security and 1 year in cloud security"
+    ],
+    "recommended_prior_knowledge": [
+      "Cloud fundamentals",
+      "Security architecture",
+      "Risk management"
+    ],
+    "target_job_titles": [
+      "Cloud Security Engineer",
+      "Cloud Security Architect",
+      "Security Architect",
+      "Cloud Security Analyst",
+      "Azure Cloud Security Engineer",
+      "Senior Cloud Security Engineer"
+    ],
+    "job_postings_count": 22000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "CISSP",
+      "AWS Security Specialty"
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Azure Security Engineer Associate (AZ-500)",
+    "provider": "Microsoft",
+    "industry": "cybersecurity",
+    "subdomain": "cloud_security",
+    "difficulty": 4,
+    "description": "Validates expertise in implementing security controls and threat protection, managing identity and access, and protecting data, applications, and networks in Microsoft Azure environments.",
+    "official_url": "https://learn.microsoft.com/en-us/credentials/certifications/azure-security-engineer/",
+    "cost": "$165",
+    "cost_source": "Microsoft Official (May 2026)",
+    "duration_weeks": 12,
+    "study_hours": 120,
+    "exam_format": "Multiple choice, case studies & labs, 40–60 questions",
+    "exam_duration_minutes": 120,
+    "passing_score": 700,
+    "passing_score_note": "Scaled score out of 1000",
+    "pass_rate_percent": 55,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "$0",
+    "renewal_cost_note": "Free annual renewal via Microsoft Learn assessment",
+    "salary_boost_low": 10000,
+    "salary_boost_high": 25000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 9.2,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "Azure",
+      "Microsoft Azure",
+      "cloud security",
+      "identity management",
+      "Azure Active Directory",
+      "M365",
+      "network security",
+      "threat protection",
+      "security monitoring",
+      "SIEM",
+      "Microsoft Sentinel",
+      "compliance",
+      "encryption",
+      "firewalls",
+      "Defender for Cloud"
+    ],
+    "primary_skills": [
+      "Azure",
+      "cloud security",
+      "identity management",
+      "Azure Active Directory"
+    ],
+    "secondary_skills": [
+      "Microsoft Sentinel",
+      "Defender for Cloud",
+      "network security",
+      "compliance",
+      "encryption",
+      "M365"
+    ],
+    "prerequisites": [
+      "Azure Fundamentals (AZ-900) recommended",
+      "Azure Administrator Associate (AZ-104) strongly recommended"
+    ],
+    "recommended_prior_knowledge": [
+      "Azure administration",
+      "Network security",
+      "Identity management"
+    ],
+    "target_job_titles": [
+      "Azure Cloud Security Engineer",
+      "Cloud Security Engineer",
+      "Security Architect",
+      "Azure Security Architect",
+      "Cloud Security Analyst",
+      "Identity and Access Management Engineer"
+    ],
+    "job_postings_count": 25000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "CCSP",
+      "CISSP",
+      "Microsoft Cybersecurity Architect (SC-100)"
     ]
   }
 ]

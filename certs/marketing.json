@@ -4,22 +4,31 @@
     "name": "Google Analytics Certification",
     "provider": "Google",
     "industry": "marketing",
+    "subdomain": "analytics",
     "difficulty": 1,
-    "description": "Validates proficiency in Google Analytics for measuring website performance.",
-    "official_url": "https://analytics.google.com/analytics/academy/",
-    "cost": "$0",
+    "description": "Validates proficiency in Google Analytics 4 (GA4) for measuring and analysing website performance.",
+    "official_url": "https://skillshop.withgoogle.com/",
+    "cost": "Free",
+    "cost_source": "Google Skillshop (May 2026)",
     "duration_weeks": 4,
-    "study_hours": 20,
-    "exam_format": "Multiple Choice",
-    "exam_duration_minutes": 90,
-    "passing_score": "75%",
-    "pass_rate_percent": 85,
-    "renewal_required": false,
-    "salary_boost_low": "Google Analytics,web analytics,data analysis,digital marketing,SEO,conversion tracking,audience analysis,reporting,marketing metrics",
-    "salary_boost_high": "Google Analytics,conversion tracking,SEO",
-    "worth_it_rating": "web analytics,audience analysis,reporting,marketing metrics",
-    "data_confidence": "Basic digital marketing knowledge",
-    "target_job_titles": ["Marketing Analyst", "Digital Marketer", "Web Analyst"],
+    "study_hours": 12,
+    "exam_format": "Multiple choice, 50 questions",
+    "exam_duration_minutes": 45,
+    "passing_score": 80,
+    "passing_score_note": "80% required to pass",
+    "pass_rate_percent": 82,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "Free",
+    "renewal_cost_note": "Retake assessment annually for free via Google Skillshop",
+    "salary_boost_low": 1000,
+    "salary_boost_high": 3000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.5,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
     "skills": [
       "Google Analytics",
       "web analytics",
@@ -32,8 +41,34 @@
       "marketing metrics"
     ],
     "primary_skills": [
+      "Google Analytics",
+      "web analytics",
+      "conversion tracking"
+    ],
+    "secondary_skills": [
+      "data analysis",
+      "SEO",
+      "audience analysis",
+      "reporting",
+      "marketing metrics"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic digital marketing knowledge"
+    ],
+    "target_job_titles": [
+      "Marketing Analyst",
+      "Digital Marketer",
+      "Web Analyst",
+      "Analytics Specialist",
+      "Growth Analyst",
+      "SEO Specialist"
+    ],
+    "job_postings_count": 35000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
       "Google Ads Certification",
-      "Google Advanced Analytics"
+      "HubSpot Marketing Certification"
     ]
   },
   {
@@ -41,36 +76,72 @@
     "name": "Google Ads Certification",
     "provider": "Google",
     "industry": "marketing",
+    "subdomain": "paid_ads",
     "difficulty": 1,
-    "description": "Certifies expertise in Google Ads campaign creation, management, and optimization.",
+    "description": "Certifies expertise in Google Ads campaign creation, management, and optimisation.",
     "official_url": "https://skillshop.withgoogle.com/",
-    "cost": "$0",
+    "cost": "Free",
+    "cost_source": "Google Skillshop (May 2026)",
     "duration_weeks": 4,
-    "study_hours": 20,
-    "exam_format": "Multiple Choice",
-    "exam_duration_minutes": 90,
-    "passing_score": "75%",
-    "pass_rate_percent": 84,
-    "renewal_required": false,
-    "salary_boost_low": "Google Ads,PPC,digital advertising,campaign management,search marketing,display advertising,bidding,keywords,conversion optimization,ROI",
-    "salary_boost_high": "Google Ads,PPC,keywords",
-    "worth_it_rating": "campaign management,bidding,conversion optimization,ROI,search marketing,display advertising",
-    "data_confidence": "Basic marketing knowledge",
-    "target_job_titles": ["Digital Marketer", "PPC Specialist", "Marketing Manager"],
+    "study_hours": 12,
+    "exam_format": "Multiple choice, 50 questions (separate exam per specialisation: Search, Display, Video, Shopping, Apps)",
+    "exam_duration_minutes": 45,
+    "passing_score": 80,
+    "passing_score_note": "80% required per specialisation exam",
+    "pass_rate_percent": 79,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "Free",
+    "renewal_cost_note": "Retake assessment annually for free via Google Skillshop",
+    "salary_boost_low": 2000,
+    "salary_boost_high": 5000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.3,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
     "skills": [
       "Google Ads",
       "PPC",
       "digital advertising",
       "campaign management",
       "search marketing",
+      "display advertising",
+      "bidding",
       "keywords",
       "conversion optimization",
-      "ROI",
-      "display advertising"
+      "ROI"
     ],
     "primary_skills": [
+      "Google Ads",
+      "PPC",
+      "campaign management"
+    ],
+    "secondary_skills": [
+      "search marketing",
+      "display advertising",
+      "keywords",
+      "bidding",
+      "conversion optimization"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic marketing knowledge"
+    ],
+    "target_job_titles": [
+      "Digital Marketer",
+      "PPC Specialist",
+      "Marketing Manager",
+      "SEM Specialist",
+      "Paid Search Manager",
+      "Performance Marketing Manager"
+    ],
+    "job_postings_count": 32000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
       "Google Analytics Certification",
-      "HubSpot Inbound Marketing"
+      "Meta Blueprint Certification"
     ]
   },
   {
@@ -78,21 +149,31 @@
     "name": "HubSpot Marketing Certification",
     "provider": "HubSpot",
     "industry": "marketing",
+    "subdomain": "inbound",
     "difficulty": 1,
     "description": "Comprehensive inbound marketing and HubSpot platform certification.",
     "official_url": "https://academy.hubspot.com/",
-    "cost": "$0",
+    "cost": "Free",
+    "cost_source": "HubSpot Academy (May 2026)",
     "duration_weeks": 6,
-    "study_hours": 25,
-    "exam_format": "Multiple Choice & Practical",
-    "passing_score": "80%",
-    "pass_rate_percent": 83,
-    "renewal_required": false,
-    "salary_boost_low": "HubSpot,inbound marketing,content marketing,email marketing,lead generation,CRM,marketing automation,social media,SEO",
-    "salary_boost_high": "HubSpot,inbound marketing,email marketing",
-    "worth_it_rating": "CRM,marketing automation,lead generation,social media,SEO",
-    "data_confidence": "Marketing fundamentals",
-    "target_job_titles": ["Marketing Manager", "Inbound Marketer", "Growth Specialist"],
+    "study_hours": 10,
+    "exam_format": "Multiple choice, 50 questions",
+    "exam_duration_minutes": 30,
+    "passing_score": 84,
+    "passing_score_note": "84% required (42/50 questions correct)",
+    "pass_rate_percent": 80,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 2,
+    "renewal_required": true,
+    "renewal_cost": "Free",
+    "renewal_cost_note": "Retake exam for free every 2 years via HubSpot Academy",
+    "salary_boost_low": 1500,
+    "salary_boost_high": 4000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.2,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
     "skills": [
       "HubSpot",
       "inbound marketing",
@@ -105,8 +186,34 @@
       "SEO"
     ],
     "primary_skills": [
-      "HubSpot Sales Certification",
-      "Advanced HubSpot"
+      "HubSpot",
+      "inbound marketing",
+      "marketing automation"
+    ],
+    "secondary_skills": [
+      "content marketing",
+      "email marketing",
+      "CRM",
+      "lead generation",
+      "SEO"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Marketing fundamentals"
+    ],
+    "target_job_titles": [
+      "Marketing Manager",
+      "Inbound Marketer",
+      "Growth Specialist",
+      "Marketing Operations Manager",
+      "Content Marketer",
+      "CRM Manager"
+    ],
+    "job_postings_count": 28000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "HubSpot Sales Software Certification",
+      "HubSpot Service Hub Certification"
     ]
   }
 ]

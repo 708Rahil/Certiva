@@ -356,11 +356,20 @@ const CERT_ALIASES: Record<number, string[]> = {
   13: ['ibm data science'],
   14: ['tableau desktop specialist', 'tableau specialist'],
   15: ['cfa', 'chartered financial analyst', 'cfa level 1', 'cfa level i'],
-  16: ['bloomberg market concepts', 'bmc'],
+  16: ['bloomberg market concepts', 'bloomberg market concepts', 'bmc'],
   17: ['google analytics'],
   18: ['google ads'],
   19: ['hubspot marketing', 'hubspot inbound'],
-  20: ['pmp', 'project management professional']
+  20: ['pmp', 'project management professional'],
+  21: ['aws devops engineer professional', 'aws devops professional', 'aws devops'],
+  22: ['cka', 'certified kubernetes administrator', 'kubernetes administrator'],
+  23: ['terraform associate', 'hashicorp terraform', 'terraform'],
+  24: ['cissp', 'certified information systems security professional'],
+  25: ['ccsp', 'certified cloud security professional'],
+  26: ['az-500', 'az500', 'azure security engineer'],
+  27: ['pl-300', 'pl300', 'power bi', 'power bi data analyst', 'microsoft power bi'],
+  28: ['snowpro core', 'snowflake snowpro', 'snowpro'],
+  29: ['google cloud professional data engineer', 'gcp data engineer', 'professional data engineer']
 };
 
 export function matchCertifications(

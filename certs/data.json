@@ -2,23 +2,32 @@
   {
     "id": 10,
     "name": "Google Data Analytics Certificate",
-    "provider": "Google",
+    "provider": "Google / Coursera",
     "industry": "data",
+    "subdomain": "analytics",
     "difficulty": 1,
     "description": "Covers the full data analysis process from ask to visualization using real-world datasets.",
     "official_url": "https://www.coursera.org/professional-certificates/google-data-analytics",
-    "cost": "$49/mo",
+    "cost": "$49/month",
+    "cost_source": "Coursera Official (May 2026)",
     "duration_weeks": 24,
     "study_hours": 40,
-    "exam_format": "Coursework & Capstone",
-    "passing_score": "75%",
+    "exam_format": "Coursework, quizzes & capstone project — no standalone timed exam",
+    "exam_duration_minutes": 0,
+    "passing_score": 80,
+    "passing_score_note": "80% required on graded assessments",
     "pass_rate_percent": 78,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 3,
     "renewal_required": false,
-    "salary_boost_low": "data analysis,SQL,spreadsheets,R programming,Tableau,data visualization,data cleaning,analytics,statistics",
-    "salary_boost_high": "data analysis,SQL,Tableau",
-    "worth_it_rating": "spreadsheets,R,data visualization,data cleaning,statistics",
-    "data_confidence": "Basic computer skills",
-    "target_job_titles": ["Data Analyst", "Business Analyst", "Analytics Specialist"],
+    "renewal_cost": "$0",
+    "salary_boost_low": 3000,
+    "salary_boost_high": 7000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.4,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
     "skills": [
       "data analysis",
       "SQL",
@@ -31,8 +40,33 @@
       "Google Analytics"
     ],
     "primary_skills": [
-      "Google Advanced Data Analytics",
-      "Tableau Data Analyst"
+      "data analysis",
+      "SQL",
+      "data visualization"
+    ],
+    "secondary_skills": [
+      "Tableau",
+      "spreadsheets",
+      "R programming",
+      "statistics",
+      "data cleaning"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic computer skills"
+    ],
+    "target_job_titles": [
+      "Data Analyst",
+      "Business Analyst",
+      "Analytics Specialist",
+      "Reporting Analyst",
+      "Operations Analyst"
+    ],
+    "job_postings_count": 52000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "IBM Data Science Certificate",
+      "Tableau Desktop Specialist"
     ]
   },
   {
@@ -40,24 +74,30 @@
     "name": "Excel Expert Certification",
     "provider": "Microsoft",
     "industry": "data",
+    "subdomain": "analytics",
     "difficulty": 2,
     "description": "Microsoft MOS Expert-level certification for advanced Excel capabilities.",
     "official_url": "https://learn.microsoft.com/en-us/credentials/certifications/mos-excel-expert-2019/",
     "cost": "$165",
+    "cost_source": "Certiport / Pearson VUE (May 2026)",
     "duration_weeks": 6,
     "study_hours": 50,
-    "exam_format": "Multiple Choice",
+    "exam_format": "Performance-based project exam (2 exams: Excel Expert Part 1 & Part 2)",
     "exam_duration_minutes": 50,
-    "passing_score": "80%",
+    "passing_score": 700,
+    "passing_score_note": "Scaled score out of 1000; each of the 2 exams scored separately",
     "pass_rate_percent": 72,
+    "pass_rate_source": "Community estimate",
     "valid_years": 3,
     "renewal_required": false,
-    "salary_boost_low": "Excel,spreadsheets,data analysis,pivot tables,VLOOKUP,formulas,macros,VBA,data modeling,reporting",
-    "salary_boost_high": "Excel,pivot tables,VLOOKUP",
-    "worth_it_rating": "formulas,macros,VBA,data modeling,reporting",
+    "renewal_cost": "$0",
+    "salary_boost_low": 1500,
+    "salary_boost_high": 3500,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 7.8,
     "trending": false,
-    "data_confidence": "Spreadsheet basics",
-    "target_job_titles": ["Data Analyst", "Financial Analyst", "Business Analyst"],
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
     "skills": [
       "Excel",
       "spreadsheets",
@@ -67,35 +107,71 @@
       "formulas",
       "macros",
       "VBA",
-      "data modeling"
+      "data modeling",
+      "reporting"
     ],
     "primary_skills": [
+      "Excel",
+      "data analysis",
+      "pivot tables"
+    ],
+    "secondary_skills": [
+      "VLOOKUP",
+      "formulas",
+      "macros",
+      "VBA",
+      "data modeling"
+    ],
+    "prerequisites": [
+      "Intermediate Excel knowledge"
+    ],
+    "recommended_prior_knowledge": [
+      "Spreadsheet basics"
+    ],
+    "target_job_titles": [
+      "Data Analyst",
+      "Financial Analyst",
+      "Business Analyst",
+      "Operations Analyst",
+      "Reporting Analyst"
+    ],
+    "job_postings_count": 40000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
       "SQL Certification",
-      "Google Data Analytics"
+      "Tableau Desktop Specialist"
     ]
   },
   {
     "id": 12,
     "name": "SQL Certification",
-    "provider": "CompTIA/Oracle",
+    "provider": "Various (Oracle, Coursera)",
     "industry": "data",
+    "subdomain": "engineering",
     "difficulty": 2,
     "description": "Validates SQL proficiency for querying, manipulating, and managing relational databases.",
     "official_url": "https://www.oracle.com/education/learn-associates/",
-    "cost": "$150-200",
+    "cost": "$150–$200",
+    "cost_source": "Oracle / Coursera (May 2026) — varies by provider",
     "duration_weeks": 6,
     "study_hours": 60,
-    "exam_format": "Multiple Choice",
+    "exam_format": "Multiple choice & hands-on queries — varies by provider",
     "exam_duration_minutes": 90,
-    "passing_score": "70%",
+    "passing_score": 70,
+    "passing_score_note": "Varies by provider — typically 70% or above",
     "pass_rate_percent": 68,
-    "valid_years": 3,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 5,
     "renewal_required": false,
-    "salary_boost_low": "SQL,databases,queries,joins,aggregations,stored procedures,data manipulation,PostgreSQL,MySQL,data analysis",
-    "salary_boost_high": "SQL,queries,joins",
-    "worth_it_rating": "aggregations,stored procedures,data manipulation,PostgreSQL,MySQL",
-    "data_confidence": "Basic database concepts",
-    "target_job_titles": ["Data Analyst", "Database Administrator", "Backend Engineer"],
+    "renewal_cost": "$0",
+    "salary_boost_low": 3000,
+    "salary_boost_high": 7000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.6,
+    "trending": true,
+    "data_confidence": "medium",
+    "data_confidence_note": "Multiple providers exist with different formats and costs",
+    "last_verified": "2026-05-20",
     "skills": [
       "SQL",
       "databases",
@@ -105,33 +181,69 @@
       "stored procedures",
       "data manipulation",
       "PostgreSQL",
-      "MySQL"
+      "MySQL",
+      "data analysis"
     ],
     "primary_skills": [
-      "Advanced SQL",
-      "NoSQL certifications"
+      "SQL",
+      "databases",
+      "queries"
+    ],
+    "secondary_skills": [
+      "joins",
+      "aggregations",
+      "stored procedures",
+      "PostgreSQL",
+      "MySQL"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic database concepts"
+    ],
+    "target_job_titles": [
+      "Data Analyst",
+      "Database Administrator",
+      "Backend Engineer",
+      "SQL Developer",
+      "Data Engineer",
+      "Reporting Analyst"
+    ],
+    "job_postings_count": 48000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "IBM Data Science Certificate",
+      "Google Data Analytics Certificate"
     ]
   },
   {
     "id": 13,
     "name": "IBM Data Science Certificate",
-    "provider": "IBM",
+    "provider": "IBM / Coursera",
     "industry": "data",
+    "subdomain": "science",
     "difficulty": 3,
     "description": "Comprehensive data science curriculum covering Python, ML, and real-world projects.",
     "official_url": "https://www.coursera.org/professional-certificates/ibm-data-science",
-    "cost": "$49/mo",
+    "cost": "$49/month",
+    "cost_source": "Coursera Official (May 2026)",
     "duration_weeks": 24,
     "study_hours": 60,
-    "exam_format": "Coursework & Capstone",
-    "passing_score": "75%",
+    "exam_format": "Coursework, quizzes & capstone project — no standalone timed exam",
+    "exam_duration_minutes": 0,
+    "passing_score": 80,
+    "passing_score_note": "80% required on graded assessments",
     "pass_rate_percent": 71,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 3,
     "renewal_required": false,
-    "salary_boost_low": "Python,machine learning,data science,SQL,data visualization,Jupyter,pandas,NumPy,scikit-learn,AI,statistics",
-    "salary_boost_high": "Python,machine learning,pandas",
-    "worth_it_rating": "SQL,data visualization,scikit-learn,AI,statistics",
-    "data_confidence": "Python fundamentals,statistics basics",
-    "target_job_titles": ["Data Scientist", "ML Engineer", "Analytics Engineer"],
+    "renewal_cost": "$0",
+    "salary_boost_low": 8000,
+    "salary_boost_high": 18000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.9,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
     "skills": [
       "Python",
       "machine learning",
@@ -146,32 +258,67 @@
       "statistics"
     ],
     "primary_skills": [
-      "Google Advanced Data Analytics",
-      "Andrew Ng ML Specialization"
+      "Python",
+      "machine learning",
+      "data science"
+    ],
+    "secondary_skills": [
+      "SQL",
+      "data visualization",
+      "pandas",
+      "scikit-learn",
+      "statistics"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Python fundamentals",
+      "statistics basics"
+    ],
+    "target_job_titles": [
+      "Data Scientist",
+      "ML Engineer",
+      "Analytics Engineer",
+      "Machine Learning Engineer",
+      "AI Specialist",
+      "Research Scientist"
+    ],
+    "job_postings_count": 58000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Google Cloud Professional Data Engineer",
+      "TensorFlow Developer Certificate"
     ]
   },
   {
     "id": 14,
     "name": "Tableau Desktop Specialist",
-    "provider": "Salesforce",
+    "provider": "Salesforce / Tableau",
     "industry": "data",
+    "subdomain": "bi_tools",
     "difficulty": 2,
     "description": "Entry-level Tableau certification for data visualization and dashboard creation.",
     "official_url": "https://www.tableau.com/learn/certification",
-    "cost": "$250",
+    "cost": "$100",
+    "cost_source": "Tableau Official (May 2026)",
     "duration_weeks": 6,
     "study_hours": 50,
-    "exam_format": "Multiple Choice",
+    "exam_format": "Multiple choice, 45 questions",
     "exam_duration_minutes": 60,
-    "passing_score": "70%",
+    "passing_score": 750,
+    "passing_score_note": "Scaled score out of 1000",
     "pass_rate_percent": 75,
-    "valid_years": 2,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 999,
     "renewal_required": false,
-    "salary_boost_low": "Tableau,data visualization,dashboards,data analysis,business intelligence,reporting,charts,analytics",
-    "salary_boost_high": "Tableau,dashboards,data visualization",
-    "worth_it_rating": "reporting,business intelligence,analytics,charts",
-    "data_confidence": "Data analysis basics",
-    "target_job_titles": ["BI Analyst", "Data Analyst", "Dashboard Developer"],
+    "renewal_cost": "$0",
+    "renewal_cost_note": "Specialist title does not expire",
+    "salary_boost_low": 2500,
+    "salary_boost_high": 6000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.1,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
     "skills": [
       "Tableau",
       "data visualization",
@@ -179,11 +326,271 @@
       "business intelligence",
       "reporting",
       "charts",
+      "analytics",
+      "data analysis"
+    ],
+    "primary_skills": [
+      "Tableau",
+      "data visualization",
+      "dashboards"
+    ],
+    "secondary_skills": [
+      "business intelligence",
+      "reporting",
+      "charts",
+      "analytics"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Data analysis basics",
+      "3+ months Tableau experience"
+    ],
+    "target_job_titles": [
+      "BI Analyst",
+      "Data Analyst",
+      "Dashboard Developer",
+      "Business Intelligence Analyst",
+      "Visualization Specialist"
+    ],
+    "job_postings_count": 22000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Tableau Desktop Certified Professional",
+      "Power BI Data Analyst Associate"
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Microsoft Power BI Data Analyst Associate (PL-300)",
+    "provider": "Microsoft",
+    "industry": "data",
+    "subdomain": "bi_tools",
+    "difficulty": 2,
+    "description": "Validates skills in connecting to data sources, transforming data, and building Power BI reports and dashboards. Power BI is now the dominant BI tool in enterprise environments.",
+    "official_url": "https://learn.microsoft.com/en-us/credentials/certifications/data-analyst-associate/",
+    "cost": "$165",
+    "cost_source": "Microsoft Official (May 2026)",
+    "duration_weeks": 8,
+    "study_hours": 60,
+    "exam_format": "Multiple choice, case studies & labs, 40–60 questions",
+    "exam_duration_minutes": 100,
+    "passing_score": 700,
+    "passing_score_note": "Scaled score out of 1000",
+    "pass_rate_percent": 65,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "$0",
+    "renewal_cost_note": "Free annual renewal via Microsoft Learn assessment",
+    "salary_boost_low": 4000,
+    "salary_boost_high": 10000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.8,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "Power BI",
+      "business intelligence",
+      "data visualization",
+      "DAX",
+      "data modeling",
+      "dashboards",
+      "SQL",
+      "data transformation",
+      "reporting",
+      "Excel",
+      "Azure",
       "analytics"
     ],
     "primary_skills": [
-      "Tableau Desktop Qualified Associate",
-      "Google Data Analytics"
+      "Power BI",
+      "business intelligence",
+      "data visualization"
+    ],
+    "secondary_skills": [
+      "DAX",
+      "data modeling",
+      "SQL",
+      "data transformation",
+      "dashboards"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Data analysis basics",
+      "SQL basics",
+      "Excel experience"
+    ],
+    "target_job_titles": [
+      "BI Analyst",
+      "Data Analyst",
+      "Business Intelligence Developer",
+      "Power BI Developer",
+      "Reporting Analyst",
+      "Analytics Engineer"
+    ],
+    "job_postings_count": 38000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Azure Data Engineer Associate (DP-203)",
+      "Fabric Analytics Engineer (DP-600)"
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Snowflake SnowPro Core",
+    "provider": "Snowflake",
+    "industry": "data",
+    "subdomain": "engineering",
+    "difficulty": 3,
+    "description": "Validates core knowledge of Snowflake's cloud data platform including data loading, transformation, performance optimization, and administration.",
+    "official_url": "https://www.snowflake.com/certifications/",
+    "cost": "$175",
+    "cost_source": "Snowflake Official (May 2026)",
+    "duration_weeks": 8,
+    "study_hours": 60,
+    "exam_format": "Multiple choice & scenario-based, 100 questions",
+    "exam_duration_minutes": 115,
+    "passing_score": 75,
+    "passing_score_note": "Approximately 75% required",
+    "pass_rate_percent": 60,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 2,
+    "renewal_required": true,
+    "renewal_cost": "$175",
+    "salary_boost_low": 8000,
+    "salary_boost_high": 18000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.8,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "Snowflake",
+      "cloud data platform",
+      "SQL",
+      "data warehousing",
+      "data loading",
+      "data transformation",
+      "performance optimization",
+      "data engineering",
+      "analytics",
+      "cloud storage",
+      "ETL"
+    ],
+    "primary_skills": [
+      "Snowflake",
+      "data warehousing",
+      "SQL"
+    ],
+    "secondary_skills": [
+      "data loading",
+      "ETL",
+      "data transformation",
+      "performance optimization",
+      "cloud storage"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "SQL proficiency",
+      "Data warehousing concepts",
+      "Cloud basics"
+    ],
+    "target_job_titles": [
+      "Data Engineer",
+      "Analytics Engineer",
+      "Data Architect",
+      "Cloud Data Engineer",
+      "BI Developer",
+      "Data Platform Engineer"
+    ],
+    "job_postings_count": 25000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "SnowPro Advanced: Data Engineer",
+      "dbt Developer Certification"
+    ]
+  },
+  {
+    "id": 29,
+    "name": "Google Cloud Professional Data Engineer",
+    "provider": "Google",
+    "industry": "data",
+    "subdomain": "engineering",
+    "difficulty": 4,
+    "description": "Validates the ability to design, build, and operationalize data processing systems on Google Cloud. One of the most respected data engineering certifications.",
+    "official_url": "https://cloud.google.com/certification/data-engineer",
+    "cost": "$200",
+    "cost_source": "Google Cloud Official (May 2026)",
+    "duration_weeks": 16,
+    "study_hours": 120,
+    "exam_format": "Multiple choice & scenario-based, ~50 questions",
+    "exam_duration_minutes": 120,
+    "passing_score": 70,
+    "passing_score_note": "Approximate — Google does not publish exact passing score",
+    "pass_rate_percent": 50,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 2,
+    "renewal_required": true,
+    "renewal_cost": "$200",
+    "salary_boost_low": 12000,
+    "salary_boost_high": 28000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 9.0,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "GCP",
+      "Google Cloud",
+      "BigQuery",
+      "data pipelines",
+      "machine learning",
+      "data engineering",
+      "Dataflow",
+      "Pub/Sub",
+      "data warehousing",
+      "SQL",
+      "Python",
+      "Kubernetes",
+      "analytics"
+    ],
+    "primary_skills": [
+      "GCP",
+      "BigQuery",
+      "data pipelines",
+      "data engineering"
+    ],
+    "secondary_skills": [
+      "Dataflow",
+      "Pub/Sub",
+      "machine learning",
+      "SQL",
+      "Python",
+      "data warehousing"
+    ],
+    "prerequisites": [
+      "Google Associate Cloud Engineer recommended"
+    ],
+    "recommended_prior_knowledge": [
+      "GCP fundamentals",
+      "SQL",
+      "Python",
+      "Data engineering concepts"
+    ],
+    "target_job_titles": [
+      "Data Engineer",
+      "Cloud Data Engineer",
+      "Analytics Engineer",
+      "Big Data Engineer",
+      "Data Architect",
+      "Machine Learning Engineer"
+    ],
+    "job_postings_count": 32000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Google Cloud Professional ML Engineer",
+      "Snowflake SnowPro Core"
     ]
   }
 ]
