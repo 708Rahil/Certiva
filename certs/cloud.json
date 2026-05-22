@@ -1,0 +1,348 @@
+[
+  {
+    "id": 1,
+    "name": "AWS Cloud Practitioner",
+    "provider": "Amazon Web Services",
+    "industry": "cloud",
+    "difficulty": 1,
+    "description": "Entry-level AWS certification covering cloud concepts, core AWS services, security, and pricing.",
+    "official_url": "https://aws.amazon.com/certification/certified-cloud-practitioner/",
+    "cost": "$100",
+    "duration_weeks": 4,
+    "study_hours": 40,
+    "exam_format": "Multiple Choice",
+    "exam_duration_minutes": 90,
+    "passing_score": "70%",
+    "pass_rate_percent": 78,
+    "valid_years": 3,
+    "renewal_required": false,
+    "salary_boost_low": 2000,
+    "salary_boost_high": 5000,
+    "worth_it_rating": 8.5,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "AWS",
+      "cloud computing",
+      "EC2",
+      "S3",
+      "IAM",
+      "billing",
+      "infrastructure",
+      "cloud services"
+    ],
+    "primary_skills": [
+      "AWS",
+      "cloud computing",
+      "infrastructure",
+      "EC2",
+      "S3"
+    ],
+    "secondary_skills": [
+      "IAM",
+      "billing",
+      "cloud services"
+    ],
+    "recommended_prior_knowledge": "Basic cloud concepts",
+    "target_job_titles": [
+      "Cloud Engineer",
+      "AWS Developer",
+      "Solutions Architect"
+    ],
+    "job_postings_count": 50000,
+    "next_certs": [
+      "AWS Solutions Architect Associate",
+      "AWS Developer Associate"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "AWS Solutions Architect Associate",
+    "provider": "Amazon Web Services",
+    "industry": "cloud",
+    "difficulty": 3,
+    "description": "Covers designing scalable, resilient, and cost-optimized architectures on AWS.",
+    "official_url": "https://aws.amazon.com/certification/certified-solutions-architect-associate/",
+    "cost": "$300",
+    "duration_weeks": 8,
+    "study_hours": 80,
+    "exam_format": "Multiple Choice",
+    "exam_duration_minutes": 130,
+    "passing_score": "72%",
+    "pass_rate_percent": 65,
+    "valid_years": 3,
+    "renewal_required": false,
+    "salary_boost_low": 5000,
+    "salary_boost_high": 12000,
+    "worth_it_rating": 9.0,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "AWS",
+      "VPC",
+      "IAM",
+      "EC2",
+      "S3",
+      "RDS",
+      "scalability",
+      "cloud architecture",
+      "high availability",
+      "security",
+      "infrastructure"
+    ],
+    "primary_skills": [
+      "AWS",
+      "VPC",
+      "EC2",
+      "RDS",
+      "security"
+    ],
+    "secondary_skills": [
+      "IAM",
+      "S3",
+      "scalability",
+      "cloud architecture"
+    ],
+    "prerequisites": "AWS Cloud Practitioner or equivalent experience",
+    "recommended_prior_knowledge": "AWS core services,networking concepts",
+    "target_job_titles": [
+      "Solutions Architect",
+      "Cloud Engineer",
+      "DevOps Engineer"
+    ],
+    "job_postings_count": 45000,
+    "next_certs": [
+      "AWS Solutions Architect Professional",
+      "AWS DevOps Engineer"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "AWS Developer Associate",
+    "provider": "Amazon Web Services",
+    "industry": "cloud",
+    "difficulty": 3,
+    "description": "Validates proficiency in developing and maintaining AWS-based applications.",
+    "official_url": "https://aws.amazon.com/certification/certified-developer-associate/",
+    "cost": "$300",
+    "duration_weeks": 8,
+    "study_hours": 80,
+    "exam_format": "Multiple Choice",
+    "exam_duration_minutes": 130,
+    "passing_score": "62%",
+    "pass_rate_percent": 62,
+    "valid_years": 3,
+    "renewal_required": false,
+    "salary_boost_low": 4500,
+    "salary_boost_high": 10000,
+    "worth_it_rating": 8.8,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "AWS",
+      "Lambda",
+      "DynamoDB",
+      "API Gateway",
+      "S3",
+      "CloudFormation",
+      "DevOps",
+      "CI/CD",
+      "serverless",
+      "software development",
+      "Python",
+      "Node.js"
+    ],
+    "primary_skills": [
+      "AWS",
+      "Lambda",
+      "serverless",
+      "CI/CD"
+    ],
+    "secondary_skills": [
+      "DynamoDB",
+      "API Gateway",
+      "CloudFormation",
+      "Python",
+      "Node.js"
+    ],
+    "prerequisites": "AWS Cloud Practitioner or professional experience",
+    "recommended_prior_knowledge": "Programming basics,AWS core services",
+    "target_job_titles": [
+      "AWS Developer",
+      "Backend Engineer",
+      "DevOps Engineer"
+    ],
+    "job_postings_count": 40000,
+    "next_certs": [
+      "AWS Solutions Architect Associate",
+      "AWS DevOps Engineer"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Azure Fundamentals (AZ-900)",
+    "provider": "Microsoft",
+    "industry": "cloud",
+    "difficulty": 1,
+    "description": "Foundation-level Microsoft Azure certification covering cloud concepts and core Azure services.",
+    "official_url": "https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/",
+    "cost": "$165",
+    "duration_weeks": 3,
+    "study_hours": 30,
+    "exam_format": "Multiple Choice",
+    "exam_duration_minutes": 85,
+    "passing_score": "700",
+    "pass_rate_percent": 81,
+    "valid_years": 1,
+    "renewal_required": false,
+    "salary_boost_low": 1500,
+    "salary_boost_high": 4000,
+    "worth_it_rating": 8.2,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "Azure",
+      "cloud computing",
+      "Microsoft Azure",
+      "cloud services",
+      "virtual machines",
+      "storage",
+      "networking",
+      "security"
+    ],
+    "primary_skills": [
+      "Azure",
+      "cloud computing",
+      "virtual machines",
+      "storage"
+    ],
+    "secondary_skills": [
+      "networking",
+      "security",
+      "cloud services"
+    ],
+    "recommended_prior_knowledge": "Basic IT knowledge",
+    "target_job_titles": [
+      "Cloud Engineer",
+      "Azure Developer",
+      "Systems Administrator"
+    ],
+    "job_postings_count": 35000,
+    "next_certs": [
+      "Azure Administrator",
+      "Azure Solutions Architect"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Google Associate Cloud Engineer",
+    "provider": "Google",
+    "industry": "cloud",
+    "difficulty": 3,
+    "description": "Validates ability to deploy and manage Google Cloud applications and infrastructure.",
+    "official_url": "https://cloud.google.com/certification/cloud-engineer",
+    "cost": "$200",
+    "duration_weeks": 8,
+    "study_hours": 80,
+    "exam_format": "Multiple Choice",
+    "exam_duration_minutes": 120,
+    "passing_score": "70%",
+    "pass_rate_percent": 68,
+    "valid_years": 3,
+    "renewal_required": false,
+    "salary_boost_low": 3000,
+    "salary_boost_high": 8000,
+    "worth_it_rating": 8.0,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "GCP",
+      "Google Cloud",
+      "Kubernetes",
+      "Compute Engine",
+      "cloud infrastructure",
+      "networking",
+      "deployment",
+      "storage",
+      "security"
+    ],
+    "primary_skills": [
+      "GCP",
+      "Kubernetes",
+      "deployment",
+      "storage"
+    ],
+    "secondary_skills": [
+      "Networking",
+      "security",
+      "Cloud SQL"
+    ],
+    "prerequisites": "GCP Cloud Fundamentals",
+    "recommended_prior_knowledge": "Linux basics,networking concepts",
+    "target_job_titles": [
+      "Cloud Engineer",
+      "DevOps Engineer",
+      "Infrastructure Engineer"
+    ],
+    "job_postings_count": 30000,
+    "next_certs": [
+      "Google Cloud Architect",
+      "Google Cloud Data Engineer"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "CompTIA Network+",
+    "provider": "CompTIA",
+    "industry": "cloud",
+    "difficulty": 2,
+    "description": "Validates foundational networking skills across infrastructure and protocols.",
+    "official_url": "https://www.comptia.org/certifications/network",
+    "cost": "$338",
+    "duration_weeks": 8,
+    "study_hours": 80,
+    "exam_format": "Multiple Choice",
+    "exam_duration_minutes": 90,
+    "passing_score": "720",
+    "pass_rate_percent": 65,
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "169",
+    "salary_boost_low": "Network fundamentals",
+    "salary_boost_high": "networking,TCP/IP,DNS,routing,switching,firewalls,network security,VPN,wireless,troubleshooting",
+    "worth_it_rating": "networking,TCP/IP,routing",
+    "trending": false,
+    "data_confidence": "CompTIA A+",
+    "target_job_titles": [
+      "Network Administrator",
+      "Network Engineer",
+      "IT Support Technician",
+      "Systems Administrator"
+    ],
+    "skills": [
+      "networking",
+      "TCP/IP",
+      "DNS",
+      "routing",
+      "firewalls",
+      "VPN",
+      "network security",
+      "switching",
+      "troubleshooting"
+    ],
+    "primary_skills": [
+      "networking",
+      "TCP/IP",
+      "firewalls"
+    ],
+    "secondary_skills": [
+      "CompTIA Security+",
+      "Cisco CCNA"
+    ]
+  }
+]

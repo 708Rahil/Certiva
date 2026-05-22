@@ -1,0 +1,112 @@
+[
+  {
+    "id": 17,
+    "name": "Google Analytics Certification",
+    "provider": "Google",
+    "industry": "marketing",
+    "difficulty": 1,
+    "description": "Validates proficiency in Google Analytics for measuring website performance.",
+    "official_url": "https://analytics.google.com/analytics/academy/",
+    "cost": "$0",
+    "duration_weeks": 4,
+    "study_hours": 20,
+    "exam_format": "Multiple Choice",
+    "exam_duration_minutes": 90,
+    "passing_score": "75%",
+    "pass_rate_percent": 85,
+    "renewal_required": false,
+    "salary_boost_low": "Google Analytics,web analytics,data analysis,digital marketing,SEO,conversion tracking,audience analysis,reporting,marketing metrics",
+    "salary_boost_high": "Google Analytics,conversion tracking,SEO",
+    "worth_it_rating": "web analytics,audience analysis,reporting,marketing metrics",
+    "data_confidence": "Basic digital marketing knowledge",
+    "target_job_titles": ["Marketing Analyst", "Digital Marketer", "Web Analyst"],
+    "skills": [
+      "Google Analytics",
+      "web analytics",
+      "data analysis",
+      "digital marketing",
+      "SEO",
+      "conversion tracking",
+      "audience analysis",
+      "reporting",
+      "marketing metrics"
+    ],
+    "primary_skills": [
+      "Google Ads Certification",
+      "Google Advanced Analytics"
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Google Ads Certification",
+    "provider": "Google",
+    "industry": "marketing",
+    "difficulty": 1,
+    "description": "Certifies expertise in Google Ads campaign creation, management, and optimization.",
+    "official_url": "https://skillshop.withgoogle.com/",
+    "cost": "$0",
+    "duration_weeks": 4,
+    "study_hours": 20,
+    "exam_format": "Multiple Choice",
+    "exam_duration_minutes": 90,
+    "passing_score": "75%",
+    "pass_rate_percent": 84,
+    "renewal_required": false,
+    "salary_boost_low": "Google Ads,PPC,digital advertising,campaign management,search marketing,display advertising,bidding,keywords,conversion optimization,ROI",
+    "salary_boost_high": "Google Ads,PPC,keywords",
+    "worth_it_rating": "campaign management,bidding,conversion optimization,ROI,search marketing,display advertising",
+    "data_confidence": "Basic marketing knowledge",
+    "target_job_titles": ["Digital Marketer", "PPC Specialist", "Marketing Manager"],
+    "skills": [
+      "Google Ads",
+      "PPC",
+      "digital advertising",
+      "campaign management",
+      "search marketing",
+      "keywords",
+      "conversion optimization",
+      "ROI",
+      "display advertising"
+    ],
+    "primary_skills": [
+      "Google Analytics Certification",
+      "HubSpot Inbound Marketing"
+    ]
+  },
+  {
+    "id": 19,
+    "name": "HubSpot Marketing Certification",
+    "provider": "HubSpot",
+    "industry": "marketing",
+    "difficulty": 1,
+    "description": "Comprehensive inbound marketing and HubSpot platform certification.",
+    "official_url": "https://academy.hubspot.com/",
+    "cost": "$0",
+    "duration_weeks": 6,
+    "study_hours": 25,
+    "exam_format": "Multiple Choice & Practical",
+    "passing_score": "80%",
+    "pass_rate_percent": 83,
+    "renewal_required": false,
+    "salary_boost_low": "HubSpot,inbound marketing,content marketing,email marketing,lead generation,CRM,marketing automation,social media,SEO",
+    "salary_boost_high": "HubSpot,inbound marketing,email marketing",
+    "worth_it_rating": "CRM,marketing automation,lead generation,social media,SEO",
+    "data_confidence": "Marketing fundamentals",
+    "target_job_titles": ["Marketing Manager", "Inbound Marketer", "Growth Specialist"],
+    "skills": [
+      "HubSpot",
+      "inbound marketing",
+      "content marketing",
+      "email marketing",
+      "lead generation",
+      "CRM",
+      "marketing automation",
+      "social media",
+      "SEO"
+    ],
+    "primary_skills": [
+      "HubSpot Sales Certification",
+      "Advanced HubSpot"
+    ]
+  }
+]

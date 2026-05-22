@@ -1,0 +1,43 @@
+[
+  {
+    "id": 20,
+    "name": "PMI PMP (Project Management Professional)",
+    "provider": "PMI",
+    "industry": "management",
+    "difficulty": 4,
+    "description": "Gold-standard project management certification recognized globally across industries.",
+    "official_url": "https://www.pmi.org/certifications/types/project-management-pmp",
+    "cost": "$555",
+    "duration_weeks": 24,
+    "study_hours": 120,
+    "exam_format": "Multiple Choice",
+    "exam_duration_minutes": 200,
+    "passing_score": "61%",
+    "pass_rate_percent": 61,
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "275",
+    "salary_boost_low": "project management,agile,scrum,risk management,stakeholder management,budgeting,scheduling,leadership,Waterfall,PMBOK",
+    "salary_boost_high": "project management,leadership,risk management",
+    "worth_it_rating": "agile,scrum,stakeholder management,budgeting,scheduling,Waterfall,PMBOK",
+    "trending": false,
+    "data_confidence": "Management fundamentals",
+    "target_job_titles": ["Project Manager", "Program Manager", "PMO Director"],
+    "skills": [
+      "project management",
+      "leadership",
+      "risk management",
+      "stakeholder management",
+      "budgeting",
+      "scheduling",
+      "Waterfall",
+      "PMBOK",
+      "resource management"
+    ],
+    "primary_skills": [
+      "PgMP",
+      "CAPM",
+      "Agile certifications"
+    ]
+  }
+]
