@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useAuth } from '@clerk/nextjs';
+import LoggedOutState from '@/components/LoggedOutState';
 
 interface AnalyticsData {
   jobCount: number;
@@ -17,15 +19,37 @@ const INDUSTRY_COLORS: Record<string, string> = {
 };
 
 export default function AnalyticsPage() {
+  const { isLoaded, userId } = useAuth();
   const [data, setData] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!isLoaded || !userId) return;
+
     fetch('/api/analytics')
       .then(r => r.json())
       .then(d => { setData(d); setLoading(false); })
       .catch(() => setLoading(false));
-  }, []);
+  }, [isLoaded, userId]);
+
+  if (!isLoaded) {
+    return <LoadingState />;
+  }
+
+  if (!userId) {
+    return (
+      <LoggedOutState
+        title="Unlock Career Analytics"
+        description="Connect your account to visualize patterns, common skills, and certification recommendations across your history."
+        features={[
+          "Identify frequent target certifications",
+          "Identify and highlight critical skill gaps",
+          "Analyze distribution of job levels and industries",
+          "Get personalized path recommendations"
+        ]}
+      />
+    );
+  }
 
   if (loading) return <LoadingState />;
 

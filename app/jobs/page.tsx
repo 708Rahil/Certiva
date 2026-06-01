@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useAuth } from '@clerk/nextjs';
+import LoggedOutState from '@/components/LoggedOutState';
 
 interface Job {
   id: number;
@@ -32,10 +34,13 @@ function detectJobIndustry(title: string, desc: string): string {
 }
 
 export default function JobsPage() {
+  const { isLoaded, userId } = useAuth();
   const [jobs, setJobs] = useState<JobWithTopIndustry[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!isLoaded || !userId) return;
+
     fetch('/api/jobs')
       .then(r => r.json())
       .then(async (data) => {
@@ -63,7 +68,26 @@ export default function JobsPage() {
         setLoading(false);
       })
       .catch(() => setLoading(false));
-  }, []);
+  }, [isLoaded, userId]);
+
+  if (!isLoaded) {
+    return <LoadingState />;
+  }
+
+  if (!userId) {
+    return (
+      <LoggedOutState
+        title="Access Your Saved Analyses"
+        description="Create an account to keep a permanent history of all your analyzed job postings and matched certifications."
+        features={[
+          "Save up to 50 detailed job matches",
+          "Scoped history accessible from any device",
+          "Compare recommended certifications side-by-side",
+          "Track skill keywords over time"
+        ]}
+      />
+    );
+  }
 
   return (
     <div style={{ maxWidth: 860, margin: '0 auto', padding: '48px 24px 80px' }}>
@@ -200,6 +224,23 @@ function EmptyState() {
       }}>
         → Start Your First Analysis
       </Link>
+    </div>
+  );
+}
+
+function LoadingState() {
+  return (
+    <div style={{ maxWidth: 860, margin: '0 auto', padding: '48px 24px 80px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        {[1, 2, 3].map(i => (
+          <div key={i} style={{
+            height: 100, borderRadius: 16, background: 'var(--bg-card)',
+            backgroundImage: 'linear-gradient(90deg, var(--bg-card) 0%, var(--border) 50%, var(--bg-card) 100%)',
+            backgroundSize: '200% 100%',
+            animation: `shimmer 1.4s ease infinite ${i * 0.15}s`,
+          }} />
+        ))}
+      </div>
     </div>
   );
 }

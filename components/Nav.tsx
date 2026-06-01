@@ -2,9 +2,11 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useAuth, UserButton } from '@clerk/nextjs';
 
 export default function Nav() {
   const path = usePathname();
+  const { isLoaded, userId } = useAuth();
 
   const links = [
     { href: '/', label: 'New Analysis' },
@@ -68,14 +70,50 @@ export default function Nav() {
           ))}
         </div>
 
-        <div style={{
-          fontSize: 12,
-          color: 'var(--text-muted)',
-          fontWeight: 500,
-          letterSpacing: '0.05em',
-          textTransform: 'uppercase',
-        }}>
-          Career Intelligence
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, minHeight: 32 }}>
+          {isLoaded && (
+            userId ? (
+              <UserButton appearance={{
+                elements: {
+                  userButtonAvatarBox: {
+                    width: 32,
+                    height: 32,
+                    border: '1px solid rgba(255,255,255,0.1)',
+                  }
+                }
+              }} />
+            ) : (
+              <>
+                <Link href="/sign-in" style={{
+                  textDecoration: 'none',
+                  fontSize: 14,
+                  fontWeight: 500,
+                  color: 'var(--text-secondary)',
+                  transition: 'all 0.15s',
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-primary)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-secondary)'; }}
+                >
+                  Sign In
+                </Link>
+                <Link href="/sign-up" style={{
+                  textDecoration: 'none',
+                  fontSize: 14,
+                  fontWeight: 600,
+                  color: '#fff',
+                  background: 'var(--accent)',
+                  padding: '6px 16px',
+                  borderRadius: 8,
+                  transition: 'all 0.15s',
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = 'var(--accent-light)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = 'var(--accent)'; }}
+                >
+                  Sign Up
+                </Link>
+              </>
+            )
+          )}
         </div>
       </div>
     </nav>

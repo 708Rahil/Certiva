@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import { useAuth } from '@clerk/nextjs';
 import CertCard from '@/components/CertCard';
 import ScoreRing from '@/components/ScoreRing';
 
@@ -36,6 +37,7 @@ interface Job {
   description: string;
   extracted_skills: string;
   created_at: string;
+  user_id?: string | null;
 }
 
 const INDUSTRY_COLORS: Record<string, string> = {
@@ -62,6 +64,8 @@ export default function JobDetailPage() {
       .catch(() => setLoading(false));
   }, [id]);
 
+  const { isLoaded, userId } = useAuth();
+
   if (loading) return <LoadingState />;
   if (!job) return <div style={{ padding: 40, color: 'var(--text-secondary)' }}>Job not found.</div>;
 
@@ -77,6 +81,56 @@ export default function JobDetailPage() {
       <Link href="/jobs" style={{ fontSize: 13, color: 'var(--text-muted)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 28 }}>
         ← All Jobs
       </Link>
+
+      {/* Guest Callout Banner */}
+      {isLoaded && !userId && !job.user_id && (
+        <div className="animate-fade-up" style={{
+          background: 'var(--accent-dim)',
+          border: '1px solid rgba(79,110,247,0.3)',
+          borderRadius: 16,
+          padding: '16px 24px',
+          marginBottom: 24,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          gap: 16,
+          flexWrap: 'wrap',
+        }}>
+          <div>
+            <h4 style={{ margin: '0 0 4px', fontSize: 14, fontWeight: 600, color: 'var(--accent-light)' }}>
+              ⚡ Save This Analysis to Your Account
+            </h4>
+            <p style={{ margin: 0, fontSize: 13, color: 'var(--text-secondary)' }}>
+              This is a temporary guest analysis. Sign up or sign in to save it to your history.
+            </p>
+          </div>
+          <div style={{ display: 'flex', gap: 10 }}>
+            <Link href="/sign-in" style={{
+              background: 'transparent',
+              border: '1px solid rgba(79,110,247,0.4)',
+              color: 'var(--accent-light)',
+              textDecoration: 'none',
+              padding: '6px 14px',
+              borderRadius: 8,
+              fontSize: 13,
+              fontWeight: 500,
+            }}>
+              Sign In
+            </Link>
+            <Link href="/sign-up" style={{
+              background: 'var(--accent)',
+              color: '#fff',
+              textDecoration: 'none',
+              padding: '6px 14px',
+              borderRadius: 8,
+              fontSize: 13,
+              fontWeight: 600,
+            }}>
+              Sign Up
+            </Link>
+          </div>
+        </div>
+      )}
 
       {/* Job header card */}
       <div className="animate-fade-up" style={{

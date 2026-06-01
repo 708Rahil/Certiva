@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { initDb, getDb } from '@/lib/db';
 import { extractSkills, detectIndustry, matchCertifications, Certification, inferSeniority } from '@/lib/matcher';
+import { auth } from '@clerk/nextjs/server';
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,11 +16,12 @@ export async function POST(req: NextRequest) {
     // Extract skills
     const skills = extractSkills(title + ' ' + description);
     const industry = detectIndustry(title, description);
+    const { userId } = await auth();
 
     // Save job
     const jobResult = await db.execute({
-      sql: 'INSERT INTO jobs (title, company, description, extracted_skills) VALUES (?, ?, ?, ?)',
-      args: [title, company, description, JSON.stringify(skills)],
+      sql: 'INSERT INTO jobs (title, company, description, extracted_skills, user_id) VALUES (?, ?, ?, ?, ?)',
+      args: [title, company, description, JSON.stringify(skills), userId || null],
     });
     const jobId = Number(jobResult.lastInsertRowid);
 
@@ -69,11 +71,16 @@ export async function POST(req: NextRequest) {
 
 export async function GET() {
   try {
+    const { userId } = await auth();
+    if (!userId) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
     await initDb();
     const db = getDb();
-    const result = await db.execute(
-      'SELECT * FROM jobs ORDER BY created_at DESC LIMIT 50'
-    );
+    const result = await db.execute({
+      sql: 'SELECT * FROM jobs WHERE user_id = ? ORDER BY created_at DESC LIMIT 50',
+      args: [userId],
+    });
     return NextResponse.json(result.rows);
   } catch (e) {
     return NextResponse.json({ error: String(e) }, { status: 500 });

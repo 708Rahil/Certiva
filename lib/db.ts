@@ -53,9 +53,16 @@ export async function initDb() {
       company TEXT NOT NULL,
       description TEXT NOT NULL,
       extracted_skills TEXT NOT NULL,
+      user_id TEXT,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
   `);
+
+  try {
+    await db.execute('ALTER TABLE jobs ADD COLUMN user_id TEXT');
+  } catch {
+    // Column already exists or database is brand new
+  }
 
   await db.execute(`
     CREATE TABLE IF NOT EXISTS recommendations (
