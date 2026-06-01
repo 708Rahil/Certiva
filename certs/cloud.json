@@ -302,10 +302,10 @@
     "cost_source": "Google Cloud Official (May 2026)",
     "duration_weeks": 8,
     "study_hours": 80,
-    "exam_format": "Multiple choice & scenario-based, 50–60 questions",
+    "exam_format": "Multiple choice & scenario-based, 50\u201360 questions",
     "exam_duration_minutes": 120,
     "passing_score": 70,
-    "passing_score_note": "Approximate — Google does not publish exact passing score",
+    "passing_score_note": "Approximate \u2014 Google does not publish exact passing score",
     "pass_rate_percent": 68,
     "pass_rate_source": "Community estimate",
     "valid_years": 2,
@@ -447,7 +447,7 @@
     "description": "Validates technical expertise in provisioning, operating, and managing distributed application systems on AWS.",
     "official_url": "https://aws.amazon.com/certification/certified-devops-engineer-professional/",
     "cost": "$300",
-    "cost_source": "AWS Official (May 2026) — Professional-level exams are $300",
+    "cost_source": "AWS Official (May 2026) \u2014 Professional-level exams are $300",
     "duration_weeks": 12,
     "study_hours": 120,
     "exam_format": "Multiple choice & multiple response, 75 questions",
@@ -662,6 +662,1320 @@
     "next_certs": [
       "Certified Kubernetes Administrator",
       "AWS DevOps Engineer Professional"
+    ]
+  },
+  {
+    "id": 70,
+    "name": "AWS Certified SysOps Administrator \u2013 Associate",
+    "provider": "Amazon Web Services",
+    "industry": "cloud",
+    "subdomain": "aws",
+    "difficulty": 4,
+    "description": "Validates ability to deploy, manage, and operate scalable, reliable, and secure infrastructure on AWS.",
+    "official_url": "https://aws.amazon.com/certification/certified-sysops-admin-associate/",
+    "cost": "$150",
+    "cost_source": "AWS Official (2026)",
+    "duration_weeks": 10,
+    "study_hours": 100,
+    "exam_format": "Multiple choice & multiple response, 65 questions",
+    "exam_duration_minutes": 130,
+    "passing_score": 720,
+    "passing_score_note": "Scaled score out of 1000",
+    "pass_rate_percent": 60,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$150",
+    "salary_boost_low": 6000,
+    "salary_boost_high": 14000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.9,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-01",
+    "skills": [
+      "AWS",
+      "system administration",
+      "AWS Systems Manager",
+      "CloudWatch",
+      "Auto Scaling",
+      "ELB",
+      "RDS",
+      "IAM",
+      "monitoring",
+      "troubleshooting",
+      "infrastructure management"
+    ],
+    "primary_skills": [
+      "AWS",
+      "system administration",
+      "CloudWatch",
+      "Auto Scaling"
+    ],
+    "secondary_skills": [
+      "AWS Systems Manager",
+      "ELB",
+      "RDS",
+      "IAM",
+      "monitoring",
+      "troubleshooting"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "AWS Cloud Practitioner knowledge",
+      "Systems administration experience"
+    ],
+    "target_job_titles": [
+      "Cloud Administrator",
+      "Systems Administrator (Cloud)",
+      "DevOps Engineer",
+      "Site Reliability Engineer (Junior)",
+      "Cloud Operations Engineer"
+    ],
+    "job_postings_count": 32000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "AWS DevOps Engineer Professional",
+      "AWS Solutions Architect Professional"
+    ]
+  },
+  {
+    "id": 71,
+    "name": "AWS Certified Solutions Architect \u2013 Professional",
+    "provider": "Amazon Web Services",
+    "industry": "cloud",
+    "subdomain": "aws",
+    "difficulty": 5,
+    "description": "Advanced certification validating ability to design and deploy dynamically scalable, highly available, fault-tolerant, and reliable applications on AWS.",
+    "official_url": "https://aws.amazon.com/certification/certified-solutions-architect-professional/",
+    "cost": "$300",
+    "cost_source": "AWS Official (2026)",
+    "duration_weeks": 14,
+    "study_hours": 150,
+    "exam_format": "Multiple choice & multiple response, 75 questions",
+    "exam_duration_minutes": 180,
+    "passing_score": 750,
+    "passing_score_note": "Scaled score out of 1000",
+    "pass_rate_percent": 52,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$300",
+    "salary_boost_low": 15000,
+    "salary_boost_high": 35000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 9.4,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-01",
+    "skills": [
+      "AWS",
+      "architecture",
+      "VPC",
+      "multi-region deployment",
+      "disaster recovery",
+      "high availability",
+      "scalability",
+      "security design",
+      "cost optimization",
+      "performance tuning",
+      "enterprise architecture"
+    ],
+    "primary_skills": [
+      "AWS",
+      "enterprise architecture",
+      "multi-region deployment",
+      "disaster recovery"
+    ],
+    "secondary_skills": [
+      "VPC",
+      "high availability",
+      "cost optimization",
+      "security design"
+    ],
+    "prerequisites": [
+      "AWS Solutions Architect Associate or equivalent experience"
+    ],
+    "recommended_prior_knowledge": [
+      "2+ years AWS architecture experience",
+      "Advanced AWS services knowledge",
+      "Enterprise architecture principles"
+    ],
+    "target_job_titles": [
+      "Senior Cloud Architect",
+      "Solutions Architect (Enterprise)",
+      "Principal Cloud Engineer",
+      "Cloud Consultant",
+      "Technical Architect"
+    ],
+    "job_postings_count": 38000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "AWS Certified Security \u2013 Specialty",
+      "AWS Certified Advanced Networking \u2013 Specialty"
+    ]
+  },
+  {
+    "id": 72,
+    "name": "AWS Certified Advanced Networking \u2013 Specialty",
+    "provider": "Amazon Web Services",
+    "industry": "cloud",
+    "subdomain": "aws",
+    "difficulty": 5,
+    "description": "Validates advanced expertise in implementing and managing AWS networking solutions, including hybrid connectivity and advanced routing.",
+    "official_url": "https://aws.amazon.com/certification/certified-advanced-networking-specialty/",
+    "cost": "$300",
+    "cost_source": "AWS Official (2026)",
+    "duration_weeks": 12,
+    "study_hours": 120,
+    "exam_format": "Multiple choice & multiple response, 65 questions",
+    "exam_duration_minutes": 170,
+    "passing_score": 750,
+    "passing_score_note": "Scaled score out of 1000",
+    "pass_rate_percent": 48,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$300",
+    "salary_boost_low": 12000,
+    "salary_boost_high": 28000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.8,
+    "trending": false,
+    "data_confidence": "high",
+    "last_verified": "2026-06-01",
+    "skills": [
+      "AWS",
+      "networking",
+      "VPC",
+      "VPN",
+      "Direct Connect",
+      "Route 53",
+      "CloudFront",
+      "hybrid connectivity",
+      "network security",
+      "traffic management",
+      "BGP"
+    ],
+    "primary_skills": [
+      "AWS",
+      "advanced networking",
+      "VPC design",
+      "hybrid connectivity"
+    ],
+    "secondary_skills": [
+      "VPN",
+      "Direct Connect",
+      "Route 53",
+      "CloudFront",
+      "BGP"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "AWS Solutions Architect Associate knowledge",
+      "Advanced networking concepts",
+      "BGP and routing protocols"
+    ],
+    "target_job_titles": [
+      "Network Architect (Cloud)",
+      "Cloud Network Engineer",
+      "Infrastructure Architect",
+      "Telecom Cloud Engineer",
+      "Enterprise Network Architect"
+    ],
+    "job_postings_count": 18000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "AWS Certified Security \u2013 Specialty"
+    ]
+  },
+  {
+    "id": 31,
+    "name": "AWS Certified SAP on AWS \u2013 Specialty",
+    "provider": "Amazon Web Services",
+    "industry": "cloud",
+    "subdomain": "aws",
+    "difficulty": 4,
+    "description": "Validates expertise in designing, deploying, and managing SAP applications and workloads on AWS infrastructure.",
+    "official_url": "https://aws.amazon.com/certification/certified-sap-on-aws-specialty/",
+    "cost": "$300",
+    "cost_source": "AWS Official (2026)",
+    "duration_weeks": 10,
+    "study_hours": 100,
+    "exam_format": "Multiple choice & multiple response, 65 questions",
+    "exam_duration_minutes": 150,
+    "passing_score": 750,
+    "passing_score_note": "Scaled score out of 1000",
+    "pass_rate_percent": 54,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$300",
+    "salary_boost_low": 12000,
+    "salary_boost_high": 28000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.6,
+    "trending": false,
+    "data_confidence": "high",
+    "last_verified": "2026-06-01",
+    "skills": [
+      "AWS",
+      "SAP",
+      "enterprise resource planning",
+      "high availability",
+      "disaster recovery",
+      "performance tuning",
+      "licensing",
+      "infrastructure design",
+      "migration",
+      "backup and recovery"
+    ],
+    "primary_skills": [
+      "AWS",
+      "SAP architecture",
+      "enterprise solutions",
+      "high availability"
+    ],
+    "secondary_skills": [
+      "disaster recovery",
+      "performance tuning",
+      "licensing",
+      "backup and recovery"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "SAP architecture knowledge",
+      "AWS Solutions Architect Associate experience",
+      "Enterprise IT infrastructure"
+    ],
+    "target_job_titles": [
+      "SAP Cloud Consultant",
+      "Enterprise Cloud Architect (SAP workloads)",
+      "SAP Infrastructure Engineer",
+      "SAP Migration Specialist",
+      "Solutions Architect (SAP)"
+    ],
+    "job_postings_count": 12000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "AWS Certified Solutions Architect \u2013 Professional"
+    ]
+  },
+  {
+    "id": 32,
+    "name": "Google Cloud Digital Leader",
+    "provider": "Google",
+    "industry": "cloud",
+    "subdomain": "gcp",
+    "difficulty": 1,
+    "description": "Entry-level certification covering cloud computing fundamentals and Google Cloud's business solutions.",
+    "official_url": "https://cloud.google.com/certification/cloud-digital-leader",
+    "cost": "$99",
+    "cost_source": "Google Cloud Official (2026)",
+    "duration_weeks": 3,
+    "study_hours": 30,
+    "exam_format": "Multiple choice, ~40 questions",
+    "exam_duration_minutes": 90,
+    "passing_score": 70,
+    "passing_score_note": "Approximate \u2014 Google does not publish exact passing score",
+    "pass_rate_percent": 78,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 2,
+    "renewal_required": true,
+    "renewal_cost": "$99",
+    "salary_boost_low": 1500,
+    "salary_boost_high": 4000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.1,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-01",
+    "skills": [
+      "GCP",
+      "cloud computing",
+      "digital transformation",
+      "business value",
+      "cloud operations",
+      "data management",
+      "security basics"
+    ],
+    "primary_skills": [
+      "GCP",
+      "cloud computing",
+      "digital transformation"
+    ],
+    "secondary_skills": [
+      "cloud operations",
+      "data management",
+      "security basics"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic IT and business knowledge"
+    ],
+    "target_job_titles": [
+      "Cloud Sales Associate",
+      "Business Analyst (Cloud teams)",
+      "Technical Account Manager (Junior)",
+      "Pre-sales Consultant",
+      "Cloud Support Associate"
+    ],
+    "job_postings_count": 8000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Associate Cloud Engineer",
+      "Generative AI Leader"
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Generative AI Leader",
+    "provider": "Google",
+    "industry": "cloud",
+    "subdomain": "gcp",
+    "difficulty": 2,
+    "description": "Foundational certification covering generative AI concepts, capabilities, and Google Cloud's generative AI solutions.",
+    "official_url": "https://cloud.google.com/certification/generative-ai-leader",
+    "cost": "$99",
+    "cost_source": "Google Cloud Official (2026)",
+    "duration_weeks": 4,
+    "study_hours": 40,
+    "exam_format": "Multiple choice, ~40 questions",
+    "exam_duration_minutes": 90,
+    "passing_score": 70,
+    "passing_score_note": "Approximate",
+    "pass_rate_percent": 76,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 2,
+    "renewal_required": true,
+    "renewal_cost": "$99",
+    "salary_boost_low": 2500,
+    "salary_boost_high": 7000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.4,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-01",
+    "skills": [
+      "GCP",
+      "generative AI",
+      "large language models",
+      "Vertex AI",
+      "AI applications",
+      "ethical AI",
+      "business value of AI"
+    ],
+    "primary_skills": [
+      "GCP",
+      "generative AI",
+      "Vertex AI"
+    ],
+    "secondary_skills": [
+      "large language models",
+      "AI applications",
+      "ethical AI"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic cloud concepts"
+    ],
+    "target_job_titles": [
+      "AI Product Specialist",
+      "GenAI Solutions Consultant",
+      "Business Analyst (AI-focused)",
+      "AI Sales Engineer (Entry-level)",
+      "Digital Transformation Associate"
+    ],
+    "job_postings_count": 12000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Professional Machine Learning Engineer"
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Associate Cloud Engineer",
+    "provider": "Google",
+    "industry": "cloud",
+    "subdomain": "gcp",
+    "difficulty": 3,
+    "description": "Mid-level certification validating ability to deploy and manage Google Cloud applications and infrastructure.",
+    "official_url": "https://cloud.google.com/certification/cloud-engineer",
+    "cost": "$125",
+    "cost_source": "Google Cloud Official (2026)",
+    "duration_weeks": 8,
+    "study_hours": 80,
+    "exam_format": "Multiple choice & scenario-based, 50\u201360 questions",
+    "exam_duration_minutes": 120,
+    "passing_score": 70,
+    "passing_score_note": "Approximate",
+    "pass_rate_percent": 68,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$125",
+    "salary_boost_low": 5000,
+    "salary_boost_high": 12000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.9,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-01",
+    "skills": [
+      "GCP",
+      "Compute Engine",
+      "App Engine",
+      "Kubernetes Engine",
+      "Cloud Storage",
+      "networking",
+      "deployment",
+      "management"
+    ],
+    "primary_skills": [
+      "GCP",
+      "Compute Engine",
+      "Kubernetes",
+      "deployment"
+    ],
+    "secondary_skills": [
+      "App Engine",
+      "Cloud Storage",
+      "networking",
+      "management"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Linux basics",
+      "networking concepts",
+      "command line experience"
+    ],
+    "target_job_titles": [
+      "Cloud Engineer (Junior)",
+      "DevOps Engineer (Entry)",
+      "Systems Administrator (Cloud)",
+      "Site Reliability Engineer (Junior)",
+      "Infrastructure Engineer"
+    ],
+    "job_postings_count": 28000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Professional Cloud Architect",
+      "Professional Cloud Developer"
+    ]
+  },
+  {
+    "id": 36,
+    "name": "Google Workspace Administrator (Associate)",
+    "provider": "Google",
+    "industry": "cloud",
+    "subdomain": "gcp",
+    "difficulty": 3,
+    "description": "Certification validating ability to administer and manage Google Workspace for organizations.",
+    "official_url": "https://support.google.com/a/answer/7667673",
+    "cost": "$99",
+    "cost_source": "Google Cloud Official (2026)",
+    "duration_weeks": 6,
+    "study_hours": 50,
+    "exam_format": "Multiple choice, ~40 questions",
+    "exam_duration_minutes": 90,
+    "passing_score": 70,
+    "passing_score_note": "Approximate",
+    "pass_rate_percent": 75,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 2,
+    "renewal_required": true,
+    "renewal_cost": "$99",
+    "salary_boost_low": 3000,
+    "salary_boost_high": 7000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.0,
+    "trending": false,
+    "data_confidence": "high",
+    "last_verified": "2026-06-01",
+    "skills": [
+      "Google Workspace",
+      "administration",
+      "Gmail",
+      "Drive",
+      "Meet",
+      "user management",
+      "security",
+      "compliance"
+    ],
+    "primary_skills": [
+      "Google Workspace",
+      "administration",
+      "user management"
+    ],
+    "secondary_skills": [
+      "Gmail",
+      "Drive",
+      "security",
+      "compliance"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "IT administration basics",
+      "Google Workspace familiarity"
+    ],
+    "target_job_titles": [
+      "Google Workspace Admin",
+      "IT Administrator",
+      "Systems Admin (Workspace-focused)",
+      "IT Support Engineer",
+      "SaaS Admin Specialist"
+    ],
+    "job_postings_count": 15000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Google Workspace Administrator (Professional)"
+    ]
+  },
+  {
+    "id": 37,
+    "name": "Professional Cloud Architect",
+    "provider": "Google",
+    "industry": "cloud",
+    "subdomain": "gcp",
+    "difficulty": 5,
+    "description": "Advanced certification validating ability to design, build, and manage cloud solutions on Google Cloud.",
+    "official_url": "https://cloud.google.com/certification/cloud-architect",
+    "cost": "$200",
+    "cost_source": "Google Cloud Official (2026)",
+    "duration_weeks": 12,
+    "study_hours": 130,
+    "exam_format": "Multiple choice & scenario-based, 50 questions",
+    "exam_duration_minutes": 120,
+    "passing_score": 70,
+    "passing_score_note": "Approximate",
+    "pass_rate_percent": 58,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$200",
+    "salary_boost_low": 12000,
+    "salary_boost_high": 30000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 9.3,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-01",
+    "skills": [
+      "GCP",
+      "architecture",
+      "multi-region deployment",
+      "disaster recovery",
+      "scalability",
+      "cost optimization",
+      "security design",
+      "performance"
+    ],
+    "primary_skills": [
+      "GCP",
+      "cloud architecture",
+      "multi-region deployment"
+    ],
+    "secondary_skills": [
+      "disaster recovery",
+      "scalability",
+      "cost optimization",
+      "security design"
+    ],
+    "prerequisites": [
+      "Associate Cloud Engineer or equivalent experience"
+    ],
+    "recommended_prior_knowledge": [
+      "2+ years GCP experience",
+      "Advanced cloud architecture",
+      "Enterprise design patterns"
+    ],
+    "target_job_titles": [
+      "Cloud Solutions Architect",
+      "Enterprise Architect",
+      "Cloud Consultant",
+      "Principal Cloud Engineer",
+      "Technical Architect"
+    ],
+    "job_postings_count": 32000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Professional Cloud Security Engineer",
+      "Professional Cloud Network Engineer"
+    ]
+  },
+  {
+    "id": 38,
+    "name": "Professional Cloud Developer",
+    "provider": "Google",
+    "industry": "cloud",
+    "subdomain": "gcp",
+    "difficulty": 4,
+    "description": "Certification validating ability to build cloud-native applications using Google Cloud services.",
+    "official_url": "https://cloud.google.com/certification/cloud-developer",
+    "cost": "$200",
+    "cost_source": "Google Cloud Official (2026)",
+    "duration_weeks": 10,
+    "study_hours": 100,
+    "exam_format": "Multiple choice & scenario-based, 50 questions",
+    "exam_duration_minutes": 120,
+    "passing_score": 70,
+    "passing_score_note": "Approximate",
+    "pass_rate_percent": 62,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$200",
+    "salary_boost_low": 8000,
+    "salary_boost_high": 18000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.8,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-01",
+    "skills": [
+      "GCP",
+      "App Engine",
+      "Cloud Functions",
+      "Pub/Sub",
+      "Cloud Run",
+      "APIs",
+      "serverless",
+      "application development"
+    ],
+    "primary_skills": [
+      "GCP",
+      "App Engine",
+      "Cloud Functions",
+      "serverless"
+    ],
+    "secondary_skills": [
+      "Cloud Run",
+      "Pub/Sub",
+      "APIs",
+      "application development"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Programming fundamentals",
+      "Associate Cloud Engineer knowledge"
+    ],
+    "target_job_titles": [
+      "Cloud Software Engineer",
+      "Backend Engineer (GCP)",
+      "Serverless Developer",
+      "Platform Engineer",
+      "Full Stack Cloud Developer"
+    ],
+    "job_postings_count": 24000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Professional Cloud DevOps Engineer"
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Professional Cloud DevOps Engineer",
+    "provider": "Google",
+    "industry": "cloud",
+    "subdomain": "gcp",
+    "difficulty": 5,
+    "description": "Advanced certification validating expertise in deploying, monitoring, and managing Google Cloud infrastructure.",
+    "official_url": "https://cloud.google.com/certification/cloud-devops-engineer",
+    "cost": "$200",
+    "cost_source": "Google Cloud Official (2026)",
+    "duration_weeks": 12,
+    "study_hours": 120,
+    "exam_format": "Multiple choice & scenario-based, 50 questions",
+    "exam_duration_minutes": 120,
+    "passing_score": 70,
+    "passing_score_note": "Approximate",
+    "pass_rate_percent": 55,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$200",
+    "salary_boost_low": 10000,
+    "salary_boost_high": 24000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 9.1,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-01",
+    "skills": [
+      "GCP",
+      "CI/CD",
+      "Cloud Build",
+      "Container Registry",
+      "Kubernetes Engine",
+      "monitoring",
+      "logging",
+      "infrastructure as code"
+    ],
+    "primary_skills": [
+      "GCP",
+      "CI/CD",
+      "Kubernetes Engine",
+      "infrastructure as code"
+    ],
+    "secondary_skills": [
+      "Cloud Build",
+      "monitoring",
+      "logging",
+      "Container Registry"
+    ],
+    "prerequisites": [
+      "Associate Cloud Engineer or equivalent experience"
+    ],
+    "recommended_prior_knowledge": [
+      "DevOps and CI/CD experience",
+      "Linux and scripting",
+      "Kubernetes basics"
+    ],
+    "target_job_titles": [
+      "DevOps Engineer",
+      "Site Reliability Engineer (SRE)",
+      "Platform Engineer",
+      "Infrastructure Engineer",
+      "Release Engineer"
+    ],
+    "job_postings_count": 26000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Professional Data Engineer"
+    ]
+  },
+  {
+    "id": 42,
+    "name": "Professional Cloud Network Engineer",
+    "provider": "Google",
+    "industry": "cloud",
+    "subdomain": "gcp",
+    "difficulty": 5,
+    "description": "Advanced certification validating expertise in designing and managing complex network architectures on Google Cloud.",
+    "official_url": "https://cloud.google.com/certification/cloud-network-engineer",
+    "cost": "$200",
+    "cost_source": "Google Cloud Official (2026)",
+    "duration_weeks": 12,
+    "study_hours": 120,
+    "exam_format": "Multiple choice & scenario-based, 50 questions",
+    "exam_duration_minutes": 120,
+    "passing_score": 70,
+    "passing_score_note": "Approximate",
+    "pass_rate_percent": 50,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$200",
+    "salary_boost_low": 11000,
+    "salary_boost_high": 26000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.9,
+    "trending": false,
+    "data_confidence": "high",
+    "last_verified": "2026-06-01",
+    "skills": [
+      "GCP",
+      "networking",
+      "VPC",
+      "Cloud Interconnect",
+      "Cloud VPN",
+      "Load Balancing",
+      "Cloud DNS",
+      "hybrid connectivity"
+    ],
+    "primary_skills": [
+      "GCP",
+      "advanced networking",
+      "VPC design",
+      "hybrid connectivity"
+    ],
+    "secondary_skills": [
+      "Cloud Interconnect",
+      "Cloud VPN",
+      "Load Balancing",
+      "Cloud DNS"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Advanced networking concepts",
+      "BGP and routing protocols",
+      "Cloud architecture knowledge"
+    ],
+    "target_job_titles": [
+      "Cloud Network Engineer",
+      "Network Architect",
+      "Infrastructure Engineer (Networking focus)",
+      "Telecom Cloud Engineer",
+      "Site Reliability Engineer (Network-heavy teams)"
+    ],
+    "job_postings_count": 16000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Professional Cloud Security Engineer"
+    ]
+  },
+  {
+    "id": 43,
+    "name": "Professional Cloud Database Engineer",
+    "provider": "Google",
+    "industry": "cloud",
+    "subdomain": "gcp",
+    "difficulty": 5,
+    "description": "Advanced certification validating ability to design, implement, and manage database solutions on Google Cloud.",
+    "official_url": "https://cloud.google.com/certification/cloud-database-engineer",
+    "cost": "$200",
+    "cost_source": "Google Cloud Official (2026)",
+    "duration_weeks": 11,
+    "study_hours": 110,
+    "exam_format": "Multiple choice & scenario-based, 50 questions",
+    "exam_duration_minutes": 120,
+    "passing_score": 70,
+    "passing_score_note": "Approximate",
+    "pass_rate_percent": 53,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$200",
+    "salary_boost_low": 10000,
+    "salary_boost_high": 25000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 9.0,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-01",
+    "skills": [
+      "GCP",
+      "Cloud SQL",
+      "Firestore",
+      "Spanner",
+      "Bigtable",
+      "database design",
+      "performance tuning",
+      "backup and recovery"
+    ],
+    "primary_skills": [
+      "GCP",
+      "database architecture",
+      "Cloud SQL",
+      "Firestore"
+    ],
+    "secondary_skills": [
+      "Spanner",
+      "Bigtable",
+      "performance tuning",
+      "backup and recovery"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "SQL and database concepts",
+      "Data modeling",
+      "Cloud architecture knowledge"
+    ],
+    "target_job_titles": [
+      "Database Engineer",
+      "Cloud DBA",
+      "Data Platform Engineer",
+      "Backend Infrastructure Engineer",
+      "Data Systems Engineer"
+    ],
+    "job_postings_count": 20000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Professional Data Engineer"
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Google Workspace Administrator (Professional)",
+    "provider": "Google",
+    "industry": "cloud",
+    "subdomain": "gcp",
+    "difficulty": 3,
+    "description": "Advanced certification validating expertise in managing and deploying Google Workspace at enterprise scale.",
+    "official_url": "https://support.google.com/a/answer/7667673",
+    "cost": "$99",
+    "cost_source": "Google Cloud Official (2026)",
+    "duration_weeks": 8,
+    "study_hours": 70,
+    "exam_format": "Multiple choice, ~40 questions",
+    "exam_duration_minutes": 90,
+    "passing_score": 70,
+    "passing_score_note": "Approximate",
+    "pass_rate_percent": 68,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 2,
+    "renewal_required": true,
+    "renewal_cost": "$99",
+    "salary_boost_low": 5000,
+    "salary_boost_high": 12000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.2,
+    "trending": false,
+    "data_confidence": "high",
+    "last_verified": "2026-06-01",
+    "skills": [
+      "Google Workspace",
+      "enterprise administration",
+      "security governance",
+      "identity management",
+      "collaboration tools",
+      "compliance",
+      "integration"
+    ],
+    "primary_skills": [
+      "Google Workspace",
+      "enterprise administration",
+      "identity management"
+    ],
+    "secondary_skills": [
+      "security governance",
+      "collaboration tools",
+      "compliance",
+      "integration"
+    ],
+    "prerequisites": [
+      "Google Workspace Administrator (Associate) or equivalent experience"
+    ],
+    "recommended_prior_knowledge": [
+      "Enterprise IT administration",
+      "Identity and access management",
+      "Security governance"
+    ],
+    "target_job_titles": [
+      "Enterprise Workspace Admin",
+      "IT Operations Manager",
+      "Collaboration Systems Engineer",
+      "SaaS Infrastructure Admin",
+      "Identity & Access Admin (Workspace)"
+    ],
+    "job_postings_count": 18000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Professional Cloud Architect"
+    ]
+  },
+  {
+    "id": 57,
+    "name": "Azure Administrator Associate (AZ-104)",
+    "provider": "Microsoft",
+    "industry": "cloud",
+    "subdomain": "azure",
+    "difficulty": 3,
+    "description": "Validates expertise in managing Azure subscriptions, identities, storage, compute, virtual networks, and monitoring. The most hired-against Azure certification on the market.",
+    "official_url": "https://learn.microsoft.com/en-us/credentials/certifications/azure-administrator/",
+    "cost": "$165",
+    "cost_source": "Microsoft Official (May 2026)",
+    "duration_weeks": 8,
+    "study_hours": 80,
+    "exam_format": "Multiple choice, case studies & labs, 40\u201360 questions",
+    "exam_duration_minutes": 100,
+    "passing_score": 700,
+    "passing_score_note": "Scaled score out of 1000",
+    "pass_rate_percent": 60,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "$0",
+    "renewal_cost_note": "Free annual renewal via Microsoft Learn assessment",
+    "salary_boost_low": 6000,
+    "salary_boost_high": 15000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 9.1,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "Azure",
+      "Microsoft Azure",
+      "identity management",
+      "storage",
+      "compute",
+      "virtual networks",
+      "monitoring",
+      "governance",
+      "Azure Active Directory",
+      "backup",
+      "load balancing",
+      "resource management"
+    ],
+    "primary_skills": [
+      "Azure",
+      "identity management",
+      "virtual networks",
+      "compute"
+    ],
+    "secondary_skills": [
+      "storage",
+      "monitoring",
+      "governance",
+      "Azure Active Directory",
+      "backup"
+    ],
+    "prerequisites": [
+      "Azure Fundamentals (AZ-900) recommended"
+    ],
+    "recommended_prior_knowledge": [
+      "Networking fundamentals",
+      "Virtualization concepts",
+      "Cloud basics"
+    ],
+    "target_job_titles": [
+      "Azure Administrator",
+      "Cloud Administrator",
+      "Systems Administrator",
+      "Infrastructure Engineer",
+      "Cloud Engineer",
+      "IT Administrator"
+    ],
+    "job_postings_count": 78000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Azure Solutions Architect Expert (AZ-305)",
+      "Azure DevOps Engineer Expert (AZ-400)",
+      "Azure Security Engineer Associate (AZ-500)"
+    ]
+  },
+  {
+    "id": 58,
+    "name": "Azure Developer Associate (AZ-204)",
+    "provider": "Microsoft",
+    "industry": "cloud",
+    "subdomain": "azure",
+    "difficulty": 3,
+    "description": "Validates skills in building, deploying, and maintaining Azure-hosted applications including Azure Functions, App Service, Storage, API Management, and monitoring solutions.",
+    "official_url": "https://learn.microsoft.com/en-us/credentials/certifications/azure-developer/",
+    "cost": "$165",
+    "cost_source": "Microsoft Official (May 2026)",
+    "duration_weeks": 8,
+    "study_hours": 80,
+    "exam_format": "Multiple choice, case studies & labs, 40\u201360 questions",
+    "exam_duration_minutes": 120,
+    "passing_score": 700,
+    "passing_score_note": "Scaled score out of 1000",
+    "pass_rate_percent": 58,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "$0",
+    "renewal_cost_note": "Free annual renewal via Microsoft Learn assessment",
+    "salary_boost_low": 6000,
+    "salary_boost_high": 15000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.8,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "Azure",
+      "Microsoft Azure",
+      "Azure Functions",
+      "App Service",
+      "Azure Storage",
+      "API Management",
+      "Cosmos DB",
+      "Azure Cache",
+      "monitoring",
+      "CI/CD",
+      "containerization",
+      "serverless",
+      "Python",
+      "C#"
+    ],
+    "primary_skills": [
+      "Azure",
+      "Azure Functions",
+      "App Service",
+      "serverless"
+    ],
+    "secondary_skills": [
+      "Azure Storage",
+      "API Management",
+      "Cosmos DB",
+      "CI/CD",
+      "containerization"
+    ],
+    "prerequisites": [
+      "Azure Fundamentals (AZ-900) recommended",
+      "1\u20132 years Azure development experience"
+    ],
+    "recommended_prior_knowledge": [
+      "Programming in Python or C#",
+      "Cloud development concepts",
+      "REST APIs"
+    ],
+    "target_job_titles": [
+      "Azure Developer",
+      "Cloud Developer",
+      "Backend Engineer",
+      "Software Engineer",
+      "Full Stack Developer",
+      "Cloud Application Developer"
+    ],
+    "job_postings_count": 55000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Azure DevOps Engineer Expert (AZ-400)",
+      "Azure Solutions Architect Expert (AZ-305)"
+    ]
+  },
+  {
+    "id": 59,
+    "name": "Azure Solutions Architect Expert (AZ-305)",
+    "provider": "Microsoft",
+    "industry": "cloud",
+    "subdomain": "azure",
+    "difficulty": 4,
+    "description": "Validates advanced skills in designing secure, scalable, and reliable Azure solutions. Covers compute, storage, networking, identity, governance, and monitoring architecture.",
+    "official_url": "https://learn.microsoft.com/en-us/credentials/certifications/azure-solutions-architect/",
+    "cost": "$165",
+    "cost_source": "Microsoft Official (May 2026)",
+    "duration_weeks": 12,
+    "study_hours": 120,
+    "exam_format": "Multiple choice, case studies & labs, 40\u201360 questions",
+    "exam_duration_minutes": 120,
+    "passing_score": 700,
+    "passing_score_note": "Scaled score out of 1000",
+    "pass_rate_percent": 52,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "$0",
+    "renewal_cost_note": "Free annual renewal via Microsoft Learn assessment",
+    "salary_boost_low": 12000,
+    "salary_boost_high": 28000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 9.3,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "Azure",
+      "cloud architecture",
+      "infrastructure design",
+      "high availability",
+      "disaster recovery",
+      "identity management",
+      "networking",
+      "storage",
+      "governance",
+      "security",
+      "cost optimization",
+      "scalability"
+    ],
+    "primary_skills": [
+      "Azure",
+      "cloud architecture",
+      "infrastructure design"
+    ],
+    "secondary_skills": [
+      "high availability",
+      "disaster recovery",
+      "governance",
+      "security",
+      "cost optimization"
+    ],
+    "prerequisites": [
+      "Azure Administrator Associate (AZ-104) strongly recommended"
+    ],
+    "recommended_prior_knowledge": [
+      "Azure administration",
+      "Networking",
+      "Security fundamentals"
+    ],
+    "target_job_titles": [
+      "Cloud Architect",
+      "Solutions Architect",
+      "Azure Architect",
+      "Infrastructure Architect",
+      "Senior Cloud Engineer",
+      "Enterprise Architect"
+    ],
+    "job_postings_count": 48000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Azure DevOps Engineer Expert (AZ-400)",
+      "Microsoft Cybersecurity Architect (SC-100)"
+    ]
+  },
+  {
+    "id": 60,
+    "name": "Azure DevOps Engineer Expert (AZ-400)",
+    "provider": "Microsoft",
+    "industry": "cloud",
+    "subdomain": "devops",
+    "difficulty": 4,
+    "description": "Validates expertise in designing and implementing DevOps practices using Azure DevOps and GitHub, covering CI/CD pipelines, infrastructure as code, monitoring, and security.",
+    "official_url": "https://learn.microsoft.com/en-us/credentials/certifications/devops-engineer/",
+    "cost": "$165",
+    "cost_source": "Microsoft Official (May 2026)",
+    "duration_weeks": 12,
+    "study_hours": 120,
+    "exam_format": "Multiple choice, case studies & labs, 40\u201360 questions",
+    "exam_duration_minutes": 120,
+    "passing_score": 700,
+    "passing_score_note": "Scaled score out of 1000",
+    "pass_rate_percent": 50,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "$0",
+    "renewal_cost_note": "Free annual renewal via Microsoft Learn assessment",
+    "salary_boost_low": 10000,
+    "salary_boost_high": 22000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 9.0,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "Azure DevOps",
+      "CI/CD",
+      "GitHub Actions",
+      "infrastructure as code",
+      "pipelines",
+      "monitoring",
+      "testing",
+      "security",
+      "containers",
+      "Kubernetes",
+      "Terraform",
+      "automation",
+      "DevOps"
+    ],
+    "primary_skills": [
+      "Azure DevOps",
+      "CI/CD",
+      "infrastructure as code"
+    ],
+    "secondary_skills": [
+      "GitHub Actions",
+      "pipelines",
+      "Kubernetes",
+      "Terraform",
+      "monitoring",
+      "automation"
+    ],
+    "prerequisites": [
+      "Azure Administrator Associate (AZ-104) OR Azure Developer Associate (AZ-204)"
+    ],
+    "recommended_prior_knowledge": [
+      "Azure administration or development",
+      "CI/CD concepts",
+      "Scripting"
+    ],
+    "target_job_titles": [
+      "DevOps Engineer",
+      "Platform Engineer",
+      "Release Engineer",
+      "Site Reliability Engineer",
+      "Azure DevOps Engineer",
+      "Cloud Engineer"
+    ],
+    "job_postings_count": 42000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Azure Solutions Architect Expert (AZ-305)",
+      "Certified Kubernetes Administrator (CKA)"
     ]
   }
 ]

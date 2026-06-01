@@ -1,5 +1,6 @@
 import { auth } from '@clerk/nextjs/server';
 import { getDb } from '@/lib/db';
+import { findAlternativePaths, extractProvider, getProviderColor } from '@/lib/roadmapMatcher';
 
 export async function GET() {
   try {
@@ -42,10 +43,18 @@ export async function GET() {
     const enrichedCerts = allCerts.map((cert: any) => ({
       ...cert,
       userStatus: userCertMap.get(cert.id) || null,
+      provider: extractProvider(cert.name),
+      providerColor: getProviderColor(extractProvider(cert.name)),
+    }));
+
+    // Calculate alternatives for each cert
+    const certsWithAlternatives = enrichedCerts.map((cert: any) => ({
+      ...cert,
+      alternatives: findAlternativePaths(cert, enrichedCerts, userCertMap),
     }));
 
     // Group by industry
-    const byIndustry = enrichedCerts.reduce((acc: any, cert: any) => {
+    const byIndustry = certsWithAlternatives.reduce((acc: any, cert: any) => {
       if (!acc[cert.industry]) {
         acc[cert.industry] = [];
       }
@@ -55,10 +64,10 @@ export async function GET() {
 
     return Response.json({
       byIndustry,
-      allCerts: enrichedCerts,
+      allCerts: certsWithAlternatives,
     });
   } catch (error) {
     console.error('Roadmap error:', error);
-    return Response.json({ error: 'Failed to fetch roadmap' }, { status: 500 });
+    return Response.json({ error: 'Failed to fetch roadmap', details: String(error) }, { status: 500 });
   }
 }

@@ -8,6 +8,9 @@ interface Cert {
   difficulty: number;
   prerequisites: string[];
   userStatus?: string;
+  provider?: string;
+  providerColor?: string;
+  alternatives?: Cert[];
 }
 
 interface RoadmapFlowchartProps {
@@ -214,6 +217,33 @@ export default function RoadmapFlowchart({ certs }: RoadmapFlowchartProps) {
                 >
                   {cert.difficulty}
                 </text>
+
+                {/* Provider badge */}
+                {cert.provider && (
+                  <g>
+                    <rect
+                      x={x + certWidth - 80}
+                      y={y + 8}
+                      width="72"
+                      height="24"
+                      rx="4"
+                      fill={cert.providerColor || 'var(--text-secondary)'}
+                      opacity="0.15"
+                      stroke={cert.providerColor || 'var(--text-secondary)'}
+                      strokeWidth="1"
+                    />
+                    <text
+                      x={x + certWidth - 44}
+                      y={y + 26}
+                      textAnchor="middle"
+                      fontSize="10"
+                      fill={cert.providerColor || 'var(--text-secondary)'}
+                      fontWeight="600"
+                    >
+                      {cert.provider}
+                    </text>
+                  </g>
+                )}
 
                 {/* Cert name */}
                 <text
