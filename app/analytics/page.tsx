@@ -7,7 +7,7 @@ import LoggedOutState from '@/components/LoggedOutState';
 
 interface AnalyticsData {
   jobCount: number;
-  topCerts: { name: string; industry: string; difficulty: number; count: number; avg_score: number }[];
+  topCerts: { name: string; industry: string; difficulty: number; count: number; total_score: number; avg_score: number }[];
   topSkills: { skill: string; count: number }[];
   skillGaps: string[];
   recentJobs: { id: number; title: string; company: string; created_at: string }[];
@@ -87,12 +87,14 @@ export default function AnalyticsPage() {
               background: 'var(--bg-card)', border: '1px solid var(--border)',
               borderRadius: 20, padding: '24px',
             }}>
-              <SectionHeader title="Most Recommended" subtitle="By frequency across all jobs" />
+              <SectionHeader title="Most Recommended" subtitle="By average score across all jobs" />
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {data!.topCerts.slice(0, 6).map((cert, i) => {
                   const color = INDUSTRY_COLORS[cert.industry] || '#94a3b8';
-                  const maxCount = data!.topCerts[0]?.count || 1;
-                  const pct = Math.round((cert.count / maxCount) * 100);
+                  const maxScore = data!.topCerts[0]?.total_score || 1;
+                  const totalScore = cert.total_score || 0;
+                  const avgScore = cert.count > 0 ? totalScore / cert.count : 0;
+                  const pct = Math.round((totalScore / maxScore) * 100);
                   return (
                     <div key={cert.name}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 5, alignItems: 'center' }}>
@@ -106,7 +108,7 @@ export default function AnalyticsPage() {
                           </span>
                         </div>
                         <span style={{ fontSize: 12, color: 'var(--text-muted)', flexShrink: 0 }}>
-                          {cert.count}×
+                          {(avgScore || 0).toFixed(1)}%
                         </span>
                       </div>
                       <div style={{ height: 4, background: 'var(--border)', borderRadius: 2, overflow: 'hidden' }}>

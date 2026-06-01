@@ -75,3 +75,94 @@ body {
   transform: rotate(-90deg);
   transform-origin: center;
 }
+
+/* Clerk UserButton dropdown styling */
+.cl-userButtonPopoverCard {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+}
+
+.cl-userPreviewMainIdentifier,
+.cl-userPreviewSecondaryIdentifier {
+  color: #fff !important;
+}
+
+.cl-userPreviewMainIdentifier {
+  font-weight: 500;
+}
+
+.cl-userPreviewSecondaryIdentifier {
+  font-weight: 400;
+}
+
+.cl-userButtonPopoverCard button,
+.cl-userButtonPopoverCard [role="button"],
+.cl-menuButton__root,
+[role="menuitem"] {
+  color: #fff !important;
+}
+
+.cl-userButtonPopoverCard button:hover,
+.cl-userButtonPopoverCard [role="button"]:hover {
+  background: var(--bg-card-hover) !important;
+}
+
+/* Target all text in the popover */
+.cl-userButtonPopoverCard * {
+  color: #fff !important;
+}
+
+.cl-userButtonPopoverCard * * {
+  color: inherit !important;
+}
+
+/* Clerk account management page styling */
+.cl-main {
+  background: var(--bg) !important;
+  color: var(--text-primary) !important;
+}
+
+.cl-card {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+}
+
+.cl-formButtonPrimary {
+  background: var(--accent) !important;
+  color: #fff !important;
+}
+
+.cl-formButtonPrimary:hover {
+  background: var(--accent-light) !important;
+}
+
+.cl-formFieldLabel,
+.cl-label {
+  color: var(--text-primary) !important;
+}
+
+.cl-input,
+.cl-select,
+textarea {
+  background: var(--bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border) !important;
+}
+
+.cl-input::placeholder,
+.cl-select::placeholder {
+  color: var(--text-secondary) !important;
+}
+
+.cl-text,
+.cl-alertBox,
+p, span, div, label, button, a {
+  color: var(--text-primary) !important;
+}
+
+/* Ensure manage account text is white */
+.cl-userProfile,
+.cl-accordionItem,
+.cl-accordionTrigger {
+  color: var(--text-primary) !important;
+}

@@ -80,6 +80,22 @@ export async function initDb() {
     )
   `);
 
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS user_certifications (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id TEXT NOT NULL,
+      cert_id INTEGER NOT NULL,
+      status TEXT NOT NULL DEFAULT 'interested',
+      started_date DATE,
+      completed_date DATE,
+      notes TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (cert_id) REFERENCES certifications(id),
+      UNIQUE(user_id, cert_id)
+    )
+  `);
+
   // Seed certifications if empty
   const count = await db.execute('SELECT COUNT(*) as cnt FROM certifications');
   if ((count.rows[0] as unknown as { cnt: number }).cnt === 0) {

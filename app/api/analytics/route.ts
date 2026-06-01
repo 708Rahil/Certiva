@@ -18,16 +18,16 @@ export async function GET() {
       args: [userId]
     });
 
-    // Most recommended certifications
+    // Most recommended certifications (by total score across all jobs)
     const topCerts = await db.execute({
       sql: `
-        SELECT c.name, c.industry, c.difficulty, COUNT(*) as count, AVG(r.score) as avg_score
+        SELECT c.name, c.industry, c.difficulty, COUNT(*) as count, SUM(r.score) as total_score, AVG(r.score) as avg_score
         FROM recommendations r
         JOIN certifications c ON r.cert_id = c.id
         JOIN jobs j ON r.job_id = j.id
         WHERE j.user_id = ?
         GROUP BY c.id
-        ORDER BY count DESC
+        ORDER BY total_score DESC
         LIMIT 8
       `,
       args: [userId]

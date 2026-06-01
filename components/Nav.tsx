@@ -11,6 +11,7 @@ export default function Nav() {
   const links = [
     { href: '/', label: 'New Analysis' },
     { href: '/jobs', label: 'Saved Jobs' },
+    { href: '/certifications', label: 'My Certifications' },
     { href: '/analytics', label: 'Analytics' },
   ];
 
@@ -79,7 +80,19 @@ export default function Nav() {
                     width: 32,
                     height: 32,
                     border: '1px solid rgba(255,255,255,0.1)',
-                  }
+                  },
+                  userPreviewMainIdentifier: {
+                    color: '#fff',
+                  },
+                  userPreviewSecondaryIdentifier: {
+                    color: '#fff',
+                  },
+                  userButtonBox: {
+                    flexDirection: 'row-reverse',
+                  },
+                  menuButton__avatar: {
+                    border: '1px solid rgba(255,255,255,0.1)',
+                  },
                 }
               }} />
             ) : (

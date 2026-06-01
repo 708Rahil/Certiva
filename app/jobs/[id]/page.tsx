@@ -52,6 +52,31 @@ export default function JobDetailPage() {
   const [loading, setLoading] = useState(true);
   const [showFullDesc, setShowFullDesc] = useState(false);
   const [filterIndustry, setFilterIndustry] = useState<string>('all');
+  const { isLoaded, userId } = useAuth();
+
+  const handleAddToCerts = async (certId: number, certName: string) => {
+    try {
+      const response = await fetch('/api/user-certifications', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          certId,
+          status: 'interested',
+          startedDate: null,
+          completedDate: null,
+          notes: `Recommended from job: ${job?.title}`,
+        }),
+      });
+
+      if (!response.ok) throw new Error('Failed to add certification');
+
+      // Show success message (you could add a toast here)
+      alert(`✓ Added "${certName}" to My Certifications`);
+    } catch (error) {
+      console.error('Error adding certification:', error);
+      alert('Failed to add certification. Please try again.');
+    }
+  };
 
   useEffect(() => {
     fetch(`/api/jobs/${id}`)
@@ -63,8 +88,6 @@ export default function JobDetailPage() {
       })
       .catch(() => setLoading(false));
   }, [id]);
-
-  const { isLoaded, userId } = useAuth();
 
   if (loading) return <LoadingState />;
   if (!job) return <div style={{ padding: 40, color: 'var(--text-secondary)' }}>Job not found.</div>;
@@ -231,6 +254,7 @@ export default function JobDetailPage() {
               <CertCard
                 key={rec.id}
                 rank={recs.indexOf(rec) + 1}
+                certId={rec.cert_id}
                 name={rec.name}
                 provider={rec.provider}
                 industry={rec.industry}
@@ -244,6 +268,7 @@ export default function JobDetailPage() {
                 cost={rec.cost}
                 duration={rec.duration_weeks ? `${rec.duration_weeks} weeks` : undefined}
                 official_url={rec.official_url}
+                onAddToCerts={userId ? handleAddToCerts : undefined}
                 animDelay={i * 60}
               />
             ))}
