@@ -12,6 +12,7 @@ export default function Nav() {
     { href: '/', label: 'New Analysis' },
     { href: '/jobs', label: 'Saved Jobs' },
     { href: '/certifications', label: 'My Certifications' },
+    { href: '/roadmap', label: 'Roadmap' },
     { href: '/analytics', label: 'Analytics' },
   ];
 
