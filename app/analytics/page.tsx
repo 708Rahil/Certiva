@@ -91,10 +91,9 @@ export default function AnalyticsPage() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {data!.topCerts.slice(0, 6).map((cert, i) => {
                   const color = INDUSTRY_COLORS[cert.industry] || '#94a3b8';
-                  const maxScore = data!.topCerts[0]?.total_score || 1;
                   const totalScore = cert.total_score || 0;
                   const avgScore = cert.count > 0 ? totalScore / cert.count : 0;
-                  const pct = Math.round((totalScore / maxScore) * 100);
+                  const pct = Math.round(avgScore);
                   return (
                     <div key={cert.name}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 5, alignItems: 'center' }}>
