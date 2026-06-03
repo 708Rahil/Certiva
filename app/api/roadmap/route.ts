@@ -58,6 +58,21 @@ export async function POST(req: NextRequest) {
     );
 
     const topRecs = recommendations.slice(0, 8);
+    const byIndustry: Record<string, any[]> = {};
+
+    for (const rec of topRecs) {
+        const industry = rec.cert.industry || 'general';
+
+        if (!byIndustry[industry]) {
+            byIndustry[industry] = [];
+        }
+
+        byIndustry[industry].push(rec.cert);
+    }
+
+    
+    
+    
     if (topRecs.length > 0) {
       const { error: recsError } = await supabase.from('recommendations').insert(
         topRecs.map((rec) => ({
@@ -84,6 +99,7 @@ export async function POST(req: NextRequest) {
       seniority,
       extractionSource: source, // 'llm' or 'keyword' — useful for debugging
       recommendationCount: topRecs.length,
+      byIndustry, //LLM test
     });
   } catch (e) {
     console.error(e);
