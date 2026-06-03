@@ -24,18 +24,18 @@ export default function RoadmapPage() {
     fetch('/api/roadmap')
       .then(res => res.json())
       .then(result => {
+        console.log("ROADMAP RESPONSE:", result);
         if (result.error) {
-          console.error('API Error:', result);
-          setLoading(false);
-          return;
+            console.error('API Error:', result);
+            setLoading(false);
+            return;
         }
+
         setData(result);
-        const industries = Object.keys(result.byIndustry || {});
-        setSelectedIndustry(industries[0] || null);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Failed to load roadmap:', err);
+
+        const industries = Object.keys(result.byIndustry ?? {});
+  
+        setSelectedIndustry(industries.length > 0 ? industries[0] : null);
         setLoading(false);
       });
   }, []);
