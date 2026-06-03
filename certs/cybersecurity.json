@@ -1,7 +1,7 @@
 [
   {
     "id": 7,
-    "name": "CompTIA Security+",
+    "name": "CompTIA Security+ (SY0-701)",
     "provider": "CompTIA",
     "industry": "cybersecurity",
     "subdomain": "defensive",
@@ -53,7 +53,7 @@
       "security policies"
     ],
     "prerequisites": [
-      "CompTIA Network+ or 2 years IT admin experience recommended"
+      "CompTIA Network+ (N10-009) or 2 years IT admin experience recommended"
     ],
     "recommended_prior_knowledge": [
       "Networking fundamentals",
@@ -84,14 +84,14 @@
     "difficulty": 4,
     "description": "Advanced certification for ethical hackers covering attack techniques and countermeasures.",
     "official_url": "https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/",
-    "cost": "$950\u2013$1,199",
-    "cost_source": "EC-Council Official CEH v13 (May 2026) \u2014 $950 via ECC remote proctoring, $1,199 via Pearson VUE",
+    "cost": "$950–$1,199",
+    "cost_source": "EC-Council Official CEH v13 (May 2026) — $950 via ECC remote proctoring, $1,199 via Pearson VUE",
     "duration_weeks": 16,
     "study_hours": 150,
     "exam_format": "Multiple choice, 125 questions",
     "exam_duration_minutes": 240,
     "passing_score": 70,
-    "passing_score_note": "Varies by exam form \u2014 typically 60\u201385%; no fixed cutoff published",
+    "passing_score_note": "Varies by exam form — typically 60–85%; no fixed cutoff published",
     "pass_rate_percent": 45,
     "pass_rate_source": "Community estimate",
     "valid_years": 3,
@@ -165,7 +165,7 @@
     "cost_source": "Coursera Official (May 2026)",
     "duration_weeks": 20,
     "study_hours": 40,
-    "exam_format": "Coursework, labs & graded assessments \u2014 no standalone timed exam",
+    "exam_format": "Coursework, labs & graded assessments — no standalone timed exam",
     "exam_duration_minutes": 0,
     "passing_score": 80,
     "passing_score_note": "80% required on each graded assessment",
@@ -218,7 +218,7 @@
     "job_postings_count": 28000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "CompTIA Security+",
+      "CompTIA Security+ (SY0-701)",
       "CEH"
     ]
   },
@@ -235,12 +235,12 @@
     "cost_source": "ISC2 Official (May 2026)",
     "duration_weeks": 24,
     "study_hours": 250,
-    "exam_format": "Computerized Adaptive Testing (CAT), 125\u2013175 questions",
+    "exam_format": "Computerized Adaptive Testing (CAT), 125–175 questions",
     "exam_duration_minutes": 240,
     "passing_score": 700,
     "passing_score_note": "Scaled score out of 1000",
     "pass_rate_percent": 40,
-    "pass_rate_source": "Community estimate \u2014 ISC2 does not publish official pass rates",
+    "pass_rate_source": "Community estimate — ISC2 does not publish official pass rates",
     "valid_years": 3,
     "renewal_required": true,
     "renewal_cost": "$125",
@@ -379,7 +379,7 @@
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
       "CISSP",
-      "AWS Security Specialty"
+      "AWS Security Specialty (SCS-C02)"
     ]
   },
   {
@@ -395,7 +395,7 @@
     "cost_source": "Microsoft Official (May 2026)",
     "duration_weeks": 12,
     "study_hours": 120,
-    "exam_format": "Multiple choice, case studies & labs, 40\u201360 questions",
+    "exam_format": "Multiple choice, case studies & labs, 40–60 questions",
     "exam_duration_minutes": 120,
     "passing_score": 700,
     "passing_score_note": "Scaled score out of 1000",
@@ -465,7 +465,7 @@
     "next_certs": [
       "CCSP",
       "CISSP",
-      "Microsoft Cybersecurity Architect (SC-100)"
+      "Microsoft Cybersecurity Architect Expert (SC-100)"
     ]
   },
   {
@@ -481,7 +481,7 @@
     "cost_source": "Microsoft Official (May 2026)",
     "duration_weeks": 8,
     "study_hours": 80,
-    "exam_format": "Multiple choice & scenario-based, 40\u201360 questions",
+    "exam_format": "Multiple choice & scenario-based, 40–60 questions",
     "exam_duration_minutes": 150,
     "passing_score": 700,
     "passing_score_note": "Scaled score out of 1000",
@@ -526,7 +526,7 @@
       "M365"
     ],
     "prerequisites": [
-      "CompTIA Security+ or equivalent experience recommended"
+      "CompTIA Security+ (SY0-701) or equivalent experience recommended"
     ],
     "recommended_prior_knowledge": [
       "Security operations fundamentals",
@@ -544,9 +544,9 @@
     "job_postings_count": 38000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "Microsoft Cybersecurity Architect (SC-100)",
+      "Microsoft Cybersecurity Architect Expert (SC-100)",
       "CISSP",
-      "Azure Security Engineer (AZ-500)"
+      "Azure Security Engineer Associate (AZ-500)"
     ]
   },
   {
@@ -562,7 +562,7 @@
     "cost_source": "Microsoft Official (May 2026)",
     "duration_weeks": 8,
     "study_hours": 80,
-    "exam_format": "Multiple choice & scenario-based, 40\u201360 questions",
+    "exam_format": "Multiple choice & scenario-based, 40–60 questions",
     "exam_duration_minutes": 100,
     "passing_score": 700,
     "passing_score_note": "Scaled score out of 1000",
@@ -625,8 +625,8 @@
     "job_postings_count": 28000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "Microsoft Cybersecurity Architect (SC-100)",
-      "Azure Security Engineer (AZ-500)",
+      "Microsoft Cybersecurity Architect Expert (SC-100)",
+      "Azure Security Engineer Associate (AZ-500)",
       "CISSP"
     ]
   },
@@ -643,7 +643,7 @@
     "cost_source": "Microsoft Official (May 2026)",
     "duration_weeks": 16,
     "study_hours": 150,
-    "exam_format": "Multiple choice, case studies, 40\u201360 questions",
+    "exam_format": "Multiple choice, case studies, 40–60 questions",
     "exam_duration_minutes": 100,
     "passing_score": 700,
     "passing_score_note": "Scaled score out of 1000",
@@ -708,7 +708,7 @@
     "next_certs": [
       "CISSP",
       "CCSP",
-      "AWS Certified Security Specialty"
+      "AWS Security Specialty (SCS-C02) (SCS-C02)"
     ]
   }
 ]

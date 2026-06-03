@@ -12,7 +12,7 @@
     "cost_source": "Coursera Official (May 2026)",
     "duration_weeks": 24,
     "study_hours": 40,
-    "exam_format": "Coursework, quizzes & capstone project \u2014 no standalone timed exam",
+    "exam_format": "Coursework, quizzes & capstone project — no standalone timed exam",
     "exam_duration_minutes": 0,
     "passing_score": 80,
     "passing_score_note": "80% required on graded assessments",
@@ -151,14 +151,14 @@
     "difficulty": 2,
     "description": "Validates SQL proficiency for querying, manipulating, and managing relational databases.",
     "official_url": "https://www.oracle.com/education/learn-associates/",
-    "cost": "$150\u2013$200",
-    "cost_source": "Oracle / Coursera (May 2026) \u2014 varies by provider",
+    "cost": "$150–$200",
+    "cost_source": "Oracle / Coursera (May 2026) — varies by provider",
     "duration_weeks": 6,
     "study_hours": 60,
-    "exam_format": "Multiple choice & hands-on queries \u2014 varies by provider",
+    "exam_format": "Multiple choice & hands-on queries — varies by provider",
     "exam_duration_minutes": 90,
     "passing_score": 70,
-    "passing_score_note": "Varies by provider \u2014 typically 70% or above",
+    "passing_score_note": "Varies by provider — typically 70% or above",
     "pass_rate_percent": 68,
     "pass_rate_source": "Community estimate",
     "valid_years": 5,
@@ -228,7 +228,7 @@
     "cost_source": "Coursera Official (May 2026)",
     "duration_weeks": 24,
     "study_hours": 60,
-    "exam_format": "Coursework, quizzes & capstone project \u2014 no standalone timed exam",
+    "exam_format": "Coursework, quizzes & capstone project — no standalone timed exam",
     "exam_duration_minutes": 0,
     "passing_score": 80,
     "passing_score_note": "80% required on graded assessments",
@@ -285,7 +285,7 @@
     "job_postings_count": 58000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "Google Cloud Professional Data Engineer",
+      "Google Cloud Google Cloud Professional Data Engineer",
       "TensorFlow Developer Certificate"
     ]
   },
@@ -356,7 +356,7 @@
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
       "Tableau Desktop Certified Professional",
-      "Power BI Data Analyst Associate"
+      "Microsoft Power BI Data Analyst Associate (PL-300)"
     ]
   },
   {
@@ -372,7 +372,7 @@
     "cost_source": "Microsoft Official (May 2026)",
     "duration_weeks": 8,
     "study_hours": 60,
-    "exam_format": "Multiple choice, case studies & labs, 40\u201360 questions",
+    "exam_format": "Multiple choice, case studies & labs, 40–60 questions",
     "exam_duration_minutes": 100,
     "passing_score": 700,
     "passing_score_note": "Scaled score out of 1000",
@@ -438,7 +438,7 @@
   },
   {
     "id": 74,
-    "name": "Snowflake SnowPro Core",
+    "name": "Snowflake SnowPro Core (COF-C02)",
     "provider": "Snowflake",
     "industry": "data",
     "subdomain": "engineering",
@@ -527,7 +527,7 @@
     "exam_format": "Multiple choice & scenario-based, ~50 questions",
     "exam_duration_minutes": 120,
     "passing_score": 70,
-    "passing_score_note": "Approximate \u2014 Google does not publish exact passing score",
+    "passing_score_note": "Approximate — Google does not publish exact passing score",
     "pass_rate_percent": 50,
     "pass_rate_source": "Community estimate",
     "valid_years": 2,
@@ -536,7 +536,7 @@
     "salary_boost_low": 12000,
     "salary_boost_high": 28000,
     "salary_boost_source": "Glassdoor/PayScale (estimated)",
-    "worth_it_rating": 9.0,
+    "worth_it_rating": 9,
     "trending": true,
     "data_confidence": "high",
     "last_verified": "2026-05-20",
@@ -589,13 +589,13 @@
     "job_postings_count": 32000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "Google Cloud Professional ML Engineer",
-      "Snowflake SnowPro Core"
+      "Professional Machine Learning Engineer",
+      "Snowflake SnowPro Core (COF-C02)"
     ]
   },
   {
     "id": 50,
-    "name": "AWS Certified Data Engineer \u2013 Associate",
+    "name": "AWS Data Engineer Associate (DEA-C01)",
     "provider": "Amazon Web Services",
     "industry": "data",
     "subdomain": "engineering",
@@ -618,7 +618,7 @@
     "salary_boost_low": 8000,
     "salary_boost_high": 18000,
     "salary_boost_source": "Glassdoor/PayScale (estimated)",
-    "worth_it_rating": 9.0,
+    "worth_it_rating": 9,
     "trending": true,
     "data_confidence": "high",
     "last_verified": "2026-06-01",
@@ -664,13 +664,13 @@
     "job_postings_count": 28000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "AWS Certified Database \u2013 Specialty",
-      "AWS Solutions Architect Professional"
+      "AWS Database Specialty (DBS-C01)",
+      "AWS Solutions Architect Professional (SAP-C02)"
     ]
   },
   {
     "id": 51,
-    "name": "AWS Certified Machine Learning Engineer \u2013 Associate",
+    "name": "AWS Machine Learning Engineer Associate (MLA-C01)",
     "provider": "Amazon Web Services",
     "industry": "data",
     "subdomain": "science",
@@ -739,13 +739,13 @@
     "job_postings_count": 24000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "AWS Solutions Architect Professional",
-      "AWS DevOps Engineer Professional"
+      "AWS Solutions Architect Professional (SAP-C02)",
+      "AWS DevOps Engineer Professional (DOP-C02)"
     ]
   },
   {
     "id": 52,
-    "name": "AWS Certified Database \u2013 Specialty",
+    "name": "AWS Database Specialty (DBS-C01)",
     "provider": "Amazon Web Services",
     "industry": "data",
     "subdomain": "engineering",
@@ -814,8 +814,8 @@
     "job_postings_count": 22000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "AWS Certified Data Engineer \u2013 Associate",
-      "AWS Certified Solutions Architect \u2013 Professional"
+      "AWS Data Engineer Associate (DEA-C01)",
+      "AWS Solutions Architect Professional (SAP-C02)"
     ]
   },
   {
@@ -881,7 +881,7 @@
     "job_postings_count": 22000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "Professional Data Engineer"
+      "Google Cloud Professional Data Engineer"
     ]
   },
   {
@@ -936,7 +936,7 @@
       "feature engineering"
     ],
     "prerequisites": [
-      "Professional Data Engineer or equivalent ML experience"
+      "Google Cloud Professional Data Engineer or equivalent ML experience"
     ],
     "recommended_prior_knowledge": [
       "Python and statistics",
@@ -969,7 +969,7 @@
     "cost_source": "Microsoft Official (May 2026)",
     "duration_weeks": 10,
     "study_hours": 100,
-    "exam_format": "Multiple choice, case studies & labs, 40\u201360 questions",
+    "exam_format": "Multiple choice, case studies & labs, 40–60 questions",
     "exam_duration_minutes": 120,
     "passing_score": 700,
     "passing_score_note": "Scaled score out of 1000",
@@ -982,7 +982,7 @@
     "salary_boost_low": 10000,
     "salary_boost_high": 22000,
     "salary_boost_source": "Glassdoor/PayScale (estimated)",
-    "worth_it_rating": 9.0,
+    "worth_it_rating": 9,
     "trending": true,
     "data_confidence": "high",
     "last_verified": "2026-05-20",
@@ -1037,7 +1037,7 @@
     "next_certs": [
       "Azure Solutions Architect Expert (AZ-305)",
       "Fabric Analytics Engineer (DP-600)",
-      "Snowflake SnowPro Core"
+      "Snowflake SnowPro Core (COF-C02)"
     ]
   },
   {
@@ -1053,7 +1053,7 @@
     "cost_source": "Microsoft Official (May 2026)",
     "duration_weeks": 10,
     "study_hours": 100,
-    "exam_format": "Multiple choice, case studies & labs, 40\u201360 questions",
+    "exam_format": "Multiple choice, case studies & labs, 40–60 questions",
     "exam_duration_minutes": 120,
     "passing_score": 700,
     "passing_score_note": "Scaled score out of 1000",
@@ -1121,7 +1121,7 @@
     "next_certs": [
       "Azure AI Engineer Associate (AI-102)",
       "IBM Data Science Certificate",
-      "Google Cloud Professional ML Engineer"
+      "Professional Machine Learning Engineer"
     ]
   },
   {
@@ -1137,7 +1137,7 @@
     "cost_source": "Microsoft Official (May 2026)",
     "duration_weeks": 10,
     "study_hours": 100,
-    "exam_format": "Multiple choice, case studies & labs, 40\u201360 questions",
+    "exam_format": "Multiple choice, case studies & labs, 40–60 questions",
     "exam_duration_minutes": 120,
     "passing_score": 700,
     "passing_score_note": "Scaled score out of 1000",

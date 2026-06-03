@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sync:certs": "node scripts/sync-certs-to-supabase.mjs"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.4.2",

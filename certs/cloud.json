@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "AWS Cloud Practitioner",
+    "name": "AWS Cloud Practitioner (CLF-C02)",
     "provider": "Amazon Web Services",
     "industry": "cloud",
     "subdomain": "aws",
@@ -64,13 +64,13 @@
     "job_postings_count": 50000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "AWS Solutions Architect Associate",
-      "AWS Developer Associate"
+      "AWS Solutions Architect Associate (SAA-C03)",
+      "AWS Developer Associate (DVA-C02)"
     ]
   },
   {
     "id": 2,
-    "name": "AWS Solutions Architect Associate",
+    "name": "AWS Solutions Architect Associate (SAA-C03)",
     "provider": "Amazon Web Services",
     "industry": "cloud",
     "subdomain": "aws",
@@ -93,7 +93,7 @@
     "salary_boost_low": 5000,
     "salary_boost_high": 12000,
     "salary_boost_source": "Glassdoor/PayScale (estimated)",
-    "worth_it_rating": 9.0,
+    "worth_it_rating": 9,
     "trending": true,
     "data_confidence": "high",
     "last_verified": "2026-05-20",
@@ -124,7 +124,7 @@
       "high availability"
     ],
     "prerequisites": [
-      "AWS Cloud Practitioner or equivalent experience"
+      "AWS Cloud Practitioner (CLF-C02) or equivalent experience"
     ],
     "recommended_prior_knowledge": [
       "AWS core services",
@@ -140,13 +140,13 @@
     "job_postings_count": 45000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "AWS Solutions Architect Professional",
-      "AWS DevOps Engineer Professional"
+      "AWS Solutions Architect Professional (SAP-C02)",
+      "AWS DevOps Engineer Professional (DOP-C02)"
     ]
   },
   {
     "id": 3,
-    "name": "AWS Developer Associate",
+    "name": "AWS Developer Associate (DVA-C02)",
     "provider": "Amazon Web Services",
     "industry": "cloud",
     "subdomain": "aws",
@@ -200,7 +200,7 @@
       "Node.js"
     ],
     "prerequisites": [
-      "AWS Cloud Practitioner or professional experience"
+      "AWS Cloud Practitioner (CLF-C02) or professional experience"
     ],
     "recommended_prior_knowledge": [
       "Programming basics",
@@ -216,8 +216,8 @@
     "job_postings_count": 40000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "AWS Solutions Architect Professional",
-      "AWS DevOps Engineer Professional"
+      "AWS Solutions Architect Professional (SAP-C02)",
+      "AWS DevOps Engineer Professional (DOP-C02)"
     ]
   },
   {
@@ -302,10 +302,10 @@
     "cost_source": "Google Cloud Official (May 2026)",
     "duration_weeks": 8,
     "study_hours": 80,
-    "exam_format": "Multiple choice & scenario-based, 50\u201360 questions",
+    "exam_format": "Multiple choice & scenario-based, 50–60 questions",
     "exam_duration_minutes": 120,
     "passing_score": 70,
-    "passing_score_note": "Approximate \u2014 Google does not publish exact passing score",
+    "passing_score_note": "Approximate — Google does not publish exact passing score",
     "pass_rate_percent": 68,
     "pass_rate_source": "Community estimate",
     "valid_years": 2,
@@ -314,7 +314,7 @@
     "salary_boost_low": 3000,
     "salary_boost_high": 8000,
     "salary_boost_source": "Glassdoor/PayScale (estimated)",
-    "worth_it_rating": 8.0,
+    "worth_it_rating": 8,
     "trending": true,
     "data_confidence": "high",
     "last_verified": "2026-05-20",
@@ -358,13 +358,13 @@
     "job_postings_count": 30000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "Google Cloud Professional Architect",
-      "Google Cloud Professional Data Engineer"
+      "Professional Cloud Architect",
+      "Google Cloud Google Cloud Professional Data Engineer"
     ]
   },
   {
     "id": 6,
-    "name": "CompTIA Network+",
+    "name": "CompTIA Network+ (N10-009)",
     "provider": "CompTIA",
     "industry": "cloud",
     "subdomain": "networking",
@@ -433,13 +433,13 @@
     "job_postings_count": 22000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "CompTIA Security+",
+      "CompTIA Security+ (SY0-701)",
       "Cisco CCNA"
     ]
   },
   {
     "id": 21,
-    "name": "AWS DevOps Engineer Professional",
+    "name": "AWS DevOps Engineer Professional (DOP-C02)",
     "provider": "Amazon Web Services",
     "industry": "cloud",
     "subdomain": "devops",
@@ -447,7 +447,7 @@
     "description": "Validates technical expertise in provisioning, operating, and managing distributed application systems on AWS.",
     "official_url": "https://aws.amazon.com/certification/certified-devops-engineer-professional/",
     "cost": "$300",
-    "cost_source": "AWS Official (May 2026) \u2014 Professional-level exams are $300",
+    "cost_source": "AWS Official (May 2026) — Professional-level exams are $300",
     "duration_weeks": 12,
     "study_hours": 120,
     "exam_format": "Multiple choice & multiple response, 75 questions",
@@ -494,7 +494,7 @@
       "Docker"
     ],
     "prerequisites": [
-      "AWS Developer Associate or AWS Solutions Architect Associate"
+      "AWS Developer Associate (DVA-C02) or AWS Solutions Architect Associate (SAA-C03)"
     ],
     "recommended_prior_knowledge": [
       "2+ years AWS experience",
@@ -511,8 +511,8 @@
     "job_postings_count": 35000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "AWS Solutions Architect Professional",
-      "Certified Kubernetes Administrator"
+      "AWS Solutions Architect Professional (SAP-C02)",
+      "Certified Kubernetes Administrator (CKA)"
     ]
   },
   {
@@ -540,7 +540,7 @@
     "salary_boost_low": 8000,
     "salary_boost_high": 20000,
     "salary_boost_source": "Glassdoor/PayScale (estimated)",
-    "worth_it_rating": 9.0,
+    "worth_it_rating": 9,
     "trending": true,
     "data_confidence": "high",
     "last_verified": "2026-05-20",
@@ -589,12 +589,12 @@
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
       "Certified Kubernetes Application Developer (CKAD)",
-      "AWS DevOps Engineer Professional"
+      "AWS DevOps Engineer Professional (DOP-C02)"
     ]
   },
   {
     "id": 23,
-    "name": "HashiCorp Terraform Associate",
+    "name": "HashiCorp Terraform Associate (003)",
     "provider": "HashiCorp",
     "industry": "cloud",
     "subdomain": "devops",
@@ -660,13 +660,13 @@
     "job_postings_count": 30000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "Certified Kubernetes Administrator",
-      "AWS DevOps Engineer Professional"
+      "Certified Kubernetes Administrator (CKA)",
+      "AWS DevOps Engineer Professional (DOP-C02)"
     ]
   },
   {
     "id": 70,
-    "name": "AWS Certified SysOps Administrator \u2013 Associate",
+    "name": "AWS SysOps Administrator Associate (SOA-C02)",
     "provider": "Amazon Web Services",
     "industry": "cloud",
     "subdomain": "aws",
@@ -735,13 +735,13 @@
     "job_postings_count": 32000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "AWS DevOps Engineer Professional",
-      "AWS Solutions Architect Professional"
+      "AWS DevOps Engineer Professional (DOP-C02)",
+      "AWS Solutions Architect Professional (SAP-C02)"
     ]
   },
   {
     "id": 71,
-    "name": "AWS Certified Solutions Architect \u2013 Professional",
+    "name": "AWS Solutions Architect Professional (SAP-C02)",
     "provider": "Amazon Web Services",
     "industry": "cloud",
     "subdomain": "aws",
@@ -794,7 +794,7 @@
       "security design"
     ],
     "prerequisites": [
-      "AWS Solutions Architect Associate or equivalent experience"
+      "AWS Solutions Architect Associate (SAA-C03) or equivalent experience"
     ],
     "recommended_prior_knowledge": [
       "2+ years AWS architecture experience",
@@ -811,13 +811,13 @@
     "job_postings_count": 38000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "AWS Certified Security \u2013 Specialty",
-      "AWS Certified Advanced Networking \u2013 Specialty"
+      "AWS Security Specialty (SCS-C02) (SCS-C02)",
+      "AWS Advanced Networking Specialty (ANS-C01)"
     ]
   },
   {
     "id": 72,
-    "name": "AWS Certified Advanced Networking \u2013 Specialty",
+    "name": "AWS Advanced Networking Specialty (ANS-C01)",
     "provider": "Amazon Web Services",
     "industry": "cloud",
     "subdomain": "aws",
@@ -886,12 +886,12 @@
     "job_postings_count": 18000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "AWS Certified Security \u2013 Specialty"
+      "AWS Security Specialty (SCS-C02) (SCS-C02)"
     ]
   },
   {
     "id": 31,
-    "name": "AWS Certified SAP on AWS \u2013 Specialty",
+    "name": "AWS SAP on AWS Specialty (PAS-C01)",
     "provider": "Amazon Web Services",
     "industry": "cloud",
     "subdomain": "aws",
@@ -958,7 +958,7 @@
     "job_postings_count": 12000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "AWS Certified Solutions Architect \u2013 Professional"
+      "AWS Solutions Architect Professional (SAP-C02)"
     ]
   },
   {
@@ -977,7 +977,7 @@
     "exam_format": "Multiple choice, ~40 questions",
     "exam_duration_minutes": 90,
     "passing_score": 70,
-    "passing_score_note": "Approximate \u2014 Google does not publish exact passing score",
+    "passing_score_note": "Approximate — Google does not publish exact passing score",
     "pass_rate_percent": 78,
     "pass_rate_source": "Community estimate",
     "valid_years": 2,
@@ -1105,7 +1105,7 @@
     "cost_source": "Google Cloud Official (2026)",
     "duration_weeks": 8,
     "study_hours": 80,
-    "exam_format": "Multiple choice & scenario-based, 50\u201360 questions",
+    "exam_format": "Multiple choice & scenario-based, 50–60 questions",
     "exam_duration_minutes": 120,
     "passing_score": 70,
     "passing_score_note": "Approximate",
@@ -1188,7 +1188,7 @@
     "salary_boost_low": 3000,
     "salary_boost_high": 7000,
     "salary_boost_source": "Glassdoor/PayScale (estimated)",
-    "worth_it_rating": 8.0,
+    "worth_it_rating": 8,
     "trending": false,
     "data_confidence": "high",
     "last_verified": "2026-06-01",
@@ -1441,7 +1441,7 @@
     "job_postings_count": 26000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "Professional Data Engineer"
+      "Google Cloud Professional Data Engineer"
     ]
   },
   {
@@ -1539,7 +1539,7 @@
     "salary_boost_low": 10000,
     "salary_boost_high": 25000,
     "salary_boost_source": "Glassdoor/PayScale (estimated)",
-    "worth_it_rating": 9.0,
+    "worth_it_rating": 9,
     "trending": true,
     "data_confidence": "high",
     "last_verified": "2026-06-01",
@@ -1581,7 +1581,7 @@
     "job_postings_count": 20000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
-      "Professional Data Engineer"
+      "Google Cloud Professional Data Engineer"
     ]
   },
   {
@@ -1667,7 +1667,7 @@
     "cost_source": "Microsoft Official (May 2026)",
     "duration_weeks": 8,
     "study_hours": 80,
-    "exam_format": "Multiple choice, case studies & labs, 40\u201360 questions",
+    "exam_format": "Multiple choice, case studies & labs, 40–60 questions",
     "exam_duration_minutes": 100,
     "passing_score": 700,
     "passing_score_note": "Scaled score out of 1000",
@@ -1748,7 +1748,7 @@
     "cost_source": "Microsoft Official (May 2026)",
     "duration_weeks": 8,
     "study_hours": 80,
-    "exam_format": "Multiple choice, case studies & labs, 40\u201360 questions",
+    "exam_format": "Multiple choice, case studies & labs, 40–60 questions",
     "exam_duration_minutes": 120,
     "passing_score": 700,
     "passing_score_note": "Scaled score out of 1000",
@@ -1796,7 +1796,7 @@
     ],
     "prerequisites": [
       "Azure Fundamentals (AZ-900) recommended",
-      "1\u20132 years Azure development experience"
+      "1–2 years Azure development experience"
     ],
     "recommended_prior_knowledge": [
       "Programming in Python or C#",
@@ -1831,7 +1831,7 @@
     "cost_source": "Microsoft Official (May 2026)",
     "duration_weeks": 12,
     "study_hours": 120,
-    "exam_format": "Multiple choice, case studies & labs, 40\u201360 questions",
+    "exam_format": "Multiple choice, case studies & labs, 40–60 questions",
     "exam_duration_minutes": 120,
     "passing_score": 700,
     "passing_score_note": "Scaled score out of 1000",
@@ -1894,7 +1894,7 @@
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
       "Azure DevOps Engineer Expert (AZ-400)",
-      "Microsoft Cybersecurity Architect (SC-100)"
+      "Microsoft Cybersecurity Architect Expert (SC-100)"
     ]
   },
   {
@@ -1910,7 +1910,7 @@
     "cost_source": "Microsoft Official (May 2026)",
     "duration_weeks": 12,
     "study_hours": 120,
-    "exam_format": "Multiple choice, case studies & labs, 40\u201360 questions",
+    "exam_format": "Multiple choice, case studies & labs, 40–60 questions",
     "exam_duration_minutes": 120,
     "passing_score": 700,
     "passing_score_note": "Scaled score out of 1000",
@@ -1923,7 +1923,7 @@
     "salary_boost_low": 10000,
     "salary_boost_high": 22000,
     "salary_boost_source": "Glassdoor/PayScale (estimated)",
-    "worth_it_rating": 9.0,
+    "worth_it_rating": 9,
     "trending": true,
     "data_confidence": "high",
     "last_verified": "2026-05-20",
@@ -1975,7 +1975,7 @@
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
       "Azure Solutions Architect Expert (AZ-305)",
-      "Certified Kubernetes Administrator (CKA)"
+      "Certified Kubernetes Administrator (CKA) (CKA)"
     ]
   }
 ]
