@@ -25,19 +25,35 @@ export default function RoadmapPage() {
       .then(res => res.json())
       .then(result => {
         console.log("ROADMAP RESPONSE:", result);
+
         if (result.error) {
             console.error('API Error:', result);
             setLoading(false);
             return;
         }
 
-        setData(result);
+        // 👇 FIX: API returns an ARRAY, not an object
+        if (Array.isArray(result)) {
+            const byIndustry = result.reduce((acc: any, job: any) => {
+            const industry = job.industry || 'general';
 
-        const industries = Object.keys(result.byIndustry ?? {});
-  
-        setSelectedIndustry(industries.length > 0 ? industries[0] : null);
+            if (!acc[industry]) acc[industry] = [];
+            acc[industry].push(job);
+
+            return acc;
+            }, {});
+
+            setData({ byIndustry });
+
+            const industries = Object.keys(byIndustry);
+            setSelectedIndustry(industries[0] || null);
+        } else {
+            console.error('Unexpected API format:', result);
+            setData(null);
+        }
+
         setLoading(false);
-      });
+        });
   }, []);
 
   if (loading) {
@@ -71,7 +87,7 @@ export default function RoadmapPage() {
   }
 
   const industries = Object.keys(data.byIndustry).sort();
-  const currentCerts = selectedIndustry ? (data.byIndustry[selectedIndustry] || []) : [];
+  const currentCerts = selectedIndustry ? (data?.byIndustry?.[selectedIndustry] || []) : [];
 
   return (
     <div style={{
