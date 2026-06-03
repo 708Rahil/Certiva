@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 interface ScoreRingProps {
   score: number;
@@ -8,19 +8,22 @@ interface ScoreRingProps {
 }
 
 export default function ScoreRing({ score, size = 72 }: ScoreRingProps) {
-  const circleRef = useRef<SVGCircleElement>(null);
-
   const radius = (size - 10) / 2;
   const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (score / 100) * circumference;
-
-  const color = score >= 70 ? '#34d399' : score >= 45 ? '#fbbf24' : '#4f6ef7';
+  
+  // Start with full offset (empty circle) so it can animate in
+  const [offset, setOffset] = useState(circumference);
 
   useEffect(() => {
-    if (circleRef.current) {
-      circleRef.current.style.strokeDashoffset = String(offset);
-    }
-  }, [offset]);
+    // Small delay ensures the initial empty state is rendered before animating to the target
+    const targetOffset = circumference - (score / 100) * circumference;
+    const timeout = setTimeout(() => {
+      setOffset(targetOffset);
+    }, 50);
+    return () => clearTimeout(timeout);
+  }, [score, circumference]);
+
+  const color = score >= 70 ? '#34d399' : score >= 45 ? '#fbbf24' : '#4f6ef7';
 
   return (
     <div style={{ position: 'relative', width: size, height: size, flexShrink: 0 }}>
@@ -36,7 +39,6 @@ export default function ScoreRing({ score, size = 72 }: ScoreRingProps) {
         />
         {/* Score arc */}
         <circle
-          ref={circleRef}
           cx={size / 2}
           cy={size / 2}
           r={radius}
@@ -45,8 +47,8 @@ export default function ScoreRing({ score, size = 72 }: ScoreRingProps) {
           strokeWidth={5}
           strokeLinecap="round"
           strokeDasharray={circumference}
-          strokeDashoffset={circumference}
-          style={{ transition: 'stroke-dashoffset 1s ease' }}
+          strokeDashoffset={offset}
+          style={{ transition: 'stroke-dashoffset 1s ease-out' }}
         />
       </svg>
       <div style={{
