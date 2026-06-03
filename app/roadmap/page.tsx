@@ -8,6 +8,7 @@ interface Cert {
   name: string;
   difficulty: number;
   prerequisites: string[];
+  next_certs?: string[];
   userStatus?: string;
   provider?: string;
   providerColor?: string;

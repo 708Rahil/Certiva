@@ -1,12 +1,18 @@
 'use client';
 
 import React, { useMemo } from 'react';
+import {
+  buildRoadmapGraph,
+  computeNodeLevels,
+  groupCertsByLevel,
+} from '@/lib/roadmapGraph';
 
 interface Cert {
   id: number;
   name: string;
   difficulty: number;
-  prerequisites: string[];
+  prerequisites?: string[];
+  next_certs?: string[];
   userStatus?: string;
   provider?: string;
   providerColor?: string;
@@ -17,61 +23,41 @@ interface RoadmapFlowchartProps {
   certs: Cert[];
 }
 
+const CERT_WIDTH = 320;
+const LEVEL_WIDTH = CERT_WIDTH + 50;
+const CERT_HEIGHT = 140;
+const LEVEL_HEIGHT = 180;
+const PADDING_LEFT = 50;
+const PADDING_TOP = 80;
+
 export default function RoadmapFlowchart({ certs }: RoadmapFlowchartProps) {
-  // Calculate layout and dependencies
   const layout = useMemo(() => {
-    // Build dependency graph
-    const graph = new Map<number, Set<number>>();
-    certs.forEach(cert => {
-      graph.set(cert.id, new Set());
-    });
+    const graph = buildRoadmapGraph(certs);
+    const nodeLevel = computeNodeLevels(
+      graph,
+      certs.map((c) => c.id)
+    );
+    const levels = groupCertsByLevel(nodeLevel);
 
-    // Parse prerequisites and link certs
-    certs.forEach(cert => {
-      if (cert.prerequisites?.length > 0) {
-        cert.prerequisites.forEach(prereq => {
-          // Try to find matching cert by name or partial match
-          const prereqCert = certs.find(
-            c => c.name.toLowerCase().includes(prereq.toLowerCase().split(' or ')[0]) ||
-                 prereq.toLowerCase().includes(c.name.toLowerCase())
-          );
-          if (prereqCert && prereqCert.id !== cert.id) {
-            graph.get(prereqCert.id)?.add(cert.id);
-          }
+    const positions = new Map<
+      number,
+      { x: number; y: number; cx: number; cy: number }
+    >();
+
+    levels.forEach((level, levelIdx) => {
+      level.forEach((certId, certIdx) => {
+        const x = certIdx * LEVEL_WIDTH + PADDING_LEFT;
+        const y = levelIdx * LEVEL_HEIGHT + PADDING_TOP;
+        positions.set(certId, {
+          x,
+          y,
+          cx: x + CERT_WIDTH / 2,
+          cy: y + CERT_HEIGHT / 2,
         });
-      }
-    });
-
-    // Determine levels (topological sort)
-    const levels: number[][] = [];
-    const visited = new Set<number>();
-    const nodeLevel = new Map<number, number>();
-
-    const getLevel = (nodeId: number): number => {
-      if (nodeLevel.has(nodeId)) return nodeLevel.get(nodeId)!;
-      
-      let maxPrevLevel = -1;
-      // Find all nodes that point to this one
-      graph.forEach((deps, fromId) => {
-        if (deps.has(nodeId)) {
-          maxPrevLevel = Math.max(maxPrevLevel, getLevel(fromId));
-        }
       });
-
-      const level = maxPrevLevel + 1;
-      nodeLevel.set(nodeId, level);
-      return level;
-    };
-
-    certs.forEach(cert => getLevel(cert.id));
-
-    // Group by levels
-    nodeLevel.forEach((level, nodeId) => {
-      if (!levels[level]) levels[level] = [];
-      levels[level].push(nodeId);
     });
 
-    return { graph, levels, nodeLevel };
+    return { graph, levels, nodeLevel, positions };
   }, [certs]);
 
   const getStatus = (cert: Cert) => {
@@ -107,23 +93,28 @@ export default function RoadmapFlowchart({ certs }: RoadmapFlowchartProps) {
     }
   };
 
-  // Calculate positions
-  const certWidth = 320;
-  const levelWidth = certWidth + 50;
-  const certHeight = 140;
-  const levelHeight = 180;
+  const edges: { fromId: number; toId: number }[] = [];
+  layout.graph.forEach((deps, fromId) => {
+    deps.forEach((toId) => {
+      if (layout.positions.has(fromId) && layout.positions.has(toId)) {
+        edges.push({ fromId, toId });
+      }
+    });
+  });
 
   return (
-    <div style={{
-      background: 'var(--bg-secondary)',
-      borderRadius: 12,
-      padding: 24,
-      overflow: 'auto',
-      minHeight: 500,
-    }}>
+    <div
+      style={{
+        background: 'var(--bg-secondary)',
+        borderRadius: 12,
+        padding: 24,
+        overflow: 'auto',
+        minHeight: 500,
+      }}
+    >
       <svg
         width="100%"
-        height={Math.max(600, layout.levels.length * levelHeight)}
+        height={Math.max(600, layout.levels.length * LEVEL_HEIGHT)}
         style={{ minWidth: 1000 }}
       >
         <defs>
@@ -139,58 +130,41 @@ export default function RoadmapFlowchart({ certs }: RoadmapFlowchartProps) {
           </marker>
         </defs>
 
-        {/* Draw arrows */}
-        {Array.from(layout.graph.entries()).map(([fromId, deps]) => {
-          return Array.from(deps).map(toId => {
-            const fromCert = certs.find(c => c.id === fromId);
-            const toCert = certs.find(c => c.id === toId);
-            if (!fromCert || !toCert) return null;
+        {edges.map(({ fromId, toId }) => {
+          const from = layout.positions.get(fromId)!;
+          const to = layout.positions.get(toId)!;
 
-            const fromLevel = layout.nodeLevel.get(fromId) || 0;
-            const toLevel = layout.nodeLevel.get(toId) || 0;
-            const fromIndex = layout.levels[fromLevel]?.indexOf(fromId) || 0;
-            const toIndex = layout.levels[toLevel]?.indexOf(toId) || 0;
-
-            const x1 = fromIndex * levelWidth + levelWidth / 2 + 50;
-            const y1 = fromLevel * levelHeight + certHeight / 2 + 85;
-            const x2 = toIndex * levelWidth + levelWidth / 2 + 50;
-            const y2 = toLevel * levelHeight + certHeight / 2 + 85;
-
-            return (
-              <g key={`arrow-${fromId}-${toId}`}>
-                <path
-                  d={`M ${x1} ${y1} Q ${(x1 + x2) / 2} ${(y1 + y2) / 2 + 30} ${x2} ${y2}`}
-                  stroke="var(--text-secondary)"
-                  strokeWidth="2"
-                  fill="none"
-                  strokeDasharray="5,5"
-                  opacity="0.5"
-                  markerEnd="url(#arrowhead)"
-                />
-              </g>
-            );
-          });
+          return (
+            <g key={`arrow-${fromId}-${toId}`}>
+              <path
+                d={`M ${from.cx} ${from.cy} Q ${(from.cx + to.cx) / 2} ${(from.cy + to.cy) / 2 + 30} ${to.cx} ${to.cy}`}
+                stroke="var(--text-secondary)"
+                strokeWidth="2"
+                fill="none"
+                strokeDasharray="5,5"
+                opacity="0.5"
+                markerEnd="url(#arrowhead)"
+              />
+            </g>
+          );
         })}
 
-        {/* Draw cert nodes */}
         {layout.levels.map((level, levelIdx) =>
-          level.map((certId, certIdx) => {
-            const cert = certs.find(c => c.id === certId);
-            if (!cert) return null;
+          level.map((certId) => {
+            const cert = certs.find((c) => c.id === certId);
+            const pos = layout.positions.get(certId);
+            if (!cert || !pos) return null;
 
             const status = getStatus(cert);
             const statusColor = getStatusColor(status);
-            const x = certIdx * levelWidth + 50;
-            const y = levelIdx * levelHeight + 80;
 
             return (
               <g key={`cert-${cert.id}`}>
-                {/* Background rect */}
                 <rect
-                  x={x}
-                  y={y}
-                  width={certWidth}
-                  height={certHeight}
+                  x={pos.x}
+                  y={pos.y}
+                  width={CERT_WIDTH}
+                  height={CERT_HEIGHT}
                   rx="8"
                   fill={statusColor}
                   opacity="0.1"
@@ -198,18 +172,17 @@ export default function RoadmapFlowchart({ certs }: RoadmapFlowchartProps) {
                   strokeWidth="2"
                 />
 
-                {/* Difficulty indicator */}
                 <rect
-                  x={x + 8}
-                  y={y + 8}
+                  x={pos.x + 8}
+                  y={pos.y + 8}
                   width="24"
                   height="24"
                   rx="4"
                   fill={statusColor}
                 />
                 <text
-                  x={x + 20}
-                  y={y + 26}
+                  x={pos.x + 20}
+                  y={pos.y + 26}
                   textAnchor="middle"
                   fontSize="12"
                   fill="#fff"
@@ -218,12 +191,11 @@ export default function RoadmapFlowchart({ certs }: RoadmapFlowchartProps) {
                   {cert.difficulty}
                 </text>
 
-                {/* Provider badge */}
                 {cert.provider && (
                   <g>
                     <rect
-                      x={x + certWidth - 80}
-                      y={y + 8}
+                      x={pos.x + CERT_WIDTH - 80}
+                      y={pos.y + 8}
                       width="72"
                       height="24"
                       rx="4"
@@ -233,8 +205,8 @@ export default function RoadmapFlowchart({ certs }: RoadmapFlowchartProps) {
                       strokeWidth="1"
                     />
                     <text
-                      x={x + certWidth - 44}
-                      y={y + 26}
+                      x={pos.x + CERT_WIDTH - 44}
+                      y={pos.y + 26}
                       textAnchor="middle"
                       fontSize="10"
                       fill={cert.providerColor || 'var(--text-secondary)'}
@@ -245,10 +217,9 @@ export default function RoadmapFlowchart({ certs }: RoadmapFlowchartProps) {
                   </g>
                 )}
 
-                {/* Cert name */}
                 <text
-                  x={x + 12}
-                  y={y + 52}
+                  x={pos.x + 12}
+                  y={pos.y + 52}
                   fontSize="13"
                   fontWeight="600"
                   fill="var(--text-primary)"
@@ -256,13 +227,11 @@ export default function RoadmapFlowchart({ certs }: RoadmapFlowchartProps) {
                 >
                   {cert.name}
                 </text>
-                {/* Tooltip title attribute for hover */}
                 <title>{cert.name}</title>
 
-                {/* Status badge */}
                 <text
-                  x={x + 12}
-                  y={y + 120}
+                  x={pos.x + 12}
+                  y={pos.y + 120}
                   fontSize="11"
                   fill={statusColor}
                   fontWeight="500"
@@ -276,29 +245,38 @@ export default function RoadmapFlowchart({ certs }: RoadmapFlowchartProps) {
         )}
       </svg>
 
-      {/* Legend */}
-      <div style={{
-        display: 'flex',
-        gap: 24,
-        marginTop: 24,
-        paddingTop: 16,
-        borderTop: '1px solid var(--border)',
-        fontSize: 13,
-      }}>
+      <div
+        style={{
+          display: 'flex',
+          gap: 24,
+          marginTop: 24,
+          paddingTop: 16,
+          borderTop: '1px solid var(--border)',
+          fontSize: 13,
+        }}
+      >
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div style={{ width: 12, height: 12, borderRadius: 3, background: '#10b981' }} />
+          <div
+            style={{ width: 12, height: 12, borderRadius: 3, background: '#10b981' }}
+          />
           <span style={{ color: 'var(--text-secondary)' }}>Completed</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div style={{ width: 12, height: 12, borderRadius: 3, background: '#f59e0b' }} />
+          <div
+            style={{ width: 12, height: 12, borderRadius: 3, background: '#f59e0b' }}
+          />
           <span style={{ color: 'var(--text-secondary)' }}>In Progress</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div style={{ width: 12, height: 12, borderRadius: 3, background: '#3b82f6' }} />
+          <div
+            style={{ width: 12, height: 12, borderRadius: 3, background: '#3b82f6' }}
+          />
           <span style={{ color: 'var(--text-secondary)' }}>Interested</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div style={{ width: 12, height: 12, borderRadius: 3, background: '#6b7280' }} />
+          <div
+            style={{ width: 12, height: 12, borderRadius: 3, background: '#6b7280' }}
+          />
           <span style={{ color: 'var(--text-secondary)' }}>Not Started</span>
         </div>
       </div>

@@ -1,68 +1,84 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { initDb, getDb } from '@/lib/db';
+import { initDb, getSupabase } from '@/lib/db';
 import { extractSkills, detectIndustry, matchCertifications, Certification, inferSeniority } from '@/lib/matcher';
 import { auth } from '@clerk/nextjs/server';
 
 export async function POST(req: NextRequest) {
   try {
     await initDb();
-    const db = getDb();
+    const supabase = getSupabase();
     const { title, company, description } = await req.json();
 
     if (!title || !company || !description) {
       return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
     }
 
-    // Extract skills
     const skills = extractSkills(title + ' ' + description);
     const industry = detectIndustry(title, description);
     const { userId } = await auth();
 
-    // Save job
-    const jobResult = await db.execute({
-      sql: 'INSERT INTO jobs (title, company, description, extracted_skills, user_id) VALUES (?, ?, ?, ?, ?)',
-      args: [title, company, description, JSON.stringify(skills), userId || null],
-    });
-    const jobId = Number(jobResult.lastInsertRowid);
+    const { data: job, error: jobError } = await supabase
+      .from('jobs')
+      .insert({
+        title,
+        company,
+        description,
+        extracted_skills: JSON.stringify(skills),
+        user_id: userId || null,
+      })
+      .select('id')
+      .single();
 
-    // Get all certs
-    const certsResult = await db.execute('SELECT * FROM certifications');
-    const certs = certsResult.rows as unknown as Certification[];
-
-    // Infer seniority level of the job
-    const userLevel = inferSeniority(title, description);
-
-    // Match & rank
-    const recommendations = matchCertifications(skills, industry, title, description, certs, userLevel);
-
-    console.log('=== MATCHING RESULTS ===');
-    console.log(`Job Title: "${title}" | Detected Industry: "${industry}" | Inferred Seniority: "${userLevel}"`);
-    console.log('Extracted Skills:', skills);
-    recommendations.forEach(r => {
-      console.log(`- ${r.cert.name} (ID: ${r.cert.id}): Score = ${r.score} | SkillOverlap = ${r.skillOverlap}% | IndustryMatch = ${r.industryMatch} | DiffFit = ${r.difficultyFit}% | TitleMatch = ${r.titleMatch}`);
-    });
-    console.log('=========================');
-
-    // Save top 8 recommendations
-    const topRecs = recommendations.slice(0, 8);
-    for (const rec of topRecs) {
-      await db.execute({
-        sql: `INSERT INTO recommendations (job_id, cert_id, score, skill_overlap, industry_match, difficulty_fit, matched_skills, explanation)
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-        args: [
-          jobId,
-          rec.cert.id,
-          rec.score,
-          rec.skillOverlap,
-          rec.industryMatch ? 1 : 0,
-          rec.difficultyFit,
-          JSON.stringify(rec.matchedSkills),
-          rec.explanation,
-        ],
-      });
+    if (jobError || !job) {
+      throw new Error(jobError?.message || 'Failed to save job');
     }
 
-    return NextResponse.json({ jobId, skills, industry, recommendationCount: topRecs.length });
+    const jobId = job.id;
+
+    const { data: certs, error: certsError } = await supabase
+      .from('certifications')
+      .select('*');
+
+    if (certsError) {
+      throw new Error(certsError.message);
+    }
+
+    const userLevel = inferSeniority(title, description);
+    const recommendations = matchCertifications(
+      skills,
+      industry,
+      title,
+      description,
+      (certs ?? []) as Certification[],
+      userLevel
+    );
+
+    const topRecs = recommendations.slice(0, 8);
+    if (topRecs.length > 0) {
+      const { error: recsError } = await supabase.from('recommendations').insert(
+        topRecs.map((rec) => ({
+          job_id: jobId,
+          cert_id: rec.cert.id,
+          score: rec.score,
+          skill_overlap: rec.skillOverlap,
+          industry_match: rec.industryMatch,
+          difficulty_fit: rec.difficultyFit,
+          matched_skills: JSON.stringify(rec.matchedSkills),
+          explanation: rec.explanation,
+        }))
+      );
+
+      if (recsError) {
+        throw new Error(recsError.message);
+      }
+    }
+
+    return NextResponse.json({
+      jobId,
+      skills,
+      industry,
+      recommendationCount: topRecs.length,
+    });
   } catch (e) {
     console.error(e);
     return NextResponse.json({ error: String(e) }, { status: 500 });
@@ -75,13 +91,22 @@ export async function GET() {
     if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+
     await initDb();
-    const db = getDb();
-    const result = await db.execute({
-      sql: 'SELECT * FROM jobs WHERE user_id = ? ORDER BY created_at DESC LIMIT 50',
-      args: [userId],
-    });
-    return NextResponse.json(result.rows);
+    const supabase = getSupabase();
+
+    const { data, error } = await supabase
+      .from('jobs')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false })
+      .limit(50);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return NextResponse.json(data ?? []);
   } catch (e) {
     return NextResponse.json({ error: String(e) }, { status: 500 });
   }

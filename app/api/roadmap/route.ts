@@ -1,5 +1,5 @@
 import { auth } from '@clerk/nextjs/server';
-import { getDb } from '@/lib/db';
+import { getSupabase, initDb } from '@/lib/db';
 import { findAlternativePaths, extractProvider, getProviderColor } from '@/lib/roadmapMatcher';
 
 export async function GET() {
@@ -10,7 +10,8 @@ export async function GET() {
       return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Get all certifications from all JSON files
+    await initDb();
+
     const cloudCerts = (await import('@/certs/cloud.json')).default;
     const dataCerts = (await import('@/certs/data.json')).default;
     const cybersecurityCerts = (await import('@/certs/cybersecurity.json')).default;
@@ -27,40 +28,43 @@ export async function GET() {
       ...managementCerts,
     ];
 
-    // Get user's certifications
-    const db = getDb();
-    const userCerts = await db.execute(
-      `SELECT cert_id, status FROM user_certifications WHERE user_id = ?`,
-      [userId]
-    );
+    const supabase = getSupabase();
+    const { data: userCerts, error } = await supabase
+      .from('user_certifications')
+      .select('cert_id, status')
+      .eq('user_id', userId);
 
-    const userCertMap = new Map();
-    userCerts.rows?.forEach((row: any) => {
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    const userCertMap = new Map<number, string>();
+    userCerts?.forEach((row) => {
       userCertMap.set(row.cert_id, row.status);
     });
 
-    // Enrich certs with user progress and build dependency info
-    const enrichedCerts = allCerts.map((cert: any) => ({
+    const enrichedCerts = allCerts.map((cert) => ({
       ...cert,
       userStatus: userCertMap.get(cert.id) || null,
       provider: extractProvider(cert.name),
       providerColor: getProviderColor(extractProvider(cert.name)),
     }));
 
-    // Calculate alternatives for each cert
-    const certsWithAlternatives = enrichedCerts.map((cert: any) => ({
+    const certsWithAlternatives = enrichedCerts.map((cert) => ({
       ...cert,
       alternatives: findAlternativePaths(cert, enrichedCerts, userCertMap),
     }));
 
-    // Group by industry
-    const byIndustry = certsWithAlternatives.reduce((acc: any, cert: any) => {
-      if (!acc[cert.industry]) {
-        acc[cert.industry] = [];
-      }
-      acc[cert.industry].push(cert);
-      return acc;
-    }, {});
+    const byIndustry = certsWithAlternatives.reduce<Record<string, typeof certsWithAlternatives>>(
+      (acc, cert) => {
+        if (!acc[cert.industry]) {
+          acc[cert.industry] = [];
+        }
+        acc[cert.industry].push(cert);
+        return acc;
+      },
+      {}
+    );
 
     return Response.json({
       byIndustry,
@@ -68,6 +72,9 @@ export async function GET() {
     });
   } catch (error) {
     console.error('Roadmap error:', error);
-    return Response.json({ error: 'Failed to fetch roadmap', details: String(error) }, { status: 500 });
+    return Response.json(
+      { error: 'Failed to fetch roadmap', details: String(error) },
+      { status: 500 }
+    );
   }
 }

@@ -4,7 +4,7 @@ A full-stack MVP that analyzes job postings and recommends ranked certifications
 
 ## Tech Stack
 - **Frontend/Backend**: Next.js 16 (App Router)  
-- **Database**: SQLite via `@libsql/client` (file: `certiva.db`)
+- **Database**: Supabase (PostgreSQL) via `@supabase/supabase-js`
 - **Styling**: TailwindCSS + custom CSS variables
 - **Matching Engine**: Custom keyword-based skill extractor + weighted scoring algorithm
 
@@ -51,6 +51,7 @@ final_score = 0.6 × skill_overlap + 0.2 × industry_match + 0.2 × difficulty_f
 - 💼 Management: PMP
 
 ## Production Notes
-- DB is auto-created and seeded on first request
-- For production, replace SQLite with PostgreSQL using the same query patterns
+- Run `supabase/schema.sql` once in the Supabase SQL editor to create tables
+- Set `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` in your env
+- Certifications are auto-seeded from JSON on first API request if the table is empty
 - Add OpenAI skill extraction by calling the API in `lib/matcher.ts → extractSkills()`

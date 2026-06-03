@@ -1,9 +1,8 @@
-import { getDb, initDb } from '@/lib/db';
+import { getSupabase, initDb } from '@/lib/db';
 import { NextRequest, NextResponse } from 'next/server';
 
-await initDb();
-
 export async function GET(request: NextRequest) {
+  await initDb();
   const searchParams = request.nextUrl.searchParams;
   const page = parseInt(searchParams.get('page') || '1');
   const pageSize = 20;
@@ -15,79 +14,71 @@ export async function GET(request: NextRequest) {
   const trending = searchParams.get('trending');
   const sortBy = searchParams.get('sortBy') || 'name';
 
-  const db = getDb();
+  const supabase = getSupabase();
 
   try {
-    let whereClause = '1=1';
-    const args: any[] = [];
+    let query = supabase
+      .from('certifications')
+      .select(
+        'id, name, provider, industry, difficulty, cost, duration_weeks, pass_rate_percent, salary_boost_low, salary_boost_high, trending, official_url',
+        { count: 'exact' }
+      );
 
     if (search) {
-      whereClause += ' AND (LOWER(name) LIKE LOWER(?) OR LOWER(provider) LIKE LOWER(?))';
-      args.push(`%${search}%`);
-      args.push(`%${search}%`);
+      query = query.or(`name.ilike.%${search}%,provider.ilike.%${search}%`);
     }
 
     if (industry && industry !== 'all') {
-      whereClause += ' AND industry = ?';
-      args.push(industry);
+      query = query.eq('industry', industry);
     }
 
     if (difficulty && difficulty !== 'all') {
-      whereClause += ' AND difficulty = ?';
-      args.push(parseInt(difficulty));
+      query = query.eq('difficulty', parseInt(difficulty));
     }
 
     if (trending === 'true') {
-      whereClause += ' AND trending = 1';
+      query = query.eq('trending', true);
     }
 
-    let orderBy = 'name ASC';
     switch (sortBy) {
       case 'difficulty':
-        orderBy = 'difficulty DESC';
+        query = query.order('difficulty', { ascending: false });
         break;
       case 'salary':
-        orderBy = 'salary_boost_high DESC';
+        query = query.order('salary_boost_high', { ascending: false });
         break;
       case 'trending':
-        orderBy = 'trending DESC, salary_boost_high DESC';
+        query = query
+          .order('trending', { ascending: false })
+          .order('salary_boost_high', { ascending: false });
         break;
       case 'pass-rate':
-        orderBy = 'pass_rate_percent DESC';
+        query = query.order('pass_rate_percent', { ascending: false });
         break;
+      default:
+        query = query.order('name', { ascending: true });
     }
 
-    // Get total count
-    const countResult = await db.execute({
-      sql: `SELECT COUNT(*) as cnt FROM certifications WHERE ${whereClause}`,
-      args,
-    });
-    const total = (countResult.rows[0] as unknown as { cnt: number }).cnt;
+    const { data, count, error } = await query.range(offset, offset + pageSize - 1);
 
-    // Get paginated results
-    const results = await db.execute({
-      sql: `
-        SELECT 
-          id, name, provider, industry, difficulty, cost, 
-          duration_weeks, pass_rate_percent, 
-          salary_boost_low, salary_boost_high, trending, official_url
-        FROM certifications
-        WHERE ${whereClause}
-        ORDER BY ${orderBy}
-        LIMIT ? OFFSET ?
-      `,
-      args: [...args, pageSize, offset],
-    });
+    if (error) {
+      throw new Error(error.message);
+    }
 
-    // Get available industries
-    const industriesResult = await db.execute(
-      'SELECT DISTINCT industry FROM certifications ORDER BY industry'
-    );
-    const industries = industriesResult.rows.map((r: any) => r.industry);
+    const { data: industriesData, error: industriesError } = await supabase
+      .from('certifications')
+      .select('industry')
+      .order('industry');
+
+    if (industriesError) {
+      throw new Error(industriesError.message);
+    }
+
+    const industries = [...new Set((industriesData ?? []).map((r) => r.industry))];
 
     return NextResponse.json({
-      certs: results.rows,
-      total,
+      certs: data ?? [],
+      total: count ?? 0,
       page,
       pageSize,
       industries,

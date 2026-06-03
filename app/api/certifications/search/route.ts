@@ -1,9 +1,8 @@
-import { getDb, initDb } from '@/lib/db';
+import { getSupabase, initDb } from '@/lib/db';
 import { NextRequest, NextResponse } from 'next/server';
 
-await initDb();
-
 export async function GET(request: NextRequest) {
+  await initDb();
   const searchParams = request.nextUrl.searchParams;
   const query = searchParams.get('q');
 
@@ -11,21 +10,20 @@ export async function GET(request: NextRequest) {
     return NextResponse.json([]);
   }
 
-  const db = getDb();
+  const supabase = getSupabase();
 
   try {
-    const results = await db.execute({
-      sql: `
-        SELECT id, name, provider, industry, difficulty, cost
-        FROM certifications
-        WHERE LOWER(name) LIKE LOWER(?)
-           OR LOWER(provider) LIKE LOWER(?)
-        LIMIT 15
-      `,
-      args: [`%${query}%`, `%${query}%`],
-    });
+    const { data, error } = await supabase
+      .from('certifications')
+      .select('id, name, provider, industry, difficulty, cost')
+      .or(`name.ilike.%${query}%,provider.ilike.%${query}%`)
+      .limit(15);
 
-    return NextResponse.json(results.rows);
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return NextResponse.json(data ?? []);
   } catch (error) {
     console.error('Error searching certifications:', error);
     return NextResponse.json(

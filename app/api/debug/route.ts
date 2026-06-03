@@ -1,23 +1,42 @@
 import { NextResponse } from 'next/server';
-import { getDb } from '@/lib/db';
+import { getSupabase, initDb } from '@/lib/db';
 
 export async function GET() {
   try {
-    const db = getDb();
-    
-    // Check table info
-    const tableInfo = await db.execute("PRAGMA table_info(certifications)");
-    
-    // Check sample record
-    const certs = await db.execute("SELECT id, name, primary_skills, secondary_skills FROM certifications LIMIT 3");
-    
-    // Check jobs
-    const jobs = await db.execute("SELECT id, title, created_at FROM jobs ORDER BY id DESC LIMIT 5");
-    
+    await initDb();
+    const supabase = getSupabase();
+
+    const { count: certCount, error: certCountError } = await supabase
+      .from('certifications')
+      .select('*', { count: 'exact', head: true });
+
+    if (certCountError) {
+      throw new Error(certCountError.message);
+    }
+
+    const { data: certs, error: certsError } = await supabase
+      .from('certifications')
+      .select('id, name, primary_skills, secondary_skills')
+      .limit(3);
+
+    if (certsError) {
+      throw new Error(certsError.message);
+    }
+
+    const { data: jobs, error: jobsError } = await supabase
+      .from('jobs')
+      .select('id, title, created_at')
+      .order('id', { ascending: false })
+      .limit(5);
+
+    if (jobsError) {
+      throw new Error(jobsError.message);
+    }
+
     return NextResponse.json({
-      tableInfo: tableInfo.rows,
-      certs: certs.rows,
-      jobs: jobs.rows
+      certCount: certCount ?? 0,
+      certs: certs ?? [],
+      jobs: jobs ?? [],
     });
   } catch (e) {
     return NextResponse.json({ error: String(e) }, { status: 500 });

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { initDb, getDb } from '@/lib/db';
+import { initDb, getSupabase } from '@/lib/db';
 import { auth } from '@clerk/nextjs/server';
 
 export async function GET() {
@@ -10,38 +10,89 @@ export async function GET() {
     }
 
     await initDb();
-    const db = getDb();
+    const supabase = getSupabase();
 
-    // Total jobs
-    const jobCount = await db.execute({
-      sql: 'SELECT COUNT(*) as cnt FROM jobs WHERE user_id = ?',
-      args: [userId]
-    });
+    const { count: jobCount, error: jobCountError } = await supabase
+      .from('jobs')
+      .select('*', { count: 'exact', head: true })
+      .eq('user_id', userId);
 
-    // Most recommended certifications (by total score across all jobs)
-    const topCerts = await db.execute({
-      sql: `
-        SELECT c.name, c.industry, c.difficulty, COUNT(*) as count, SUM(r.score) as total_score, AVG(r.score) as avg_score
-        FROM recommendations r
-        JOIN certifications c ON r.cert_id = c.id
-        JOIN jobs j ON r.job_id = j.id
-        WHERE j.user_id = ?
-        GROUP BY c.id
-        ORDER BY total_score DESC
-        LIMIT 8
-      `,
-      args: [userId]
-    });
+    if (jobCountError) {
+      throw new Error(jobCountError.message);
+    }
 
-    // All extracted skills aggregated
-    const allJobs = await db.execute({
-      sql: 'SELECT extracted_skills FROM jobs WHERE user_id = ?',
-      args: [userId]
-    });
-    
+    const { data: userJobs, error: jobsError } = await supabase
+      .from('jobs')
+      .select('id, extracted_skills, title, company, created_at')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false });
+
+    if (jobsError) {
+      throw new Error(jobsError.message);
+    }
+
+    const jobs = userJobs ?? [];
+    const jobIds = jobs.map((j) => j.id);
+
+    let topCerts: Array<{
+      name: string;
+      industry: string;
+      difficulty: number;
+      count: number;
+      total_score: number;
+      avg_score: number;
+    }> = [];
+
+    if (jobIds.length > 0) {
+      const { data: recs, error: recsError } = await supabase
+        .from('recommendations')
+        .select('score, cert_id, certifications (name, industry, difficulty)')
+        .in('job_id', jobIds);
+
+      if (recsError) {
+        throw new Error(recsError.message);
+      }
+
+      const certStats = new Map<
+        number,
+        { name: string; industry: string; difficulty: number; count: number; total_score: number }
+      >();
+
+      for (const rec of recs ?? []) {
+        const cert = rec.certifications as unknown as {
+          name: string;
+          industry: string;
+          difficulty: number;
+        } | null;
+        if (!cert) continue;
+
+        const existing = certStats.get(rec.cert_id);
+        if (existing) {
+          existing.count += 1;
+          existing.total_score += rec.score;
+        } else {
+          certStats.set(rec.cert_id, {
+            name: cert.name,
+            industry: cert.industry,
+            difficulty: cert.difficulty,
+            count: 1,
+            total_score: rec.score,
+          });
+        }
+      }
+
+      topCerts = [...certStats.values()]
+        .map((c) => ({
+          ...c,
+          avg_score: c.total_score / c.count,
+        }))
+        .sort((a, b) => b.avg_score - a.avg_score)
+        .slice(0, 8);
+    }
+
     const skillCounts: Record<string, number> = {};
-    for (const row of allJobs.rows) {
-      const skills: string[] = JSON.parse(row.extracted_skills as string || '[]');
+    for (const row of jobs) {
+      const skills: string[] = JSON.parse(row.extracted_skills || '[]');
       for (const skill of skills) {
         skillCounts[skill] = (skillCounts[skill] || 0) + 1;
       }
@@ -52,11 +103,17 @@ export async function GET() {
       .slice(0, 12)
       .map(([skill, count]) => ({ skill, count }));
 
-    // Top skill gaps (skills in certs that don't appear in job postings)
-    const allCerts = await db.execute('SELECT skills FROM certifications');
+    const { data: allCerts, error: certsError } = await supabase
+      .from('certifications')
+      .select('skills');
+
+    if (certsError) {
+      throw new Error(certsError.message);
+    }
+
     const certSkillCounts: Record<string, number> = {};
-    for (const row of allCerts.rows) {
-      const skills: string[] = JSON.parse(row.skills as string || '[]');
+    for (const row of allCerts ?? []) {
+      const skills: string[] = JSON.parse(row.skills || '[]');
       for (const skill of skills) {
         certSkillCounts[skill] = (certSkillCounts[skill] || 0) + 1;
       }
@@ -68,19 +125,19 @@ export async function GET() {
       .slice(0, 6)
       .map(([skill]) => skill);
 
-    // Recent jobs
-    const recentJobs = await db.execute({
-      sql: 'SELECT id, title, company, created_at FROM jobs WHERE user_id = ? ORDER BY created_at DESC LIMIT 5',
-      args: [userId]
-    });
+    const recentJobs = jobs.slice(0, 5).map(({ id, title, company, created_at }) => ({
+      id,
+      title,
+      company,
+      created_at,
+    }));
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return NextResponse.json({
-      jobCount: (jobCount.rows[0] as unknown as { cnt: number }).cnt,
-      topCerts: topCerts.rows,
+      jobCount: jobCount ?? 0,
+      topCerts,
       topSkills,
       skillGaps: gaps,
-      recentJobs: recentJobs.rows,
+      recentJobs,
     });
   } catch (e) {
     return NextResponse.json({ error: String(e) }, { status: 500 });
