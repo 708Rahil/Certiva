@@ -38,6 +38,20 @@ export default function JobsPage() {
   const [jobs, setJobs] = useState<JobWithTopIndustry[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const handleDelete = async (id: number) => {
+    if (!confirm('Are you sure you want to delete this job analysis?')) return;
+    
+    try {
+      const res = await fetch(`/api/jobs/${id}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error('Failed to delete job');
+      
+      setJobs(jobs => jobs.filter(j => j.id !== id));
+    } catch (err) {
+      console.error('Error deleting job:', err);
+      alert('Failed to delete job. Please try again.');
+    }
+  };
+
   useEffect(() => {
     if (!isLoaded || !userId) return;
 
@@ -188,11 +202,45 @@ export default function JobsPage() {
                     </div>
                   </div>
 
-                  <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                    <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 6 }}>{date}</div>
-                    <div style={{ fontSize: 13, color: 'var(--accent-light)', fontWeight: 500 }}>
-                      View results →
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'space-between', flexShrink: 0 }}>
+                    <div>
+                      <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 6, textAlign: 'right' }}>{date}</div>
+                      <div style={{ fontSize: 13, color: 'var(--accent-light)', fontWeight: 500, textAlign: 'right' }}>
+                        View results →
+                      </div>
                     </div>
+                    
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleDelete(job.id);
+                      }}
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: 'var(--text-muted)',
+                        cursor: 'pointer',
+                        padding: '6px 8px',
+                        borderRadius: 6,
+                        marginTop: 12,
+                        fontSize: 13,
+                        transition: 'background 0.2s',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 6
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = 'rgba(239, 68, 68, 0.1)';
+                        e.currentTarget.style.color = '#ef4444';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'transparent';
+                        e.currentTarget.style.color = 'var(--text-muted)';
+                      }}
+                      title="Delete saved job"
+                    >
+                      🗑️ Delete
+                    </button>
                   </div>
                 </div>
               </Link>

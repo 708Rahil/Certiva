@@ -79,3 +79,50 @@ export async function GET(
     return NextResponse.json({ error: String(e) }, { status: 500 });
   }
 }
+
+export async function DELETE(
+  _req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    await initDb();
+    const supabase = getSupabase();
+    const { id } = await params;
+    const { userId } = await auth();
+
+    if (!userId) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    // Check ownership
+    const { data: job, error: fetchError } = await supabase
+      .from('jobs')
+      .select('user_id')
+      .eq('id', id)
+      .maybeSingle();
+
+    if (fetchError || !job) {
+      return NextResponse.json({ error: 'Job not found' }, { status: 404 });
+    }
+
+    if (job.user_id !== userId) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    // Explicitly delete recommendations to be safe
+    await supabase.from('recommendations').delete().eq('job_id', id);
+
+    const { error: deleteError } = await supabase
+      .from('jobs')
+      .delete()
+      .eq('id', id);
+
+    if (deleteError) {
+      throw new Error(deleteError.message);
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (e) {
+    return NextResponse.json({ error: String(e) }, { status: 500 });
+  }
+}
