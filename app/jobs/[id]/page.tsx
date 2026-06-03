@@ -52,6 +52,8 @@ export default function JobDetailPage() {
   const [loading, setLoading] = useState(true);
   const [showFullDesc, setShowFullDesc] = useState(false);
   const [filterIndustry, setFilterIndustry] = useState<string>('all');
+  type SortOption = 'score' | 'difficulty' | 'cost';
+  const [sortBy, setSortBy] = useState<SortOption>('score');
   const { isLoaded, userId } = useAuth();
 
   const handleAddToCerts = async (certId: number, certName: string) => {
@@ -96,7 +98,27 @@ export default function JobDetailPage() {
   const topScore = recs[0]?.score || 0;
   const industries = [...new Set(recs.map(r => r.industry))];
 
-  const filtered = filterIndustry === 'all' ? recs : recs.filter(r => r.industry === filterIndustry);
+  const getCostValue = (costStr: string | undefined) => {
+    if (!costStr || costStr.toLowerCase().includes('free')) return 0;
+    const match = costStr.match(/\d+/);
+    return match ? parseInt(match[0], 10) : 9999;
+  };
+
+  const filteredAndSorted = (filterIndustry === 'all' ? recs : recs.filter(r => r.industry === filterIndustry))
+    .sort((a, b) => {
+      if (sortBy === 'score') return b.score - a.score;
+      if (sortBy === 'difficulty') {
+        if (a.difficulty !== b.difficulty) return a.difficulty - b.difficulty;
+        return b.score - a.score; // Tiebreaker
+      }
+      if (sortBy === 'cost') {
+        const costA = getCostValue(a.cost);
+        const costB = getCostValue(b.cost);
+        if (costA !== costB) return costA - costB;
+        return b.score - a.score; // Tiebreaker
+      }
+      return 0;
+    });
 
   return (
     <div style={{ maxWidth: 1000, margin: '0 auto', padding: '40px 24px 80px' }}>
@@ -238,22 +260,46 @@ export default function JobDetailPage() {
       {/* Recommendations */}
       <div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
-          <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600, color: 'var(--text-primary)', letterSpacing: '-0.3px' }}>
-            Recommended Certifications
-          </h2>
-          <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>
-            {filtered.length} result{filtered.length !== 1 ? 's' : ''}
-          </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600, color: 'var(--text-primary)', letterSpacing: '-0.3px' }}>
+              Recommended Certifications
+            </h2>
+            <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>
+              {filteredAndSorted.length} result{filteredAndSorted.length !== 1 ? 's' : ''}
+            </span>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 500 }}>Sort by:</span>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as SortOption)}
+              style={{
+                background: 'var(--bg-card)',
+                border: '1px solid var(--border)',
+                borderRadius: 8,
+                padding: '6px 12px',
+                fontSize: 13,
+                color: 'var(--text-primary)',
+                outline: 'none',
+                cursor: 'pointer'
+              }}
+            >
+              <option value="score">Best Match</option>
+              <option value="difficulty">Difficulty (Low to High)</option>
+              <option value="cost">Cost (Low to High)</option>
+            </select>
+          </div>
         </div>
 
-        {filtered.length === 0 ? (
+        {filteredAndSorted.length === 0 ? (
           <EmptyState />
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            {filtered.map((rec, i) => (
+            {filteredAndSorted.map((rec, i) => (
               <CertCard
                 key={rec.id}
-                rank={recs.indexOf(rec) + 1}
+                rank={i + 1}
                 certId={rec.cert_id}
                 name={rec.name}
                 provider={rec.provider}
