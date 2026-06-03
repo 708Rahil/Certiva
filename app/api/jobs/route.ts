@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { initDb, getSupabase } from '@/lib/db';
-import { extractSkills, detectIndustry, matchCertifications, Certification, inferSeniority } from '@/lib/matcher';
+import { matchCertifications, Certification } from '@/lib/matcher';
+import { extractJobData } from '@/lib/llmExtractor';
 import { auth } from '@clerk/nextjs/server';
 
 export async function POST(req: NextRequest) {
@@ -13,10 +14,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
     }
 
-    const skills = extractSkills(title + ' ' + description);
-    const industry = detectIndustry(title, description);
     const { userId } = await auth();
 
+    // ── LLM extraction (with keyword fallback) ──────────────────────────────
+    const { skills, industry, seniority, source } = await extractJobData(title, description);
+
+    // ── Save job ─────────────────────────────────────────────────────────────
     const { data: job, error: jobError } = await supabase
       .from('jobs')
       .insert({
@@ -35,6 +38,7 @@ export async function POST(req: NextRequest) {
 
     const jobId = job.id;
 
+    // ── Fetch certifications ─────────────────────────────────────────────────
     const { data: certs, error: certsError } = await supabase
       .from('certifications')
       .select('*');
@@ -43,14 +47,14 @@ export async function POST(req: NextRequest) {
       throw new Error(certsError.message);
     }
 
-    const userLevel = inferSeniority(title, description);
+    // ── Match & rank ─────────────────────────────────────────────────────────
     const recommendations = matchCertifications(
       skills,
       industry,
       title,
       description,
       (certs ?? []) as Certification[],
-      userLevel
+      seniority
     );
 
     const topRecs = recommendations.slice(0, 8);
@@ -77,6 +81,8 @@ export async function POST(req: NextRequest) {
       jobId,
       skills,
       industry,
+      seniority,
+      extractionSource: source, // 'llm' or 'keyword' — useful for debugging
       recommendationCount: topRecs.length,
     });
   } catch (e) {
