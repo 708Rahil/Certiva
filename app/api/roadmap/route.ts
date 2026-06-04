@@ -107,7 +107,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
     const { userId } = await auth();
     if (!userId) {
@@ -117,41 +117,49 @@ export async function GET() {
     await initDb();
     const supabase = getSupabase();
 
-    // 1. Get the user's jobs
+    // 1. Get the user's jobs to populate selector and find current job
     const { data: jobs, error: jobsError } = await supabase
       .from('jobs')
-      .select('id')
+      .select('id, title, company, extracted_skills, created_at')
       .eq('user_id', userId)
-      .order('created_at', { ascending: false })
-      .limit(50);
+      .order('created_at', { ascending: false });
 
     if (jobsError) throw new Error(jobsError.message);
     if (!jobs || jobs.length === 0) {
-      return NextResponse.json([]);
+      return NextResponse.json({ jobs: [], selectedJob: null, recommendations: [] });
     }
 
-    const jobIds = jobs.map((j: any) => j.id);
+    const { searchParams } = new URL(req.url);
+    const queryJobId = searchParams.get('jobId');
+    let targetJobId = queryJobId ? parseInt(queryJobId, 10) : null;
 
-    // 2. Get recommendations for those jobs
+    if (!targetJobId || isNaN(targetJobId)) {
+      targetJobId = jobs[0].id;
+    }
+
+    const selectedJob = jobs.find((j: any) => j.id === targetJobId) || jobs[0];
+
+    // 2. Get recommendations for this specific job
     const { data: recs, error: recsError } = await supabase
       .from('recommendations')
-      .select('cert_id, score')
-      .in('job_id', jobIds);
+      .select('cert_id, score, matched_skills, explanation')
+      .eq('job_id', selectedJob.id);
 
     if (recsError) throw new Error(recsError.message);
     if (!recs || recs.length === 0) {
-      return NextResponse.json([]);
+      return NextResponse.json({
+        jobs: jobs.map((j: any) => ({ id: j.id, title: j.title, company: j.company })),
+        selectedJob: {
+          id: selectedJob.id,
+          title: selectedJob.title,
+          company: selectedJob.company,
+          skills: safeParseJSON(selectedJob.extracted_skills),
+        },
+        recommendations: [],
+      });
     }
 
-    // Deduplicate cert IDs, keeping the highest score for each
-    const certScoreMap = new Map<number, number>();
-    for (const rec of recs) {
-      const existing = certScoreMap.get(rec.cert_id) ?? 0;
-      if (rec.score > existing) {
-        certScoreMap.set(rec.cert_id, rec.score);
-      }
-    }
-    const certIds = Array.from(certScoreMap.keys());
+    const certIds = recs.map((r: any) => r.cert_id);
 
     // 3. Fetch those certifications
     const { data: certs, error: certsError } = await supabase
@@ -160,9 +168,6 @@ export async function GET() {
       .in('id', certIds);
 
     if (certsError) throw new Error(certsError.message);
-    if (!certs || certs.length === 0) {
-      return NextResponse.json([]);
-    }
 
     // 4. Fetch user certification statuses
     const { data: userCerts } = await supabase
@@ -191,7 +196,8 @@ export async function GET() {
     // 6. Build enriched cert objects
     const { extractProvider, getProviderColor, findAlternativePaths } = await import('@/lib/roadmapMatcher');
 
-    const enrichedCerts = certs.map((cert: any) => {
+    const enrichedCerts = (certs ?? []).map((cert: any) => {
+      const rec = recs.find((r: any) => r.cert_id === cert.id);
       const provider = extractProvider(cert.name);
       const providerColor = getProviderColor(provider);
       const userStatus = userCertMap.get(cert.id) || undefined;
@@ -227,10 +233,30 @@ export async function GET() {
         providerColor,
         userStatus,
         alternatives,
+        score: rec?.score || 0,
+        explanation: rec?.explanation || '',
+        matchedSkills: safeParseJSON(rec?.matched_skills),
       };
     });
 
-    return NextResponse.json(enrichedCerts);
+    // Sort by difficulty (ascending) to show a progressive path, and then by score (descending)
+    enrichedCerts.sort((a, b) => {
+      if (a.difficulty !== b.difficulty) {
+        return a.difficulty - b.difficulty;
+      }
+      return b.score - a.score;
+    });
+
+    return NextResponse.json({
+      jobs: jobs.map((j: any) => ({ id: j.id, title: j.title, company: j.company })),
+      selectedJob: {
+        id: selectedJob.id,
+        title: selectedJob.title,
+        company: selectedJob.company,
+        skills: safeParseJSON(selectedJob.extracted_skills),
+      },
+      recommendations: enrichedCerts,
+    });
   } catch (e) {
     console.error(e);
     return NextResponse.json({ error: String(e) }, { status: 500 });
