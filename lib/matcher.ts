@@ -342,6 +342,8 @@ export interface Certification {
   duration: string;
   trending?: boolean;
   target_job_titles?: string; // JSON-encoded string array from DB
+  job_postings_count?: number;
+  worth_it_rating?: number;
 }
 
 export interface RecommendationResult {
@@ -482,6 +484,13 @@ export function matchCertifications(
   const difficultyTarget = userLevel === 'entry' ? 2 : userLevel === 'mid' ? 3 : 4;
   const textLower = (jobTitle + ' ' + jobDescription).toLowerCase();
 
+  // Pre-compute max job_postings_count for log-scaling normalization
+  const maxPostings = Math.max(
+    1,
+    ...certifications.map(c => c.job_postings_count ?? 0)
+  );
+  const logMaxPostings = Math.log1p(maxPostings);
+
   const results: RecommendationResult[] = certifications.map(cert => {
     const certSkills: string[] = JSON.parse(cert.skills || '[]');
     const primarySkills: string[] = cert.primary_skills ? JSON.parse(cert.primary_skills) : [];
@@ -492,7 +501,88 @@ export function matchCertifications(
     const secondarySkillsLower = secondarySkills.map(s => s.toLowerCase());
     const jobSkillsLower = jobSkills.map(s => s.toLowerCase());
 
-    // 1. Explicit name matching detection
+    // ── 1. Skill Coverage (PRIMARY SIGNAL) ──────────────────────────────────
+    //
+    // Two-directional coverage:
+    //   A) Job Coverage: What % of the job's required skills does this cert address?
+    //      → This is the most important signal (how useful is this cert for the job?)
+    //   B) Cert Relevance: What % of this cert's skills are actually needed by the job?
+    //      → Penalizes certs that teach mostly irrelevant skills
+    //
+    // Skill matching uses strict word-boundary logic for short terms to avoid
+    // false positives (e.g. "AI" matching "email").
+
+    // Build a set of all cert skills (deduplicated, weighted by tier)
+    const certSkillWeights = new Map<string, number>();
+    for (const ps of primarySkillsLower) {
+      if (!isCertificationName(ps)) certSkillWeights.set(ps, 2.0);
+    }
+    for (const ss of secondarySkillsLower) {
+      if (!isCertificationName(ss) && !certSkillWeights.has(ss)) certSkillWeights.set(ss, 1.0);
+    }
+    for (const cs of certSkillsLower) {
+      if (!isCertificationName(cs) && !certSkillWeights.has(cs)) certSkillWeights.set(cs, 0.5);
+    }
+
+    // A) Job Coverage: How many job skills does this cert cover?
+    const matchedJobSkillsList: string[] = [];
+    for (let i = 0; i < jobSkills.length; i++) {
+      const jsLower = jobSkillsLower[i];
+      const matched = skillMatch(jsLower, certSkillWeights);
+      if (matched) {
+        matchedJobSkillsList.push(jobSkills[i]); // preserve original case
+      }
+    }
+    const jobCoverage = jobSkills.length > 0
+      ? matchedJobSkillsList.length / jobSkills.length
+      : 0;
+
+    // B) Cert Relevance: How much of the cert's weighted skill set is used by this job?
+    let totalCertWeight = 0;
+    let matchedCertWeight = 0;
+    for (const [cs, weight] of certSkillWeights) {
+      totalCertWeight += weight;
+      if (jobSkillsLower.some(js => skillTermMatch(js, cs))) {
+        matchedCertWeight += weight;
+      }
+    }
+    const certRelevance = totalCertWeight > 0
+      ? matchedCertWeight / totalCertWeight
+      : 0;
+
+    // Combined skill score: 80% job coverage, 20% cert relevance
+    const skillScore = (0.80 * jobCoverage) + (0.20 * certRelevance);
+
+    // ── 2. Industry Alignment ───────────────────────────────────────────────
+    const industryMatch = cert.industry === jobIndustry;
+    const industryScore = industryMatch ? 1.0 : 0;
+
+    // ── 3. Title Match ──────────────────────────────────────────────────────
+    const targetTitles: string[] = cert.target_job_titles
+      ? JSON.parse(cert.target_job_titles)
+      : [];
+    const { match: titleMatch, matchedTitle: matchedJobTitle } = matchJobTitle(jobTitle, targetTitles);
+    const titleScore = titleMatch ? 1.0 : 0;
+
+    // ── 4. Difficulty Fit ───────────────────────────────────────────────────
+    // Smooth curve: perfect match = 1.0, 1 level off = 0.75, 2+ = 0.4, 3+ = 0.15
+    const diffDelta = Math.abs(cert.difficulty - difficultyTarget);
+    const difficultyFit = Math.max(0, 1 - diffDelta * 0.25 - (diffDelta > 1 ? 0.1 : 0));
+
+    // ── 5. Market Signals (small weight) ────────────────────────────────────
+    // Log-scaled job postings to prevent huge counts from dominating
+    const logPostings = Math.log1p(cert.job_postings_count ?? 0);
+    const marketDemand = logMaxPostings > 0 ? logPostings / logMaxPostings : 0;
+
+    // Worth-it rating normalized to 0-1 (ratings are 0-10 scale)
+    const worthIt = Math.min(1, (cert.worth_it_rating ?? 0) / 10);
+
+    // Trending as a binary small boost
+    const trendingBonus = cert.trending ? 1.0 : 0;
+
+    // ── 6. Explicit Name Match (tiebreaker only) ────────────────────────────
+    // If the cert is explicitly mentioned in the job listing, give a small bump
+    // but don't let it dominate over actual skill coverage
     let explicitMatch = false;
     const aliases = CERT_ALIASES[cert.id] || [];
     for (const alias of aliases) {
@@ -501,163 +591,182 @@ export function matchCertifications(
         break;
       }
     }
+    const explicitBonus = explicitMatch ? 1.0 : 0;
 
-    // 2. Skill overlap score (Weighted coverage calculations)
-    let totalPossibleWeight = 0;
-    let earnedWeight = 0;
-    const processedSkills = new Set<string>();
-
-    // Weight primary skills (1.5x)
-    primarySkillsLower.forEach(ps => {
-      // Don't treat cert aliases as primary skills
-      if (isCertificationName(ps)) return;
-      processedSkills.add(ps);
-      const isMatched = jobSkillsLower.some(js => js.includes(ps) || ps.includes(js));
-      totalPossibleWeight += 1.5;
-      if (isMatched) earnedWeight += 1.5;
-    });
-
-    // Weight secondary skills (0.7x)
-    secondarySkillsLower.forEach(ss => {
-      if (isCertificationName(ss)) return;
-      processedSkills.add(ss);
-      const isMatched = jobSkillsLower.some(js => js.includes(ss) || ss.includes(js));
-      totalPossibleWeight += 0.7;
-      if (isMatched) earnedWeight += 0.7;
-    });
-
-    // Weight generic remaining skills (1.0x)
-    certSkillsLower.forEach(s => {
-      if (isCertificationName(s)) return;
-      if (!processedSkills.has(s)) {
-        processedSkills.add(s);
-        const isMatched = jobSkillsLower.some(js => js.includes(s) || s.includes(js));
-        totalPossibleWeight += 1.0;
-        if (isMatched) earnedWeight += 1.0;
-      }
-    });
-
-    // Score based on how well the certification meets the job's requirements (job coverage)
-    // and how aligned the certification's scope is to the job (cert precision/coverage)
-    const matchedJobSkills = jobSkills.filter(js => {
-      const jsLower = js.toLowerCase();
-      return certSkillsLower.some(cs => cs.includes(jsLower) || jsLower.includes(cs));
-    });
-
-    const jobCoverageScore = jobSkills.length > 0 ? matchedJobSkills.length / jobSkills.length : 0;
-    const certCoverageScore = totalPossibleWeight > 0 ? earnedWeight / totalPossibleWeight : 0;
-
-    // Balanced skill overlap: 70% job coverage, 30% certification coverage
-    const skillOverlap = (0.7 * jobCoverageScore) + (0.3 * certCoverageScore);
-
-    // Keep original-cased matched skills for UI/explanations
-    const matchedSkillsOriginal = jobSkills.filter(js =>
-      certSkillsLower.some(cs => cs.includes(js.toLowerCase()) || js.toLowerCase().includes(cs))
-    );
-
-    // 3. Industry alignment bonus
-    const industryMatch = cert.industry === jobIndustry;
-
-    // 4. Difficulty fit (Bypass/give 100% difficulty fit if explicitly matching by name)
-    const diffDelta = Math.abs(cert.difficulty - difficultyTarget);
-    const difficultyFit = explicitMatch ? 1.0 : Math.max(0, 1 - diffDelta * 0.35);
-
-    // 5. Trending bonus
-    const trendingBonus = cert.trending ? 0.05 : 0;
-
-    // 6. Job title match bonus (+15 pts if job title aligns with cert's target roles)
-    const targetTitles: string[] = cert.target_job_titles
-      ? JSON.parse(cert.target_job_titles)
-      : [];
-    const { match: titleMatch, matchedTitle: matchedJobTitle } = matchJobTitle(jobTitle, targetTitles);
-    const titleMatchBonus = titleMatch ? 0.15 : 0;
-
-    // Final composite score
-    // Weights: 50% skill overlap, 15% industry match, 10% difficulty, 15% title match, +30% explicit match bonus
-    const explicitMatchBonus = explicitMatch ? 0.30 : 0;
+    // ── FINAL COMPOSITE SCORE ───────────────────────────────────────────────
+    //
+    // Weight distribution (total = 1.0):
+    //   Skill coverage:   0.75  ← primary hiring signal
+    //   Industry match:   0.08  ← domain alignment
+    //   Title match:      0.07  ← role alignment
+    //   Difficulty fit:   0.04  ← level appropriateness
+    //   Market demand:    0.02  ← industry adoption signal
+    //   Worth-it rating:  0.01  ← community quality signal
+    //   Trending:         0.01  ← recency signal
+    //   Explicit mention: 0.02  ← tiebreaker for certs named in job posting
+    //
     const rawScore =
-      0.50 * skillOverlap +
-      0.15 * (industryMatch ? 1 : 0) +
-      0.10 * difficultyFit +
-      titleMatchBonus +
-      explicitMatchBonus +
-      trendingBonus;
+      0.75 * skillScore +
+      0.08 * industryScore +
+      0.07 * titleScore +
+      0.04 * difficultyFit +
+      0.02 * marketDemand +
+      0.01 * worthIt +
+      0.01 * trendingBonus +
+      0.02 * explicitBonus;
+
     const score = Math.min(100, Math.round(rawScore * 100));
 
-    const explanation = generateExplanation(
-      cert, matchedSkillsOriginal, certSkills, jobSkills,
-      industryMatch, titleMatch, matchedJobTitle, explicitMatch, score
-    );
+    const explanation = generateExplanation({
+      cert,
+      matchedSkills: matchedJobSkillsList,
+      jobSkills,
+      certSkills,
+      jobCoverage,
+      certRelevance,
+      industryMatch,
+      titleMatch,
+      matchedJobTitle,
+      explicitMatch,
+      difficultyFit,
+      marketDemand,
+      score,
+    });
 
     return {
       cert,
       score,
-      skillOverlap: Math.round(skillOverlap * 100),
+      skillOverlap: Math.round(skillScore * 100),
       industryMatch,
       difficultyFit: Math.round(difficultyFit * 100),
       titleMatch,
       matchedJobTitle,
-      matchedSkills: matchedSkillsOriginal,
+      matchedSkills: matchedJobSkillsList,
       explanation,
     };
   });
 
   return results
     .filter(r => r.score > 0)
-    .sort((a, b) => b.score - a.score);
+    .sort((a, b) => {
+      // Primary sort by score, tiebreak by skill overlap then market demand
+      if (b.score !== a.score) return b.score - a.score;
+      if (b.skillOverlap !== a.skillOverlap) return b.skillOverlap - a.skillOverlap;
+      return (b.cert.job_postings_count ?? 0) - (a.cert.job_postings_count ?? 0);
+    });
 }
 
-function generateExplanation(
-  cert: Certification,
-  matchedSkills: string[],
-  certSkills: string[],
-  jobSkills: string[],
-  industryMatch: boolean,
-  titleMatch: boolean,
-  matchedJobTitle: string,
-  explicitMatch: boolean,
-  score: number
-): string {
+// ─── Skill Matching Helpers ─────────────────────────────────────────────────
+
+/** Check if a job skill term matches any cert skill in the weighted map */
+function skillMatch(jobSkill: string, certSkillWeights: Map<string, number>): boolean {
+  for (const certSkill of certSkillWeights.keys()) {
+    if (skillTermMatch(jobSkill, certSkill)) return true;
+  }
+  return false;
+}
+
+/** Bidirectional term match with boundary awareness for short keywords */
+function skillTermMatch(a: string, b: string): boolean {
+  // Exact match
+  if (a === b) return true;
+
+  // For short terms (≤3 chars like SQL, AI, GCP), require word boundary match
+  if (a.length <= 3 || b.length <= 3) {
+    return testAlias(` ${a} `, b) || testAlias(` ${b} `, a);
+  }
+
+  // For longer terms, allow substring matching but require significant overlap
+  // "machine learning" matches "machine learning engineer" but
+  // "data" doesn't match "update" (substring would be misleading)
+  if (a.length >= 4 && b.length >= 4) {
+    if (a.includes(b) || b.includes(a)) return true;
+  }
+
+  return false;
+}
+
+// ─── Explanation Generator ──────────────────────────────────────────────────
+
+interface ExplanationInput {
+  cert: Certification;
+  matchedSkills: string[];
+  jobSkills: string[];
+  certSkills: string[];
+  jobCoverage: number;
+  certRelevance: number;
+  industryMatch: boolean;
+  titleMatch: boolean;
+  matchedJobTitle: string;
+  explicitMatch: boolean;
+  difficultyFit: number;
+  marketDemand: number;
+  score: number;
+}
+
+function generateExplanation(input: ExplanationInput): string {
+  const {
+    cert, matchedSkills, jobSkills, certSkills,
+    jobCoverage, certRelevance, industryMatch,
+    titleMatch, matchedJobTitle, explicitMatch,
+    difficultyFit, marketDemand, score,
+  } = input;
+
   const parts: string[] = [];
+  const coveragePct = Math.round(jobCoverage * 100);
+  const matchCount = matchedSkills.length;
+  const totalJobSkills = jobSkills.length;
 
-  // Opening line — factor in explicit match first
-  if (explicitMatch) {
-    parts.push(`Explicitly mentioned or requested in this job posting.`);
-  } else if (score >= 70) {
-    parts.push(titleMatch
-      ? `Highly recommended for this role.`
-      : `Strong match for this role.`
-    );
-  } else if (score >= 40) {
-    parts.push(`Solid complement to this role's requirements.`);
+  // Lead with the concrete skill coverage stat
+  if (coveragePct >= 60) {
+    parts.push(`Covers ${coveragePct}% of this role's required skills (${matchCount}/${totalJobSkills}).`);
+  } else if (coveragePct >= 30) {
+    parts.push(`Addresses ${matchCount} of ${totalJobSkills} required skills (${coveragePct}% coverage).`);
+  } else if (matchCount > 0) {
+    parts.push(`Partially relevant — covers ${matchCount} of ${totalJobSkills} job skills.`);
   } else {
-    parts.push(`Partial alignment with this role.`);
+    parts.push(`Limited direct skill overlap with this role.`);
   }
 
-  // Title match signal
-  if (!explicitMatch && titleMatch && matchedJobTitle) {
-    parts.push(`Directly targets "${matchedJobTitle}" roles.`);
+  // Explicitly named in posting
+  if (explicitMatch) {
+    parts.push(`Specifically mentioned in this job posting.`);
   }
 
-  // Skill overlap
+  // Title match — concrete role targeting
+  if (titleMatch && matchedJobTitle) {
+    parts.push(`Designed for "${matchedJobTitle}" roles.`);
+  }
+
+  // Matched skills (show up to 4 for specificity)
   if (matchedSkills.length > 0) {
-    const top = matchedSkills.slice(0, 3).join(', ');
-    parts.push(`Covers key skills: ${top}.`);
+    const display = matchedSkills.slice(0, 4).join(', ');
+    const remaining = matchedSkills.length - 4;
+    const suffix = remaining > 0 ? ` +${remaining} more` : '';
+    parts.push(`Key matches: ${display}${suffix}.`);
   }
 
   // Industry alignment
-  if (industryMatch && !explicitMatch) {
-    parts.push(`Aligned with the ${cert.industry} domain of this position.`);
+  if (industryMatch) {
+    parts.push(`Same domain (${INDUSTRY_LABELS[cert.industry] || cert.industry}).`);
   }
 
-  // Skill gaps the cert would fill
-  const gaps = certSkills.filter(cs =>
-    !isCertificationName(cs) &&
-    !jobSkills.some(js => js.toLowerCase().includes(cs.toLowerCase()) || cs.toLowerCase().includes(js.toLowerCase()))
-  ).slice(0, 2);
+  // Difficulty context
+  if (difficultyFit < 0.5) {
+    const levelLabel = cert.difficulty <= 2 ? 'entry-level' : cert.difficulty >= 4 ? 'expert-level' : 'mid-level';
+    parts.push(`Note: This is a ${levelLabel} cert — may not match your seniority.`);
+  }
 
-  if (gaps.length > 0) {
-    parts.push(`Also builds: ${gaps.join(', ')}.`);
+  // Additive skills the cert would build beyond job requirements
+  if (matchedSkills.length > 0) {
+    const gaps = certSkills.filter(cs =>
+      !isCertificationName(cs) &&
+      !matchedSkills.some(ms => ms.toLowerCase().includes(cs.toLowerCase()) || cs.toLowerCase().includes(ms.toLowerCase()))
+    ).slice(0, 2);
+
+    if (gaps.length > 0) {
+      parts.push(`Also builds: ${gaps.join(', ')}.`);
+    }
   }
 
   return parts.join(' ');
