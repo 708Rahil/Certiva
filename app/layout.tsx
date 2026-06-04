@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Certiva — Career Intelligence Platform",
@@ -52,11 +53,12 @@ export default function RootLayout({
       }
     }}>
       <html lang="en">
-        <body>
+        <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
           <Nav />
-          <main style={{ minHeight: "calc(100vh - 60px)" }}>
+          <main style={{ flex: 1 }}>
             {children}
           </main>
+          <Footer />
         </body>
       </html>
     </ClerkProvider>
