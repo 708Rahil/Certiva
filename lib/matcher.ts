@@ -344,6 +344,7 @@ export interface Certification {
   target_job_titles?: string; // JSON-encoded string array from DB
   job_postings_count?: number;
   worth_it_rating?: number;
+  official_url?: string;
 }
 
 export interface RecommendationResult {

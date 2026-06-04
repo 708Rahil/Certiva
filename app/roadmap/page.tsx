@@ -106,6 +106,45 @@ export default function RoadmapPage() {
   }
 
   if (error) {
+    if (error === 'Unauthorized') {
+      return (
+        <div style={{
+          maxWidth: 600,
+          margin: '80px auto',
+          padding: '40px 24px',
+          textAlign: 'center',
+          background: 'var(--bg-secondary)',
+          borderRadius: 16,
+          border: '1px solid var(--border)',
+        }}>
+          <Award size={48} style={{ color: 'var(--accent)', marginBottom: 16 }} />
+          <h2 style={{ fontSize: 24, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 12 }}>
+            Unlock Your Career Roadmap
+          </h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: 15, lineHeight: 1.6, maxWidth: 460, margin: '0 auto 28px' }}>
+            Sign in to analyze your saved jobs, generate customized certification pathways, track your certification progress, and map out your next career moves.
+          </p>
+          <a 
+            href="/sign-in?redirect_url=/roadmap"
+            style={{
+              display: 'inline-block',
+              padding: '12px 28px',
+              background: 'var(--accent)',
+              color: '#fff',
+              borderRadius: 10,
+              textDecoration: 'none',
+              fontWeight: 600,
+              transition: 'opacity 0.2s',
+            }}
+            onMouseOver={(e) => e.currentTarget.style.opacity = '0.9'}
+            onMouseOut={(e) => e.currentTarget.style.opacity = '1'}
+          >
+            Sign In / Register
+          </a>
+        </div>
+      );
+    }
+
     return (
       <div style={{
         maxWidth: 900,
