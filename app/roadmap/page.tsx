@@ -15,6 +15,7 @@ interface Cert {
   matchedSkills?: string[];
   description?: string;
   alternatives?: any[];
+  next_certs?: string[];
 }
 
 interface Job {
@@ -561,9 +562,12 @@ export default function RoadmapPage() {
       {/* GENERIC ROADMAP MODE */}
       {mode === 'generic' && (
         <>
-          <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 24 }}>
-            {INDUSTRY_LABELS[selectedIndustry] || selectedIndustry} Certification Guide
+          <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 8 }}>
+            {INDUSTRY_LABELS[selectedIndustry] || selectedIndustry} Path Guides
           </h2>
+          <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 24 }}>
+            Explore what credentials to take next to progressively build your expertise.
+          </p>
 
           {genericCerts.length === 0 ? (
             <div style={{
@@ -577,45 +581,67 @@ export default function RoadmapPage() {
               No certifications categorized in this domain.
             </div>
           ) : (
-            <div style={{ position: 'relative', paddingLeft: 32 }}>
-              <div style={{
-                position: 'absolute',
-                left: 11,
-                top: 16,
-                bottom: 16,
-                width: 2,
-                background: 'linear-gradient(to bottom, var(--accent) 60%, var(--border))',
-              }} />
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+              gap: 16,
+            }}>
+              {genericCerts.map((cert: Cert) => {
+                const nextList = cert.next_certs || [];
+                if (nextList.length === 0) return null;
 
-              {/* STAGE 1: Foundational */}
-              {genericStage1.length > 0 && (
-                <TimelineStage 
-                  title="Stage 1: Foundational / Entry-Level" 
-                  subtitle="Start here to build primary familiarity and terminologies" 
-                  stepNumber="1" 
-                  certs={genericStage1} 
-                />
-              )}
+                return (
+                  <div
+                    key={`generic-${cert.id}`}
+                    style={{
+                      background: 'var(--bg-secondary)',
+                      borderRadius: 12,
+                      padding: 16,
+                      border: '1px solid var(--border)',
+                    }}
+                  >
+                    <div style={{
+                      fontSize: 12,
+                      fontWeight: 600,
+                      color: 'var(--text-secondary)',
+                      marginBottom: 12,
+                    }}>
+                      After {cert.name}
+                    </div>
 
-              {/* STAGE 2: Associate */}
-              {genericStage2.length > 0 && (
-                <TimelineStage 
-                  title="Stage 2: Intermediate / Associate" 
-                  subtitle="Mid-level core credentials for practitioners" 
-                  stepNumber="2" 
-                  certs={genericStage2} 
-                />
-              )}
-
-              {/* STAGE 3: Professional/Specialist */}
-              {genericStage3.length > 0 && (
-                <TimelineStage 
-                  title="Stage 3: Professional & Specialty" 
-                  subtitle="Advanced and specialized certifications for experts" 
-                  stepNumber="3" 
-                  certs={genericStage3} 
-                />
-              )}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                      {nextList.map((nextName: string, idx: number) => {
+                        return (
+                          <div
+                            key={`${cert.id}-next-${idx}`}
+                            style={{
+                              background: 'rgba(255,255,255,0.02)',
+                              borderRadius: 8,
+                              padding: 12,
+                              border: '1px solid var(--border)',
+                            }}
+                          >
+                            <div style={{
+                              fontSize: 12,
+                              fontWeight: 600,
+                              color: 'var(--text-primary)',
+                              marginBottom: 4,
+                            }}>
+                              {nextName}
+                            </div>
+                            <div style={{
+                              fontSize: 11,
+                              color: 'var(--text-secondary)',
+                            }}>
+                              Recommended Next Step
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           )}
         </>
