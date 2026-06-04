@@ -350,7 +350,23 @@ export async function GET(req: NextRequest) {
 function safeParseJSON(val: any): any[] {
   if (Array.isArray(val)) return val;
   if (typeof val === 'string') {
-    try { return JSON.parse(val); } catch { return []; }
+    const trimmedVal = val.trim();
+    if (!trimmedVal) return [];
+    try {
+      const parsed = JSON.parse(trimmedVal);
+      if (Array.isArray(parsed)) return parsed;
+      if (typeof parsed === 'string') {
+        if (parsed.includes(',')) {
+          return parsed.split(',').map(s => s.trim()).filter(Boolean);
+        }
+        return [parsed];
+      }
+    } catch {
+      if (trimmedVal.includes(',')) {
+        return trimmedVal.split(',').map(s => s.trim()).filter(Boolean);
+      }
+      return [trimmedVal];
+    }
   }
   return [];
 }

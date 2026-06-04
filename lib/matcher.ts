@@ -326,6 +326,30 @@ export function inferSeniority(title: string, description: string): UserLevel {
   return 'mid';
 }
 
+export function safeParseJSON(val: any): string[] {
+  if (Array.isArray(val)) return val;
+  if (typeof val === 'string') {
+    const trimmedVal = val.trim();
+    if (!trimmedVal) return [];
+    try {
+      const parsed = JSON.parse(trimmedVal);
+      if (Array.isArray(parsed)) return parsed;
+      if (typeof parsed === 'string') {
+        if (parsed.includes(',')) {
+          return parsed.split(',').map(s => s.trim()).filter(Boolean);
+        }
+        return [parsed];
+      }
+    } catch {
+      if (trimmedVal.includes(',')) {
+        return trimmedVal.split(',').map(s => s.trim()).filter(Boolean);
+      }
+      return [trimmedVal];
+    }
+  }
+  return [];
+}
+
 // ─── Matching Algorithm ───────────────────────────────────────────────────────
 
 export interface Certification {
@@ -497,9 +521,9 @@ export function matchCertifications(
   const logMaxPostings = Math.log1p(maxPostings);
 
   const results: RecommendationResult[] = certifications.map(cert => {
-    const certSkills: string[] = JSON.parse(cert.skills || '[]');
-    const primarySkills: string[] = cert.primary_skills ? JSON.parse(cert.primary_skills) : [];
-    const secondarySkills: string[] = cert.secondary_skills ? JSON.parse(cert.secondary_skills) : [];
+    const certSkills: string[] = safeParseJSON(cert.skills || '[]');
+    const primarySkills: string[] = cert.primary_skills ? safeParseJSON(cert.primary_skills) : [];
+    const secondarySkills: string[] = cert.secondary_skills ? safeParseJSON(cert.secondary_skills) : [];
 
     const certSkillsLower = certSkills.map(s => s.toLowerCase());
     const primarySkillsLower = primarySkills.map(s => s.toLowerCase());
@@ -583,7 +607,7 @@ export function matchCertifications(
 
     // ── 3. Title Match ──────────────────────────────────────────────────────
     const targetTitles: string[] = cert.target_job_titles
-      ? JSON.parse(cert.target_job_titles)
+      ? safeParseJSON(cert.target_job_titles)
       : [];
     const { match: titleMatch, matchedTitle: matchedJobTitle } = matchJobTitle(jobTitle, targetTitles);
     const titleScore = titleMatch ? 1.0 : 0;
