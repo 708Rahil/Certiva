@@ -49,6 +49,7 @@ export default function RoadmapPage() {
   const [genericRoadmaps, setGenericRoadmaps] = useState<Record<string, Cert[]>>({});
   const [selectedIndustry, setSelectedIndustry] = useState<string>('cloud');
   const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   // Fetch roadmap data for a specific jobId or default
   const fetchRoadmapData = (jobId?: string) => {
@@ -189,6 +190,12 @@ export default function RoadmapPage() {
   const genericStage1 = genericCerts.filter(c => c.difficulty <= 2);
   const genericStage2 = genericCerts.filter(c => c.difficulty === 3);
   const genericStage3 = genericCerts.filter(c => c.difficulty >= 4);
+
+  const filteredGenericCerts = genericCerts.filter(cert => {
+    if (!searchQuery) return true;
+    const q = searchQuery.toLowerCase();
+    return cert.name.toLowerCase().includes(q) || cert.provider.toLowerCase().includes(q);
+  });
 
   // Calculate unique skills covered by the roadmap vs total job skills (for job-specific mode)
   const jobSkills: string[] = selectedJob?.skills || [];
@@ -605,9 +612,32 @@ export default function RoadmapPage() {
           <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 8 }}>
             {INDUSTRY_LABELS[selectedIndustry] || selectedIndustry} Path Guides
           </h2>
-          <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 24 }}>
+          <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 20 }}>
             Explore what credentials to take next to progressively build your expertise.
           </p>
+
+          {/* Search Input for Generic Path */}
+          <div style={{ marginBottom: 24, maxWidth: 480 }}>
+            <input
+              type="text"
+              placeholder="Search for a completed certification (e.g., Cloud Practitioner, CCNA, PL-300)..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{
+                width: '100%',
+                padding: '12px 16px',
+                borderRadius: 10,
+                border: '1px solid var(--border)',
+                background: 'var(--bg-secondary)',
+                color: 'var(--text-primary)',
+                fontSize: 14,
+                outline: 'none',
+                transition: 'border-color 0.2s',
+              }}
+              onFocus={(e) => e.target.style.borderColor = 'var(--accent)'}
+              onBlur={(e) => e.target.style.borderColor = 'var(--border)'}
+            />
+          </div>
 
           {genericCerts.length === 0 ? (
             <div style={{
@@ -620,13 +650,24 @@ export default function RoadmapPage() {
             }}>
               No certifications categorized in this domain.
             </div>
+          ) : filteredGenericCerts.length === 0 ? (
+            <div style={{
+              background: 'var(--bg-secondary)',
+              borderRadius: 12,
+              padding: 40,
+              textAlign: 'center',
+              color: 'var(--text-secondary)',
+              border: '1px solid var(--border)'
+            }}>
+              No matching certifications found for "{searchQuery}".
+            </div>
           ) : (
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
               gap: 16,
             }}>
-              {genericCerts.map((cert: Cert) => {
+              {filteredGenericCerts.map((cert: Cert) => {
                 const nextList = cert.next_certs || [];
                 if (nextList.length === 0) return null;
 
