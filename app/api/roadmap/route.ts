@@ -247,6 +247,48 @@ export async function GET(req: NextRequest) {
       return b.score - a.score;
     });
 
+    // 7. Group all database certifications by industry for the generic path viewer
+    const genericCerts = allCerts.map((cert: any) => {
+      const provider = extractProvider(cert.name);
+      const providerColor = getProviderColor(provider);
+      const userStatus = userCertMap.get(cert.id) || undefined;
+
+      const alternatives = findAlternativePaths(cert, allCerts, userCertMap).map((alt: any) => {
+        const altProvider = extractProvider(alt.name);
+        return {
+          id: alt.id,
+          name: alt.name,
+          difficulty: alt.difficulty,
+          provider: altProvider,
+          providerColor: getProviderColor(altProvider),
+          userStatus: userCertMap.get(alt.id) || undefined,
+        };
+      });
+
+      return {
+        id: cert.id,
+        name: cert.name,
+        difficulty: cert.difficulty,
+        industry: cert.industry || 'general',
+        prerequisites: cert.prerequisites,
+        next_certs: cert.next_certs,
+        provider,
+        providerColor,
+        userStatus,
+        alternatives,
+        description: cert.description,
+      };
+    });
+
+    const genericRoadmaps: Record<string, any[]> = {};
+    for (const cert of genericCerts) {
+      const ind = cert.industry || 'general';
+      if (!genericRoadmaps[ind]) {
+        genericRoadmaps[ind] = [];
+      }
+      genericRoadmaps[ind].push(cert);
+    }
+
     return NextResponse.json({
       jobs: jobs.map((j: any) => ({ id: j.id, title: j.title, company: j.company })),
       selectedJob: {
@@ -256,6 +298,7 @@ export async function GET(req: NextRequest) {
         skills: safeParseJSON(selectedJob.extracted_skills),
       },
       recommendations: enrichedCerts,
+      genericRoadmaps,
     });
   } catch (e) {
     console.error(e);
