@@ -66,3 +66,11 @@ CREATE TABLE IF NOT EXISTS user_certifications (
 CREATE INDEX IF NOT EXISTS idx_jobs_user_id ON jobs(user_id);
 CREATE INDEX IF NOT EXISTS idx_recommendations_job_id ON recommendations(job_id);
 CREATE INDEX IF NOT EXISTS idx_user_certifications_user_id ON user_certifications(user_id);
+
+CREATE TABLE IF NOT EXISTS profiles (
+  id TEXT PRIMARY KEY, -- maps to Clerk user_id
+  full_name TEXT,
+  goal_job TEXT,
+  current_skills TEXT, -- JSON-encoded string array
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);

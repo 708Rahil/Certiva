@@ -47,6 +47,36 @@ export async function POST(req: NextRequest) {
       throw new Error(certsError.message);
     }
 
+    // ── Fetch user profile & completed certs ────────────────────────────────
+    let userSkills: string[] = [];
+    let completedCertIds: number[] = [];
+
+    if (userId) {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('current_skills')
+        .eq('id', userId)
+        .maybeSingle();
+
+      if (profile && profile.current_skills) {
+        try {
+          userSkills = typeof profile.current_skills === 'string'
+            ? JSON.parse(profile.current_skills)
+            : profile.current_skills;
+        } catch {}
+      }
+
+      const { data: completed } = await supabase
+        .from('user_certifications')
+        .select('cert_id')
+        .eq('user_id', userId)
+        .eq('status', 'completed');
+
+      if (completed) {
+        completedCertIds = completed.map((c: any) => c.cert_id);
+      }
+    }
+
     // ── Match & rank ─────────────────────────────────────────────────────────
     const recommendations = matchCertifications(
       skills,
@@ -54,7 +84,9 @@ export async function POST(req: NextRequest) {
       title,
       description,
       (certs ?? []) as Certification[],
-      seniority
+      seniority,
+      userSkills,
+      completedCertIds
     );
 
     const topRecs = recommendations.slice(0, 8);

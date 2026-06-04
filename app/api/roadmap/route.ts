@@ -47,6 +47,36 @@ export async function POST(req: NextRequest) {
       throw new Error(certsError.message);
     }
 
+    // ── Fetch user profile & completed certs ────────────────────────────────
+    let userSkills: string[] = [];
+    let completedCertIds: number[] = [];
+
+    if (userId) {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('current_skills')
+        .eq('id', userId)
+        .maybeSingle();
+
+      if (profile && profile.current_skills) {
+        try {
+          userSkills = typeof profile.current_skills === 'string'
+            ? JSON.parse(profile.current_skills)
+            : profile.current_skills;
+        } catch {}
+      }
+
+      const { data: completed } = await supabase
+        .from('user_certifications')
+        .select('cert_id')
+        .eq('user_id', userId)
+        .eq('status', 'completed');
+
+      if (completed) {
+        completedCertIds = completed.map((c: any) => c.cert_id);
+      }
+    }
+
     // ── Match & rank ─────────────────────────────────────────────────────────
     const recommendations = matchCertifications(
       skills,
@@ -54,7 +84,9 @@ export async function POST(req: NextRequest) {
       title,
       description,
       (certs ?? []) as Certification[],
-      seniority
+      seniority,
+      userSkills,
+      completedCertIds
     );
 
     const topRecs = recommendations.slice(0, 8);
@@ -120,7 +152,7 @@ export async function GET(req: NextRequest) {
     // 1. Get the user's jobs to populate selector and find current job
     const { data: jobs, error: jobsError } = await supabase
       .from('jobs')
-      .select('id, title, company, extracted_skills, created_at')
+      .select('id, title, company, description, extracted_skills, created_at')
       .eq('user_id', userId)
       .order('created_at', { ascending: false });
 
@@ -139,53 +171,45 @@ export async function GET(req: NextRequest) {
 
     const selectedJob = jobs.find((j: any) => j.id === targetJobId) || jobs[0];
 
-    // 2. Get recommendations for this specific job
-    const { data: recs, error: recsError } = await supabase
-      .from('recommendations')
-      .select('cert_id, score, matched_skills, explanation')
-      .eq('job_id', selectedJob.id);
+    // 2. Fetch user profile skills
+    let userSkills: string[] = [];
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('current_skills')
+      .eq('id', userId)
+      .maybeSingle();
 
-    if (recsError) throw new Error(recsError.message);
-    if (!recs || recs.length === 0) {
-      return NextResponse.json({
-        jobs: jobs.map((j: any) => ({ id: j.id, title: j.title, company: j.company })),
-        selectedJob: {
-          id: selectedJob.id,
-          title: selectedJob.title,
-          company: selectedJob.company,
-          skills: safeParseJSON(selectedJob.extracted_skills),
-        },
-        recommendations: [],
-      });
+    if (profile && profile.current_skills) {
+      try {
+        userSkills = typeof profile.current_skills === 'string'
+          ? JSON.parse(profile.current_skills)
+          : profile.current_skills;
+      } catch {}
     }
 
-    const certIds = recs.map((r: any) => r.cert_id);
-
-    // 3. Fetch those certifications
-    const { data: certs, error: certsError } = await supabase
-      .from('certifications')
-      .select('*')
-      .in('id', certIds);
-
-    if (certsError) throw new Error(certsError.message);
-
-    // 4. Fetch user certification statuses
+    // 3. Fetch user certification statuses
     const { data: userCerts } = await supabase
       .from('user_certifications')
       .select('cert_id, status')
       .eq('user_id', userId);
 
     const userCertMap = new Map<number, string>();
+    const completedCertIds: number[] = [];
     for (const uc of userCerts ?? []) {
       userCertMap.set(uc.cert_id, uc.status);
+      if (uc.status === 'completed') {
+        completedCertIds.push(uc.cert_id);
+      }
     }
 
-    // 5. Fetch ALL certifications for alternative path matching
-    const { data: allCertsRaw } = await supabase
+    // 4. Fetch ALL certifications from database
+    const { data: certs, error: certsError } = await supabase
       .from('certifications')
       .select('*');
 
-    const allCerts = (allCertsRaw ?? []).map((c: any) => ({
+    if (certsError) throw new Error(certsError.message);
+
+    const allCerts = (certs ?? []).map((c: any) => ({
       ...c,
       prerequisites: safeParseJSON(c.prerequisites),
       next_certs: safeParseJSON(c.next_certs),
@@ -193,24 +217,33 @@ export async function GET(req: NextRequest) {
       secondary_skills: safeParseJSON(c.secondary_skills),
     }));
 
-    // 6. Build enriched cert objects
+    // 5. Run dynamic real-time matching
+    const { detectIndustry, inferSeniority } = await import('@/lib/matcher');
+    const jobSkills = safeParseJSON(selectedJob.extracted_skills);
+    const jobIndustry = detectIndustry(selectedJob.title, selectedJob.description || '');
+    const seniority = inferSeniority(selectedJob.title, selectedJob.description || '');
+
+    const recommendations = matchCertifications(
+      jobSkills,
+      jobIndustry,
+      selectedJob.title,
+      selectedJob.description || '',
+      allCerts as any[],
+      seniority,
+      userSkills,
+      completedCertIds
+    );
+
+    // 6. Build enriched cert objects with dynamic scores and explanations
     const { extractProvider, getProviderColor, findAlternativePaths } = await import('@/lib/roadmapMatcher');
 
-    const enrichedCerts = (certs ?? []).map((cert: any) => {
-      const rec = recs.find((r: any) => r.cert_id === cert.id);
+    const enrichedCerts = recommendations.map((recResult) => {
+      const cert = recResult.cert;
       const provider = extractProvider(cert.name);
       const providerColor = getProviderColor(provider);
       const userStatus = userCertMap.get(cert.id) || undefined;
 
-      const certParsed = {
-        ...cert,
-        prerequisites: safeParseJSON(cert.prerequisites),
-        next_certs: safeParseJSON(cert.next_certs),
-        primary_skills: safeParseJSON(cert.primary_skills),
-        secondary_skills: safeParseJSON(cert.secondary_skills),
-      };
-
-      const alternatives = findAlternativePaths(certParsed, allCerts, userCertMap).map((alt: any) => {
+      const alternatives = findAlternativePaths(cert, allCerts, userCertMap).map((alt: any) => {
         const altProvider = extractProvider(alt.name);
         return {
           id: alt.id,
@@ -227,15 +260,15 @@ export async function GET(req: NextRequest) {
         name: cert.name,
         difficulty: cert.difficulty,
         industry: cert.industry || 'general',
-        prerequisites: certParsed.prerequisites,
-        next_certs: certParsed.next_certs,
+        prerequisites: cert.prerequisites,
+        next_certs: cert.next_certs,
         provider,
         providerColor,
         userStatus,
         alternatives,
-        score: rec?.score || 0,
-        explanation: rec?.explanation || '',
-        matchedSkills: safeParseJSON(rec?.matched_skills),
+        score: recResult.score,
+        explanation: recResult.explanation,
+        matchedSkills: recResult.matchedSkills,
         official_url: cert.official_url,
       };
     });

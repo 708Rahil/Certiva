@@ -345,6 +345,8 @@ export interface Certification {
   job_postings_count?: number;
   worth_it_rating?: number;
   official_url?: string;
+  prerequisites?: string[] | null;
+  next_certs?: string[] | null;
 }
 
 export interface RecommendationResult {
@@ -480,7 +482,9 @@ export function matchCertifications(
   jobTitle: string,
   jobDescription: string,
   certifications: Certification[],
-  userLevel: UserLevel = 'entry'
+  userLevel: UserLevel = 'entry',
+  userSkills: string[] = [],
+  completedCertIds: number[] = []
 ): RecommendationResult[] {
   const difficultyTarget = userLevel === 'entry' ? 2 : userLevel === 'mid' ? 3 : 4;
   const textLower = (jobTitle + ' ' + jobDescription).toLowerCase();
@@ -501,17 +505,16 @@ export function matchCertifications(
     const primarySkillsLower = primarySkills.map(s => s.toLowerCase());
     const secondarySkillsLower = secondarySkills.map(s => s.toLowerCase());
     const jobSkillsLower = jobSkills.map(s => s.toLowerCase());
+    const userSkillsLower = userSkills.map(s => s.toLowerCase());
 
     // ── 1. Skill Coverage (PRIMARY SIGNAL) ──────────────────────────────────
     //
     // Two-directional coverage:
     //   A) Job Coverage: What % of the job's required skills does this cert address?
-    //      → This is the most important signal (how useful is this cert for the job?)
+    //      Split into:
+    //        1) Missing Skills (upskilling) - 70% of job coverage
+    //        2) Existing Skills (validation) - 30% of job coverage
     //   B) Cert Relevance: What % of this cert's skills are actually needed by the job?
-    //      → Penalizes certs that teach mostly irrelevant skills
-    //
-    // Skill matching uses strict word-boundary logic for short terms to avoid
-    // false positives (e.g. "AI" matching "email").
 
     // Build a set of all cert skills (deduplicated, weighted by tier)
     const certSkillWeights = new Map<string, number>();
@@ -534,9 +537,28 @@ export function matchCertifications(
         matchedJobSkillsList.push(jobSkills[i]); // preserve original case
       }
     }
-    // Capped denominator: covering 4 key skills is considered excellent coverage
+
+    // Categorize job skills based on user profile skills
+    const missingJobSkills = jobSkillsLower.filter(js => !userSkillsLower.includes(js));
+    const existingJobSkills = jobSkillsLower.filter(js => userSkillsLower.includes(js));
+
+    let missingScore = 0;
+    if (missingJobSkills.length > 0) {
+      const matchedMissing = missingJobSkills.filter(js => skillMatch(js, certSkillWeights));
+      missingScore = Math.min(1.0, matchedMissing.length / Math.min(4, missingJobSkills.length));
+    } else {
+      missingScore = 1.0; // No missing skills: complete coverage
+    }
+
+    let existingScore = 0;
+    if (existingJobSkills.length > 0) {
+      const matchedExisting = existingJobSkills.filter(js => skillMatch(js, certSkillWeights));
+      existingScore = Math.min(1.0, matchedExisting.length / Math.min(4, existingJobSkills.length));
+    }
+
+    // Capped overall job coverage score (70% gap-bridging, 30% validation)
     const jobCoverage = jobSkills.length > 0
-      ? Math.min(1.0, matchedJobSkillsList.length / Math.min(4, jobSkills.length))
+      ? (0.70 * missingScore + 0.30 * existingScore)
       : 0;
 
     // B) Cert Relevance: How much of the cert's weighted skill set is used by this job?
@@ -567,24 +589,16 @@ export function matchCertifications(
     const titleScore = titleMatch ? 1.0 : 0;
 
     // ── 4. Difficulty Fit ───────────────────────────────────────────────────
-    // Smooth curve: perfect match = 1.0, 1 level off = 0.75, 2+ = 0.4, 3+ = 0.15
     const diffDelta = Math.abs(cert.difficulty - difficultyTarget);
     const difficultyFit = Math.max(0, 1 - diffDelta * 0.25 - (diffDelta > 1 ? 0.1 : 0));
 
     // ── 5. Market Signals (small weight) ────────────────────────────────────
-    // Log-scaled job postings to prevent huge counts from dominating
     const logPostings = Math.log1p(cert.job_postings_count ?? 0);
     const marketDemand = logMaxPostings > 0 ? logPostings / logMaxPostings : 0;
-
-    // Worth-it rating normalized to 0-1 (ratings are 0-10 scale)
     const worthIt = Math.min(1, (cert.worth_it_rating ?? 0) / 10);
-
-    // Trending as a binary small boost
     const trendingBonus = cert.trending ? 1.0 : 0;
 
     // ── 6. Explicit Name Match (tiebreaker only) ────────────────────────────
-    // If the cert is explicitly mentioned in the job listing, give a small bump
-    // but don't let it dominate over actual skill coverage
     let explicitMatch = false;
     const aliases = CERT_ALIASES[cert.id] || [];
     for (const alias of aliases) {
@@ -596,17 +610,6 @@ export function matchCertifications(
     const explicitBonus = explicitMatch ? 1.0 : 0;
 
     // ── FINAL COMPOSITE SCORE ───────────────────────────────────────────────
-    //
-    // Rebalanced Weight distribution (total = 1.0):
-    //   Skill coverage:   0.50  ← primary hiring signal
-    //   Title match:      0.20  ← major role alignment
-    //   Industry match:   0.15  ← domain alignment
-    //   Difficulty fit:   0.05  ← level appropriateness
-    //   Explicit mention: 0.05  ← bonus for named cert
-    //   Market demand:    0.02  ← industry adoption
-    //   Worth-it rating:  0.02  ← community quality
-    //   Trending:         0.01  ← recency signal
-    //
     const rawScore =
       0.50 * skillScore +
       0.20 * titleScore +
@@ -617,8 +620,7 @@ export function matchCertifications(
       0.02 * worthIt +
       0.01 * trendingBonus;
 
-    // Scale and curve the final score to fit a friendly 0-100 range.
-    // If there is a basic match, map rawScore curve so good matches populate 70%-95%.
+    // Scale and curve the final score
     const scoreVal = rawScore > 0 ? (0.25 + 0.75 * Math.pow(rawScore, 0.8)) : 0;
     const score = Math.min(100, Math.round(scoreVal * 100));
 
@@ -636,6 +638,7 @@ export function matchCertifications(
       difficultyFit,
       marketDemand,
       score,
+      userSkills,
     });
 
     return {
@@ -707,6 +710,7 @@ interface ExplanationInput {
   difficultyFit: number;
   marketDemand: number;
   score: number;
+  userSkills?: string[];
 }
 
 function generateExplanation(input: ExplanationInput): string {
@@ -714,7 +718,7 @@ function generateExplanation(input: ExplanationInput): string {
     cert, matchedSkills, jobSkills, certSkills,
     jobCoverage, certRelevance, industryMatch,
     titleMatch, matchedJobTitle, explicitMatch,
-    difficultyFit, marketDemand, score,
+    difficultyFit, marketDemand, score, userSkills,
   } = input;
 
   const parts: string[] = [];
@@ -749,6 +753,16 @@ function generateExplanation(input: ExplanationInput): string {
     const remaining = matchedSkills.length - 4;
     const suffix = remaining > 0 ? ` +${remaining} more` : '';
     parts.push(`Key matches: ${display}${suffix}.`);
+  }
+
+  // Highlight validated skills if user profile matches
+  if (userSkills && userSkills.length > 0) {
+    const userSkillsLower = userSkills.map(s => s.toLowerCase());
+    const validatedSkills = matchedSkills.filter(s => userSkillsLower.includes(s.toLowerCase()));
+    if (validatedSkills.length > 0) {
+      const displayVal = validatedSkills.slice(0, 3).join(', ');
+      parts.push(`Formally validates your skills in: ${displayVal}.`);
+    }
   }
 
   // Industry alignment
