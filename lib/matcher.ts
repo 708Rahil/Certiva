@@ -533,8 +533,9 @@ export function matchCertifications(
         matchedJobSkillsList.push(jobSkills[i]); // preserve original case
       }
     }
+    // Capped denominator: covering 4 key skills is considered excellent coverage
     const jobCoverage = jobSkills.length > 0
-      ? matchedJobSkillsList.length / jobSkills.length
+      ? Math.min(1.0, matchedJobSkillsList.length / Math.min(4, jobSkills.length))
       : 0;
 
     // B) Cert Relevance: How much of the cert's weighted skill set is used by this job?
@@ -595,27 +596,30 @@ export function matchCertifications(
 
     // ── FINAL COMPOSITE SCORE ───────────────────────────────────────────────
     //
-    // Weight distribution (total = 1.0):
-    //   Skill coverage:   0.75  ← primary hiring signal
-    //   Industry match:   0.08  ← domain alignment
-    //   Title match:      0.07  ← role alignment
-    //   Difficulty fit:   0.04  ← level appropriateness
-    //   Market demand:    0.02  ← industry adoption signal
-    //   Worth-it rating:  0.01  ← community quality signal
+    // Rebalanced Weight distribution (total = 1.0):
+    //   Skill coverage:   0.50  ← primary hiring signal
+    //   Title match:      0.20  ← major role alignment
+    //   Industry match:   0.15  ← domain alignment
+    //   Difficulty fit:   0.05  ← level appropriateness
+    //   Explicit mention: 0.05  ← bonus for named cert
+    //   Market demand:    0.02  ← industry adoption
+    //   Worth-it rating:  0.02  ← community quality
     //   Trending:         0.01  ← recency signal
-    //   Explicit mention: 0.02  ← tiebreaker for certs named in job posting
     //
     const rawScore =
-      0.75 * skillScore +
-      0.08 * industryScore +
-      0.07 * titleScore +
-      0.04 * difficultyFit +
+      0.50 * skillScore +
+      0.20 * titleScore +
+      0.15 * industryScore +
+      0.05 * difficultyFit +
+      0.05 * explicitBonus +
       0.02 * marketDemand +
-      0.01 * worthIt +
-      0.01 * trendingBonus +
-      0.02 * explicitBonus;
+      0.02 * worthIt +
+      0.01 * trendingBonus;
 
-    const score = Math.min(100, Math.round(rawScore * 100));
+    // Scale and curve the final score to fit a friendly 0-100 range.
+    // If there is a basic match, map rawScore curve so good matches populate 70%-95%.
+    const scoreVal = rawScore > 0 ? (0.25 + 0.75 * Math.pow(rawScore, 0.8)) : 0;
+    const score = Math.min(100, Math.round(scoreVal * 100));
 
     const explanation = generateExplanation({
       cert,
