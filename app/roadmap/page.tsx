@@ -531,35 +531,35 @@ export default function RoadmapPage() {
                     background: 'linear-gradient(to bottom, var(--accent) 60%, var(--border))',
                   }} />
 
-                  {/* STAGE 1: Foundational */}
-                  {jobStage1.length > 0 && (
-                    <TimelineStage 
-                      title="Stage 1: Foundational Credentials" 
-                      subtitle="Build fundamental domain and tool familiarity" 
-                      stepNumber="1" 
-                      certs={jobStage1} 
-                    />
-                  )}
-
-                  {/* STAGE 2: Associate */}
-                  {jobStage2.length > 0 && (
-                    <TimelineStage 
-                      title="Stage 2: Associate Certifications" 
-                      subtitle="Demonstrate capability in standard frameworks and core tasks" 
-                      stepNumber="2" 
-                      certs={jobStage2} 
-                    />
-                  )}
-
-                  {/* STAGE 3: Professional/Specialist */}
-                  {jobStage3.length > 0 && (
-                    <TimelineStage 
-                      title="Stage 3: Advanced & Specialist Expertise" 
-                      subtitle="Establish advanced authority, architectural competence, or direct alignment" 
-                      stepNumber="3" 
-                      certs={jobStage3} 
-                    />
-                  )}
+                  {/* DYNAMIC STAGES TIMELINE */}
+                  {[
+                    {
+                      title: "Foundational Credentials",
+                      subtitle: "Build fundamental domain and tool familiarity",
+                      certs: jobStage1
+                    },
+                    {
+                      title: "Associate Certifications",
+                      subtitle: "Demonstrate capability in standard frameworks and core tasks",
+                      certs: jobStage2
+                    },
+                    {
+                      title: "Advanced & Specialist Expertise",
+                      subtitle: "Establish advanced authority, architectural competence, or direct alignment",
+                      certs: jobStage3
+                    }
+                  ]
+                    .filter(stage => stage.certs.length > 0)
+                    .map((stage, index) => (
+                      <TimelineStage 
+                        key={index}
+                        title={`Step ${index + 1}: ${stage.title}`} 
+                        subtitle={stage.subtitle} 
+                        stepNumber={(index + 1).toString()} 
+                        certs={stage.certs} 
+                      />
+                    ))
+                  }
                 </div>
               )}
 

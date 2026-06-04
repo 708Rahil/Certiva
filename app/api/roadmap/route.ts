@@ -240,8 +240,14 @@ export async function GET(req: NextRequest) {
       };
     });
 
-    // Sort by difficulty (ascending) to show a progressive path, and then by score (descending)
-    enrichedCerts.sort((a, b) => {
+    // 1. Sort all matches by score descending to get the absolute top matches
+    enrichedCerts.sort((a, b) => b.score - a.score);
+
+    // 2. Select only the top 4 matching certifications for a focused roadmap
+    const topFourCerts = enrichedCerts.slice(0, 4);
+
+    // 3. Sort the top 4 by difficulty (ascending) to show a progressive path
+    topFourCerts.sort((a, b) => {
       if (a.difficulty !== b.difficulty) {
         return a.difficulty - b.difficulty;
       }
@@ -299,7 +305,7 @@ export async function GET(req: NextRequest) {
         company: selectedJob.company,
         skills: safeParseJSON(selectedJob.extracted_skills),
       },
-      recommendations: enrichedCerts,
+      recommendations: topFourCerts,
       genericRoadmaps,
     });
   } catch (e) {
