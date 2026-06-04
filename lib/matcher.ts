@@ -74,6 +74,50 @@ const SKILL_KEYWORDS: Record<string, string[]> = {
   'leadership': ['leadership', 'team lead', 'managing teams', 'team management'],
   'stakeholder management': ['stakeholder', 'stakeholders', 'client management'],
 
+  // AI/ML
+  'TensorFlow': ['tensorflow', 'tf', 'tf2'],
+  'PyTorch': ['pytorch', 'torch'],
+  'Keras': ['keras'],
+  'deep learning': ['deep learning', 'deep neural networks', 'dnn'],
+  'neural networks': ['neural networks', 'neural network', 'ann', 'cnn', 'rnn'],
+  'NLP': ['nlp', 'natural language processing', 'text mining', 'text analytics'],
+  'computer vision': ['computer vision', 'image recognition', 'object detection', 'image classification'],
+  'generative AI': ['generative ai', 'gen ai', 'genai', 'llm', 'llms', 'large language model', 'chatgpt', 'gpt'],
+  'transformers': ['transformers', 'transformer models', 'bert', 'attention mechanism'],
+  'MLflow': ['mlflow', 'ml flow', 'experiment tracking'],
+  'Databricks': ['databricks', 'databricks lakehouse', 'lakehouse'],
+  'SageMaker': ['sagemaker', 'amazon sagemaker'],
+  'Hugging Face': ['hugging face', 'huggingface'],
+  'model deployment': ['model deployment', 'model serving', 'mlops', 'ml ops'],
+  'feature engineering': ['feature engineering', 'feature store', 'feature extraction'],
+  'Apache Spark': ['apache spark', 'spark', 'pyspark'],
+  'Kafka': ['kafka', 'apache kafka', 'kafka streams', 'event streaming'],
+  'dbt': ['dbt', 'data build tool'],
+  'Apache Airflow': ['apache airflow', 'airflow', 'dag', 'dags'],
+  'Delta Lake': ['delta lake', 'delta'],
+
+  // Business / CRM
+  'Salesforce': ['salesforce', 'sfdc', 'salesforce crm'],
+  'ServiceNow': ['servicenow', 'service now', 'snow'],
+  'Dynamics 365': ['dynamics 365', 'dynamics365', 'd365', 'microsoft dynamics'],
+  'ITIL': ['itil', 'itil 4', 'it service management', 'itsm'],
+  'Apex': ['apex', 'salesforce apex'],
+  'Lightning Web Components': ['lightning web components', 'lwc', 'lightning'],
+  'SOQL': ['soql', 'salesforce queries'],
+
+  // Networking / Infrastructure
+  'Cisco': ['cisco', 'ccna', 'ccnp', 'ccie'],
+  'SD-WAN': ['sd-wan', 'sdwan', 'software-defined wan'],
+  'BGP': ['bgp', 'border gateway protocol'],
+  'OSPF': ['ospf', 'open shortest path first'],
+  'VMware': ['vmware', 'vsphere', 'vcenter', 'esxi'],
+  'virtualization': ['virtualization', 'virtual machines', 'vm', 'vms', 'hypervisor'],
+  'Red Hat': ['red hat', 'redhat', 'rhel', 'rhcsa', 'rhce'],
+  'Ansible': ['ansible', 'ansible playbook', 'ansible tower', 'configuration management'],
+  'Podman': ['podman', 'buildah'],
+  'SELinux': ['selinux', 'security enhanced linux'],
+  'system administration': ['system administration', 'sysadmin', 'sys admin', 'systems administration'],
+
   // General Tech
   'Node.js': ['node.js', 'nodejs', 'express', 'backend javascript'],
   'Linux': ['linux', 'unix', 'bash', 'shell scripting', 'command line'],
@@ -88,7 +132,7 @@ function getDynamicSkillKeywords(): Record<string, string[]> {
     try {
       const certs = loadAllCertifications();
       const tempSkills = new Set<string>();
-      
+
       for (const cert of certs) {
         if (cert.skills) {
           cert.skills.forEach(s => tempSkills.add(s));
@@ -109,14 +153,14 @@ function getDynamicSkillKeywords(): Record<string, string[]> {
           });
         }
       }
-      
+
       const finalKeywords: Record<string, string[]> = {};
-      
+
       // Seed with default hardcoded mappings (retaining aliases/synonyms)
       for (const [skill, keywords] of Object.entries(SKILL_KEYWORDS)) {
         finalKeywords[skill] = keywords.map(kw => kw.toLowerCase());
       }
-      
+
       // Add all skills from certifications if not already represented
       for (const skill of tempSkills) {
         const skillLower = skill.toLowerCase();
@@ -125,7 +169,7 @@ function getDynamicSkillKeywords(): Record<string, string[]> {
           finalKeywords[skill] = [skillLower];
         }
       }
-      
+
       DYNAMIC_SKILL_KEYWORDS = finalKeywords;
     } catch (e) {
       console.error('Failed to load dynamic skill keywords, falling back to static keywords', e);
@@ -186,12 +230,19 @@ function testAlias(text: string, alias: string): boolean {
 // ─── Industry Detection ───────────────────────────────────────────────────────
 
 const INDUSTRY_KEYWORDS: Record<string, string[]> = {
-  cloud: ['cloud', 'aws', 'azure', 'gcp', 'devops', 'infrastructure', 'kubernetes', 'serverless', 'networking'],
-  data: ['data', 'analytics', 'sql', 'python', 'machine learning', 'business intelligence', 'tableau'],
+  cloud: ['cloud', 'aws', 'azure', 'gcp', 'devops', 'infrastructure', 'kubernetes', 'serverless', 'networking',
+    'cisco', 'ccna', 'ccnp', 'vmware', 'vsphere', 'virtualization', 'linux', 'red hat', 'rhel',
+    'ansible', 'system administrator', 'network engineer', 'sysadmin'],
+  data: ['data', 'analytics', 'sql', 'python', 'machine learning', 'business intelligence', 'tableau',
+    'tensorflow', 'pytorch', 'deep learning', 'neural network', 'nlp', 'computer vision', 'ai',
+    'artificial intelligence', 'generative ai', 'llm', 'databricks', 'spark', 'kafka', 'dbt',
+    'airflow', 'mlflow', 'sagemaker', 'data engineer', 'ml engineer', 'data science'],
   cybersecurity: ['security', 'cybersecurity', 'penetration', 'vulnerability', 'threat', 'siem', 'incident'],
   finance: ['finance', 'investment', 'portfolio', 'trading', 'financial', 'equity', 'markets', 'bloomberg'],
   marketing: ['marketing', 'seo', 'google ads', 'digital marketing', 'content', 'social media', 'campaigns'],
-  management: ['project management', 'agile', 'scrum', 'pmp', 'program manager'],
+  management: ['project management', 'agile', 'scrum', 'pmp', 'program manager',
+    'salesforce', 'servicenow', 'dynamics 365', 'crm', 'itil', 'itsm',
+    'scrum master', 'product owner', 'delivery manager'],
 };
 
 export function detectIndustry(title: string, description: string): string {
@@ -213,10 +264,10 @@ export type UserLevel = 'entry' | 'mid' | 'senior';
 export function inferSeniority(title: string, description: string): UserLevel {
   const titleLower = title.toLowerCase();
   const textLower = (title + ' ' + description).toLowerCase();
-  
+
   const seniorTitles = ['senior', 'sr', 'lead', 'principal', 'staff', 'director', 'manager', 'head', 'vp', 'chief', 'expert', 'architect'];
   const entryTitles = ['junior', 'jr', 'entry', 'associate', 'intern', 'trainee', 'graduate', 'assistant', 'l1', 'level 1'];
-  
+
   // Title-level matching takes precedence
   if (seniorTitles.some(t => new RegExp(`\\b${t}\\b`).test(titleLower))) {
     return 'senior';
@@ -224,21 +275,21 @@ export function inferSeniority(title: string, description: string): UserLevel {
   if (entryTitles.some(t => new RegExp(`\\b${t}\\b`).test(titleLower))) {
     return 'entry';
   }
-  
+
   // Description mentions score
   let seniorScore = 0;
   let entryScore = 0;
-  
+
   seniorTitles.forEach(t => {
     const matches = textLower.match(new RegExp(`\\b${t}\\b`, 'g'));
     if (matches) seniorScore += matches.length;
   });
-  
+
   entryTitles.forEach(t => {
     const matches = textLower.match(new RegExp(`\\b${t}\\b`, 'g'));
     if (matches) entryScore += matches.length;
   });
-  
+
   // Experience years check
   const expMatch = textLower.match(/(\d+)\+?\s*(?:years?|yrs?)\b/i);
   if (expMatch) {
@@ -249,13 +300,13 @@ export function inferSeniority(title: string, description: string): UserLevel {
       return 'entry';
     }
   }
-  
+
   if (seniorScore > entryScore) {
     return 'senior';
   } else if (entryScore > seniorScore) {
     return 'entry';
   }
-  
+
   return 'mid';
 }
 
@@ -369,7 +420,39 @@ const CERT_ALIASES: Record<number, string[]> = {
   26: ['az-500', 'az500', 'azure security engineer'],
   27: ['pl-300', 'pl300', 'power bi', 'power bi data analyst', 'microsoft power bi'],
   28: ['snowpro core', 'snowflake snowpro', 'snowpro'],
-  29: ['google cloud professional data engineer', 'gcp data engineer', 'professional data engineer']
+  29: ['google cloud professional data engineer', 'gcp data engineer', 'professional data engineer'],
+
+  // AI/ML certs (ai_ml.json)
+  75: ['tensorflow developer', 'tensorflow certificate', 'tensorflow certified'],
+  76: ['databricks ml', 'databricks machine learning associate', 'databricks ml associate'],
+  77: ['databricks data engineer', 'databricks data engineer associate'],
+  78: ['aws ai practitioner', 'aif-c01', 'aws certified ai practitioner'],
+  79: ['ibm ai engineering', 'ibm ai engineer'],
+  80: ['deep learning specialization', 'andrew ng deep learning', 'deeplearning.ai'],
+  81: ['hugging face nlp', 'hugging face certificate'],
+  82: ['confluent kafka', 'kafka developer', 'confluent certified developer'],
+  83: ['dbt certification', 'dbt analytics engineering', 'dbt certified'],
+  84: ['airflow certification', 'astronomer airflow', 'apache airflow certified'],
+
+  // Networking certs (networking.json)
+  85: ['ccna', 'cisco ccna', 'ccna 200-301'],
+  86: ['ccnp', 'cisco ccnp', 'ccnp enterprise', 'encor'],
+  87: ['devnet', 'cisco devnet', 'devnet associate'],
+  88: ['comptia a+', 'a+', 'comptia a plus'],
+  89: ['comptia linux+', 'linux+', 'comptia linux plus'],
+  90: ['rhcsa', 'red hat certified system administrator'],
+  91: ['rhce', 'red hat certified engineer'],
+  92: ['vcp-dcv', 'vmware vcp', 'vmware certified professional'],
+
+  // Business certs (business.json)
+  93: ['salesforce admin', 'salesforce administrator', 'salesforce certified administrator'],
+  94: ['salesforce developer', 'salesforce platform developer', 'platform developer i'],
+  95: ['salesforce app builder', 'salesforce platform app builder'],
+  96: ['servicenow csa', 'servicenow administrator', 'servicenow certified system administrator'],
+  97: ['mb-910', 'dynamics 365 fundamentals', 'dynamics crm fundamentals'],
+  98: ['itil foundation', 'itil 4 foundation', 'itil 4'],
+  99: ['pmi-acp', 'pmi agile', 'agile certified practitioner'],
+  100: ['csm', 'certified scrum master', 'scrum master certification'],
 };
 
 export function matchCertifications(
@@ -444,10 +527,10 @@ export function matchCertifications(
       const jsLower = js.toLowerCase();
       return certSkillsLower.some(cs => cs.includes(jsLower) || jsLower.includes(cs));
     });
-    
+
     const jobCoverageScore = jobSkills.length > 0 ? matchedJobSkills.length / jobSkills.length : 0;
     const certCoverageScore = totalPossibleWeight > 0 ? earnedWeight / totalPossibleWeight : 0;
-    
+
     // Balanced skill overlap: 70% job coverage, 30% certification coverage
     const skillOverlap = (0.7 * jobCoverageScore) + (0.3 * certCoverageScore);
 

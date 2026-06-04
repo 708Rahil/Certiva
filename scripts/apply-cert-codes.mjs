@@ -6,7 +6,7 @@ import fs from 'fs';
 import path from 'path';
 
 const CERTS_DIR = path.join(process.cwd(), 'certs');
-const INDUSTRIES = ['cloud', 'cybersecurity', 'data', 'finance', 'marketing', 'management'];
+const INDUSTRIES = ['cloud', 'cybersecurity', 'data', 'finance', 'marketing', 'management', 'ai_ml', 'business', 'networking'];
 
 /** Official / vendor exam codes where applicable */
 const NAME_BY_ID = {

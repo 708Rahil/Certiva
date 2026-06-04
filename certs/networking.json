@@ -1,0 +1,623 @@
+[
+    {
+        "id": 85,
+        "name": "Cisco CCNA (200-301)",
+        "provider": "Cisco",
+        "industry": "cloud",
+        "subdomain": "networking",
+        "difficulty": 3,
+        "description": "The most recognised entry-level networking certification covering IP connectivity, network access, security fundamentals, automation, and programmability.",
+        "official_url": "https://www.cisco.com/c/en/us/training-events/training-certifications/certifications/associate/ccna.html",
+        "cost": "$330",
+        "cost_source": "Cisco Official (May 2026)",
+        "duration_weeks": 12,
+        "study_hours": 120,
+        "exam_format": "Multiple choice, drag-and-drop & simulation, ~100 questions",
+        "exam_duration_minutes": 120,
+        "passing_score": 825,
+        "passing_score_note": "Scaled score out of 1000 \u2014 Cisco does not publish exact cutoff",
+        "pass_rate_percent": 50,
+        "pass_rate_source": "Community estimate",
+        "valid_years": 3,
+        "renewal_required": true,
+        "renewal_cost": "$330",
+        "renewal_cost_note": "Retake CCNA or pass any professional/expert level exam",
+        "salary_boost_low": 4000,
+        "salary_boost_high": 10000,
+        "salary_boost_source": "Glassdoor/PayScale (estimated)",
+        "worth_it_rating": 9.0,
+        "trending": true,
+        "data_confidence": "high",
+        "last_verified": "2026-05-20",
+        "skills": [
+            "networking",
+            "TCP/IP",
+            "routing",
+            "switching",
+            "VLANs",
+            "OSPF",
+            "network security",
+            "VPN",
+            "wireless",
+            "automation",
+            "Python",
+            "network programmability"
+        ],
+        "primary_skills": [
+            "networking",
+            "routing",
+            "switching"
+        ],
+        "secondary_skills": [
+            "TCP/IP",
+            "VLANs",
+            "OSPF",
+            "network security",
+            "VPN",
+            "automation"
+        ],
+        "prerequisites": [
+            "CompTIA Network+ or equivalent experience recommended"
+        ],
+        "recommended_prior_knowledge": [
+            "Basic networking",
+            "OSI model",
+            "IP addressing"
+        ],
+        "target_job_titles": [
+            "Network Engineer",
+            "Network Administrator",
+            "Systems Administrator",
+            "Infrastructure Engineer",
+            "IT Support Engineer",
+            "NOC Engineer"
+        ],
+        "job_postings_count": 45000,
+        "job_postings_source": "LinkedIn Jobs (2026)",
+        "next_certs": [
+            "Cisco CCNP Enterprise",
+            "Cisco DevNet Associate"
+        ]
+    },
+    {
+        "id": 86,
+        "name": "Cisco CCNP Enterprise",
+        "provider": "Cisco",
+        "industry": "cloud",
+        "subdomain": "networking",
+        "difficulty": 4,
+        "description": "Professional-level Cisco certification for advanced enterprise networking including SD-WAN, network design, automation, and troubleshooting.",
+        "official_url": "https://www.cisco.com/c/en/us/training-events/training-certifications/certifications/professional/ccnp-enterprise.html",
+        "cost": "$400",
+        "cost_source": "Cisco Official (May 2026) \u2014 core exam $400 + one concentration exam $300",
+        "duration_weeks": 20,
+        "study_hours": 200,
+        "exam_format": "Two exams: core (ENCOR) + one concentration exam",
+        "exam_duration_minutes": 120,
+        "passing_score": 825,
+        "passing_score_note": "Scaled score out of 1000",
+        "pass_rate_percent": 40,
+        "pass_rate_source": "Community estimate",
+        "valid_years": 3,
+        "renewal_required": true,
+        "renewal_cost": "$400",
+        "salary_boost_low": 8000,
+        "salary_boost_high": 20000,
+        "salary_boost_source": "Glassdoor/PayScale (estimated)",
+        "worth_it_rating": 8.9,
+        "trending": true,
+        "data_confidence": "high",
+        "last_verified": "2026-05-20",
+        "skills": [
+            "networking",
+            "SD-WAN",
+            "network architecture",
+            "OSPF",
+            "BGP",
+            "routing",
+            "switching",
+            "network automation",
+            "Python",
+            "QoS",
+            "network security",
+            "troubleshooting"
+        ],
+        "primary_skills": [
+            "networking",
+            "SD-WAN",
+            "network architecture"
+        ],
+        "secondary_skills": [
+            "BGP",
+            "OSPF",
+            "network automation",
+            "QoS",
+            "Python"
+        ],
+        "prerequisites": [
+            "Cisco CCNA or equivalent experience"
+        ],
+        "recommended_prior_knowledge": [
+            "CCNA-level networking",
+            "Routing protocols",
+            "Network design principles"
+        ],
+        "target_job_titles": [
+            "Senior Network Engineer",
+            "Network Architect",
+            "Infrastructure Engineer",
+            "Network Consultant",
+            "Solutions Engineer",
+            "NOC Team Lead"
+        ],
+        "job_postings_count": 28000,
+        "job_postings_source": "LinkedIn Jobs (2026)",
+        "next_certs": [
+            "Cisco CCIE Enterprise",
+            "Cisco DevNet Professional"
+        ]
+    },
+    {
+        "id": 87,
+        "name": "Cisco DevNet Associate",
+        "provider": "Cisco",
+        "industry": "cloud",
+        "subdomain": "networking",
+        "difficulty": 2,
+        "description": "Entry-level certification for network automation and software development, covering APIs, SDKs, Cisco platforms, and infrastructure as code.",
+        "official_url": "https://developer.cisco.com/certification/",
+        "cost": "$330",
+        "cost_source": "Cisco Official (May 2026)",
+        "duration_weeks": 10,
+        "study_hours": 80,
+        "exam_format": "Multiple choice & hands-on labs, ~100 questions",
+        "exam_duration_minutes": 120,
+        "passing_score": 825,
+        "passing_score_note": "Scaled score out of 1000",
+        "pass_rate_percent": 58,
+        "pass_rate_source": "Community estimate",
+        "valid_years": 3,
+        "renewal_required": true,
+        "renewal_cost": "$330",
+        "salary_boost_low": 5000,
+        "salary_boost_high": 14000,
+        "salary_boost_source": "Glassdoor/PayScale (estimated)",
+        "worth_it_rating": 8.6,
+        "trending": true,
+        "data_confidence": "high",
+        "last_verified": "2026-05-20",
+        "skills": [
+            "network automation",
+            "Python",
+            "REST APIs",
+            "DevOps",
+            "CI/CD",
+            "infrastructure as code",
+            "networking",
+            "Ansible",
+            "Terraform",
+            "Cisco platforms",
+            "JSON",
+            "YANG"
+        ],
+        "primary_skills": [
+            "network automation",
+            "Python",
+            "REST APIs"
+        ],
+        "secondary_skills": [
+            "DevOps",
+            "CI/CD",
+            "Ansible",
+            "Terraform",
+            "infrastructure as code"
+        ],
+        "prerequisites": [
+            "Basic networking and programming knowledge"
+        ],
+        "recommended_prior_knowledge": [
+            "Python basics",
+            "Networking fundamentals",
+            "REST API concepts"
+        ],
+        "target_job_titles": [
+            "Network Automation Engineer",
+            "DevOps Engineer",
+            "NetDevOps Engineer",
+            "Network Developer",
+            "Platform Engineer",
+            "Cloud Engineer"
+        ],
+        "job_postings_count": 22000,
+        "job_postings_source": "LinkedIn Jobs (2026)",
+        "next_certs": [
+            "Cisco CCNP Enterprise",
+            "HashiCorp Terraform Associate"
+        ]
+    },
+    {
+        "id": 88,
+        "name": "CompTIA A+",
+        "provider": "CompTIA",
+        "industry": "cloud",
+        "subdomain": "networking",
+        "difficulty": 1,
+        "description": "Industry-standard entry-level IT certification covering hardware, operating systems, networking, troubleshooting, and security fundamentals.",
+        "official_url": "https://www.comptia.org/certifications/a",
+        "cost": "$246",
+        "cost_source": "CompTIA Official \u2014 two exams at $246 each (Core 1 + Core 2) (May 2026)",
+        "duration_weeks": 8,
+        "study_hours": 70,
+        "exam_format": "Multiple choice & performance-based, max 90 questions per exam (2 exams required)",
+        "exam_duration_minutes": 90,
+        "passing_score": 675,
+        "passing_score_note": "Core 1: 675/900, Core 2: 700/900",
+        "pass_rate_percent": 60,
+        "pass_rate_source": "Community estimate",
+        "valid_years": 3,
+        "renewal_required": true,
+        "renewal_cost": "$246",
+        "renewal_cost_note": "Earn 20 CEUs or retake exam",
+        "salary_boost_low": 2000,
+        "salary_boost_high": 5000,
+        "salary_boost_source": "Glassdoor/PayScale (estimated)",
+        "worth_it_rating": 8.0,
+        "trending": false,
+        "data_confidence": "high",
+        "last_verified": "2026-05-20",
+        "skills": [
+            "hardware",
+            "operating systems",
+            "networking",
+            "troubleshooting",
+            "security",
+            "cloud computing",
+            "virtualization",
+            "mobile devices",
+            "Windows",
+            "Linux",
+            "macOS"
+        ],
+        "primary_skills": [
+            "hardware",
+            "operating systems",
+            "troubleshooting"
+        ],
+        "secondary_skills": [
+            "networking",
+            "security",
+            "virtualization",
+            "cloud computing",
+            "Linux"
+        ],
+        "prerequisites": [],
+        "recommended_prior_knowledge": [
+            "Basic computer literacy"
+        ],
+        "target_job_titles": [
+            "IT Support Specialist",
+            "Help Desk Technician",
+            "Desktop Support",
+            "Systems Administrator",
+            "IT Technician",
+            "Field Service Technician"
+        ],
+        "job_postings_count": 55000,
+        "job_postings_source": "LinkedIn Jobs (2026)",
+        "next_certs": [
+            "CompTIA Network+",
+            "CompTIA Security+"
+        ]
+    },
+    {
+        "id": 89,
+        "name": "CompTIA Linux+",
+        "provider": "CompTIA",
+        "industry": "cloud",
+        "subdomain": "networking",
+        "difficulty": 2,
+        "description": "Validates Linux administration skills including scripting, system management, security, and troubleshooting across multiple distributions.",
+        "official_url": "https://www.comptia.org/certifications/linux",
+        "cost": "$338",
+        "cost_source": "CompTIA Official (May 2026)",
+        "duration_weeks": 8,
+        "study_hours": 70,
+        "exam_format": "Multiple choice & performance-based, max 90 questions",
+        "exam_duration_minutes": 90,
+        "passing_score": 720,
+        "passing_score_note": "Scaled score out of 900",
+        "pass_rate_percent": 55,
+        "pass_rate_source": "Community estimate",
+        "valid_years": 3,
+        "renewal_required": true,
+        "renewal_cost": "$338",
+        "salary_boost_low": 3000,
+        "salary_boost_high": 8000,
+        "salary_boost_source": "Glassdoor/PayScale (estimated)",
+        "worth_it_rating": 8.2,
+        "trending": false,
+        "data_confidence": "high",
+        "last_verified": "2026-05-20",
+        "skills": [
+            "Linux",
+            "bash scripting",
+            "shell scripting",
+            "system administration",
+            "networking",
+            "security",
+            "storage",
+            "virtualization",
+            "containers",
+            "automation",
+            "troubleshooting"
+        ],
+        "primary_skills": [
+            "Linux",
+            "bash scripting",
+            "system administration"
+        ],
+        "secondary_skills": [
+            "shell scripting",
+            "networking",
+            "security",
+            "containers",
+            "automation"
+        ],
+        "prerequisites": [
+            "CompTIA A+ or equivalent experience"
+        ],
+        "recommended_prior_knowledge": [
+            "Basic Linux commands",
+            "IT fundamentals"
+        ],
+        "target_job_titles": [
+            "Linux Administrator",
+            "Systems Administrator",
+            "DevOps Engineer",
+            "Cloud Engineer",
+            "Site Reliability Engineer",
+            "Infrastructure Engineer"
+        ],
+        "job_postings_count": 30000,
+        "job_postings_source": "LinkedIn Jobs (2026)",
+        "next_certs": [
+            "Red Hat RHCSA",
+            "CompTIA Security+",
+            "Certified Kubernetes Administrator"
+        ]
+    },
+    {
+        "id": 90,
+        "name": "Red Hat Certified System Administrator (RHCSA)",
+        "provider": "Red Hat",
+        "industry": "cloud",
+        "subdomain": "networking",
+        "difficulty": 3,
+        "description": "Performance-based Red Hat certification validating core Linux system administration skills including storage, networking, security, and automation.",
+        "official_url": "https://www.redhat.com/en/services/certification/rhcsa",
+        "cost": "$400",
+        "cost_source": "Red Hat Official (May 2026)",
+        "duration_weeks": 8,
+        "study_hours": 80,
+        "exam_format": "Hands-on performance-based exam \u2014 no multiple choice, all practical tasks on a live system",
+        "exam_duration_minutes": 150,
+        "passing_score": 70,
+        "passing_score_note": "210 out of 300 points required (70%)",
+        "pass_rate_percent": 55,
+        "pass_rate_source": "Community estimate",
+        "valid_years": 3,
+        "renewal_required": true,
+        "renewal_cost": "$400",
+        "salary_boost_low": 5000,
+        "salary_boost_high": 12000,
+        "salary_boost_source": "Glassdoor/PayScale (estimated)",
+        "worth_it_rating": 9.0,
+        "trending": true,
+        "data_confidence": "high",
+        "last_verified": "2026-05-20",
+        "skills": [
+            "Linux",
+            "Red Hat",
+            "RHEL",
+            "system administration",
+            "bash scripting",
+            "storage",
+            "networking",
+            "security",
+            "SELinux",
+            "systemd",
+            "containers",
+            "Podman"
+        ],
+        "primary_skills": [
+            "Linux",
+            "Red Hat",
+            "system administration"
+        ],
+        "secondary_skills": [
+            "bash scripting",
+            "storage",
+            "SELinux",
+            "containers",
+            "Podman",
+            "systemd"
+        ],
+        "prerequisites": [
+            "Linux fundamentals",
+            "CompTIA Linux+ or equivalent experience"
+        ],
+        "recommended_prior_knowledge": [
+            "Linux command line",
+            "Networking basics",
+            "Storage concepts"
+        ],
+        "target_job_titles": [
+            "Linux Administrator",
+            "Systems Administrator",
+            "DevOps Engineer",
+            "Cloud Engineer",
+            "Infrastructure Engineer",
+            "Platform Engineer"
+        ],
+        "job_postings_count": 25000,
+        "job_postings_source": "LinkedIn Jobs (2026)",
+        "next_certs": [
+            "Red Hat Certified Engineer (RHCE)",
+            "Certified Kubernetes Administrator"
+        ]
+    },
+    {
+        "id": 91,
+        "name": "Red Hat Certified Engineer (RHCE)",
+        "provider": "Red Hat",
+        "industry": "cloud",
+        "subdomain": "networking",
+        "difficulty": 4,
+        "description": "Advanced Red Hat certification focused on automation using Ansible, covering playbooks, roles, inventory management, and enterprise automation at scale.",
+        "official_url": "https://www.redhat.com/en/services/certification/rhce",
+        "cost": "$400",
+        "cost_source": "Red Hat Official (May 2026)",
+        "duration_weeks": 12,
+        "study_hours": 100,
+        "exam_format": "Hands-on performance-based exam \u2014 all practical Ansible automation tasks",
+        "exam_duration_minutes": 240,
+        "passing_score": 70,
+        "passing_score_note": "210 out of 300 points required (70%)",
+        "pass_rate_percent": 45,
+        "pass_rate_source": "Community estimate",
+        "valid_years": 3,
+        "renewal_required": true,
+        "renewal_cost": "$400",
+        "salary_boost_low": 8000,
+        "salary_boost_high": 18000,
+        "salary_boost_source": "Glassdoor/PayScale (estimated)",
+        "worth_it_rating": 9.1,
+        "trending": true,
+        "data_confidence": "high",
+        "last_verified": "2026-05-20",
+        "skills": [
+            "Ansible",
+            "automation",
+            "Linux",
+            "Red Hat",
+            "playbooks",
+            "infrastructure as code",
+            "DevOps",
+            "Python",
+            "system administration",
+            "CI/CD",
+            "configuration management"
+        ],
+        "primary_skills": [
+            "Ansible",
+            "automation",
+            "infrastructure as code"
+        ],
+        "secondary_skills": [
+            "Linux",
+            "Red Hat",
+            "playbooks",
+            "configuration management",
+            "CI/CD"
+        ],
+        "prerequisites": [
+            "Red Hat RHCSA (required)"
+        ],
+        "recommended_prior_knowledge": [
+            "RHCSA-level Linux",
+            "Ansible basics",
+            "Python basics"
+        ],
+        "target_job_titles": [
+            "Linux Engineer",
+            "Automation Engineer",
+            "DevOps Engineer",
+            "Platform Engineer",
+            "Infrastructure Engineer",
+            "SRE"
+        ],
+        "job_postings_count": 18000,
+        "job_postings_source": "LinkedIn Jobs (2026)",
+        "next_certs": [
+            "Red Hat OpenShift Administrator",
+            "Certified Kubernetes Administrator"
+        ]
+    },
+    {
+        "id": 92,
+        "name": "VMware VCP-DCV (Data Center Virtualization)",
+        "provider": "VMware / Broadcom",
+        "industry": "cloud",
+        "subdomain": "networking",
+        "difficulty": 3,
+        "description": "Validates expertise in VMware vSphere virtualization, covering deployment, configuration, management, and troubleshooting of virtual infrastructure.",
+        "official_url": "https://www.vmware.com/learning/certification/vcp-dcv.html",
+        "cost": "$250",
+        "cost_source": "VMware / Broadcom Official (May 2026)",
+        "duration_weeks": 10,
+        "study_hours": 80,
+        "exam_format": "Multiple choice, 70 questions",
+        "exam_duration_minutes": 130,
+        "passing_score": 300,
+        "passing_score_note": "300 out of 500 points (60%)",
+        "pass_rate_percent": 58,
+        "pass_rate_source": "Community estimate",
+        "valid_years": 2,
+        "renewal_required": true,
+        "renewal_cost": "$250",
+        "salary_boost_low": 5000,
+        "salary_boost_high": 12000,
+        "salary_boost_source": "Glassdoor/PayScale (estimated)",
+        "worth_it_rating": 8.3,
+        "trending": false,
+        "data_confidence": "high",
+        "last_verified": "2026-05-20",
+        "skills": [
+            "VMware",
+            "vSphere",
+            "virtualization",
+            "vCenter",
+            "ESXi",
+            "networking",
+            "storage",
+            "infrastructure",
+            "high availability",
+            "disaster recovery",
+            "cloud computing"
+        ],
+        "primary_skills": [
+            "VMware",
+            "vSphere",
+            "virtualization"
+        ],
+        "secondary_skills": [
+            "vCenter",
+            "ESXi",
+            "storage",
+            "high availability",
+            "disaster recovery"
+        ],
+        "prerequisites": [
+            "VMware vSphere training course required"
+        ],
+        "recommended_prior_knowledge": [
+            "Networking fundamentals",
+            "Storage concepts",
+            "Server administration"
+        ],
+        "target_job_titles": [
+            "VMware Administrator",
+            "Systems Administrator",
+            "Infrastructure Engineer",
+            "Data Center Engineer",
+            "Virtualization Engineer",
+            "Cloud Engineer"
+        ],
+        "job_postings_count": 20000,
+        "job_postings_source": "LinkedIn Jobs (2026)",
+        "next_certs": [
+            "VMware VCAP",
+            "Certified Kubernetes Administrator"
+        ]
+    }
+]

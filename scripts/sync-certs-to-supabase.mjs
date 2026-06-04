@@ -33,7 +33,7 @@ if (!url || !key) {
 }
 
 const supabase = createClient(url, key);
-const INDUSTRIES = ['cloud', 'cybersecurity', 'data', 'finance', 'marketing', 'management'];
+const INDUSTRIES = ['cloud', 'cybersecurity', 'data', 'finance', 'marketing', 'management', 'ai_ml', 'business', 'networking'];
 
 function toRow(cert) {
   return {

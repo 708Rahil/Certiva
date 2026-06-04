@@ -43,7 +43,7 @@ export interface EnrichedCertification {
   data_confidence: string;
 }
 
-const INDUSTRIES = ['cloud', 'cybersecurity', 'data', 'finance', 'marketing', 'management'];
+const INDUSTRIES = ['cloud', 'cybersecurity', 'data', 'finance', 'marketing', 'management', 'ai_ml', 'business', 'networking'];
 
 export function loadAllCertifications(): EnrichedCertification[] {
   const allCerts: EnrichedCertification[] = [];

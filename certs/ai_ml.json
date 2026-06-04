@@ -1,0 +1,784 @@
+[
+    {
+        "id": 75,
+        "name": "TensorFlow Developer Certificate",
+        "provider": "Google",
+        "industry": "data",
+        "subdomain": "science",
+        "difficulty": 3,
+        "description": "Validates proficiency in using TensorFlow to build and train neural networks for computer vision, NLP, and time series problems.",
+        "official_url": "https://www.tensorflow.org/certificate",
+        "cost": "$100",
+        "cost_source": "Google TensorFlow Certificate Program (May 2026)",
+        "duration_weeks": 12,
+        "study_hours": 100,
+        "exam_format": "Practical coding exam \u2014 build and train models in TensorFlow within a 5-hour window",
+        "exam_duration_minutes": 300,
+        "passing_score": 0,
+        "passing_score_note": "Models are evaluated on accuracy thresholds across 5 categories \u2014 no fixed score published",
+        "pass_rate_percent": 55,
+        "pass_rate_source": "Community estimate",
+        "valid_years": 3,
+        "renewal_required": true,
+        "renewal_cost": "$100",
+        "salary_boost_low": 8000,
+        "salary_boost_high": 20000,
+        "salary_boost_source": "Glassdoor/PayScale (estimated)",
+        "worth_it_rating": 8.7,
+        "trending": true,
+        "data_confidence": "high",
+        "last_verified": "2026-05-20",
+        "skills": [
+            "TensorFlow",
+            "deep learning",
+            "neural networks",
+            "computer vision",
+            "NLP",
+            "Python",
+            "machine learning",
+            "Keras",
+            "model training",
+            "image classification",
+            "time series"
+        ],
+        "primary_skills": [
+            "TensorFlow",
+            "deep learning",
+            "neural networks"
+        ],
+        "secondary_skills": [
+            "computer vision",
+            "NLP",
+            "Keras",
+            "Python",
+            "model training"
+        ],
+        "prerequisites": [
+            "Python proficiency",
+            "Basic ML concepts"
+        ],
+        "recommended_prior_knowledge": [
+            "Python",
+            "Linear algebra",
+            "Machine learning fundamentals"
+        ],
+        "target_job_titles": [
+            "ML Engineer",
+            "Deep Learning Engineer",
+            "AI Engineer",
+            "Computer Vision Engineer",
+            "NLP Engineer",
+            "Research Engineer"
+        ],
+        "job_postings_count": 35000,
+        "job_postings_source": "LinkedIn Jobs (2026)",
+        "next_certs": [
+            "Google Cloud Professional ML Engineer",
+            "Azure AI Engineer Associate (AI-102)"
+        ]
+    },
+    {
+        "id": 76,
+        "name": "Databricks Certified Machine Learning Associate",
+        "provider": "Databricks",
+        "industry": "data",
+        "subdomain": "science",
+        "difficulty": 3,
+        "description": "Validates ability to use Databricks for ML workflows including feature engineering, model training, MLflow tracking, and deployment on the Databricks Lakehouse Platform.",
+        "official_url": "https://www.databricks.com/learn/certification/machine-learning-associate",
+        "cost": "$200",
+        "cost_source": "Databricks Official (May 2026)",
+        "duration_weeks": 8,
+        "study_hours": 60,
+        "exam_format": "Multiple choice, 45 questions",
+        "exam_duration_minutes": 90,
+        "passing_score": 70,
+        "passing_score_note": "Approximately 70% required",
+        "pass_rate_percent": 62,
+        "pass_rate_source": "Community estimate",
+        "valid_years": 2,
+        "renewal_required": true,
+        "renewal_cost": "$200",
+        "salary_boost_low": 10000,
+        "salary_boost_high": 22000,
+        "salary_boost_source": "Glassdoor/PayScale (estimated)",
+        "worth_it_rating": 8.9,
+        "trending": true,
+        "data_confidence": "high",
+        "last_verified": "2026-05-20",
+        "skills": [
+            "Databricks",
+            "MLflow",
+            "Apache Spark",
+            "machine learning",
+            "Python",
+            "feature engineering",
+            "model deployment",
+            "data pipelines",
+            "Delta Lake",
+            "AutoML"
+        ],
+        "primary_skills": [
+            "Databricks",
+            "MLflow",
+            "machine learning"
+        ],
+        "secondary_skills": [
+            "Apache Spark",
+            "feature engineering",
+            "model deployment",
+            "Delta Lake",
+            "AutoML"
+        ],
+        "prerequisites": [
+            "Python and ML fundamentals",
+            "Basic Spark knowledge recommended"
+        ],
+        "recommended_prior_knowledge": [
+            "Python",
+            "Machine learning concepts",
+            "SQL"
+        ],
+        "target_job_titles": [
+            "ML Engineer",
+            "Data Scientist",
+            "Analytics Engineer",
+            "AI Engineer",
+            "ML Platform Engineer",
+            "Data Engineer"
+        ],
+        "job_postings_count": 28000,
+        "job_postings_source": "LinkedIn Jobs (2026)",
+        "next_certs": [
+            "Databricks Certified Data Engineer Associate",
+            "AWS Machine Learning Engineer Associate"
+        ]
+    },
+    {
+        "id": 77,
+        "name": "Databricks Certified Data Engineer Associate",
+        "provider": "Databricks",
+        "industry": "data",
+        "subdomain": "engineering",
+        "difficulty": 3,
+        "description": "Validates ability to build and manage data pipelines using Databricks, Delta Lake, Apache Spark, and the Lakehouse Platform.",
+        "official_url": "https://www.databricks.com/learn/certification/data-engineer-associate",
+        "cost": "$200",
+        "cost_source": "Databricks Official (May 2026)",
+        "duration_weeks": 8,
+        "study_hours": 60,
+        "exam_format": "Multiple choice, 45 questions",
+        "exam_duration_minutes": 90,
+        "passing_score": 70,
+        "passing_score_note": "Approximately 70% required",
+        "pass_rate_percent": 65,
+        "pass_rate_source": "Community estimate",
+        "valid_years": 2,
+        "renewal_required": true,
+        "renewal_cost": "$200",
+        "salary_boost_low": 8000,
+        "salary_boost_high": 20000,
+        "salary_boost_source": "Glassdoor/PayScale (estimated)",
+        "worth_it_rating": 9.0,
+        "trending": true,
+        "data_confidence": "high",
+        "last_verified": "2026-05-20",
+        "skills": [
+            "Databricks",
+            "Delta Lake",
+            "Apache Spark",
+            "data pipelines",
+            "ETL",
+            "Python",
+            "SQL",
+            "data engineering",
+            "streaming",
+            "data warehousing",
+            "Unity Catalog"
+        ],
+        "primary_skills": [
+            "Databricks",
+            "Delta Lake",
+            "data pipelines"
+        ],
+        "secondary_skills": [
+            "Apache Spark",
+            "ETL",
+            "SQL",
+            "streaming",
+            "Unity Catalog"
+        ],
+        "prerequisites": [
+            "SQL proficiency",
+            "Python basics",
+            "Data engineering fundamentals"
+        ],
+        "recommended_prior_knowledge": [
+            "SQL",
+            "Python",
+            "Data pipeline concepts"
+        ],
+        "target_job_titles": [
+            "Data Engineer",
+            "Analytics Engineer",
+            "Data Architect",
+            "Platform Engineer",
+            "ML Engineer",
+            "Cloud Data Engineer"
+        ],
+        "job_postings_count": 32000,
+        "job_postings_source": "LinkedIn Jobs (2026)",
+        "next_certs": [
+            "Databricks Certified Machine Learning Associate",
+            "Snowflake SnowPro Core",
+            "Azure Data Engineer Associate (DP-203)"
+        ]
+    },
+    {
+        "id": 78,
+        "name": "AWS Certified AI Practitioner (AIF-C01)",
+        "provider": "Amazon Web Services",
+        "industry": "data",
+        "subdomain": "science",
+        "difficulty": 1,
+        "description": "Entry-level AWS certification covering AI and ML concepts, AWS AI services, generative AI, and responsible AI practices on AWS.",
+        "official_url": "https://aws.amazon.com/certification/certified-ai-practitioner/",
+        "cost": "$100",
+        "cost_source": "AWS Official (May 2026) \u2014 Foundational tier",
+        "duration_weeks": 4,
+        "study_hours": 30,
+        "exam_format": "Multiple choice & multiple response, 65 questions",
+        "exam_duration_minutes": 90,
+        "passing_score": 700,
+        "passing_score_note": "Scaled score out of 1000",
+        "pass_rate_percent": 72,
+        "pass_rate_source": "Community estimate",
+        "valid_years": 3,
+        "renewal_required": true,
+        "renewal_cost": "$100",
+        "salary_boost_low": 3000,
+        "salary_boost_high": 8000,
+        "salary_boost_source": "Glassdoor/PayScale (estimated)",
+        "worth_it_rating": 8.2,
+        "trending": true,
+        "data_confidence": "high",
+        "last_verified": "2026-05-20",
+        "skills": [
+            "AWS",
+            "AI",
+            "machine learning",
+            "generative AI",
+            "Amazon Bedrock",
+            "SageMaker",
+            "responsible AI",
+            "AI services",
+            "natural language processing",
+            "computer vision"
+        ],
+        "primary_skills": [
+            "AWS",
+            "AI",
+            "generative AI"
+        ],
+        "secondary_skills": [
+            "Amazon Bedrock",
+            "SageMaker",
+            "responsible AI",
+            "NLP",
+            "computer vision"
+        ],
+        "prerequisites": [],
+        "recommended_prior_knowledge": [
+            "Basic AWS knowledge",
+            "AI/ML concepts"
+        ],
+        "target_job_titles": [
+            "AI Practitioner",
+            "Cloud Engineer",
+            "Solutions Architect",
+            "Product Manager",
+            "Business Analyst",
+            "Junior ML Engineer"
+        ],
+        "job_postings_count": 30000,
+        "job_postings_source": "LinkedIn Jobs (2026)",
+        "next_certs": [
+            "AWS Machine Learning Engineer Associate",
+            "AWS Solutions Architect Associate"
+        ]
+    },
+    {
+        "id": 79,
+        "name": "IBM AI Engineering Professional Certificate",
+        "provider": "IBM / Coursera",
+        "industry": "data",
+        "subdomain": "science",
+        "difficulty": 3,
+        "description": "Comprehensive AI engineering curriculum covering deep learning, neural networks, computer vision, NLP, and deployment using PyTorch, Keras, and TensorFlow.",
+        "official_url": "https://www.coursera.org/professional-certificates/ai-engineer",
+        "cost": "$49/month",
+        "cost_source": "Coursera Official (May 2026)",
+        "duration_weeks": 20,
+        "study_hours": 80,
+        "exam_format": "Coursework, quizzes & capstone project \u2014 no standalone timed exam",
+        "exam_duration_minutes": 0,
+        "passing_score": 80,
+        "passing_score_note": "80% required on graded assessments",
+        "pass_rate_percent": 65,
+        "pass_rate_source": "Community estimate",
+        "valid_years": 3,
+        "renewal_required": false,
+        "renewal_cost": "$0",
+        "salary_boost_low": 8000,
+        "salary_boost_high": 20000,
+        "salary_boost_source": "Glassdoor/PayScale (estimated)",
+        "worth_it_rating": 8.6,
+        "trending": true,
+        "data_confidence": "high",
+        "last_verified": "2026-05-20",
+        "skills": [
+            "deep learning",
+            "neural networks",
+            "PyTorch",
+            "Keras",
+            "TensorFlow",
+            "computer vision",
+            "NLP",
+            "Python",
+            "machine learning",
+            "model deployment",
+            "AI",
+            "transformers"
+        ],
+        "primary_skills": [
+            "deep learning",
+            "PyTorch",
+            "neural networks"
+        ],
+        "secondary_skills": [
+            "Keras",
+            "TensorFlow",
+            "computer vision",
+            "NLP",
+            "transformers",
+            "model deployment"
+        ],
+        "prerequisites": [
+            "Python proficiency",
+            "Basic ML knowledge"
+        ],
+        "recommended_prior_knowledge": [
+            "Python",
+            "Linear algebra",
+            "Statistics"
+        ],
+        "target_job_titles": [
+            "AI Engineer",
+            "ML Engineer",
+            "Deep Learning Engineer",
+            "NLP Engineer",
+            "Computer Vision Engineer",
+            "Research Scientist"
+        ],
+        "job_postings_count": 32000,
+        "job_postings_source": "LinkedIn Jobs (2026)",
+        "next_certs": [
+            "TensorFlow Developer Certificate",
+            "Azure AI Engineer Associate (AI-102)"
+        ]
+    },
+    {
+        "id": 80,
+        "name": "Deep Learning Specialization (Coursera/DeepLearning.AI)",
+        "provider": "DeepLearning.AI / Coursera",
+        "industry": "data",
+        "subdomain": "science",
+        "difficulty": 4,
+        "description": "Andrew Ng's flagship deep learning program covering neural networks, CNNs, RNNs, optimization, and ML strategy across 5 courses.",
+        "official_url": "https://www.coursera.org/specializations/deep-learning",
+        "cost": "$49/month",
+        "cost_source": "Coursera Official (May 2026)",
+        "duration_weeks": 16,
+        "study_hours": 80,
+        "exam_format": "Quizzes, programming assignments & capstone \u2014 no standalone timed exam",
+        "exam_duration_minutes": 0,
+        "passing_score": 80,
+        "passing_score_note": "80% required on programming assignments",
+        "pass_rate_percent": 60,
+        "pass_rate_source": "Community estimate",
+        "valid_years": 999,
+        "renewal_required": false,
+        "renewal_cost": "$0",
+        "salary_boost_low": 10000,
+        "salary_boost_high": 25000,
+        "salary_boost_source": "Glassdoor/PayScale (estimated)",
+        "worth_it_rating": 9.3,
+        "trending": true,
+        "data_confidence": "high",
+        "last_verified": "2026-05-20",
+        "skills": [
+            "deep learning",
+            "neural networks",
+            "CNNs",
+            "RNNs",
+            "optimization",
+            "Python",
+            "TensorFlow",
+            "machine learning",
+            "NLP",
+            "computer vision",
+            "regularization",
+            "batch normalization"
+        ],
+        "primary_skills": [
+            "deep learning",
+            "neural networks",
+            "CNNs"
+        ],
+        "secondary_skills": [
+            "RNNs",
+            "optimization",
+            "TensorFlow",
+            "NLP",
+            "computer vision"
+        ],
+        "prerequisites": [
+            "Python proficiency",
+            "Linear algebra",
+            "Basic ML"
+        ],
+        "recommended_prior_knowledge": [
+            "Python",
+            "Linear algebra",
+            "Calculus basics",
+            "Machine learning fundamentals"
+        ],
+        "target_job_titles": [
+            "Deep Learning Engineer",
+            "AI Researcher",
+            "ML Engineer",
+            "Computer Vision Engineer",
+            "NLP Engineer",
+            "Research Scientist"
+        ],
+        "job_postings_count": 40000,
+        "job_postings_source": "LinkedIn Jobs (2026)",
+        "next_certs": [
+            "TensorFlow Developer Certificate",
+            "IBM AI Engineering Professional Certificate"
+        ]
+    },
+    {
+        "id": 81,
+        "name": "Hugging Face NLP Course Certificate",
+        "provider": "Hugging Face",
+        "industry": "data",
+        "subdomain": "science",
+        "difficulty": 3,
+        "description": "Practical NLP certification covering Transformers, fine-tuning LLMs, tokenization, and deploying NLP models using the Hugging Face ecosystem.",
+        "official_url": "https://huggingface.co/learn/nlp-course",
+        "cost": "Free",
+        "cost_source": "Hugging Face (May 2026) \u2014 free open course with completion certificate",
+        "duration_weeks": 8,
+        "study_hours": 40,
+        "exam_format": "Practical assignments and community contributions \u2014 completion-based",
+        "exam_duration_minutes": 0,
+        "passing_score": 0,
+        "passing_score_note": "Completion-based \u2014 no formal exam",
+        "pass_rate_percent": 70,
+        "pass_rate_source": "Community estimate",
+        "valid_years": 999,
+        "renewal_required": false,
+        "renewal_cost": "$0",
+        "salary_boost_low": 8000,
+        "salary_boost_high": 20000,
+        "salary_boost_source": "Glassdoor/PayScale (estimated)",
+        "worth_it_rating": 8.8,
+        "trending": true,
+        "data_confidence": "high",
+        "last_verified": "2026-05-20",
+        "skills": [
+            "NLP",
+            "transformers",
+            "LLMs",
+            "fine-tuning",
+            "Hugging Face",
+            "Python",
+            "tokenization",
+            "BERT",
+            "GPT",
+            "model deployment",
+            "text classification",
+            "question answering"
+        ],
+        "primary_skills": [
+            "NLP",
+            "transformers",
+            "LLMs"
+        ],
+        "secondary_skills": [
+            "fine-tuning",
+            "Hugging Face",
+            "BERT",
+            "GPT",
+            "tokenization",
+            "text classification"
+        ],
+        "prerequisites": [
+            "Python proficiency",
+            "Basic ML/deep learning knowledge"
+        ],
+        "recommended_prior_knowledge": [
+            "Python",
+            "Deep learning fundamentals",
+            "PyTorch or TensorFlow"
+        ],
+        "target_job_titles": [
+            "NLP Engineer",
+            "AI Engineer",
+            "ML Engineer",
+            "LLM Engineer",
+            "Research Engineer",
+            "Conversational AI Developer"
+        ],
+        "job_postings_count": 25000,
+        "job_postings_source": "LinkedIn Jobs (2026)",
+        "next_certs": [
+            "TensorFlow Developer Certificate",
+            "Deep Learning Specialization"
+        ]
+    },
+    {
+        "id": 82,
+        "name": "Confluent Certified Developer for Apache Kafka",
+        "provider": "Confluent",
+        "industry": "data",
+        "subdomain": "engineering",
+        "difficulty": 3,
+        "description": "Validates expertise in building real-time streaming applications using Apache Kafka and the Confluent Platform, covering producers, consumers, Kafka Streams, and ksqlDB.",
+        "official_url": "https://www.confluent.io/certification/",
+        "cost": "$150",
+        "cost_source": "Confluent Official (May 2026)",
+        "duration_weeks": 8,
+        "study_hours": 60,
+        "exam_format": "Multiple choice, 60 questions",
+        "exam_duration_minutes": 90,
+        "passing_score": 70,
+        "passing_score_note": "Approximately 70% required",
+        "pass_rate_percent": 58,
+        "pass_rate_source": "Community estimate",
+        "valid_years": 2,
+        "renewal_required": true,
+        "renewal_cost": "$150",
+        "salary_boost_low": 8000,
+        "salary_boost_high": 18000,
+        "salary_boost_source": "Glassdoor/PayScale (estimated)",
+        "worth_it_rating": 8.7,
+        "trending": true,
+        "data_confidence": "high",
+        "last_verified": "2026-05-20",
+        "skills": [
+            "Kafka",
+            "Apache Kafka",
+            "stream processing",
+            "data pipelines",
+            "Kafka Streams",
+            "ksqlDB",
+            "event-driven architecture",
+            "Java",
+            "Python",
+            "real-time data",
+            "message queues"
+        ],
+        "primary_skills": [
+            "Kafka",
+            "stream processing",
+            "event-driven architecture"
+        ],
+        "secondary_skills": [
+            "Kafka Streams",
+            "ksqlDB",
+            "data pipelines",
+            "real-time data",
+            "Java"
+        ],
+        "prerequisites": [
+            "Java or Python experience",
+            "Basic distributed systems knowledge"
+        ],
+        "recommended_prior_knowledge": [
+            "Java or Python",
+            "Message queue concepts",
+            "Data pipeline fundamentals"
+        ],
+        "target_job_titles": [
+            "Data Engineer",
+            "Backend Engineer",
+            "Platform Engineer",
+            "Streaming Engineer",
+            "Software Engineer",
+            "Cloud Engineer"
+        ],
+        "job_postings_count": 22000,
+        "job_postings_source": "LinkedIn Jobs (2026)",
+        "next_certs": [
+            "Databricks Certified Data Engineer Associate",
+            "AWS Data Engineer Associate"
+        ]
+    },
+    {
+        "id": 83,
+        "name": "dbt Analytics Engineering Certification",
+        "provider": "dbt Labs",
+        "industry": "data",
+        "subdomain": "engineering",
+        "difficulty": 2,
+        "description": "Validates proficiency in dbt (data build tool) for transforming data in warehouses, including modeling, testing, documentation, and deployment.",
+        "official_url": "https://www.getdbt.com/certifications",
+        "cost": "$200",
+        "cost_source": "dbt Labs Official (May 2026)",
+        "duration_weeks": 6,
+        "study_hours": 40,
+        "exam_format": "Multiple choice & scenario-based, 65 questions",
+        "exam_duration_minutes": 120,
+        "passing_score": 65,
+        "passing_score_note": "Approximately 65% required",
+        "pass_rate_percent": 68,
+        "pass_rate_source": "Community estimate",
+        "valid_years": 2,
+        "renewal_required": true,
+        "renewal_cost": "$200",
+        "salary_boost_low": 6000,
+        "salary_boost_high": 15000,
+        "salary_boost_source": "Glassdoor/PayScale (estimated)",
+        "worth_it_rating": 9.0,
+        "trending": true,
+        "data_confidence": "high",
+        "last_verified": "2026-05-20",
+        "skills": [
+            "dbt",
+            "SQL",
+            "data modeling",
+            "data transformation",
+            "data warehousing",
+            "analytics engineering",
+            "Snowflake",
+            "BigQuery",
+            "Redshift",
+            "testing",
+            "documentation"
+        ],
+        "primary_skills": [
+            "dbt",
+            "data modeling",
+            "analytics engineering"
+        ],
+        "secondary_skills": [
+            "SQL",
+            "data transformation",
+            "Snowflake",
+            "BigQuery",
+            "testing"
+        ],
+        "prerequisites": [
+            "SQL proficiency",
+            "Basic data warehousing knowledge"
+        ],
+        "recommended_prior_knowledge": [
+            "SQL",
+            "Data warehouse concepts",
+            "Git basics"
+        ],
+        "target_job_titles": [
+            "Analytics Engineer",
+            "Data Engineer",
+            "Data Analyst",
+            "BI Developer",
+            "Data Architect",
+            "Data Platform Engineer"
+        ],
+        "job_postings_count": 20000,
+        "job_postings_source": "LinkedIn Jobs (2026)",
+        "next_certs": [
+            "Snowflake SnowPro Core",
+            "Databricks Certified Data Engineer Associate"
+        ]
+    },
+    {
+        "id": 84,
+        "name": "Astronomer Certification for Apache Airflow",
+        "provider": "Astronomer",
+        "industry": "data",
+        "subdomain": "engineering",
+        "difficulty": 2,
+        "description": "Validates knowledge of Apache Airflow for orchestrating data pipelines, covering DAGs, operators, scheduling, and deployment.",
+        "official_url": "https://www.astronomer.io/certification/",
+        "cost": "$150",
+        "cost_source": "Astronomer Official (May 2026)",
+        "duration_weeks": 6,
+        "study_hours": 40,
+        "exam_format": "Multiple choice, 75 questions",
+        "exam_duration_minutes": 60,
+        "passing_score": 70,
+        "passing_score_note": "Approximately 70% required",
+        "pass_rate_percent": 70,
+        "pass_rate_source": "Community estimate",
+        "valid_years": 2,
+        "renewal_required": true,
+        "renewal_cost": "$150",
+        "salary_boost_low": 5000,
+        "salary_boost_high": 12000,
+        "salary_boost_source": "Glassdoor/PayScale (estimated)",
+        "worth_it_rating": 8.5,
+        "trending": true,
+        "data_confidence": "high",
+        "last_verified": "2026-05-20",
+        "skills": [
+            "Apache Airflow",
+            "data pipelines",
+            "workflow orchestration",
+            "DAGs",
+            "Python",
+            "scheduling",
+            "ETL",
+            "data engineering",
+            "Kubernetes",
+            "cloud deployment"
+        ],
+        "primary_skills": [
+            "Apache Airflow",
+            "workflow orchestration",
+            "DAGs"
+        ],
+        "secondary_skills": [
+            "Python",
+            "scheduling",
+            "ETL",
+            "data engineering",
+            "Kubernetes"
+        ],
+        "prerequisites": [
+            "Python proficiency",
+            "Basic data pipeline knowledge"
+        ],
+        "recommended_prior_knowledge": [
+            "Python",
+            "Data pipeline concepts",
+            "SQL"
+        ],
+        "target_job_titles": [
+            "Data Engineer",
+            "ML Engineer",
+            "Platform Engineer",
+            "Analytics Engineer",
+            "DevOps Engineer",
+            "Cloud Data Engineer"
+        ],
+        "job_postings_count": 18000,
+        "job_postings_source": "LinkedIn Jobs (2026)",
+        "next_certs": [
+            "dbt Analytics Engineering Certification",
+            "Databricks Certified Data Engineer Associate"
+        ]
+    }
+]
