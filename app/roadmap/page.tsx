@@ -16,6 +16,7 @@ interface Cert {
   description?: string;
   alternatives?: any[];
   next_certs?: string[];
+  official_url?: string;
 }
 
 interface Job {
@@ -764,6 +765,33 @@ function CertCard({ cert }: { cert: Cert }) {
       <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: 16 }}>
         {cert.explanation || cert.description}
       </p>
+
+      {cert.official_url && (
+        <div style={{ marginBottom: 16 }}>
+          <a
+            href={cert.official_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
+              fontSize: 12,
+              fontWeight: 600,
+              color: 'var(--accent-light)',
+              textDecoration: 'none',
+              background: 'var(--accent-dim)',
+              padding: '6px 14px',
+              borderRadius: 8,
+              transition: 'opacity 0.2s',
+            }}
+            onMouseOver={(e) => e.currentTarget.style.opacity = '0.8'}
+            onMouseOut={(e) => e.currentTarget.style.opacity = '1'}
+          >
+            View Official Certificate Website ↗
+          </a>
+        </div>
+      )}
 
       {/* Matched Skills Chips */}
       {cert.matchedSkills && cert.matchedSkills.length > 0 && (

@@ -236,6 +236,7 @@ export async function GET(req: NextRequest) {
         score: rec?.score || 0,
         explanation: rec?.explanation || '',
         matchedSkills: safeParseJSON(rec?.matched_skills),
+        official_url: cert.official_url,
       };
     });
 
@@ -277,6 +278,7 @@ export async function GET(req: NextRequest) {
         userStatus,
         alternatives,
         description: cert.description,
+        official_url: cert.official_url,
       };
     });
 
