@@ -230,19 +230,35 @@ function testAlias(text: string, alias: string): boolean {
 // ─── Industry Detection ───────────────────────────────────────────────────────
 
 const INDUSTRY_KEYWORDS: Record<string, string[]> = {
-  cloud: ['cloud', 'aws', 'azure', 'gcp', 'devops', 'infrastructure', 'kubernetes', 'serverless', 'networking',
-    'cisco', 'ccna', 'ccnp', 'vmware', 'vsphere', 'virtualization', 'linux', 'red hat', 'rhel',
-    'ansible', 'system administrator', 'network engineer', 'sysadmin'],
-  data: ['data', 'analytics', 'sql', 'python', 'machine learning', 'business intelligence', 'tableau',
-    'tensorflow', 'pytorch', 'deep learning', 'neural network', 'nlp', 'computer vision', 'ai',
-    'artificial intelligence', 'generative ai', 'llm', 'databricks', 'spark', 'kafka', 'dbt',
-    'airflow', 'mlflow', 'sagemaker', 'data engineer', 'ml engineer', 'data science'],
+  cloud: ['cloud', 'aws', 'azure', 'gcp', 'devops', 'infrastructure', 'kubernetes', 'serverless'],
   cybersecurity: ['security', 'cybersecurity', 'penetration', 'vulnerability', 'threat', 'siem', 'incident'],
+  data: ['data', 'analytics', 'sql', 'business intelligence', 'tableau', 'power bi',
+    'databricks', 'spark', 'kafka', 'dbt', 'airflow', 'data engineer', 'data pipeline', 'etl', 'snowflake'],
+  ai_ml: ['machine learning', 'deep learning', 'neural network', 'nlp', 'computer vision', 'ai',
+    'artificial intelligence', 'generative ai', 'llm', 'tensorflow', 'pytorch',
+    'mlflow', 'sagemaker', 'ml engineer', 'data science', 'data scientist', 'hugging face'],
   finance: ['finance', 'investment', 'portfolio', 'trading', 'financial', 'equity', 'markets', 'bloomberg'],
   marketing: ['marketing', 'seo', 'google ads', 'digital marketing', 'content', 'social media', 'campaigns'],
   management: ['project management', 'agile', 'scrum', 'pmp', 'program manager',
-    'salesforce', 'servicenow', 'dynamics 365', 'crm', 'itil', 'itsm',
     'scrum master', 'product owner', 'delivery manager'],
+  business: ['salesforce', 'servicenow', 'dynamics 365', 'crm', 'itil', 'itsm',
+    'customer relationship', 'service desk', 'salesforce admin'],
+  networking: ['networking', 'cisco', 'ccna', 'ccnp', 'vmware', 'vsphere', 'virtualization',
+    'linux', 'red hat', 'rhel', 'ansible', 'system administrator', 'network engineer',
+    'sysadmin', 'sd-wan', 'routing', 'switching'],
+};
+
+// Display labels for industry codes
+export const INDUSTRY_LABELS: Record<string, string> = {
+  cloud: 'Cloud',
+  cybersecurity: 'Cybersecurity',
+  data: 'Data',
+  ai_ml: 'AI & ML',
+  finance: 'Finance',
+  marketing: 'Marketing',
+  management: 'Management',
+  business: 'Business & CRM',
+  networking: 'Networking & Infra',
 };
 
 export function detectIndustry(title: string, description: string): string {

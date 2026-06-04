@@ -3,6 +3,20 @@
 import { useEffect, useState } from 'react';
 import RoadmapFlowchart from '@/components/RoadmapFlowchart';
 
+const INDUSTRY_LABELS: Record<string, string> = {
+  cloud: 'Cloud',
+  cybersecurity: 'Cybersecurity',
+  data: 'Data',
+  ai_ml: 'AI & ML',
+  finance: 'Finance',
+  marketing: 'Marketing',
+  management: 'Management',
+  business: 'Business & CRM',
+  networking: 'Networking & Infra',
+};
+
+const INDUSTRY_ORDER = ['cloud', 'networking', 'cybersecurity', 'data', 'ai_ml', 'finance', 'marketing', 'management', 'business'];
+
 interface Cert {
   id: number;
   name: string;
@@ -86,7 +100,12 @@ export default function RoadmapPage() {
     );
   }
 
-  const industries = Object.keys(data.byIndustry).sort();
+  const industries = Object.keys(data.byIndustry)
+    .sort((a, b) => {
+      const ai = INDUSTRY_ORDER.indexOf(a);
+      const bi = INDUSTRY_ORDER.indexOf(b);
+      return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+    });
   const currentCerts = selectedIndustry ? (data?.byIndustry?.[selectedIndustry] || []) : [];
 
   return (
@@ -138,7 +157,7 @@ export default function RoadmapPage() {
               whiteSpace: 'nowrap',
             }}
           >
-            {industry}
+            {INDUSTRY_LABELS[industry] || industry}
             <span style={{
               marginLeft: 6,
               fontSize: 12,
