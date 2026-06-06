@@ -498,6 +498,37 @@ const CERT_ALIASES: Record<number, string[]> = {
   98: ['itil foundation', 'itil 4 foundation', 'itil 4'],
   99: ['pmi-acp', 'pmi agile', 'agile certified practitioner'],
   100: ['csm', 'certified scrum master', 'scrum master certification'],
+
+  // New finance certs (finance.json)
+  101: ['frm', 'financial risk manager', 'frm part 1', 'frm part i'],
+  102: ['cfp', 'certified financial planner'],
+  103: ['fmva', 'financial modeling', 'financial modeling & valuation analyst'],
+  104: ['caia', 'chartered alternative investment analyst', 'caia level 1', 'caia level i'],
+  105: ['cpa', 'certified public accountant', 'cpa designation'],
+  106: ['cfa esg', 'esg investing', 'esg investing certificate'],
+
+  // New management certs (management.json)
+  107: ['prince2', 'prince2 foundation', 'prince 2'],
+  108: ['safe agilist', 'leading safe', 'safe agilist certification'],
+  109: ['capm', 'certified associate in project management', 'pmi capm'],
+  110: ['six sigma', 'six sigma green belt', 'green belt', 'lean six sigma'],
+  111: ['sap certified', 'sap associate', 'sap certified associate'],
+
+  // New marketing certs (marketing.json)
+  112: ['meta blueprint', 'meta media buying', 'media buying professional', 'facebook blueprint'],
+  113: ['semrush', 'semrush seo', 'seo toolkit'],
+  114: ['hootsuite', 'hootsuite social', 'social marketing certification'],
+  115: ['hubspot content', 'content marketing certification'],
+  116: ['marketing cloud email', 'email specialist', 'salesforce marketing cloud'],
+  117: ['linkedin marketing', 'linkedin marketing labs'],
+  118: ['hubspot email', 'email marketing certification'],
+
+  // New business/CRM certs (business.json)
+  119: ['salesforce advanced admin', 'salesforce advanced administrator', 'advanced administrator'],
+  120: ['servicenow cad', 'certified application developer', 'servicenow developer'],
+  121: ['workday hcm', 'workday hcm core', 'hcm core'],
+  122: ['sap finance', 'sap s/4hana finance', 'finance associate'],
+  123: ['zendesk', 'zendesk customer experience', 'zendesk expert'],
 };
 
 export function matchCertifications(
@@ -612,17 +643,7 @@ export function matchCertifications(
     const { match: titleMatch, matchedTitle: matchedJobTitle } = matchJobTitle(jobTitle, targetTitles);
     const titleScore = titleMatch ? 1.0 : 0;
 
-    // ── 4. Difficulty Fit ───────────────────────────────────────────────────
-    const diffDelta = Math.abs(cert.difficulty - difficultyTarget);
-    const difficultyFit = Math.max(0, 1 - diffDelta * 0.25 - (diffDelta > 1 ? 0.1 : 0));
-
-    // ── 5. Market Signals (small weight) ────────────────────────────────────
-    const logPostings = Math.log1p(cert.job_postings_count ?? 0);
-    const marketDemand = logMaxPostings > 0 ? logPostings / logMaxPostings : 0;
-    const worthIt = Math.min(1, (cert.worth_it_rating ?? 0) / 10);
-    const trendingBonus = cert.trending ? 1.0 : 0;
-
-    // ── 6. Explicit Name Match (tiebreaker only) ────────────────────────────
+    // ── 6. Explicit Name Match ──────────────────────────────────────────────
     let explicitMatch = false;
     const aliases = CERT_ALIASES[cert.id] || [];
     for (const alias of aliases) {
@@ -633,13 +654,24 @@ export function matchCertifications(
     }
     const explicitBonus = explicitMatch ? 1.0 : 0;
 
+    // ── 4. Difficulty Fit ───────────────────────────────────────────────────
+    // If the cert is explicitly named in the job description, do not penalize it for difficulty mismatch.
+    const diffDelta = explicitMatch ? 0 : Math.abs(cert.difficulty - difficultyTarget);
+    const difficultyFit = Math.max(0, 1 - diffDelta * 0.25 - (diffDelta > 1 ? 0.1 : 0));
+
+    // ── 5. Market Signals (small weight) ────────────────────────────────────
+    const logPostings = Math.log1p(cert.job_postings_count ?? 0);
+    const marketDemand = logMaxPostings > 0 ? logPostings / logMaxPostings : 0;
+    const worthIt = Math.min(1, (cert.worth_it_rating ?? 0) / 10);
+    const trendingBonus = cert.trending ? 1.0 : 0;
+
     // ── FINAL COMPOSITE SCORE ───────────────────────────────────────────────
     const rawScore =
-      0.50 * skillScore +
+      0.40 * skillScore +
+      0.20 * explicitBonus +
       0.20 * titleScore +
-      0.15 * industryScore +
+      0.10 * industryScore +
       0.05 * difficultyFit +
-      0.05 * explicitBonus +
       0.02 * marketDemand +
       0.02 * worthIt +
       0.01 * trendingBonus;
