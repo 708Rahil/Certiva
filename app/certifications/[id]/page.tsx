@@ -1,6 +1,7 @@
 import { getSupabase } from '@/lib/db';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
 import { 
   ArrowLeft, Calendar, DollarSign, Award, Briefcase, 
   TrendingUp, Star, Percent, BookOpen, Clock, ExternalLink, ShieldCheck 
@@ -22,10 +23,9 @@ const INDUSTRY_COLORS: Record<string, string> = {
 
 const DIFFICULTY_LABELS = ['', 'Beginner', 'Beginner+', 'Intermediate', 'Advanced', 'Expert'];
 
-export default async function CertificationDetailPage({ params }: PageProps) {
-  const { id } = await params;
+// Fetch utility to avoid code repetition between metadata and rendering
+async function getCertificationData(id: string) {
   const supabase = getSupabase();
-
   let cert = null;
 
   // 1. Try finding by numeric ID
@@ -59,6 +59,41 @@ export default async function CertificationDetailPage({ params }: PageProps) {
     if (data && data.length > 0) cert = data[0];
   }
 
+  return cert;
+}
+
+// Generate Dynamic SEO Metadata
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  const cert = await getCertificationData(id);
+
+  if (!cert) {
+    return {
+      title: 'Certification Profile | Certiva',
+      description: 'Explore professional certification details, costs, difficulties, and job market impact.',
+    };
+  }
+
+  return {
+    title: `Is the ${cert.name} Worth It? Cost, Pass Rate & Next Steps | Certiva`,
+    description: `Discover if the ${cert.name} by ${cert.provider} is worth it. Get real cost (${cert.cost || 'N/A'}), duration (${cert.duration_weeks ? cert.duration_weeks + ' weeks' : 'N/A'}), difficulty level, pass rates, and next steps.`,
+  };
+}
+
+// Enable Static Pre-rendering for Googlebot
+export async function generateStaticParams() {
+  const supabase = getSupabase();
+  const { data } = await supabase.from('certifications').select('id');
+  if (!data) return [];
+  return data.map((cert) => ({
+    id: cert.id.toString(),
+  }));
+}
+
+export default async function CertificationDetailPage({ params }: PageProps) {
+  const { id } = await params;
+  const cert = await getCertificationData(id);
+
   if (!cert) {
     notFound();
   }
@@ -85,6 +120,9 @@ export default async function CertificationDetailPage({ params }: PageProps) {
 
   const industryColor = INDUSTRY_COLORS[cert.industry] || '#94a3b8';
 
+  // Sourced numeric cost for schema markup
+  const cleanPrice = cert.cost ? cert.cost.replace(/[^0-9]/g, '') : '0';
+
   return (
     <main style={{
       minHeight: '100vh',
@@ -92,6 +130,31 @@ export default async function CertificationDetailPage({ params }: PageProps) {
       color: 'var(--text-primary)',
       padding: '40px 20px 80px',
     }}>
+      {/* Inject JSON-LD Schema Markup for Google rich snippets */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Course",
+            "name": cert.name,
+            "description": cert.description,
+            "provider": {
+              "@type": "Organization",
+              "name": cert.provider,
+              "sameAs": cert.official_url || ""
+            },
+            "educationalCredentialAwarded": "Certification",
+            "offers": {
+              "@type": "Offer",
+              "price": cleanPrice || "0",
+              "priceCurrency": "USD",
+              "category": "Professional Certification"
+            }
+          })
+        }}
+      />
+
       <div style={{
         maxWidth: 1100,
         margin: '0 auto',
@@ -446,7 +509,7 @@ export default async function CertificationDetailPage({ params }: PageProps) {
                 padding: 24,
               }}>
                 <h2 style={{ fontSize: 18, fontWeight: 600, margin: '0 0 20px', borderBottom: '1px solid var(--border)', paddingBottom: 12 }}>
-                  Recommended Next Steps
+                  What certifications should you take after {cert.name}?
                 </h2>
                 <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 16 }}>
                   After obtaining this certification, consider pursuing the following to advance your credentials:
