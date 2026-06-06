@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 interface UserCertification {
   id: number;
@@ -121,6 +122,25 @@ export default function CertificationRow({ cert, onUpdate, onDelete }: Certifica
           <option value="completed">Completed</option>
         </select>
 
+        <Link
+          href={`/certifications/${cert.cert_id}`}
+          style={{
+            padding: '8px 12px',
+            borderRadius: 8,
+            background: 'var(--accent)',
+            color: '#fff',
+            textDecoration: 'none',
+            textAlign: 'center',
+            fontSize: 13,
+            fontWeight: 500,
+            transition: 'opacity 0.15s',
+            cursor: 'pointer',
+          }}
+          className="hover:opacity-90"
+        >
+          View Details
+        </Link>
+
         {cert.official_url && (
           <a
             href={cert.official_url}
@@ -131,7 +151,7 @@ export default function CertificationRow({ cert, onUpdate, onDelete }: Certifica
               borderRadius: 8,
               border: '1px solid var(--border)',
               background: 'transparent',
-              color: 'var(--accent-light)',
+              color: 'var(--text-secondary)',
               textDecoration: 'none',
               textAlign: 'center',
               fontSize: 13,
@@ -140,13 +160,15 @@ export default function CertificationRow({ cert, onUpdate, onDelete }: Certifica
               cursor: 'pointer',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--accent-dim)';
+              e.currentTarget.style.background = 'var(--border-light)';
+              e.currentTarget.style.color = '#fff';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = 'transparent';
+              e.currentTarget.style.color = 'var(--text-secondary)';
             }}
           >
-            View Details
+            Official Website ↗
           </a>
         )}
 

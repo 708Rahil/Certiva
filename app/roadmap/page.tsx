@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { Award, Briefcase, ChevronRight, CheckCircle, Clock, BookOpen, AlertCircle, Sparkles, Map } from 'lucide-react';
 
 interface Cert {
@@ -846,8 +847,27 @@ function CertCard({ cert }: { cert: Cert }) {
         {cert.explanation || cert.description}
       </p>
 
-      {cert.official_url && (
-        <div style={{ marginBottom: 16 }}>
+      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 16 }}>
+        <Link
+          href={`/certifications/${cert.id}`}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 6,
+            fontSize: 12,
+            fontWeight: 600,
+            color: '#fff',
+            textDecoration: 'none',
+            background: 'var(--accent)',
+            padding: '6px 14px',
+            borderRadius: 8,
+            transition: 'opacity 0.2s',
+          }}
+          className="hover:opacity-90"
+        >
+          View Details
+        </Link>
+        {cert.official_url && (
           <a
             href={cert.official_url}
             target="_blank"
@@ -858,20 +878,27 @@ function CertCard({ cert }: { cert: Cert }) {
               gap: 6,
               fontSize: 12,
               fontWeight: 600,
-              color: 'var(--accent-light)',
+              color: 'var(--text-secondary)',
               textDecoration: 'none',
-              background: 'var(--accent-dim)',
+              border: '1px solid var(--border)',
+              background: 'transparent',
               padding: '6px 14px',
               borderRadius: 8,
-              transition: 'opacity 0.2s',
+              transition: 'all 0.2s',
             }}
-            onMouseOver={(e) => e.currentTarget.style.opacity = '0.8'}
-            onMouseOut={(e) => e.currentTarget.style.opacity = '1'}
+            onMouseOver={(e) => {
+              e.currentTarget.style.background = 'var(--border-light)';
+              e.currentTarget.style.color = '#fff';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.background = 'transparent';
+              e.currentTarget.style.color = 'var(--text-secondary)';
+            }}
           >
-            View Official Certificate Website ↗
+            Official Website ↗
           </a>
-        </div>
-      )}
+        )}
+      </div>
 
       {/* Matched Skills Chips */}
       {cert.matchedSkills && cert.matchedSkills.length > 0 && (

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 interface BrowseCert {
   id: number;
@@ -315,24 +316,53 @@ export default function BrowseAllCertsModal({
                         )}
                       </div>
                     </div>
-                    <button
-                      onClick={() => onAddCert(cert.id, cert.name)}
-                      disabled={isAdded}
-                      style={{
-                        padding: '6px 12px',
-                        borderRadius: 6,
-                        border: 'none',
-                        background: isAdded ? 'var(--text-muted)' : 'var(--accent)',
-                        color: '#fff',
-                        fontSize: 12,
-                        fontWeight: 600,
-                        cursor: isAdded ? 'default' : 'pointer',
-                        opacity: isAdded ? 0.5 : 1,
-                        whiteSpace: 'nowrap',
-                      }}
-                    >
-                      {isAdded ? 'Added' : '+ Add'}
-                    </button>
+                    <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                      <Link
+                        href={`/certifications/${cert.id}`}
+                        target="_blank"
+                        style={{
+                          padding: '6px 12px',
+                          borderRadius: 6,
+                          border: '1px solid var(--border)',
+                          background: 'transparent',
+                          color: 'var(--text-secondary)',
+                          fontSize: 12,
+                          fontWeight: 600,
+                          textDecoration: 'none',
+                          cursor: 'pointer',
+                          whiteSpace: 'nowrap',
+                          transition: 'all 0.15s',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = 'var(--border-light)';
+                          e.currentTarget.style.color = '#fff';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = 'transparent';
+                          e.currentTarget.style.color = 'var(--text-secondary)';
+                        }}
+                      >
+                        Details
+                      </Link>
+                      <button
+                        onClick={() => onAddCert(cert.id, cert.name)}
+                        disabled={isAdded}
+                        style={{
+                          padding: '6px 12px',
+                          borderRadius: 6,
+                          border: 'none',
+                          background: isAdded ? 'var(--text-muted)' : 'var(--accent)',
+                          color: '#fff',
+                          fontSize: 12,
+                          fontWeight: 600,
+                          cursor: isAdded ? 'default' : 'pointer',
+                          opacity: isAdded ? 0.5 : 1,
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        {isAdded ? 'Added' : '+ Add'}
+                      </button>
+                    </div>
                   </div>
                 );
               })}

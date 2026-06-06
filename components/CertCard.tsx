@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import ScoreRing from './ScoreRing';
 
 interface CertCardProps {
@@ -149,55 +150,89 @@ export default function CertCard({
             {duration && (
               <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <MetaItem label="Timeline" value={duration} />
-                {official_url && (
-                  <a
-                    href={official_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ fontSize: 12, color: '#2563eb', textDecoration: 'underline', fontWeight: 500 }}
-                  >
-                    View Certificate
-                  </a>
-                )}
               </span>
             )}
           </div>
-          {certId && onAddToCerts && (
-            <button
-              onClick={async () => {
-                setAdding(true);
-                try {
-                  await onAddToCerts(certId, name);
-                } finally {
-                  setAdding(false);
-                }
-              }}
-              disabled={adding}
-              style={{
-                padding: '8px 14px',
-                borderRadius: 8,
-                border: '1px solid var(--accent)',
-                background: 'transparent',
-                color: 'var(--accent-light)',
-                fontSize: 12,
-                fontWeight: 600,
-                cursor: adding ? 'default' : 'pointer',
-                transition: 'all 0.15s',
-                opacity: adding ? 0.6 : 1,
-                whiteSpace: 'nowrap',
-              }}
-              onMouseEnter={(e) => {
-                if (!adding) {
-                  e.currentTarget.style.background = 'var(--accent-dim)';
-                }
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'transparent';
-              }}
-            >
-              {adding ? 'Adding...' : '+ Add to My Certs'}
-            </button>
-          )}
+          
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+            {certId && (
+              <Link
+                href={`/certifications/${certId}`}
+                style={{
+                  padding: '8px 14px',
+                  borderRadius: 8,
+                  background: 'var(--accent)',
+                  color: '#fff',
+                  fontSize: 12,
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                  transition: 'opacity 0.15s',
+                  whiteSpace: 'nowrap',
+                }}
+                className="hover:opacity-90"
+              >
+                View Details
+              </Link>
+            )}
+            {official_url && (
+              <a
+                href={official_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  padding: '8px 14px',
+                  borderRadius: 8,
+                  border: '1px solid var(--border)',
+                  background: 'transparent',
+                  color: 'var(--text-secondary)',
+                  fontSize: 12,
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                  transition: 'all 0.15s',
+                  whiteSpace: 'nowrap',
+                }}
+                className="hover:bg-[var(--border)] hover:text-white"
+              >
+                Official Website ↗
+              </a>
+            )}
+            {certId && onAddToCerts && (
+              <button
+                onClick={async () => {
+                  setAdding(true);
+                  try {
+                    await onAddToCerts(certId, name);
+                  } finally {
+                    setAdding(false);
+                  }
+                }}
+                disabled={adding}
+                style={{
+                  padding: '8px 14px',
+                  borderRadius: 8,
+                  border: '1px solid var(--accent)',
+                  background: 'transparent',
+                  color: 'var(--accent-light)',
+                  fontSize: 12,
+                  fontWeight: 600,
+                  cursor: adding ? 'default' : 'pointer',
+                  transition: 'all 0.15s',
+                  opacity: adding ? 0.6 : 1,
+                  whiteSpace: 'nowrap',
+                }}
+                onMouseEnter={(e) => {
+                  if (!adding) {
+                    e.currentTarget.style.background = 'var(--accent-dim)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'transparent';
+                }}
+              >
+                {adding ? 'Adding...' : '+ Add to My Certs'}
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
