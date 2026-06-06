@@ -79,5 +79,380 @@
       "PgMP (Program Management Professional)",
       "PMI-ACP (Agile Certified Practitioner)"
     ]
+  },
+  {
+    "id": 107,
+    "name": "PRINCE2 Foundation",
+    "provider": "Axelos / PeopleCert",
+    "industry": "management",
+    "subdomain": "project_management",
+    "difficulty": 2,
+    "description": "Foundation-level certification in the PRINCE2 project management methodology. Dominant framework in UK, Europe, Australia, and government sectors. Required for PRINCE2 Practitioner.",
+    "official_url": "https://www.axelos.com/certifications/propath/prince2-project-management",
+    "cost": "$600\u2013$750",
+    "cost_source": "PeopleCert Official Tier 1 pricing (June 2026) \u2014 USA, UK, Western Europe",
+    "duration_weeks": 4,
+    "study_hours": 20,
+    "exam_format": "Multiple choice, 60 questions, closed book",
+    "exam_duration_minutes": 60,
+    "passing_score": 55,
+    "passing_score_note": "55% required \u2014 33 out of 60 questions correct",
+    "pass_rate_percent": 68,
+    "pass_rate_source": "Community estimate \u2014 self-study candidates ~68% first attempt",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$600",
+    "renewal_cost_note": "Retake exam or complete approved CPD activities within 3 years",
+    "salary_boost_low": 4000,
+    "salary_boost_high": 12000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.6,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-04",
+    "skills": [
+      "project management",
+      "PRINCE2",
+      "risk management",
+      "stakeholder management",
+      "project planning",
+      "governance",
+      "change management",
+      "quality management",
+      "scheduling",
+      "Waterfall"
+    ],
+    "primary_skills": [
+      "project management",
+      "PRINCE2",
+      "governance"
+    ],
+    "secondary_skills": [
+      "risk management",
+      "stakeholder management",
+      "project planning",
+      "quality management"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic project management concepts"
+    ],
+    "target_job_titles": [
+      "Project Manager",
+      "Project Coordinator",
+      "Programme Manager",
+      "Business Analyst",
+      "IT Project Manager",
+      "Delivery Manager"
+    ],
+    "job_postings_count": 35000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "PRINCE2 Practitioner",
+      "PMI PMP"
+    ]
+  },
+  {
+    "id": 108,
+    "name": "SAFe Agilist (SA) \u2014 Leading SAFe",
+    "provider": "Scaled Agile Inc.",
+    "industry": "management",
+    "subdomain": "project_management",
+    "difficulty": 2,
+    "description": "The most widely adopted enterprise agile certification, validating ability to lead Lean-Agile transformations using the Scaled Agile Framework (SAFe 6.0) across large organisations.",
+    "official_url": "https://scaledagile.com/training/leading-safe/",
+    "cost": "$714",
+    "cost_source": "Scaled Agile Official (June 2026) \u2014 includes mandatory 2-day Leading SAFe training + exam",
+    "duration_weeks": 2,
+    "study_hours": 16,
+    "exam_format": "Multiple choice, 45 questions, scenario-based",
+    "exam_duration_minutes": 90,
+    "passing_score": 80,
+    "passing_score_note": "80% required \u2014 36 out of 45 questions correct",
+    "pass_rate_percent": 72,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "$195",
+    "renewal_cost_note": "$195/year to maintain SAFe Studio access and certification status",
+    "salary_boost_low": 6000,
+    "salary_boost_high": 18000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.8,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-04",
+    "skills": [
+      "SAFe",
+      "agile",
+      "Lean-Agile",
+      "PI planning",
+      "Agile Release Train",
+      "scrum",
+      "kanban",
+      "stakeholder management",
+      "product management",
+      "leadership",
+      "continuous delivery"
+    ],
+    "primary_skills": [
+      "SAFe",
+      "Lean-Agile",
+      "PI planning"
+    ],
+    "secondary_skills": [
+      "agile",
+      "Agile Release Train",
+      "scrum",
+      "leadership",
+      "continuous delivery"
+    ],
+    "prerequisites": [
+      "Mandatory attendance at 2-day Leading SAFe training"
+    ],
+    "recommended_prior_knowledge": [
+      "Agile/Scrum basics",
+      "Project or team management experience"
+    ],
+    "target_job_titles": [
+      "Scrum Master",
+      "Agile Coach",
+      "Release Train Engineer",
+      "Program Manager",
+      "Product Manager",
+      "Delivery Manager"
+    ],
+    "job_postings_count": 38000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "SAFe Release Train Engineer (RTE)",
+      "SAFe Product Owner/Product Manager (POPM)"
+    ]
+  },
+  {
+    "id": 109,
+    "name": "PMI CAPM (Certified Associate in Project Management)",
+    "provider": "PMI",
+    "industry": "management",
+    "subdomain": "project_management",
+    "difficulty": 2,
+    "description": "PMI's entry-level project management certification for those who haven't yet met PMP experience requirements. Covers PMBOK Guide fundamentals, agile, and predictive approaches.",
+    "official_url": "https://www.pmi.org/certifications/certified-associate-capm",
+    "cost": "$225\u2013$300",
+    "cost_source": "PMI Official (June 2026) \u2014 $225 for PMI members, $300 for non-members",
+    "duration_weeks": 8,
+    "study_hours": 60,
+    "exam_format": "Multiple choice, 150 questions",
+    "exam_duration_minutes": 180,
+    "passing_score": 0,
+    "passing_score_note": "PMI uses proficiency-level scoring \u2014 no fixed passing score published",
+    "pass_rate_percent": 68,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$150",
+    "renewal_cost_note": "Retake exam every 5 years OR earn 15 PDUs every 3 years",
+    "salary_boost_low": 3000,
+    "salary_boost_high": 8000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.2,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-04",
+    "skills": [
+      "project management",
+      "PMBOK",
+      "agile",
+      "scrum",
+      "risk management",
+      "stakeholder management",
+      "scheduling",
+      "budgeting",
+      "project planning",
+      "Waterfall"
+    ],
+    "primary_skills": [
+      "project management",
+      "PMBOK",
+      "project planning"
+    ],
+    "secondary_skills": [
+      "agile",
+      "risk management",
+      "scheduling",
+      "budgeting",
+      "stakeholder management"
+    ],
+    "prerequisites": [
+      "High school diploma + 23 hours of project management education"
+    ],
+    "recommended_prior_knowledge": [
+      "Basic project management concepts",
+      "PMBOK Guide fundamentals"
+    ],
+    "target_job_titles": [
+      "Junior Project Manager",
+      "Project Coordinator",
+      "Project Analyst",
+      "Business Analyst",
+      "Operations Coordinator",
+      "IT Coordinator"
+    ],
+    "job_postings_count": 28000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "PMI PMP",
+      "PMI-ACP"
+    ]
+  },
+  {
+    "id": 110,
+    "name": "Lean Six Sigma Green Belt",
+    "provider": "ASQ / IASSC",
+    "industry": "management",
+    "subdomain": "operations",
+    "difficulty": 3,
+    "description": "Validates ability to lead and execute process improvement projects using the DMAIC framework. Widely required in manufacturing, healthcare, logistics, and operations roles.",
+    "official_url": "https://www.asq.org/cert/six-sigma-green-belt",
+    "cost": "$438\u2013$538",
+    "cost_source": "ASQ Official (June 2026) \u2014 $438 members, $538 non-members. IASSC offers exam-only at $295.",
+    "duration_weeks": 12,
+    "study_hours": 80,
+    "exam_format": "Multiple choice, 110 questions (100 scored + 10 unscored), computer-based",
+    "exam_duration_minutes": 270,
+    "passing_score": 0,
+    "passing_score_note": "ASQ uses scaled scoring \u2014 passing score set per exam form. Approximately 70% correct required.",
+    "pass_rate_percent": 58,
+    "pass_rate_source": "Community estimate \u2014 ASQ does not publish official pass rates",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$138",
+    "renewal_cost_note": "ASQ recertification: $138 members, $188 non-members every 3 years + 18 recertification units",
+    "salary_boost_low": 5000,
+    "salary_boost_high": 15000,
+    "salary_boost_source": "Salary.com / Glassdoor (estimated) \u2014 LSSGB holders average ~$116,600",
+    "worth_it_rating": 8.8,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-04",
+    "skills": [
+      "Six Sigma",
+      "Lean",
+      "DMAIC",
+      "process improvement",
+      "quality management",
+      "statistical analysis",
+      "root cause analysis",
+      "project management",
+      "data analysis",
+      "waste reduction"
+    ],
+    "primary_skills": [
+      "Six Sigma",
+      "DMAIC",
+      "process improvement"
+    ],
+    "secondary_skills": [
+      "Lean",
+      "quality management",
+      "statistical analysis",
+      "root cause analysis",
+      "data analysis"
+    ],
+    "prerequisites": [
+      "3 years of on-the-job experience in one or more Green Belt knowledge areas (ASQ) OR no experience required (IASSC)"
+    ],
+    "recommended_prior_knowledge": [
+      "Basic statistics",
+      "Process management fundamentals"
+    ],
+    "target_job_titles": [
+      "Quality Manager",
+      "Process Improvement Manager",
+      "Operations Manager",
+      "Manufacturing Engineer",
+      "Quality Engineer",
+      "Business Process Analyst"
+    ],
+    "job_postings_count": 42000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Lean Six Sigma Black Belt",
+      "PMI PMP"
+    ]
+  },
+  {
+    "id": 111,
+    "name": "SAP Certified Associate",
+    "provider": "SAP",
+    "industry": "management",
+    "subdomain": "erp",
+    "difficulty": 3,
+    "description": "Entry-level SAP certification validating foundational knowledge of SAP S/4HANA. Multiple specialisations available (Finance, Supply Chain, HR, SD). Dominant ERP platform in enterprise \u2014 very high employer demand globally.",
+    "official_url": "https://training.sap.com/certification",
+    "cost": "$560",
+    "cost_source": "SAP Certification Hub Official (June 2026) \u2014 subscription model with multiple exam attempts",
+    "duration_weeks": 12,
+    "study_hours": 80,
+    "exam_format": "Multiple choice, 80 questions, 3 hours",
+    "exam_duration_minutes": 180,
+    "passing_score": 65,
+    "passing_score_note": "Approximately 65% required \u2014 varies slightly by module",
+    "pass_rate_percent": 62,
+    "pass_rate_source": "Community estimate \u2014 first-time pass rate typically 60\u201370%",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "$560",
+    "renewal_cost_note": "Annual SAP Certification Hub subscription renewal required to maintain certification",
+    "salary_boost_low": 8000,
+    "salary_boost_high": 25000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated) \u2014 SAP professionals average $120K\u2013$150K",
+    "worth_it_rating": 8.9,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-04",
+    "skills": [
+      "SAP",
+      "SAP S/4HANA",
+      "ERP",
+      "business processes",
+      "financial accounting",
+      "supply chain",
+      "data management",
+      "reporting",
+      "configuration",
+      "enterprise software"
+    ],
+    "primary_skills": [
+      "SAP",
+      "SAP S/4HANA",
+      "ERP"
+    ],
+    "secondary_skills": [
+      "business processes",
+      "financial accounting",
+      "supply chain",
+      "configuration",
+      "reporting"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Business process fundamentals",
+      "ERP concepts"
+    ],
+    "target_job_titles": [
+      "SAP Consultant",
+      "SAP Analyst",
+      "ERP Analyst",
+      "Business Systems Analyst",
+      "SAP Functional Analyst",
+      "Finance Systems Manager"
+    ],
+    "job_postings_count": 55000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "SAP Certified Professional",
+      "SAP SuccessFactors Consultant"
+    ]
   }
 ]

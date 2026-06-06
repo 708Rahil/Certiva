@@ -215,5 +215,521 @@
       "HubSpot Sales Software Certification",
       "HubSpot Service Hub Certification"
     ]
+  },
+  {
+    "id": 112,
+    "name": "Meta Blueprint Certified Media Buying Professional",
+    "provider": "Meta",
+    "industry": "marketing",
+    "subdomain": "paid_ads",
+    "difficulty": 2,
+    "description": "Official Meta certification validating expertise in Facebook and Instagram ad campaign creation, audience targeting, bidding, optimization, and performance measurement.",
+    "official_url": "https://www.facebook.com/business/learn/certification",
+    "cost": "$150",
+    "cost_source": "Meta Blueprint via Pearson VUE (June 2026)",
+    "duration_weeks": 4,
+    "study_hours": 20,
+    "exam_format": "Multiple choice & scenario-based, 60 questions",
+    "exam_duration_minutes": 105,
+    "passing_score": 700,
+    "passing_score_note": "Scaled score 300\u20131000, minimum 700 required to pass",
+    "pass_rate_percent": 65,
+    "pass_rate_source": "Community estimate \u2014 scenario-based questions require practical experience",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "$150",
+    "renewal_cost_note": "Annual recertification required \u2014 retake exam via Pearson VUE",
+    "salary_boost_low": 3000,
+    "salary_boost_high": 8000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.4,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-04",
+    "skills": [
+      "Meta Ads",
+      "Facebook Ads",
+      "Instagram Ads",
+      "PPC",
+      "audience targeting",
+      "campaign management",
+      "digital advertising",
+      "conversion optimization",
+      "retargeting",
+      "paid social",
+      "ROI"
+    ],
+    "primary_skills": [
+      "Meta Ads",
+      "Facebook Ads",
+      "paid social"
+    ],
+    "secondary_skills": [
+      "audience targeting",
+      "campaign management",
+      "conversion optimization",
+      "retargeting",
+      "ROI"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Digital marketing basics",
+      "Facebook Ads Manager experience"
+    ],
+    "target_job_titles": [
+      "Paid Social Manager",
+      "Digital Marketer",
+      "Performance Marketing Manager",
+      "Social Media Manager",
+      "Media Buyer",
+      "Growth Marketer"
+    ],
+    "job_postings_count": 38000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Google Ads Certification",
+      "TikTok Ads Certification"
+    ]
+  },
+  {
+    "id": 113,
+    "name": "Semrush SEO Toolkit Certification",
+    "provider": "Semrush",
+    "industry": "marketing",
+    "subdomain": "analytics",
+    "difficulty": 1,
+    "description": "Free certification validating practical SEO skills using the Semrush platform \u2014 keyword research, site audits, rank tracking, backlink analysis, and competitive research.",
+    "official_url": "https://www.semrush.com/academy/",
+    "cost": "Free",
+    "cost_source": "Semrush Academy (June 2026) \u2014 completely free, no subscription required",
+    "duration_weeks": 2,
+    "study_hours": 6,
+    "exam_format": "Multiple choice, 30 questions",
+    "exam_duration_minutes": 27,
+    "passing_score": 70,
+    "passing_score_note": "70% required to pass \u2014 retake immediately if failed",
+    "pass_rate_percent": 80,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "Free",
+    "renewal_cost_note": "Retake annually for free \u2014 Semrush updates course content regularly",
+    "salary_boost_low": 1000,
+    "salary_boost_high": 4000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.0,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-04",
+    "skills": [
+      "SEO",
+      "keyword research",
+      "Semrush",
+      "site audits",
+      "rank tracking",
+      "backlink analysis",
+      "competitive research",
+      "on-page SEO",
+      "content marketing",
+      "search marketing"
+    ],
+    "primary_skills": [
+      "SEO",
+      "keyword research",
+      "Semrush"
+    ],
+    "secondary_skills": [
+      "site audits",
+      "backlink analysis",
+      "competitive research",
+      "rank tracking"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic SEO concepts"
+    ],
+    "target_job_titles": [
+      "SEO Specialist",
+      "Digital Marketer",
+      "Content Marketer",
+      "Growth Marketer",
+      "Marketing Analyst",
+      "SEO Manager"
+    ],
+    "job_postings_count": 30000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Google Analytics Certification",
+      "HubSpot Content Marketing Certification"
+    ]
+  },
+  {
+    "id": 114,
+    "name": "Hootsuite Social Marketing Certification",
+    "provider": "Hootsuite",
+    "industry": "marketing",
+    "subdomain": "inbound",
+    "difficulty": 1,
+    "description": "Certification validating social media marketing strategy, content planning, community management, analytics, and campaign optimization using the Hootsuite platform.",
+    "official_url": "https://education.hootsuite.com/",
+    "cost": "$199",
+    "cost_source": "Hootsuite Academy (June 2026) \u2014 includes training course + exam",
+    "duration_weeks": 3,
+    "study_hours": 20,
+    "exam_format": "Multiple choice, 60 questions",
+    "exam_duration_minutes": 60,
+    "passing_score": 80,
+    "passing_score_note": "80% required to pass \u2014 48 out of 60 questions correct",
+    "pass_rate_percent": 78,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "$199",
+    "renewal_cost_note": "Annual recertification required",
+    "salary_boost_low": 2000,
+    "salary_boost_high": 6000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.1,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-04",
+    "skills": [
+      "social media",
+      "social media marketing",
+      "Hootsuite",
+      "content planning",
+      "community management",
+      "social analytics",
+      "campaign management",
+      "brand advocacy",
+      "social media strategy",
+      "scheduling"
+    ],
+    "primary_skills": [
+      "social media",
+      "social media marketing",
+      "Hootsuite"
+    ],
+    "secondary_skills": [
+      "content planning",
+      "community management",
+      "social analytics",
+      "brand advocacy"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic social media knowledge"
+    ],
+    "target_job_titles": [
+      "Social Media Manager",
+      "Digital Marketer",
+      "Content Manager",
+      "Community Manager",
+      "Social Media Coordinator",
+      "Marketing Manager"
+    ],
+    "job_postings_count": 35000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "HubSpot Marketing Certification",
+      "Meta Blueprint Certification"
+    ]
+  },
+  {
+    "id": 115,
+    "name": "HubSpot Content Marketing Certification",
+    "provider": "HubSpot",
+    "industry": "marketing",
+    "subdomain": "inbound",
+    "difficulty": 1,
+    "description": "Comprehensive content marketing certification covering content strategy, blogging, SEO, video, visual content, podcast creation, and content promotion. Separate from the HubSpot Inbound Marketing cert.",
+    "official_url": "https://academy.hubspot.com/courses/content-marketing",
+    "cost": "Free",
+    "cost_source": "HubSpot Academy (June 2026)",
+    "duration_weeks": 3,
+    "study_hours": 8,
+    "exam_format": "Multiple choice, 60 questions",
+    "exam_duration_minutes": 180,
+    "passing_score": 80,
+    "passing_score_note": "80% required \u2014 retake after 12 hours if failed",
+    "pass_rate_percent": 82,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 2,
+    "renewal_required": true,
+    "renewal_cost": "Free",
+    "renewal_cost_note": "Retake exam for free every 2 years via HubSpot Academy",
+    "salary_boost_low": 2000,
+    "salary_boost_high": 6000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.3,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-04",
+    "skills": [
+      "content marketing",
+      "content strategy",
+      "SEO",
+      "blogging",
+      "copywriting",
+      "video marketing",
+      "social media",
+      "email marketing",
+      "lead generation",
+      "storytelling",
+      "content distribution"
+    ],
+    "primary_skills": [
+      "content marketing",
+      "content strategy",
+      "SEO"
+    ],
+    "secondary_skills": [
+      "blogging",
+      "copywriting",
+      "video marketing",
+      "lead generation",
+      "content distribution"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Marketing fundamentals"
+    ],
+    "target_job_titles": [
+      "Content Marketer",
+      "Content Strategist",
+      "SEO Content Writer",
+      "Blog Manager",
+      "Content Manager",
+      "Digital Marketer"
+    ],
+    "job_postings_count": 32000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "HubSpot Marketing Certification",
+      "Semrush SEO Certification"
+    ]
+  },
+  {
+    "id": 116,
+    "name": "Salesforce Marketing Cloud Email Specialist",
+    "provider": "Salesforce",
+    "industry": "marketing",
+    "subdomain": "paid_ads",
+    "difficulty": 3,
+    "description": "Validates expertise in Salesforce Marketing Cloud for email marketing \u2014 building campaigns, automation, segmentation, analytics, and deliverability. High salary premium vs general marketing roles.",
+    "official_url": "https://trailhead.salesforce.com/credentials/marketingcloudemailspecialist",
+    "cost": "$200",
+    "cost_source": "Salesforce Official (June 2026)",
+    "duration_weeks": 8,
+    "study_hours": 60,
+    "exam_format": "Multiple choice, 60 questions",
+    "exam_duration_minutes": 90,
+    "passing_score": 67,
+    "passing_score_note": "67% required to pass",
+    "pass_rate_percent": 58,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "$100",
+    "renewal_cost_note": "Annual maintenance modules \u2014 free to complete",
+    "salary_boost_low": 6000,
+    "salary_boost_high": 18000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.9,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-04",
+    "skills": [
+      "Salesforce Marketing Cloud",
+      "email marketing",
+      "marketing automation",
+      "CRM",
+      "segmentation",
+      "campaign management",
+      "journey builder",
+      "analytics",
+      "A/B testing",
+      "deliverability"
+    ],
+    "primary_skills": [
+      "Salesforce Marketing Cloud",
+      "email marketing",
+      "marketing automation"
+    ],
+    "secondary_skills": [
+      "segmentation",
+      "journey builder",
+      "analytics",
+      "A/B testing",
+      "CRM"
+    ],
+    "prerequisites": [
+      "Salesforce Marketing Cloud fundamentals recommended"
+    ],
+    "recommended_prior_knowledge": [
+      "Email marketing basics",
+      "CRM concepts",
+      "Marketing automation fundamentals"
+    ],
+    "target_job_titles": [
+      "Marketing Cloud Specialist",
+      "Email Marketing Manager",
+      "Marketing Automation Manager",
+      "CRM Manager",
+      "Digital Marketing Manager",
+      "Marketing Operations Manager"
+    ],
+    "job_postings_count": 25000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Salesforce Marketing Cloud Consultant",
+      "Salesforce Administrator"
+    ]
+  },
+  {
+    "id": 117,
+    "name": "LinkedIn Marketing Labs Certification",
+    "provider": "LinkedIn",
+    "industry": "marketing",
+    "subdomain": "paid_ads",
+    "difficulty": 1,
+    "description": "Official LinkedIn certification for B2B marketing on LinkedIn \u2014 covering campaign management, audience targeting, Matched Audiences, Lead Gen Forms, and performance measurement.",
+    "official_url": "https://www.linkedin.com/learning/topics/linkedin-marketing-labs",
+    "cost": "Free",
+    "cost_source": "LinkedIn Marketing Labs (June 2026)",
+    "duration_weeks": 2,
+    "study_hours": 8,
+    "exam_format": "Multiple choice, 50 questions",
+    "exam_duration_minutes": 60,
+    "passing_score": 70,
+    "passing_score_note": "Approximately 70% required to pass",
+    "pass_rate_percent": 80,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "Free",
+    "renewal_cost_note": "Annual recertification via LinkedIn Marketing Labs \u2014 free",
+    "salary_boost_low": 2000,
+    "salary_boost_high": 5000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.0,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-04",
+    "skills": [
+      "LinkedIn Ads",
+      "B2B marketing",
+      "digital advertising",
+      "campaign management",
+      "audience targeting",
+      "lead generation",
+      "content marketing",
+      "social media",
+      "marketing metrics",
+      "ROI"
+    ],
+    "primary_skills": [
+      "LinkedIn Ads",
+      "B2B marketing",
+      "campaign management"
+    ],
+    "secondary_skills": [
+      "audience targeting",
+      "lead generation",
+      "Matched Audiences",
+      "marketing metrics"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic digital marketing knowledge",
+      "LinkedIn platform familiarity"
+    ],
+    "target_job_titles": [
+      "B2B Marketer",
+      "Digital Marketer",
+      "Demand Generation Manager",
+      "Marketing Manager",
+      "Social Media Manager",
+      "Performance Marketing Manager"
+    ],
+    "job_postings_count": 28000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Meta Blueprint Certification",
+      "Google Ads Certification"
+    ]
+  },
+  {
+    "id": 118,
+    "name": "HubSpot Email Marketing Certification",
+    "provider": "HubSpot",
+    "industry": "marketing",
+    "subdomain": "inbound",
+    "difficulty": 1,
+    "description": "Comprehensive email marketing certification covering email strategy, list management, segmentation, automation, A/B testing, and deliverability using HubSpot and general best practices.",
+    "official_url": "https://academy.hubspot.com/courses/email-marketing",
+    "cost": "Free",
+    "cost_source": "HubSpot Academy (June 2026)",
+    "duration_weeks": 2,
+    "study_hours": 6,
+    "exam_format": "Multiple choice, 45 questions",
+    "exam_duration_minutes": 90,
+    "passing_score": 80,
+    "passing_score_note": "80% required \u2014 retake after 12 hours if failed",
+    "pass_rate_percent": 83,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 2,
+    "renewal_required": true,
+    "renewal_cost": "Free",
+    "renewal_cost_note": "Retake exam for free every 2 years via HubSpot Academy",
+    "salary_boost_low": 1500,
+    "salary_boost_high": 5000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.1,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-04",
+    "skills": [
+      "email marketing",
+      "email automation",
+      "segmentation",
+      "A/B testing",
+      "list management",
+      "deliverability",
+      "HubSpot",
+      "campaign management",
+      "lead nurturing",
+      "marketing metrics"
+    ],
+    "primary_skills": [
+      "email marketing",
+      "email automation",
+      "segmentation"
+    ],
+    "secondary_skills": [
+      "A/B testing",
+      "list management",
+      "deliverability",
+      "lead nurturing",
+      "HubSpot"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic marketing knowledge"
+    ],
+    "target_job_titles": [
+      "Email Marketing Specialist",
+      "CRM Manager",
+      "Marketing Manager",
+      "Digital Marketer",
+      "Marketing Automation Specialist",
+      "Lifecycle Marketer"
+    ],
+    "job_postings_count": 30000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "HubSpot Marketing Certification",
+      "Salesforce Marketing Cloud Email Specialist"
+    ]
   }
 ]
