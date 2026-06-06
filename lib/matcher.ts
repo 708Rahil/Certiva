@@ -677,7 +677,13 @@ export function matchCertifications(
       0.01 * trendingBonus;
 
     // Scale and curve the final score
-    const scoreVal = rawScore > 0 ? (0.25 + 0.75 * Math.pow(rawScore, 0.8)) : 0;
+    let scoreVal = rawScore > 0 ? (0.25 + 0.75 * Math.pow(rawScore, 0.8)) : 0;
+
+    // If explicitly named in the job description, guarantee a high baseline match score (85+)
+    if (explicitMatch) {
+      scoreVal = Math.max(0.85, scoreVal);
+    }
+
     const score = Math.min(100, Math.round(scoreVal * 100));
 
     const explanation = generateExplanation({
