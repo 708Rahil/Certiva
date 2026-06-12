@@ -74,3 +74,63 @@ CREATE TABLE IF NOT EXISTS profiles (
   current_skills TEXT, -- JSON-encoded string array
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+-- Enable Row Level Security (RLS)
+ALTER TABLE user_certifications ENABLE ROW LEVEL SECURITY;
+ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE jobs ENABLE ROW LEVEL SECURITY;
+
+-- Policies for user_certifications
+CREATE POLICY "Allow users to read their own certifications"
+  ON user_certifications FOR SELECT
+  USING (auth.uid() = user_id OR (auth.jwt() ->> 'sub') = user_id);
+
+CREATE POLICY "Allow users to insert their own certifications"
+  ON user_certifications FOR INSERT
+  WITH CHECK (auth.uid() = user_id OR (auth.jwt() ->> 'sub') = user_id);
+
+CREATE POLICY "Allow users to update their own certifications"
+  ON user_certifications FOR UPDATE
+  USING (auth.uid() = user_id OR (auth.jwt() ->> 'sub') = user_id)
+  WITH CHECK (auth.uid() = user_id OR (auth.jwt() ->> 'sub') = user_id);
+
+CREATE POLICY "Allow users to delete their own certifications"
+  ON user_certifications FOR DELETE
+  USING (auth.uid() = user_id OR (auth.jwt() ->> 'sub') = user_id);
+
+-- Policies for profiles (where PRIMARY KEY 'id' matches user_id)
+CREATE POLICY "Allow users to read their own profile"
+  ON profiles FOR SELECT
+  USING (auth.uid() = id OR (auth.jwt() ->> 'sub') = id);
+
+CREATE POLICY "Allow users to insert their own profile"
+  ON profiles FOR INSERT
+  WITH CHECK (auth.uid() = id OR (auth.jwt() ->> 'sub') = id);
+
+CREATE POLICY "Allow users to update their own profile"
+  ON profiles FOR UPDATE
+  USING (auth.uid() = id OR (auth.jwt() ->> 'sub') = id)
+  WITH CHECK (auth.uid() = id OR (auth.jwt() ->> 'sub') = id);
+
+CREATE POLICY "Allow users to delete their own profile"
+  ON profiles FOR DELETE
+  USING (auth.uid() = id OR (auth.jwt() ->> 'sub') = id);
+
+-- Policies for jobs
+CREATE POLICY "Allow users to read their own jobs"
+  ON jobs FOR SELECT
+  USING (auth.uid() = user_id OR (auth.jwt() ->> 'sub') = user_id);
+
+CREATE POLICY "Allow users to insert their own jobs"
+  ON jobs FOR INSERT
+  WITH CHECK (auth.uid() = user_id OR (auth.jwt() ->> 'sub') = user_id);
+
+CREATE POLICY "Allow users to update their own jobs"
+  ON jobs FOR UPDATE
+  USING (auth.uid() = user_id OR (auth.jwt() ->> 'sub') = user_id)
+  WITH CHECK (auth.uid() = user_id OR (auth.jwt() ->> 'sub') = user_id);
+
+CREATE POLICY "Allow users to delete their own jobs"
+  ON jobs FOR DELETE
+  USING (auth.uid() = user_id OR (auth.jwt() ->> 'sub') = user_id);
+
