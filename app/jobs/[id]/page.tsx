@@ -220,6 +220,75 @@ export default function JobDetailPage() {
         </div>
       )}
 
+      {/* Job header card */}
+      <div className="animate-fade-up" style={{
+        background: 'var(--bg-card)', border: '1px solid var(--border)',
+        borderRadius: 20, padding: '28px 32px', marginBottom: 32,
+      }}>
+        <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start' }}>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>
+              Job Analysis
+            </div>
+            <h1 style={{
+              margin: '0 0 6px',
+              fontFamily: 'var(--font-display)',
+              fontSize: 28, fontWeight: 400, letterSpacing: '-0.5px',
+              color: 'var(--text-primary)',
+            }}>{job.title}</h1>
+            <div style={{ fontSize: 16, color: 'var(--text-secondary)', marginBottom: 20 }}>{job.company}</div>
+
+            {/* Extracted skills */}
+            <div style={{ marginBottom: 16 }}>
+              <div style={{ fontSize: 11, color: 'var(--text-muted)', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>
+                Extracted Skills ({skills.length})
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                {skills.map(s => (
+                  <span key={s} style={{
+                    fontSize: 12, padding: '3px 10px', borderRadius: 100,
+                    background: 'var(--border)', color: 'var(--text-secondary)', fontWeight: 500,
+                  }}>{s}</span>
+                ))}
+                {skills.length === 0 && (
+                  <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>No skills extracted.</span>
+                )}
+              </div>
+            </div>
+
+            {/* Description toggle */}
+            <div>
+              <button
+                onClick={() => setShowFullDesc(v => !v)}
+                style={{
+                  background: 'none', border: 'none', padding: 0, cursor: 'pointer',
+                  fontSize: 13, color: 'var(--accent-light)', fontFamily: 'var(--font-body)',
+                }}
+              >
+                {showFullDesc ? '↑ Hide description' : '↓ Show full job description'}
+              </button>
+              {showFullDesc && (
+                <div style={{
+                  marginTop: 12, fontSize: 13, color: 'var(--text-secondary)',
+                  lineHeight: 1.7, whiteSpace: 'pre-wrap',
+                  maxHeight: 260, overflowY: 'auto',
+                  background: 'rgba(0,0,0,0.2)', borderRadius: 10, padding: '14px 16px',
+                }}>
+                  {job.description}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Stats */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, minWidth: 140 }}>
+            <StatBubble label="Best Match" value={`${topScore}`} unit="/ 100" accent />
+            <StatBubble label="Certs Found" value={`${recs.length}`} />
+            <StatBubble label="Skills Detected" value={`${skills.length}`} />
+          </div>
+        </div>
+      </div>
+
       {/* Career Readiness Scorecard */}
       <div className="animate-fade-up delay-1" style={{
         background: 'var(--bg-card)',
@@ -380,75 +449,6 @@ export default function JobDetailPage() {
                 </div>
               </>
             )}
-          </div>
-        </div>
-      </div>
-
-      {/* Job header card */}
-      <div className="animate-fade-up" style={{
-        background: 'var(--bg-card)', border: '1px solid var(--border)',
-        borderRadius: 20, padding: '28px 32px', marginBottom: 32,
-      }}>
-        <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start' }}>
-          <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>
-              Job Analysis
-            </div>
-            <h1 style={{
-              margin: '0 0 6px',
-              fontFamily: 'var(--font-display)',
-              fontSize: 28, fontWeight: 400, letterSpacing: '-0.5px',
-              color: 'var(--text-primary)',
-            }}>{job.title}</h1>
-            <div style={{ fontSize: 16, color: 'var(--text-secondary)', marginBottom: 20 }}>{job.company}</div>
-
-            {/* Extracted skills */}
-            <div style={{ marginBottom: 16 }}>
-              <div style={{ fontSize: 11, color: 'var(--text-muted)', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>
-                Extracted Skills ({skills.length})
-              </div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                {skills.map(s => (
-                  <span key={s} style={{
-                    fontSize: 12, padding: '3px 10px', borderRadius: 100,
-                    background: 'var(--border)', color: 'var(--text-secondary)', fontWeight: 500,
-                  }}>{s}</span>
-                ))}
-                {skills.length === 0 && (
-                  <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>No skills extracted.</span>
-                )}
-              </div>
-            </div>
-
-            {/* Description toggle */}
-            <div>
-              <button
-                onClick={() => setShowFullDesc(v => !v)}
-                style={{
-                  background: 'none', border: 'none', padding: 0, cursor: 'pointer',
-                  fontSize: 13, color: 'var(--accent-light)', fontFamily: 'var(--font-body)',
-                }}
-              >
-                {showFullDesc ? '↑ Hide description' : '↓ Show full job description'}
-              </button>
-              {showFullDesc && (
-                <div style={{
-                  marginTop: 12, fontSize: 13, color: 'var(--text-secondary)',
-                  lineHeight: 1.7, whiteSpace: 'pre-wrap',
-                  maxHeight: 260, overflowY: 'auto',
-                  background: 'rgba(0,0,0,0.2)', borderRadius: 10, padding: '14px 16px',
-                }}>
-                  {job.description}
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Stats */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, minWidth: 140 }}>
-            <StatBubble label="Best Match" value={`${topScore}`} unit="/ 100" accent />
-            <StatBubble label="Certs Found" value={`${recs.length}`} />
-            <StatBubble label="Skills Detected" value={`${skills.length}`} />
           </div>
         </div>
       </div>
