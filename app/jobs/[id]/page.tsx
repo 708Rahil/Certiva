@@ -57,7 +57,7 @@ export default function JobDetailPage() {
   const { isLoaded, userId } = useAuth();
   const [userSkills, setUserSkills] = useState<string[]>([]);
   const [completedCertSkills, setCompletedCertSkills] = useState<string[]>([]);
-  const [showScorecard, setShowScorecard] = useState(true);
+  const [showScorecard, setShowScorecard] = useState(false);
 
   const handleAddToCerts = async (certId: number, certName: string) => {
     try {
