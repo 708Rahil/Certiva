@@ -355,7 +355,7 @@ export default async function CertificationDetailPage({ params }: PageProps) {
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 4, background: 'rgba(251, 191, 36, 0.08)', padding: '4px 8px', borderRadius: 8 }}>
                     <Star size={16} fill="#fbbf24" stroke="#fbbf24" />
-                    <span style={{ fontSize: 14, fontWeight: 700, color: '#fbbf24' }}>{cert.worth_it_rating.toFixed(1)} / 5</span>
+                    <span style={{ fontSize: 14, fontWeight: 700, color: '#fbbf24' }}>{cert.worth_it_rating.toFixed(1)} / 10</span>
                   </div>
                 </div>
               )}
