@@ -239,7 +239,7 @@ export default function ProfilePage() {
               type="text"
               value={profile.full_name}
               onChange={e => setProfile(prev => ({ ...prev, full_name: e.target.value }))}
-              placeholder="e.g. Rahil Gandhi"
+              placeholder="e.g. John Smith"
               style={{
                 padding: '10px 14px',
                 borderRadius: 8,
