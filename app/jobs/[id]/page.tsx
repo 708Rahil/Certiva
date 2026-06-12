@@ -57,6 +57,7 @@ export default function JobDetailPage() {
   const { isLoaded, userId } = useAuth();
   const [userSkills, setUserSkills] = useState<string[]>([]);
   const [completedCertSkills, setCompletedCertSkills] = useState<string[]>([]);
+  const [showScorecard, setShowScorecard] = useState(true);
 
   const handleAddToCerts = async (certId: number, certName: string) => {
     try {
@@ -241,202 +242,148 @@ export default function JobDetailPage() {
         </div>
       )}
 
-      {/* Main Two-Column Content Grid */}
-      <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+      {/* Main Content Grid */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
         
-        {/* Left Column: Job Details & Certifications list */}
-        <div style={{ flex: '2 1 550px', minWidth: 320, display: 'flex', flexDirection: 'column', gap: 24 }}>
-          {/* Job header card */}
-          <div className="animate-fade-up" style={{
-            background: 'var(--bg-card)', border: '1px solid var(--border)',
-            borderRadius: 20, padding: '28px 32px',
-          }}>
-            <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-              <div style={{ flex: 1, minWidth: 260 }}>
-                <div style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>
-                  Job Analysis
-                </div>
-                <h1 style={{
-                  margin: '0 0 6px',
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 28, fontWeight: 400, letterSpacing: '-0.5px',
-                  color: 'var(--text-primary)',
-                }}>{job.title}</h1>
-                <div style={{ fontSize: 16, color: 'var(--text-secondary)', marginBottom: 20 }}>{job.company}</div>
+        {/* Job header card */}
+        <div className="animate-fade-up" style={{
+          background: 'var(--bg-card)', border: '1px solid var(--border)',
+          borderRadius: 20, padding: '28px 32px',
+        }}>
+          <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
+            <div style={{ flex: 1, minWidth: 260 }}>
+              <div style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>
+                Job Analysis
+              </div>
+              <h1 style={{
+                margin: '0 0 6px',
+                fontFamily: 'var(--font-display)',
+                fontSize: 28, fontWeight: 400, letterSpacing: '-0.5px',
+                color: 'var(--text-primary)',
+              }}>{job.title}</h1>
+              <div style={{ fontSize: 16, color: 'var(--text-secondary)', marginBottom: 20 }}>{job.company}</div>
 
-                {/* Extracted skills */}
-                <div style={{ marginBottom: 16 }}>
-                  <div style={{ fontSize: 11, color: 'var(--text-muted)', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>
-                    Extracted Skills ({skills.length})
-                  </div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                    {skills.map(s => (
-                      <span key={s} style={{
-                        fontSize: 12, padding: '3px 10px', borderRadius: 100,
-                        background: 'var(--border)', color: 'var(--text-secondary)', fontWeight: 500,
-                      }}>{s}</span>
-                    ))}
-                    {skills.length === 0 && (
-                      <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>No skills extracted.</span>
-                    )}
-                  </div>
+              {/* Extracted skills */}
+              <div style={{ marginBottom: 16 }}>
+                <div style={{ fontSize: 11, color: 'var(--text-muted)', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>
+                  Extracted Skills ({skills.length})
                 </div>
-
-                {/* Description toggle */}
-                <div>
-                  <button
-                    onClick={() => setShowFullDesc(v => !v)}
-                    style={{
-                      background: 'none', border: 'none', padding: 0, cursor: 'pointer',
-                      fontSize: 13, color: 'var(--accent-light)', fontFamily: 'var(--font-body)',
-                    }}
-                  >
-                    {showFullDesc ? '↑ Hide description' : '↓ Show full job description'}
-                  </button>
-                  {showFullDesc && (
-                    <div style={{
-                      marginTop: 12, fontSize: 13, color: 'var(--text-secondary)',
-                      lineHeight: 1.7, whiteSpace: 'pre-wrap',
-                      maxHeight: 260, overflowY: 'auto',
-                      background: 'rgba(0,0,0,0.2)', borderRadius: 10, padding: '14px 16px',
-                    }}>
-                      {job.description}
-                    </div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                  {skills.map(s => (
+                    <span key={s} style={{
+                      fontSize: 12, padding: '3px 10px', borderRadius: 100,
+                      background: 'var(--border)', color: 'var(--text-secondary)', fontWeight: 500,
+                    }}>{s}</span>
+                  ))}
+                  {skills.length === 0 && (
+                    <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>No skills extracted.</span>
                   )}
                 </div>
               </div>
 
-              {/* Stats */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, minWidth: 140 }}>
-                <StatBubble label="Best Match" value={`${topScore}`} unit="/ 100" accent />
-                <StatBubble label="Certs Found" value={`${recs.length}`} />
-                <StatBubble label="Skills Detected" value={`${skills.length}`} />
-              </div>
-            </div>
-          </div>
-
-          {/* Filter bar */}
-          {industries.length > 1 && (
-            <div className="animate-fade-up delay-1" style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-              <FilterChip label="All" value="all" active={filterIndustry === 'all'} onClick={() => setFilterIndustry('all')} />
-              {industries.map(ind => (
-                <FilterChip key={ind} label={ind} value={ind} active={filterIndustry === ind}
-                  onClick={() => setFilterIndustry(ind)} color={INDUSTRY_COLORS[ind]} />
-              ))}
-            </div>
-          )}
-
-          {/* Recommendations */}
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 12 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600, color: 'var(--text-primary)', letterSpacing: '-0.3px' }}>
-                  Recommended Certifications
-                </h2>
-                <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>
-                  {filteredAndSorted.length} result{filteredAndSorted.length !== 1 ? 's' : ''}
-                </span>
-              </div>
-
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 500 }}>Sort by:</span>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as SortOption)}
+              {/* Description toggle */}
+              <div>
+                <button
+                  onClick={() => setShowFullDesc(v => !v)}
                   style={{
-                    background: 'var(--bg-card)',
-                    border: '1px solid var(--border)',
-                    borderRadius: 8,
-                    padding: '6px 12px',
-                    fontSize: 13,
-                    color: 'var(--text-primary)',
-                    outline: 'none',
-                    cursor: 'pointer'
+                    background: 'none', border: 'none', padding: 0, cursor: 'pointer',
+                    fontSize: 13, color: 'var(--accent-light)', fontFamily: 'var(--font-body)',
                   }}
                 >
-                  <option value="score">Best Match</option>
-                  <option value="difficulty">Difficulty (Low to High)</option>
-                  <option value="cost">Cost (Low to High)</option>
-                </select>
+                  {showFullDesc ? '↑ Hide description' : '↓ Show full job description'}
+                </button>
+                {showFullDesc && (
+                  <div style={{
+                    marginTop: 12, fontSize: 13, color: 'var(--text-secondary)',
+                    lineHeight: 1.7, whiteSpace: 'pre-wrap',
+                    maxHeight: 260, overflowY: 'auto',
+                    background: 'rgba(0,0,0,0.2)', borderRadius: 10, padding: '14px 16px',
+                  }}>
+                    {job.description}
+                  </div>
+                )}
               </div>
             </div>
 
-            {filteredAndSorted.length === 0 ? (
-              <EmptyState />
-            ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                {filteredAndSorted.map((rec, i) => (
-                  <CertCard
-                    key={rec.id}
-                    rank={i + 1}
-                    certId={rec.cert_id}
-                    name={rec.name}
-                    provider={rec.provider}
-                    industry={rec.industry}
-                    difficulty={rec.difficulty}
-                    score={rec.score}
-                    skillOverlap={rec.skill_overlap}
-                    industryMatch={!!rec.industry_match}
-                    matchedSkills={JSON.parse(rec.matched_skills || '[]')}
-                    explanation={rec.explanation}
-                    description={rec.description}
-                    cost={rec.cost}
-                    duration={rec.duration_weeks ? `${rec.duration_weeks} weeks` : undefined}
-                    official_url={rec.official_url}
-                    onAddToCerts={userId ? handleAddToCerts : undefined}
-                    animDelay={i * 60}
-                  />
-                ))}
-              </div>
-            )}
+            {/* Stats */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, minWidth: 140 }}>
+              <StatBubble label="Best Match" value={`${topScore}`} unit="/ 100" accent />
+              <StatBubble label="Certs Found" value={`${recs.length}`} />
+              <StatBubble label="Skills Detected" value={`${skills.length}`} />
+            </div>
           </div>
-
         </div>
 
-        {/* Right Column: Scorecard Sidebar */}
-        <div style={{ flex: '1 1 320px', minWidth: 300, position: 'sticky', top: 80, display: 'flex', flexDirection: 'column', gap: 24 }}>
-          {/* Career Readiness Scorecard */}
-          <div className="animate-fade-up delay-1" style={{
-            background: 'var(--bg-card)',
-            border: '1px solid var(--border)',
-            borderRadius: 20,
-            padding: '24px',
-            position: 'relative',
-            overflow: 'hidden',
-          }}>
-            {/* Glow backdrop */}
-            <div style={{
-              position: 'absolute',
-              top: '-50%',
-              right: '-10%',
-              width: 250,
-              height: 250,
-              background: 'rgba(79, 110, 247, 0.08)',
-              filter: 'blur(70px)',
-              borderRadius: '50%',
-              pointerEvents: 'none',
-            }} />
-
-            <h3 style={{
-              margin: '0 0 20px',
-              fontSize: 13,
-              fontWeight: 700,
-              color: 'var(--text-primary)',
-              letterSpacing: '0.05em',
-              textTransform: 'uppercase',
-              borderBottom: '1px solid var(--border)',
-              paddingBottom: 12,
-            }}>
-              🎯 Career Readiness Scorecard
-            </h3>
-
-            <div style={{
+        {/* Collapsible Career Readiness Scorecard Dropdown */}
+        <div className="animate-fade-up delay-1" style={{
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border)',
+          borderRadius: 20,
+          overflow: 'hidden',
+          transition: 'all 0.3s ease',
+        }}>
+          {/* Accordion Trigger Header */}
+          <button
+            onClick={() => setShowScorecard(v => !v)}
+            style={{
+              width: '100%',
+              background: 'none',
+              border: 'none',
+              padding: '20px 24px',
               display: 'flex',
-              flexDirection: 'column',
-              gap: 24,
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              cursor: 'pointer',
+              textAlign: 'left',
+              fontFamily: 'inherit',
+              gap: 16,
+              flexWrap: 'wrap',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <span style={{ fontSize: 18 }}>🎯</span>
+              <h3 style={{
+                margin: 0,
+                fontSize: 14,
+                fontWeight: 700,
+                color: 'var(--text-primary)',
+                letterSpacing: '0.05em',
+                textTransform: 'uppercase',
+              }}>
+                Career Readiness Scorecard
+              </h3>
+            </div>
+            
+            <div style={{ display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: 16, fontSize: 13, color: 'var(--text-secondary)' }}>
+                <span>Compatibility: <strong style={{ color: 'var(--accent-light)' }}>{matchPercent}%</strong></span>
+                <span style={{ width: 1, height: 14, background: 'var(--border)', alignSelf: 'center' }} />
+                <span>Roadmap Bridge: <strong style={{ color: 'var(--accent-light)' }}>{bridgePercent}%</strong></span>
+              </div>
+              
+              <span style={{
+                fontSize: 12,
+                color: 'var(--text-muted)',
+                transform: showScorecard ? 'rotate(180deg)' : 'rotate(0deg)',
+                transition: 'transform 0.2s ease',
+              }}>
+                ▼
+              </span>
+            </div>
+          </button>
+
+          {/* Accordion Content */}
+          {showScorecard && (
+            <div style={{
+              padding: '0 24px 24px',
+              borderTop: '1px solid var(--border)',
+              background: 'rgba(0, 0, 0, 0.05)',
+              display: 'flex',
+              gap: 32,
+              flexWrap: 'wrap',
             }}>
               {/* Col 1: Match Score Ring */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+              <div style={{ flex: '1 1 220px', display: 'flex', alignItems: 'center', gap: 16, paddingTop: 24 }}>
                 <ScoreRing score={matchPercent} size={80} />
                 <div>
                   <h4 style={{ margin: '0 0 4px', fontSize: 15, fontWeight: 700, color: 'var(--text-primary)' }}>
@@ -448,16 +395,12 @@ export default function JobDetailPage() {
                 </div>
               </div>
 
-              {/* Divider */}
-              <div style={{ height: 1, background: 'var(--border)' }} />
-
               {/* Col 2: The Skill Gap */}
-              <div>
+              <div style={{ flex: '2 1 300px', paddingTop: 24 }}>
                 <h4 style={{ margin: '0 0 10px', fontSize: 12, color: 'var(--text-secondary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                   Skill Breakdown ({skills.length})
                 </h4>
                 
-                {/* If user is logged out or has no skills */}
                 {isLoaded && (!userId || userSkills.length === 0) ? (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                     <p style={{ margin: 0, fontSize: 12, color: 'var(--text-secondary)', lineHeight: 1.4 }}>
@@ -510,58 +453,133 @@ export default function JobDetailPage() {
                 )}
               </div>
 
-              {/* Divider */}
-              <div style={{ height: 1, background: 'var(--border)' }} />
-
               {/* Col 3: Roadmap Bridge Impact */}
-              <div style={{
-                background: 'rgba(79, 110, 247, 0.04)',
-                border: '1px solid rgba(79, 110, 247, 0.08)',
-                borderRadius: 12,
-                padding: 14,
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 8,
-              }}>
-                <h4 style={{ margin: 0, fontSize: 12, fontWeight: 700, color: 'var(--accent-light)' }}>
-                  🚀 Roadmap Bridge Score
-                </h4>
-                
-                {missingSkills.length === 0 ? (
-                  <p style={{ margin: 0, fontSize: 12, color: 'var(--text-secondary)', lineHeight: 1.4 }}>
-                    You match all extracted skills for this job!
-                  </p>
-                ) : (
-                  <>
-                    <p style={{ margin: 0, fontSize: 12, color: 'var(--text-primary)', lineHeight: 1.4 }}>
-                      This roadmap teaches **{bridgedCount}** of your missing skills.
+              <div style={{ flex: '1.5 1 280px', paddingTop: 24 }}>
+                <div style={{
+                  background: 'rgba(79, 110, 247, 0.04)',
+                  border: '1px solid rgba(79, 110, 247, 0.08)',
+                  borderRadius: 12,
+                  padding: 14,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 8,
+                }}>
+                  <h4 style={{ margin: 0, fontSize: 12, fontWeight: 700, color: 'var(--accent-light)' }}>
+                    🚀 Roadmap Bridge Score
+                  </h4>
+                  
+                  {missingSkills.length === 0 ? (
+                    <p style={{ margin: 0, fontSize: 12, color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+                      You match all extracted skills for this job!
                     </p>
-                    <div style={{
-                      background: 'var(--bg-card)',
-                      borderRadius: 8,
-                      height: 5,
-                      overflow: 'hidden',
-                      position: 'relative',
-                      marginTop: 2,
-                    }}>
+                  ) : (
+                    <>
+                      <p style={{ margin: 0, fontSize: 12, color: 'var(--text-primary)', lineHeight: 1.4 }}>
+                        This roadmap teaches **{bridgedCount}** of your missing skills.
+                      </p>
                       <div style={{
-                        position: 'absolute',
-                        top: 0, left: 0, height: '100%',
-                        width: `${bridgePercent}%`,
-                        background: 'var(--accent)',
+                        background: 'var(--bg-card)',
                         borderRadius: 8,
-                        transition: 'width 0.5s ease',
-                      }} />
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, color: 'var(--text-secondary)' }}>
-                      <span>Bridging {bridgePercent}% of the gap</span>
-                      <span>{bridgedCount}/{missingSkills.length}</span>
-                    </div>
-                  </>
-                )}
+                        height: 5,
+                        overflow: 'hidden',
+                        position: 'relative',
+                        marginTop: 2,
+                      }}>
+                        <div style={{
+                          position: 'absolute',
+                          top: 0, left: 0, height: '100%',
+                          width: `${bridgePercent}%`,
+                          background: 'var(--accent)',
+                          borderRadius: 8,
+                          transition: 'width 0.5s ease',
+                        }} />
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, color: 'var(--text-secondary)' }}>
+                        <span>Bridging {bridgePercent}% of the gap</span>
+                        <span>{bridgedCount}/{missingSkills.length}</span>
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
+          )}
+        </div>
+
+        {/* Filter bar */}
+        {industries.length > 1 && (
+          <div className="animate-fade-up delay-1" style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            <FilterChip label="All" value="all" active={filterIndustry === 'all'} onClick={() => setFilterIndustry('all')} />
+            {industries.map(ind => (
+              <FilterChip key={ind} label={ind} value={ind} active={filterIndustry === ind}
+                onClick={() => setFilterIndustry(ind)} color={INDUSTRY_COLORS[ind]} />
+            ))}
           </div>
+        )}
+
+        {/* Recommendations */}
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 12 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+              <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600, color: 'var(--text-primary)', letterSpacing: '-0.3px' }}>
+                Recommended Certifications
+              </h2>
+              <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>
+                {filteredAndSorted.length} result{filteredAndSorted.length !== 1 ? 's' : ''}
+              </span>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 500 }}>Sort by:</span>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as SortOption)}
+                style={{
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border)',
+                  borderRadius: 8,
+                  padding: '6px 12px',
+                  fontSize: 13,
+                  color: 'var(--text-primary)',
+                  outline: 'none',
+                  cursor: 'pointer'
+                }}
+              >
+                <option value="score">Best Match</option>
+                <option value="difficulty">Difficulty (Low to High)</option>
+                <option value="cost">Cost (Low to High)</option>
+              </select>
+            </div>
+          </div>
+
+          {filteredAndSorted.length === 0 ? (
+            <EmptyState />
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              {filteredAndSorted.map((rec, i) => (
+                <CertCard
+                  key={rec.id}
+                  rank={i + 1}
+                  certId={rec.cert_id}
+                  name={rec.name}
+                  provider={rec.provider}
+                  industry={rec.industry}
+                  difficulty={rec.difficulty}
+                  score={rec.score}
+                  skillOverlap={rec.skill_overlap}
+                  industryMatch={!!rec.industry_match}
+                  matchedSkills={JSON.parse(rec.matched_skills || '[]')}
+                  explanation={rec.explanation}
+                  description={rec.description}
+                  cost={rec.cost}
+                  duration={rec.duration_weeks ? `${rec.duration_weeks} weeks` : undefined}
+                  official_url={rec.official_url}
+                  onAddToCerts={userId ? handleAddToCerts : undefined}
+                  animDelay={i * 60}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
       </div>
