@@ -56,6 +56,11 @@ export default function Footer() {
               onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}>
               Home
             </Link>
+            <Link href="/jobs" style={{ fontSize: 13, color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.15s' }}
+              onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-light)'}
+              onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}>
+              Saved Jobs
+            </Link>
             <Link href="/certifications" style={{ fontSize: 13, color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.15s' }}
               onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-light)'}
               onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}>
@@ -65,6 +70,11 @@ export default function Footer() {
               onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-light)'}
               onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}>
               Roadmap
+            </Link>
+            <Link href="/analytics" style={{ fontSize: 13, color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.15s' }}
+              onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-light)'}
+              onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}>
+              Analytics
             </Link>
           </div>
         </div>
