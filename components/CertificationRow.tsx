@@ -50,18 +50,9 @@ export default function CertificationRow({ cert, onUpdate, onDelete }: Certifica
   };
 
   return (
-    <div style={{
-      background: 'var(--bg-card)',
-      border: '1px solid var(--border)',
-      borderRadius: 12,
-      padding: 20,
-      display: 'grid',
-      gridTemplateColumns: '1fr auto',
-      gap: 20,
-      alignItems: 'start',
-    }}>
+    <div className="cert-row-container">
       <div>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 8 }}>
+        <div className="cert-row-title-container">
           <h3 style={{ fontSize: 18, fontWeight: 600, color: 'var(--text-primary)', margin: 0 }}>
             {cert.name}
           </h3>
@@ -70,7 +61,7 @@ export default function CertificationRow({ cert, onUpdate, onDelete }: Certifica
           </span>
         </div>
 
-        <div style={{ display: 'flex', gap: 16, marginBottom: 12, fontSize: 13, color: 'var(--text-secondary)' }}>
+        <div className="cert-row-meta">
           <span>{cert.industry}</span>
           <span>•</span>
           <span>Difficulty: {cert.difficulty}/5</span>
@@ -84,7 +75,7 @@ export default function CertificationRow({ cert, onUpdate, onDelete }: Certifica
           )}
         </div>
 
-        <div style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
+        <div style={{ display: 'flex', gap: 12, marginBottom: 16, flexWrap: 'wrap' }}>
           <div style={{ fontSize: 13 }}>
             <span style={{ color: 'var(--text-secondary)' }}>Pass Rate: </span>
             <span style={{ color: 'var(--text-primary)' }}>{cert.pass_rate_percent}%</span>
@@ -102,7 +93,7 @@ export default function CertificationRow({ cert, onUpdate, onDelete }: Certifica
         )}
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minWidth: 150 }}>
+      <div className="cert-row-actions">
         <select
           value={cert.status}
           onChange={(e) => handleStatusChange(e.target.value)}

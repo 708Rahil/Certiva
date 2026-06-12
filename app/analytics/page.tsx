@@ -75,13 +75,13 @@ export default function AnalyticsPage() {
       ) : (
         <>
           {/* Top stats row */}
-          <div className="animate-fade-up delay-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 32 }}>
+          <div className="animate-fade-up delay-1 stats-grid">
             <BigStat label="Jobs Analyzed" value={String(data!.jobCount)} icon="📋" />
             <BigStat label="Most Recommended" value={data!.topCerts?.[0] ? data!.topCerts[0].name : '—'} icon="🏆" />
             <BigStat label="Unique Skills Found" value={String(data!.topSkills.length)} icon="⚡" />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, marginBottom: 24 }}>
+          <div className="dashboard-grid">
             {/* Top Certifications */}
             <div className="animate-fade-up delay-2" style={{
               background: 'var(--bg-card)', border: '1px solid var(--border)',

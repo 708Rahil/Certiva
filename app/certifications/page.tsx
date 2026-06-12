@@ -198,7 +198,7 @@ export default function MyCertificationsPage() {
       padding: '40px 24px',
     }}>
       {/* Header */}
-      <div style={{ marginBottom: 40, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+      <div className="responsive-header">
         <div>
           <h1 style={{
             fontSize: 32,
@@ -288,7 +288,7 @@ export default function MyCertificationsPage() {
             </button>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 200px', gap: 12, marginBottom: 16 }}>
+          <div className="responsive-search-grid">
             <input
               type="text"
               placeholder="Search certifications..."
