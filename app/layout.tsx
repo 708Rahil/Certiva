@@ -5,8 +5,31 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://certiva.com'),
   title: "Certiva — Career Intelligence Platform",
   description: "Get the most relevant certifications for any job posting",
+  openGraph: {
+    title: "Certiva — Career Intelligence Platform",
+    description: "Get the most relevant certifications for any job posting",
+    url: "https://certiva.com",
+    siteName: "Certiva",
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "Certiva OG Preview Image",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Certiva — Career Intelligence Platform",
+    description: "Get the most relevant certifications for any job posting",
+    images: ["/og-image.svg"],
+  },
 };
 
 export default function RootLayout({
