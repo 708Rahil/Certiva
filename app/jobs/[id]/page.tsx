@@ -56,6 +56,7 @@ export default function JobDetailPage() {
   const [sortBy, setSortBy] = useState<SortOption>('score');
   const { isLoaded, userId } = useAuth();
   const [userSkills, setUserSkills] = useState<string[]>([]);
+  const [completedCertSkills, setCompletedCertSkills] = useState<string[]>([]);
 
   const handleAddToCerts = async (certId: number, certName: string) => {
     try {
@@ -100,6 +101,23 @@ export default function JobDetailPage() {
           }
         })
         .catch(err => console.error('Error fetching profile:', err));
+
+      fetch('/api/user-certifications')
+        .then(r => r.json())
+        .then(data => {
+          if (Array.isArray(data)) {
+            const completed = data.filter((c: any) => c.status === 'completed');
+            const skillsFromCerts = completed.flatMap((c: any) => {
+              try {
+                return JSON.parse(c.skills || '[]');
+              } catch {
+                return [];
+              }
+            });
+            setCompletedCertSkills(skillsFromCerts);
+          }
+        })
+        .catch(err => console.error('Error fetching user certifications:', err));
     }
   }, [id, userId]);
 
@@ -110,14 +128,17 @@ export default function JobDetailPage() {
   const topScore = recs[0]?.score || 0;
   const industries = [...new Set(recs.map(r => r.industry))];
 
-  // Intersect userSkills and skills case-insensitively
+  // Combined user skills from profile + completed certs
+  const combinedUserSkills = [...userSkills, ...completedCertSkills];
+
+  // Intersect combinedUserSkills and skills case-insensitively
   const matchedSkills = skills.filter(js => 
-    userSkills.some(us => us.toLowerCase() === js.toLowerCase())
+    combinedUserSkills.some(us => us.toLowerCase() === js.toLowerCase())
   );
   
   // Find missing skills
   const missingSkills = skills.filter(js => 
-    !userSkills.some(us => us.toLowerCase() === js.toLowerCase())
+    !combinedUserSkills.some(us => us.toLowerCase() === js.toLowerCase())
   );
 
   // Match score calculation
