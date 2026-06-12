@@ -55,6 +55,7 @@ export default function JobDetailPage() {
   type SortOption = 'score' | 'difficulty' | 'cost';
   const [sortBy, setSortBy] = useState<SortOption>('score');
   const { isLoaded, userId } = useAuth();
+  const [userSkills, setUserSkills] = useState<string[]>([]);
 
   const handleAddToCerts = async (certId: number, certName: string) => {
     try {
@@ -89,7 +90,18 @@ export default function JobDetailPage() {
         setLoading(false);
       })
       .catch(() => setLoading(false));
-  }, [id]);
+
+    if (userId) {
+      fetch('/api/profile')
+        .then(r => r.json())
+        .then(data => {
+          if (data && data.current_skills) {
+            setUserSkills(data.current_skills);
+          }
+        })
+        .catch(err => console.error('Error fetching profile:', err));
+    }
+  }, [id, userId]);
 
   if (loading) return <LoadingState />;
   if (!job) return <div style={{ padding: 40, color: 'var(--text-secondary)' }}>Job not found.</div>;
@@ -97,6 +109,37 @@ export default function JobDetailPage() {
   const skills: string[] = JSON.parse(job.extracted_skills || '[]');
   const topScore = recs[0]?.score || 0;
   const industries = [...new Set(recs.map(r => r.industry))];
+
+  // Intersect userSkills and skills case-insensitively
+  const matchedSkills = skills.filter(js => 
+    userSkills.some(us => us.toLowerCase() === js.toLowerCase())
+  );
+  
+  // Find missing skills
+  const missingSkills = skills.filter(js => 
+    !userSkills.some(us => us.toLowerCase() === js.toLowerCase())
+  );
+
+  // Match score calculation
+  const matchPercent = skills.length > 0 
+    ? Math.round((matchedSkills.length / skills.length) * 100) 
+    : 0;
+
+  // Bridge coverage calculation
+  const bridgeSkills = new Set<string>();
+  recs.forEach(rec => {
+    const certSkills: string[] = JSON.parse(rec.skills || '[]');
+    certSkills.forEach(cs => {
+      if (missingSkills.some(ms => ms.toLowerCase() === cs.toLowerCase())) {
+        bridgeSkills.add(cs.toLowerCase());
+      }
+    });
+  });
+
+  const bridgedCount = missingSkills.filter(ms => bridgeSkills.has(ms.toLowerCase())).length;
+  const bridgePercent = missingSkills.length > 0
+    ? Math.round((bridgedCount / missingSkills.length) * 100)
+    : 0;
 
   const getCostValue = (costStr: string | undefined) => {
     if (!costStr || costStr.toLowerCase().includes('free')) return 0;
@@ -176,6 +219,170 @@ export default function JobDetailPage() {
           </div>
         </div>
       )}
+
+      {/* Career Readiness Scorecard */}
+      <div className="animate-fade-up delay-1" style={{
+        background: 'var(--bg-card)',
+        border: '1px solid var(--border)',
+        borderRadius: 20,
+        padding: '24px 32px',
+        marginBottom: 32,
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        {/* Glow backdrop */}
+        <div style={{
+          position: 'absolute',
+          top: '-50%',
+          right: '-10%',
+          width: 250,
+          height: 250,
+          background: 'rgba(79, 110, 247, 0.08)',
+          filter: 'blur(70px)',
+          borderRadius: '50%',
+          pointerEvents: 'none',
+        }} />
+
+        <h3 style={{
+          margin: '0 0 20px',
+          fontSize: 14,
+          fontWeight: 700,
+          color: 'var(--text-primary)',
+          letterSpacing: '0.05em',
+          textTransform: 'uppercase',
+          borderBottom: '1px solid var(--border)',
+          paddingBottom: 12,
+        }}>
+          🎯 Career Readiness Scorecard
+        </h3>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gap: 32,
+          alignItems: 'start',
+        }}>
+          {/* Col 1: Match Score Ring */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+            <ScoreRing score={matchPercent} size={90} />
+            <div>
+              <h4 style={{ margin: '0 0 4px', fontSize: 16, fontWeight: 700, color: 'var(--text-primary)' }}>
+                {matchPercent}% Compatibility
+              </h4>
+              <p style={{ margin: 0, fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+                Based on skills in your profile vs. job requirements.
+              </p>
+            </div>
+          </div>
+
+          {/* Col 2: The Skill Gap */}
+          <div>
+            <h4 style={{ margin: '0 0 10px', fontSize: 13, color: 'var(--text-secondary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              Skill Breakdown ({skills.length})
+            </h4>
+            
+            {/* If user is logged out or has no skills */}
+            {isLoaded && (!userId || userSkills.length === 0) ? (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <p style={{ margin: 0, fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+                  Add your skills in your profile to calculate your matching status!
+                </p>
+                <Link href={userId ? "/profile" : "/sign-in"} style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  alignSelf: 'flex-start',
+                  fontSize: 12,
+                  fontWeight: 600,
+                  color: 'var(--accent-light)',
+                  textDecoration: 'underline',
+                }}>
+                  {userId ? "Edit Profile Skills →" : "Sign in to add skills →"}
+                </Link>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {matchedSkills.length > 0 && (
+                  <div>
+                    <div style={{ fontSize: 11, color: 'var(--green)', fontWeight: 700, marginBottom: 4 }}>✓ MATCHED SKILLS ({matchedSkills.length})</div>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                      {matchedSkills.map(skill => (
+                        <span key={skill} style={{
+                          fontSize: 11, padding: '2px 8px', borderRadius: 6,
+                          background: 'var(--green-dim)', color: 'var(--green)', fontWeight: 500,
+                        }}>{skill}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {missingSkills.length > 0 && (
+                  <div>
+                    <div style={{ fontSize: 11, color: 'var(--text-secondary)', fontWeight: 700, marginBottom: 4 }}>⚠ MISSING SKILLS ({missingSkills.length})</div>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                      {missingSkills.slice(0, 10).map(skill => (
+                        <span key={skill} style={{
+                          fontSize: 11, padding: '2px 8px', borderRadius: 6,
+                          background: 'rgba(255, 255, 255, 0.05)', color: 'var(--text-secondary)',
+                        }}>{skill}</span>
+                      ))}
+                      {missingSkills.length > 10 && (
+                        <span style={{ fontSize: 11, color: 'var(--text-muted)', alignSelf: 'center' }}>+{missingSkills.length - 10} more</span>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Col 3: Roadmap Bridge Impact */}
+          <div style={{
+            background: 'rgba(79, 110, 247, 0.05)',
+            border: '1px solid rgba(79, 110, 247, 0.1)',
+            borderRadius: 12,
+            padding: 16,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 8,
+          }}>
+            <h4 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: 'var(--accent-light)' }}>
+              🚀 Roadmap Bridge Score
+            </h4>
+            
+            {missingSkills.length === 0 ? (
+              <p style={{ margin: 0, fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+                You already match all extracted skills for this job listing!
+              </p>
+            ) : (
+              <>
+                <p style={{ margin: 0, fontSize: 13, color: 'var(--text-primary)', lineHeight: 1.4 }}>
+                  These recommended certifications teach **{bridgedCount}** of your missing skills.
+                </p>
+                <div style={{
+                  background: 'var(--bg-card)',
+                  borderRadius: 8,
+                  height: 6,
+                  overflow: 'hidden',
+                  position: 'relative',
+                  marginTop: 4,
+                }}>
+                  <div style={{
+                    position: 'absolute',
+                    top: 0, left: 0, height: '100%',
+                    width: `${bridgePercent}%`,
+                    background: 'var(--accent)',
+                    borderRadius: 8,
+                    transition: 'width 0.5s ease',
+                  }} />
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: 'var(--text-secondary)' }}>
+                  <span>Bridging {bridgePercent}% of the gap</span>
+                  <span>{bridgedCount}/{missingSkills.length} skills</span>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
 
       {/* Job header card */}
       <div className="animate-fade-up" style={{
