@@ -318,6 +318,7 @@ export async function GET(req: NextRequest) {
         alternatives,
         description: cert.description,
         official_url: cert.official_url,
+        target_job_titles: safeParseJSON(cert.target_job_titles),
       };
     });
 

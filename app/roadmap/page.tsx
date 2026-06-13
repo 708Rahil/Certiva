@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Award, Briefcase, ChevronRight, CheckCircle, Clock, BookOpen, AlertCircle, Sparkles, Map } from 'lucide-react';
 
@@ -18,6 +18,7 @@ interface Cert {
   alternatives?: any[];
   next_certs?: string[];
   official_url?: string;
+  target_job_titles?: string[];
 }
 
 interface Job {
@@ -42,13 +43,14 @@ const INDUSTRY_ORDER = ['cloud', 'networking', 'cybersecurity', 'data', 'ai_ml',
 
 export default function RoadmapPage() {
   const [loading, setLoading] = useState(true);
-  const [mode, setMode] = useState<'job-specific' | 'generic'>('job-specific');
+  const [mode, setMode] = useState<'job-specific' | 'role-specific' | 'generic'>('job-specific');
   const [jobs, setJobs] = useState<Job[]>([]);
   const [selectedJobId, setSelectedJobId] = useState<string>('');
   const [selectedJob, setSelectedJob] = useState<any>(null);
   const [recommendations, setRecommendations] = useState<Cert[]>([]);
   const [genericRoadmaps, setGenericRoadmaps] = useState<Record<string, Cert[]>>({});
   const [selectedIndustry, setSelectedIndustry] = useState<string>('cloud');
+  const [selectedRoleTitle, setSelectedRoleTitle] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
@@ -91,6 +93,48 @@ export default function RoadmapPage() {
     setSelectedJobId(val);
     fetchRoadmapData(val);
   };
+
+  // 1. Get all unique job titles for the selected industry under role-specific mode
+  const roleJobTitles = useMemo(() => {
+    const certs = genericRoadmaps[selectedIndustry] || [];
+    const titles = new Set<string>();
+    certs.forEach(cert => {
+      if (Array.isArray(cert.target_job_titles)) {
+        cert.target_job_titles.forEach((title: string) => {
+          if (title && title.trim()) {
+            titles.add(title.trim());
+          }
+        });
+      }
+    });
+    return Array.from(titles).sort();
+  }, [genericRoadmaps, selectedIndustry]);
+
+  // Auto-select the first job title when industry changes or roleJobTitles updates
+  useEffect(() => {
+    if (roleJobTitles.length > 0) {
+      if (!roleJobTitles.includes(selectedRoleTitle)) {
+        setSelectedRoleTitle(roleJobTitles[0]);
+      }
+    } else {
+      setSelectedRoleTitle('');
+    }
+  }, [roleJobTitles, selectedRoleTitle]);
+
+  // 2. Filter certifications for the selected role title
+  const roleCerts = useMemo(() => {
+    if (!selectedRoleTitle) return [];
+    const certs = genericRoadmaps[selectedIndustry] || [];
+    const filtered = certs.filter(cert => 
+      Array.isArray(cert.target_job_titles) && 
+      cert.target_job_titles.some((t: string) => t.trim().toLowerCase() === selectedRoleTitle.trim().toLowerCase())
+    );
+    return [...filtered].sort((a, b) => a.difficulty - b.difficulty);
+  }, [genericRoadmaps, selectedIndustry, selectedRoleTitle]);
+
+  const roleStage1 = useMemo(() => roleCerts.filter(c => c.difficulty <= 2), [roleCerts]);
+  const roleStage2 = useMemo(() => roleCerts.filter(c => c.difficulty === 3), [roleCerts]);
+  const roleStage3 = useMemo(() => roleCerts.filter(c => c.difficulty >= 4), [roleCerts]);
 
   if (loading && jobs.length === 0) {
     return (
@@ -271,6 +315,26 @@ export default function RoadmapPage() {
               Job Specific
             </button>
             <button
+              onClick={() => setMode('role-specific')}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+                padding: '8px 16px',
+                borderRadius: 8,
+                border: 'none',
+                background: mode === 'role-specific' ? 'var(--accent)' : 'transparent',
+                color: mode === 'role-specific' ? '#fff' : 'var(--text-secondary)',
+                fontSize: 14,
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+              }}
+            >
+              <Briefcase size={16} />
+              Role Specific
+            </button>
+            <button
               onClick={() => setMode('generic')}
               style={{
                 display: 'flex',
@@ -348,7 +412,7 @@ export default function RoadmapPage() {
           </div>
         )}
 
-        {mode === 'generic' && (
+        {(mode === 'generic' || mode === 'role-specific') && (
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -397,6 +461,61 @@ export default function RoadmapPage() {
                 );
               })}
             </div>
+
+            {mode === 'role-specific' && roleJobTitles.length > 0 && (
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 8,
+                maxWidth: 480,
+                marginTop: 8,
+              }}>
+                <label style={{
+                  fontSize: 12,
+                  fontWeight: 600,
+                  color: 'var(--text-secondary)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em'
+                }}>
+                  Target Job Title
+                </label>
+                <div style={{ position: 'relative' }}>
+                  <select
+                    value={selectedRoleTitle}
+                    onChange={(e) => setSelectedRoleTitle(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '12px 16px',
+                      borderRadius: 10,
+                      border: '1px solid var(--border)',
+                      background: 'var(--bg-secondary)',
+                      color: 'var(--text-primary)',
+                      fontSize: 15,
+                      fontWeight: 500,
+                      cursor: 'pointer',
+                      outline: 'none',
+                      appearance: 'none',
+                    }}
+                  >
+                    {roleJobTitles.map(title => (
+                      <option key={title} value={title}>
+                        {title}
+                      </option>
+                    ))}
+                  </select>
+                  <div style={{
+                    position: 'absolute',
+                    right: 14,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    pointerEvents: 'none',
+                    color: 'var(--text-secondary)',
+                  }}>
+                    ▼
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -603,6 +722,94 @@ export default function RoadmapPage() {
                 </div>
               )}
             </>
+          )}
+        </>
+      )}
+
+      {/* ROLE-SPECIFIC ROADMAP MODE */}
+      {mode === 'role-specific' && (
+        <>
+          <div style={{
+            background: 'var(--bg-secondary)',
+            borderRadius: 12,
+            padding: 20,
+            border: '1px solid var(--border)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 6,
+            marginBottom: 40,
+          }}>
+            <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Roadmap Career Track</span>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+              <span style={{ fontSize: 24, fontWeight: 800, color: 'var(--text-primary)' }}>
+                {selectedRoleTitle || 'Select a Job Title'}
+              </span>
+              <span style={{ fontSize: 14, color: 'var(--text-secondary)' }}>
+                in {INDUSTRY_LABELS[selectedIndustry] || selectedIndustry}
+              </span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginTop: 4 }}>
+              <span style={{ fontSize: 14, color: 'var(--text-secondary)' }}>
+                Progressive {roleCerts.length} step certification path
+              </span>
+            </div>
+          </div>
+
+          <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 24 }}>
+            Sequenced Role Roadmap Steps
+          </h2>
+
+          {roleCerts.length === 0 ? (
+            <div style={{
+              background: 'var(--bg-secondary)',
+              borderRadius: 12,
+              padding: 40,
+              textAlign: 'center',
+              color: 'var(--text-secondary)',
+              border: '1px solid var(--border)'
+            }}>
+              No mapped certifications for this role title in the selected industry.
+            </div>
+          ) : (
+            <div style={{ position: 'relative', paddingLeft: 32 }}>
+              <div style={{
+                position: 'absolute',
+                left: 11,
+                top: 16,
+                bottom: 16,
+                width: 2,
+                background: 'linear-gradient(to bottom, var(--accent) 60%, var(--border))',
+              }} />
+
+              {[
+                {
+                  title: "Foundational Credentials",
+                  subtitle: "Build fundamental domain and tool familiarity",
+                  certs: roleStage1
+                },
+                {
+                  title: "Associate Certifications",
+                  subtitle: "Demonstrate capability in standard frameworks and core tasks",
+                  certs: roleStage2
+                },
+                {
+                  title: "Advanced & Specialist Expertise",
+                  subtitle: "Establish advanced authority, architectural competence, or direct alignment",
+                  certs: roleStage3
+                }
+              ]
+                .filter(stage => stage.certs.length > 0)
+                .map((stage, index) => (
+                  <TimelineStage 
+                    key={index}
+                    title={`Step ${index + 1}: ${stage.title}`} 
+                    subtitle={stage.subtitle} 
+                    stepNumber={(index + 1).toString()} 
+                    certs={stage.certs} 
+                  />
+                ))
+              }
+            </div>
           )}
         </>
       )}
