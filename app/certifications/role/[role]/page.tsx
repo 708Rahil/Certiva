@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { ArrowLeft, Award, DollarSign, Clock, ShieldCheck, ChevronRight, TrendingUp } from 'lucide-react';
+import RoadmapFlowchart from '@/components/RoadmapFlowchart';
 
 interface PageProps {
   params: Promise<{ role: string }>;
@@ -126,6 +127,40 @@ export default async function RoleCertificationsPage({ params }: PageProps) {
             Sourced and verified directory of the most demanded credentials in the market to help you land a role as a {roleName}.
           </p>
         </div>
+
+        {/* Dynamic visual sequential timeline flowchart */}
+        {(() => {
+          const roadmapCerts = certs.map((c) => ({
+            id: c.id,
+            name: c.name,
+            difficulty: c.difficulty,
+            prerequisites: parseJsonField(c.prerequisites),
+            next_certs: parseJsonField(c.next_certs),
+            provider: c.provider,
+            userStatus: 'not-started',
+          }));
+
+          return (
+            <div style={{
+              marginBottom: 48,
+              background: 'var(--bg-card)',
+              border: '1px solid var(--border)',
+              borderRadius: 20,
+              padding: '24px',
+              overflowX: 'auto',
+            }}>
+              <h2 style={{ fontSize: 18, fontWeight: 700, margin: '0 0 16px', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span>🗺️</span> {roleName} Certification Path
+              </h2>
+              <p style={{ fontSize: 13, color: 'var(--text-secondary)', margin: '0 0 24px', lineHeight: 1.4 }}>
+                Recommended sequential learning track based on difficulty level and prerequisites. Expand view or scroll horizontally to track levels.
+              </p>
+              <div style={{ minWidth: 700, paddingBottom: 10 }}>
+                <RoadmapFlowchart certs={roadmapCerts} />
+              </div>
+            </div>
+          );
+        })()}
 
         {/* List of matching certifications */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
