@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Award, Briefcase, ChevronRight, CheckCircle, Clock, BookOpen, AlertCircle, Sparkles, Map } from 'lucide-react';
+import RoadmapFlowchart from '@/components/RoadmapFlowchart';
 
 interface Cert {
   id: number;
@@ -18,6 +19,8 @@ interface Cert {
   alternatives?: any[];
   next_certs?: string[];
   official_url?: string;
+  prerequisites?: string[];
+  target_job_titles?: string[];
 }
 
 interface Job {
@@ -42,7 +45,8 @@ const INDUSTRY_ORDER = ['cloud', 'networking', 'cybersecurity', 'data', 'ai_ml',
 
 export default function RoadmapPage() {
   const [loading, setLoading] = useState(true);
-  const [mode, setMode] = useState<'job-specific' | 'generic'>('job-specific');
+  const [mode, setMode] = useState<'job-specific' | 'role-specific' | 'generic'>('job-specific');
+  const [selectedRole, setSelectedRole] = useState<string>('DevOps Engineer');
   const [jobs, setJobs] = useState<Job[]>([]);
   const [selectedJobId, setSelectedJobId] = useState<string>('');
   const [selectedJob, setSelectedJob] = useState<any>(null);
@@ -208,6 +212,59 @@ export default function RoadmapPage() {
   const coveredSkillsCount = uniqueCoveredSkills.length;
   const missingSkills = jobSkills.filter(s => !coveredSkills.includes(s.toLowerCase()));
 
+  // Extract all certifications flat
+  const allCertsFromApi = useMemo(() => {
+    return Object.values(genericRoadmaps).flat();
+  }, [genericRoadmaps]);
+
+  // Extract unique roles from target_job_titles across all certifications
+  const uniqueRoles = useMemo(() => {
+    const roles = new Set<string>();
+    allCertsFromApi.forEach(c => {
+      const titles: string[] = (c as any).target_job_titles || [];
+      titles.forEach((t: string) => {
+        if (t && typeof t === 'string' && t.trim().length > 0) {
+          roles.add(t.trim());
+        }
+      });
+    });
+    return Array.from(roles).sort();
+  }, [allCertsFromApi]);
+
+  // Set default selectedRole when roles are loaded
+  useEffect(() => {
+    if (uniqueRoles.length > 0 && !uniqueRoles.includes(selectedRole)) {
+      const defaultRole = uniqueRoles.find(r => r.toLowerCase().includes('cloud engineer') || r.toLowerCase().includes('devops')) || uniqueRoles[0];
+      setSelectedRole(defaultRole);
+    }
+  }, [uniqueRoles, selectedRole]);
+
+  // Filter certifications matching the selected role
+  const roleCerts = useMemo(() => {
+    if (!selectedRole) return [];
+    const matched = allCertsFromApi.filter(c => {
+      const titles: string[] = (c as any).target_job_titles || [];
+      return titles.some(t => t.toLowerCase() === selectedRole.toLowerCase());
+    });
+
+    return matched.map(c => ({
+      id: c.id,
+      name: c.name,
+      difficulty: c.difficulty,
+      provider: c.provider,
+      providerColor: c.providerColor,
+      userStatus: c.userStatus || 'not-started',
+      prerequisites: Array.isArray(c.prerequisites) ? c.prerequisites : [],
+      next_certs: Array.isArray(c.next_certs) ? c.next_certs : [],
+      description: c.description,
+      official_url: c.official_url,
+    }));
+  }, [allCertsFromApi, selectedRole]);
+
+  const sortedRoleCerts = useMemo(() => {
+    return [...roleCerts].sort((a, b) => a.difficulty - b.difficulty);
+  }, [roleCerts]);
+
   return (
     <div style={{
       maxWidth: 1000,
@@ -249,6 +306,8 @@ export default function RoadmapPage() {
             borderRadius: 10,
             padding: 4,
             border: '1px solid var(--border)',
+            flexWrap: 'wrap',
+            gap: 2,
           }}>
             <button
               onClick={() => setMode('job-specific')}
@@ -269,6 +328,26 @@ export default function RoadmapPage() {
             >
               <Sparkles size={16} />
               Job Specific
+            </button>
+            <button
+              onClick={() => setMode('role-specific')}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+                padding: '8px 16px',
+                borderRadius: 8,
+                border: 'none',
+                background: mode === 'role-specific' ? 'var(--accent)' : 'transparent',
+                color: mode === 'role-specific' ? '#fff' : 'var(--text-secondary)',
+                fontSize: 14,
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+              }}
+            >
+              <Award size={16} />
+              Role Specific
             </button>
             <button
               onClick={() => setMode('generic')}
@@ -724,6 +803,190 @@ export default function RoadmapPage() {
                   </div>
                 );
               })}
+            </div>
+          )}
+        </>
+      )}
+
+      {/* ROLE-SPECIFIC ROADMAP MODE */}
+      {mode === 'role-specific' && (
+        <>
+          <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 8 }}>
+            🎯 Standard Role Roadmaps
+          </h2>
+          <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 24 }}>
+            Select a target career role to view the industry-standard certification roadmap and details.
+          </p>
+
+          {/* Role selector dropdown */}
+          <div style={{ marginBottom: 32, maxWidth: 480 }}>
+            <label style={{
+              fontSize: 12,
+              fontWeight: 600,
+              color: 'var(--text-secondary)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              marginBottom: 8,
+              display: 'block'
+            }}>
+              Choose Target Role
+            </label>
+            <div style={{ position: 'relative' }}>
+              <select
+                value={selectedRole}
+                onChange={(e) => setSelectedRole(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '12px 16px',
+                  borderRadius: 10,
+                  border: '1px solid var(--border)',
+                  background: 'var(--bg-secondary)',
+                  color: 'var(--text-primary)',
+                  fontSize: 15,
+                  fontWeight: 500,
+                  cursor: 'pointer',
+                  outline: 'none',
+                  appearance: 'none',
+                }}
+              >
+                {uniqueRoles.map(role => (
+                  <option key={role} value={role}>
+                    {role}
+                  </option>
+                ))}
+              </select>
+              <div style={{
+                position: 'absolute',
+                right: 14,
+                top: '50%',
+                transform: 'translateY(-50%)',
+                pointerEvents: 'none',
+                color: 'var(--text-secondary)',
+              }}>
+                ▼
+              </div>
+            </div>
+          </div>
+
+          {roleCerts.length === 0 ? (
+            <div style={{
+              background: 'var(--bg-secondary)',
+              borderRadius: 12,
+              padding: 40,
+              textAlign: 'center',
+              color: 'var(--text-secondary)',
+              border: '1px solid var(--border)'
+            }}>
+              No certifications categorized for this role yet.
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+              {/* Flowchart path map */}
+              <div style={{
+                background: 'var(--bg-card)',
+                border: '1px solid var(--border)',
+                borderRadius: 20,
+                padding: '24px',
+                overflowX: 'auto',
+              }}>
+                <h3 style={{ fontSize: 16, fontWeight: 700, margin: '0 0 16px', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span>🗺️</span> {selectedRole} Path Flowchart
+                </h3>
+                <div style={{ minWidth: 700, paddingBottom: 10 }}>
+                  <RoadmapFlowchart certs={roleCerts} />
+                </div>
+              </div>
+
+              {/* Matched cert details */}
+              <div>
+                <h3 style={{ fontSize: 16, fontWeight: 700, margin: '0 0 20px', color: 'var(--text-primary)' }}>
+                  Certifications in this Path ({roleCerts.length})
+                </h3>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
+                  {sortedRoleCerts.map((cert) => (
+                    <div
+                      key={`role-cert-${cert.id}`}
+                      style={{
+                        background: 'var(--bg-secondary)',
+                        borderRadius: 12,
+                        padding: 16,
+                        border: '1px solid var(--border)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        minHeight: 180,
+                      }}
+                    >
+                      <div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8, marginBottom: 8 }}>
+                          <span style={{
+                            fontSize: 10,
+                            fontWeight: 600,
+                            padding: '2px 8px',
+                            borderRadius: 100,
+                            background: cert.providerColor ? `${cert.providerColor}20` : 'rgba(255,255,255,0.05)',
+                            color: cert.providerColor || 'var(--text-secondary)',
+                            textTransform: 'uppercase',
+                          }}>
+                            {cert.provider}
+                          </span>
+                          <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>
+                            Diff: {cert.difficulty}/5
+                          </span>
+                        </div>
+                        <h4 style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)', margin: '0 0 6px' }}>
+                          {cert.name}
+                        </h4>
+                        {cert.description && (
+                          <p style={{ fontSize: 12, color: 'var(--text-secondary)', margin: 0, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                            {cert.description}
+                          </p>
+                        )}
+                      </div>
+
+                      <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
+                        <Link
+                          href={`/certifications/${cert.id}`}
+                          style={{
+                            flex: 1,
+                            padding: '6px 0',
+                            borderRadius: 6,
+                            border: '1px solid var(--border)',
+                            background: 'transparent',
+                            color: 'var(--text-secondary)',
+                            fontSize: 12,
+                            fontWeight: 500,
+                            textDecoration: 'none',
+                            textAlign: 'center',
+                          }}
+                        >
+                          View Guide
+                        </Link>
+                        {cert.official_url && (
+                          <a
+                            href={cert.official_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              flex: 1,
+                              padding: '6px 0',
+                              borderRadius: 6,
+                              background: 'var(--accent)',
+                              color: '#fff',
+                              fontSize: 12,
+                              fontWeight: 600,
+                              textDecoration: 'none',
+                              textAlign: 'center',
+                            }}
+                          >
+                            Official Website
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           )}
         </>
