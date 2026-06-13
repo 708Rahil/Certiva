@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { useAuth } from '@clerk/nextjs';
 import CertificationRow from '@/components/CertificationRow';
 import BrowseAllCertsModal from '@/components/BrowseAllCertsModal';
@@ -255,46 +254,6 @@ export default function MyCertificationsPage() {
           >
             Browse All
           </button>
-        </div>
-      </div>
-
-      {/* Popular Role Paths */}
-      <div className="animate-fade-up delay-1" style={{
-        marginBottom: 32,
-        padding: '16px 20px',
-        background: 'rgba(79, 110, 247, 0.05)',
-        border: '1px solid rgba(79, 110, 247, 0.1)',
-        borderRadius: 16,
-      }}>
-        <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--accent-light)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 12 }}>
-          🎯 Explore Career Certification Roadmaps
-        </div>
-        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-          {[
-            { name: 'DevOps Engineer', slug: 'devops-engineer' },
-            { name: 'Cloud Engineer', slug: 'cloud-engineer' },
-            { name: 'Solutions Architect', slug: 'solutions-architect' },
-            { name: 'Data Analyst', slug: 'data-analyst' },
-            { name: 'Cybersecurity Analyst', slug: 'cybersecurity-analyst' }
-          ].map(role => (
-            <Link
-              key={role.slug}
-              href={`/certifications/role/${role.slug}`}
-              style={{
-                textDecoration: 'none',
-                padding: '6px 12px',
-                borderRadius: 8,
-                fontSize: 13,
-                fontWeight: 500,
-                color: 'var(--text-primary)',
-                background: 'var(--bg-card)',
-                border: '1px solid var(--border)',
-                transition: 'all 0.15s',
-              }}
-            >
-              {role.name} →
-            </Link>
-          ))}
         </div>
       </div>
 
