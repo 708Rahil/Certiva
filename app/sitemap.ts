@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { getSupabase } from '@/lib/db';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://certiva.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://certroute.co';
   const supabase = getSupabase();
 
   // Query all certification IDs to generate details page URLs

@@ -5,20 +5,20 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://certiva.com'),
-  title: "Certiva — Career Intelligence Platform",
+  metadataBase: new URL('https://certroute.co'),
+  title: "Certroute — Career Intelligence Platform",
   description: "Get the most relevant certifications for any job posting",
   openGraph: {
-    title: "Certiva — Career Intelligence Platform",
+    title: "Certroute — Career Intelligence Platform",
     description: "Get the most relevant certifications for any job posting",
-    url: "https://certiva.com",
-    siteName: "Certiva",
+    url: "https://certroute.co",
+    siteName: "Certroute",
     images: [
       {
         url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "Certiva OG Preview Image",
+        alt: "Certroute OG Preview Image",
       },
     ],
     locale: "en_US",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Certiva — Career Intelligence Platform",
+    title: "Certroute — Career Intelligence Platform",
     description: "Get the most relevant certifications for any job posting",
     images: ["/og-image.svg"],
   },
@@ -42,13 +42,13 @@ export default function RootLayout({
       localization={{
         signIn: {
           start: {
-            title: 'Sign into Certiva',
+            title: 'Sign into Certroute',
             subtitle: 'Welcome back! Please sign in to continue.',
           },
         },
         signUp: {
           start: {
-            title: 'Create your Certiva account',
+            title: 'Create your Certroute account',
             subtitle: 'Welcome! Please fill in the details to get started.',
           },
         },

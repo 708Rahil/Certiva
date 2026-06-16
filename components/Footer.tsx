@@ -46,7 +46,7 @@ export default function Footer() {
               fontWeight: 500,
               color: 'var(--text-primary)',
               letterSpacing: '-0.3px',
-            }}>Certiva</span>
+            }}>Certroute</span>
           </div>
 
           {/* Navigation Links */}
@@ -91,7 +91,7 @@ export default function Footer() {
           gap: 16,
         }}>
           <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>
-            © {currentYear} Certiva. All rights reserved.
+            © {currentYear} Certroute. All rights reserved.
           </span>
 
           {/* Legal Links */}

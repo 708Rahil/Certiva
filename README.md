@@ -1,4 +1,4 @@
-# Certiva — Career Intelligence Platform
+# Certroute — Career Intelligence Platform
 
 A full-stack MVP that analyzes job postings and recommends ranked certifications.
 
