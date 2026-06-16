@@ -63,7 +63,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { role } = await params;
   const roleName = formatRoleName(role);
   return {
-    title: `Best Certifications for a ${roleName} (2026 Guide) | Certroute`,
+    title: `Best Certifications for a ${roleName} (2026 Guide) | CertRoute`,
     description: `Compare the top certifications to become a ${roleName}. Review exam costs, difficulties, study times, salary boosts, and market demand statistics.`,
   };
 }

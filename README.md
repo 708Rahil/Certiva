@@ -1,4 +1,4 @@
-# Certroute — Career Intelligence Platform
+# CertRoute — Career Intelligence Platform
 
 A full-stack MVP that analyzes job postings and recommends ranked certifications.
 

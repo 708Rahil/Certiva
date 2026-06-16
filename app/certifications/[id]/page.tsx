@@ -69,13 +69,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!cert) {
     return {
-      title: 'Certification Profile | Certroute',
+      title: 'Certification Profile | CertRoute',
       description: 'Explore professional certification details, costs, difficulties, and job market impact.',
     };
   }
 
   return {
-    title: `Is the ${cert.name} Worth It? Cost, Pass Rate & Next Steps | Certroute`,
+    title: `Is the ${cert.name} Worth It? Cost, Pass Rate & Next Steps | CertRoute`,
     description: `Discover if the ${cert.name} by ${cert.provider} is worth it. Get real cost (${cert.cost || 'N/A'}), duration (${cert.duration_weeks ? cert.duration_weeks + ' weeks' : 'N/A'}), difficulty level, pass rates, and next steps.`,
   };
 }

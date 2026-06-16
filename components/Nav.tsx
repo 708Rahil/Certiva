@@ -57,7 +57,7 @@ export default function Nav() {
             fontSize: 20,
             color: 'var(--text-primary)',
             letterSpacing: '-0.3px',
-          }}>Certroute</span>
+          }}>CertRoute</span>
         </Link>
 
         {/* Desktop Links (Hidden on mobile via desktop-menu class in globals.css) */}

@@ -13,7 +13,7 @@ export default function TermsPage() {
       <section style={{ marginBottom: 32 }}>
         <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 12 }}>1. Terms of Use</h2>
         <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6, fontSize: 15 }}>
-          By accessing or using Certroute, you agree to comply with and be bound by these Terms of Service. If you do not agree, please do not use our platform.
+          By accessing or using CertRoute, you agree to comply with and be bound by these Terms of Service. If you do not agree, please do not use our platform.
         </p>
       </section>
 
@@ -27,7 +27,7 @@ export default function TermsPage() {
       <section style={{ marginBottom: 32 }}>
         <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 12 }}>3. Limitation of Liability</h2>
         <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6, fontSize: 15 }}>
-          Certroute provides certification roadmaps and recommendations for informational purposes only. We make no guarantees regarding job placement, career advancement, or correctness of external certification costs/details.
+          CertRoute provides certification roadmaps and recommendations for informational purposes only. We make no guarantees regarding job placement, career advancement, or correctness of external certification costs/details.
         </p>
       </section>
     </div>
