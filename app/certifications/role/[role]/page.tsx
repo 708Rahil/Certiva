@@ -121,7 +121,7 @@ export default async function RoleCertificationsPage({ params }: PageProps) {
         {/* Header */}
         <div style={{ marginBottom: 40 }}>
           <h1 style={{ fontSize: 'clamp(28px, 4vw, 38px)', fontWeight: 700, margin: '0 0 10px', letterSpacing: '-0.5px' }}>
-            Top Certifications for {roleName}s
+            Best Certifications for a {roleName}
           </h1>
           <p style={{ fontSize: 16, color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
             Sourced and verified directory of the most demanded credentials in the market to help you land a role as a {roleName}.
