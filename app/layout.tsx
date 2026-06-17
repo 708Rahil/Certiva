@@ -8,10 +8,10 @@ import { Analytics } from "@vercel/analytics/next";
 export const metadata: Metadata = {
   metadataBase: new URL('https://certroute.co'),
   title: "CertRoute — Career Intelligence Platform",
-  description: "Get the most relevant certifications for any job posting",
+  description: "Paste any job listing to instantly map the exact certifications you need to stand out to recruiters, pass resume filters, and get hired. Compare costs and salary boosts in seconds.",
   openGraph: {
     title: "CertRoute — Career Intelligence Platform",
-    description: "Get the most relevant certifications for any job posting",
+    description: "Paste any job listing to instantly map the exact certifications you need to stand out to recruiters, pass resume filters, and get hired. Compare costs and salary boosts in seconds.",
     url: "https://certroute.co",
     siteName: "CertRoute",
     images: [
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "CertRoute — Career Intelligence Platform",
-    description: "Get the most relevant certifications for any job posting",
+    description: "Paste any job listing to instantly map the exact certifications you need to stand out to recruiters, pass resume filters, and get hired. Compare costs and salary boosts in seconds.",
     images: ["/og-image.svg"],
   },
 };
