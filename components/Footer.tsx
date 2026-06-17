@@ -29,17 +29,16 @@ export default function Footer() {
         }}>
           {/* Logo brand */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <div style={{
-              width: 28, height: 28,
-              background: 'var(--accent)',
-              borderRadius: 6,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontFamily: 'var(--font-display)',
-              fontWeight: 700,
-              fontSize: 14,
-              color: '#fff',
-              letterSpacing: '-0.5px',
-            }}>C</div>
+            <img 
+              src="/logo.png" 
+              alt="CertRoute Logo" 
+              style={{
+                width: 28,
+                height: 28,
+                borderRadius: 6,
+                objectFit: 'cover'
+              }} 
+            />
             <span style={{
               fontFamily: 'var(--font-display)',
               fontSize: 18,

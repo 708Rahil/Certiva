@@ -41,17 +41,16 @@ export default function Nav() {
       }}>
         {/* Logo */}
         <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{
-            width: 32, height: 32,
-            background: 'var(--accent)',
-            borderRadius: 8,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontFamily: 'var(--font-display)',
-            fontWeight: 700,
-            fontSize: 16,
-            color: '#fff',
-            letterSpacing: '-0.5px',
-          }}>C</div>
+          <img 
+            src="/logo.png" 
+            alt="CertRoute Logo" 
+            style={{
+              width: 32,
+              height: 32,
+              borderRadius: 8,
+              objectFit: 'cover'
+            }} 
+          />
           <span style={{
             fontFamily: 'var(--font-display)',
             fontSize: 20,
