@@ -18,15 +18,21 @@ interface AddCertButtonProps {
 
 export default function AddCertButton({ certId, certName, small = false }: AddCertButtonProps) {
   const { userId, isLoaded } = useAuth();
+  const [mounted, setMounted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [initLoading, setInitLoading] = useState(true);
   const [userCert, setUserCert] = useState<UserCertification | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Set mounted state
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Fetch user's certifications to see if this one is already added
   useEffect(() => {
-    if (!isLoaded) return;
+    if (!mounted || !isLoaded) return;
     if (!userId) {
       setInitLoading(false);
       return;
@@ -36,7 +42,7 @@ export default function AddCertButton({ certId, certName, small = false }: AddCe
       try {
         const res = await fetch('/api/user-certifications');
         if (res.ok) {
-          const certs: UserCertification[] = await res.ok ? await res.json() : [];
+          const certs: UserCertification[] = await res.json();
           const found = certs.find(c => c.cert_id === certId);
           setUserCert(found || null);
         }
@@ -48,7 +54,7 @@ export default function AddCertButton({ certId, certName, small = false }: AddCe
     };
 
     checkCertStatus();
-  }, [isLoaded, userId, certId]);
+  }, [mounted, isLoaded, userId, certId]);
 
   // Close dropdown on click outside
   useEffect(() => {
@@ -118,7 +124,7 @@ export default function AddCertButton({ certId, certName, small = false }: AddCe
     }
   };
 
-  if (initLoading) {
+  if (!mounted || initLoading) {
     return (
       <div style={{
         display: 'inline-flex',
