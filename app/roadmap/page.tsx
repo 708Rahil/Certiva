@@ -3,6 +3,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Award, Briefcase, ChevronRight, CheckCircle, Clock, BookOpen, AlertCircle, Sparkles, Map } from 'lucide-react';
+import { getSlug } from '@/lib/slug';
 
 interface Cert {
   id: number;
@@ -1056,7 +1057,7 @@ function CertCard({ cert }: { cert: Cert }) {
 
       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 16 }}>
         <Link
-          href={`/certifications/${cert.id}`}
+          href={`/certifications/${getSlug(cert.name)}`}
           style={{
             display: 'inline-flex',
             alignItems: 'center',

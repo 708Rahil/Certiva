@@ -5,11 +5,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://certroute.co';
   const supabase = getSupabase();
 
-  // Query all certification IDs to generate details page URLs
-  const { data: certs } = await supabase.from('certifications').select('id');
+  // Query all certification IDs and names to generate details page URLs
+  const { data: certs } = await supabase.from('certifications').select('id, name');
+  const { getSlug } = require('@/lib/slug');
 
   const certUrls = (certs || []).map((cert) => ({
-    url: `${baseUrl}/certifications/${cert.id}`,
+    url: `${baseUrl}/certifications/${getSlug(cert.name)}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.8,

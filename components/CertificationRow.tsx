@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { getSlug } from '@/lib/slug';
 
 interface UserCertification {
   id: number;
@@ -114,7 +115,7 @@ export default function CertificationRow({ cert, onUpdate, onDelete }: Certifica
         </select>
 
         <Link
-          href={`/certifications/${cert.cert_id}`}
+          href={`/certifications/${getSlug(cert.name)}`}
           style={{
             padding: '8px 12px',
             borderRadius: 8,

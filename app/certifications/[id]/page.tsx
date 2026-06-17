@@ -6,6 +6,7 @@ import {
   ArrowLeft, Calendar, DollarSign, Award, Briefcase, 
   TrendingUp, Star, Percent, BookOpen, Clock, ExternalLink, ShieldCheck 
 } from 'lucide-react';
+import { getSlug } from '@/lib/slug';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -39,7 +40,25 @@ async function getCertificationData(id: string) {
     if (data) cert = data;
   }
 
-  // 2. Try finding by case-insensitive exact name match
+  // 2. Try finding by generated URL slug match
+  if (!cert) {
+    const { data: allCerts } = await supabase
+      .from('certifications')
+      .select('id, name');
+    if (allCerts) {
+      const matchingCert = allCerts.find(c => getSlug(c.name) === id);
+      if (matchingCert) {
+        const { data } = await supabase
+          .from('certifications')
+          .select('*')
+          .eq('id', matchingCert.id)
+          .single();
+        if (data) cert = data;
+      }
+    }
+  }
+
+  // 3. Try finding by case-insensitive exact name match
   if (!cert) {
     const { data } = await supabase
       .from('certifications')
@@ -49,7 +68,7 @@ async function getCertificationData(id: string) {
     if (data && data.length > 0) cert = data[0];
   }
 
-  // 3. Try finding by acronym/name abbreviation or partial match
+  // 4. Try finding by acronym/name abbreviation or partial match
   if (!cert) {
     const { data } = await supabase
       .from('certifications')
@@ -83,11 +102,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 // Enable Static Pre-rendering for Googlebot
 export async function generateStaticParams() {
   const supabase = getSupabase();
-  const { data } = await supabase.from('certifications').select('id');
+  const { data } = await supabase.from('certifications').select('id, name');
   if (!data) return [];
-  return data.map((cert) => ({
-    id: cert.id.toString(),
-  }));
+  
+  const params: { id: string }[] = [];
+  data.forEach((cert) => {
+    params.push({ id: cert.id.toString() });
+    if (cert.name) {
+      const slug = getSlug(cert.name);
+      if (slug) {
+        params.push({ id: slug });
+      }
+    }
+  });
+  return params;
 }
 
 export default async function CertificationDetailPage({ params }: PageProps) {

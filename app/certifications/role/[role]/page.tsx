@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { ArrowLeft, Award, DollarSign, Clock, ShieldCheck, ChevronRight, TrendingUp } from 'lucide-react';
+import { getSlug } from '@/lib/slug';
 
 interface PageProps {
   params: Promise<{ role: string }>;
@@ -163,7 +164,7 @@ export default async function RoleCertificationsPage({ params }: PageProps) {
                   </div>
 
                   <Link 
-                    href={`/certifications/${cert.id}`}
+                    href={`/certifications/${getSlug(cert.name)}`}
                     style={{
                       padding: '8px 16px',
                       borderRadius: 8,

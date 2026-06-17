@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { getSlug } from '@/lib/slug';
 
 interface BrowseCert {
   id: number;
@@ -318,7 +319,7 @@ export default function BrowseAllCertsModal({
                     </div>
                     <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                       <Link
-                        href={`/certifications/${cert.id}`}
+                        href={`/certifications/${getSlug(cert.name)}`}
                         target="_blank"
                         style={{
                           padding: '6px 12px',

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { getSlug } from '@/lib/slug';
 import ScoreRing from './ScoreRing';
 
 interface CertCardProps {
@@ -157,7 +158,7 @@ export default function CertCard({
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
             {certId && (
               <Link
-                href={`/certifications/${certId}`}
+                href={`/certifications/${getSlug(name)}`}
                 style={{
                   padding: '8px 14px',
                   borderRadius: 8,
