@@ -438,7 +438,7 @@ function matchJobTitle(jobTitle: string, targetTitles: string[]): { match: boole
 // Certification alias mapping for explicit matches in job listings
 const CERT_ALIASES: Record<number, string[]> = {
   1: ['aws cloud practitioner', 'aws certified cloud practitioner', 'cloud practitioner'],
-  2: ['aws solutions architect', 'aws solutions architect associate', 'solutions architect associate'],
+  2: ['aws solutions architect', 'aws solutions architect associate', 'solutions architect associate', 'solutions architect'],
   3: ['aws developer', 'aws developer associate'],
   4: ['az-900', 'az900', 'azure fundamentals'],
   5: ['google associate cloud engineer', 'associate cloud engineer', 'gcp cloud engineer'],
@@ -466,6 +466,8 @@ const CERT_ALIASES: Record<number, string[]> = {
   27: ['pl-300', 'pl300', 'power bi', 'power bi data analyst', 'microsoft power bi'],
   28: ['snowpro core', 'snowflake snowpro', 'snowpro'],
   29: ['google cloud professional data engineer', 'gcp data engineer', 'professional data engineer'],
+  70: ['aws sysops administrator', 'aws sysops', 'sysops administrator', 'sysops'],
+  71: ['aws solutions architect professional', 'solutions architect professional', 'aws solutions architect pro', 'solutions architect pro'],
 
   // AI/ML certs (ai_ml.json)
   75: ['tensorflow developer', 'tensorflow certificate', 'tensorflow certified'],
