@@ -4,6 +4,7 @@ import { useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Award, Briefcase, ChevronRight, CheckCircle, Clock, BookOpen, AlertCircle, Sparkles, Map } from 'lucide-react';
 import { getSlug } from '@/lib/slug';
+import AddCertButton from '@/components/AddCertButton';
 
 interface Cert {
   id: number;
@@ -1056,6 +1057,7 @@ function CertCard({ cert }: { cert: Cert }) {
       </p>
 
       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 16 }}>
+        <AddCertButton certId={cert.id} certName={cert.name} small />
         <Link
           href={`/certifications/${getSlug(cert.name)}`}
           style={{
@@ -1064,14 +1066,15 @@ function CertCard({ cert }: { cert: Cert }) {
             gap: 6,
             fontSize: 12,
             fontWeight: 600,
-            color: '#fff',
+            color: 'var(--text-primary)',
             textDecoration: 'none',
-            background: 'var(--accent)',
+            border: '1px solid var(--border)',
+            background: 'transparent',
             padding: '6px 14px',
             borderRadius: 8,
-            transition: 'opacity 0.2s',
+            transition: 'all 0.2s',
           }}
-          className="hover:opacity-90"
+          className="hover:bg-opacity-10 hover:bg-white"
         >
           View Details
         </Link>

@@ -7,6 +7,7 @@ import {
   TrendingUp, Star, Percent, BookOpen, Clock, ExternalLink, ShieldCheck 
 } from 'lucide-react';
 import { getSlug } from '@/lib/slug';
+import AddCertButton from '@/components/AddCertButton';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -296,8 +297,10 @@ export default async function CertificationDetailPage({ params }: PageProps) {
               {cert.description}
             </p>
 
-            {cert.official_url && (
-              <div style={{ marginTop: 8 }}>
+            <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap', marginTop: 12 }}>
+              <AddCertButton certId={cert.id} certName={cert.name} />
+
+              {cert.official_url && (
                 <a
                   href={cert.official_url}
                   target="_blank"
@@ -308,8 +311,9 @@ export default async function CertificationDetailPage({ params }: PageProps) {
                     gap: 8,
                     fontSize: 14,
                     fontWeight: 600,
-                    color: '#fff',
-                    background: 'var(--accent)',
+                    color: 'var(--text-primary)',
+                    background: 'var(--bg)',
+                    border: '1px solid var(--border)',
                     padding: '12px 24px',
                     borderRadius: 10,
                     textDecoration: 'none',
@@ -320,8 +324,8 @@ export default async function CertificationDetailPage({ params }: PageProps) {
                   <ExternalLink size={16} />
                   Visit Official Provider Website
                 </a>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
 
