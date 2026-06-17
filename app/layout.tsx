@@ -3,6 +3,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://certroute.co'),
@@ -82,6 +83,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <Analytics />
         </body>
       </html>
     </ClerkProvider>
