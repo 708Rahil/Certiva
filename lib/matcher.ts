@@ -647,6 +647,8 @@ export function matchCertifications(
 
     // ── 6. Explicit Name Match ──────────────────────────────────────────────
     let explicitMatch = false;
+    
+    // A) Check hardcoded aliases
     const aliases = CERT_ALIASES[cert.id] || [];
     for (const alias of aliases) {
       if (testAlias(textLower, alias)) {
@@ -654,6 +656,30 @@ export function matchCertifications(
         break;
       }
     }
+
+    // B) Check dynamic base name matches
+    if (!explicitMatch) {
+      // Cleaned full name: "AWS Cloud Practitioner (CLF-C02)" -> "aws cloud practitioner"
+      const cleanName = cert.name.replace(/\s*\([^)]*\)/g, '').trim().toLowerCase();
+      if (cleanName.length >= 3 && testAlias(textLower, cleanName)) {
+        explicitMatch = true;
+      }
+      
+      // Check without provider prefix (e.g. "AWS DevOps Engineer Professional" -> "devops engineer professional")
+      if (!explicitMatch) {
+        const nameWithoutAWS = cleanName.replace(/^(aws|azure|gcp|comptia|google|cisco|microsoft)\s+/i, '').trim();
+        if (nameWithoutAWS.length >= 4 && testAlias(textLower, nameWithoutAWS)) {
+          // Verify we aren't matching overly generic keywords by ensuring provider is mentioned in text
+          const providerMentioned = cert.provider && testAlias(textLower, cert.provider.split(/\s+/)[0].toLowerCase());
+          const shortProviderMentioned = cert.name.match(/^(aws|azure|gcp|comptia|google|cisco|microsoft)/i) && 
+            testAlias(textLower, cert.name.split(/\s+/)[0].toLowerCase());
+          if (providerMentioned || shortProviderMentioned) {
+            explicitMatch = true;
+          }
+        }
+      }
+    }
+    
     const explicitBonus = explicitMatch ? 1.0 : 0;
 
     // ── 4. Difficulty Fit ───────────────────────────────────────────────────
