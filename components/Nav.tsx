@@ -12,7 +12,7 @@ export default function Nav() {
 
   const links = [
     { href: '/explore', label: 'Explore' },
-    { href: '/', label: 'New Analysis' },
+    { href: '/analyze', label: 'New Analysis' },
     { href: '/jobs', label: 'Saved Jobs' },
     { href: '/certifications', label: 'My Certifications' },
     { href: '/roadmap', label: 'My Roadmap' },
