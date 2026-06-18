@@ -7,7 +7,7 @@ export default function SignInPage() {
       justifyContent: 'center',
       alignItems: 'center',
       minHeight: 'calc(100vh - 60px)',
-      background: 'radial-gradient(circle at 50% 50%, rgba(79, 110, 247, 0.08) 0%, rgba(10, 11, 15, 0) 70%)',
+      background: 'radial-gradient(circle at 50% 50%, rgba(79, 110, 247, 0.05) 0%, var(--bg) 70%)',
       padding: '40px 24px',
     }}>
       <div style={{
@@ -17,41 +17,40 @@ export default function SignInPage() {
           appearance={{
             variables: {
               colorPrimary: '#4f6ef7',
-              colorBackground: '#131514',
-              colorInputBackground: '#1d202b',
-              colorInputText: '#ffffff',
-              colorText: '#ffffff',
-              colorTextSecondary: '#cbd5e1',
-              colorBorder: 'rgba(255, 255, 255, 0.12)',
+              colorBackground: '#ffffff',
+              colorInputBackground: '#f8fafc',
+              colorInputText: '#0f172a',
+              colorText: '#0f172a',
+              colorTextSecondary: '#475569',
+              colorBorder: '#e2e8f0',
             },
             elements: {
               card: {
-                background: 'rgba(19, 21, 28, 0.85)',
-                backdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.5)',
+                background: '#ffffff',
+                border: '1px solid var(--border)',
+                boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03)',
                 borderRadius: '20px',
               },
               headerTitle: {
-                color: '#ffffff',
+                color: '#0f172a',
               },
               headerSubtitle: {
-                color: '#cbd5e1',
+                color: '#475569',
               },
               dividerText: {
-                color: '#94a3b8',
+                color: '#64748b',
               },
               dividerLine: {
-                background: 'rgba(255, 255, 255, 0.12)',
+                background: '#e2e8f0',
               },
               formFieldLabel: {
-                color: '#e2e8f0',
+                color: '#475569',
                 fontWeight: 500,
               },
               formFieldInput: {
-                background: '#1d202b',
-                color: '#ffffff',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
+                background: '#f8fafc',
+                color: '#0f172a',
+                border: '1px solid var(--border)',
                 '&:focus': {
                   borderColor: '#4f6ef7',
                 }
@@ -60,16 +59,16 @@ export default function SignInPage() {
                 marginBottom: '6px',
               },
               socialButtonsBlockButton: {
-                background: '#1a1d26',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
-                color: '#ffffff',
+                background: '#ffffff',
+                border: '1px solid var(--border)',
+                color: '#0f172a',
                 '&:hover': {
-                  background: '#232733',
-                  borderColor: 'rgba(255, 255, 255, 0.2)',
+                  background: '#f8fafc',
+                  borderColor: 'var(--border)',
                 }
               },
               socialButtonsBlockButtonText: {
-                color: '#ffffff',
+                color: '#0f172a',
                 fontWeight: 500,
               },
               formButtonPrimary: {
@@ -79,13 +78,13 @@ export default function SignInPage() {
                 }
               },
               footerActionLink: {
-                color: '#6b83f9',
+                color: 'var(--accent)',
                 '&:hover': {
-                  color: '#8b9ffa',
+                  color: 'var(--accent-light)',
                 }
               },
               footerActionText: {
-                color: '#94a3b8',
+                color: '#64748b',
               }
             }
           }}

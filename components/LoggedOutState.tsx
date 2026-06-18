@@ -12,12 +12,11 @@ export default function LoggedOutState({ title, description, features }: LoggedO
       maxWidth: 600,
       margin: '80px auto',
       padding: '40px 32px',
-      background: 'rgba(19, 21, 28, 0.7)',
-      backdropFilter: 'blur(16px)',
+      background: '#ffffff',
       border: '1px solid var(--border)',
       borderRadius: 24,
       textAlign: 'center',
-      boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.3)',
+      boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03)',
       animation: 'fade-up 0.5s ease-out',
     }}>
       {/* Icon */}
@@ -63,11 +62,11 @@ export default function LoggedOutState({ title, description, features }: LoggedO
         flexDirection: 'column',
         gap: 12,
         alignItems: 'flex-start',
-        background: 'rgba(0, 0, 0, 0.2)',
+        background: 'rgba(0, 0, 0, 0.02)',
         borderRadius: 16,
         padding: '20px 24px',
         marginBottom: 32,
-        border: '1px solid rgba(255, 255, 255, 0.03)',
+        border: '1px solid var(--border)',
       }}>
         {features.map((feature, i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 14, color: 'var(--text-secondary)' }}>

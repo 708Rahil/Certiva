@@ -195,7 +195,7 @@ export default function AnalyticsPage() {
                       textDecoration: 'none',
                       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                       padding: '8px 12px', borderRadius: 10,
-                      background: 'rgba(0,0,0,0.2)',
+                      background: 'rgba(0,0,0,0.02)',
                       border: '1px solid var(--border)',
                       transition: 'border-color 0.15s',
                     }}

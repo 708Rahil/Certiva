@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@clerk/nextjs';
 import CertificationRow from '@/components/CertificationRow';
 import BrowseAllCertsModal from '@/components/BrowseAllCertsModal';
+import LoggedOutState from '@/components/LoggedOutState';
 
 interface UserCertification {
   id: number;
@@ -178,16 +179,26 @@ export default function MyCertificationsPage() {
     completed: certifications.filter(c => c.status === 'completed').length,
   };
 
-  if (!isLoaded || !userId) {
+  if (!isLoaded) {
     return (
-      <div style={{
-        maxWidth: 1100,
-        margin: '0 auto',
-        padding: '40px 24px',
-        textAlign: 'center',
-      }}>
-        <p style={{ color: 'var(--text-secondary)' }}>Please sign in to view your certifications.</p>
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '60px 24px', textAlign: 'center', color: 'var(--text-secondary)' }}>
+        Loading certifications...
       </div>
+    );
+  }
+
+  if (!userId) {
+    return (
+      <LoggedOutState
+        title="Track Your Certifications"
+        description="Create a free account to track certifications you're interested in, keep notes on exams, and log your completion status."
+        features={[
+          "Build a custom list of target credentials",
+          "Track progress status (Interested, In Progress, Completed)",
+          "Add personalized study logs and exam notes",
+          "Unlock tailored matching scores across saved jobs"
+        ]}
+      />
     );
   }
 
