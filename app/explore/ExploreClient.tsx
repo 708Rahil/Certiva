@@ -102,9 +102,6 @@ export default function ExploreClient({ initialRoles }: { initialRoles: Role[] }
           color: 'var(--text-primary)',
           letterSpacing: '-0.03em',
           marginBottom: 16,
-          background: 'linear-gradient(to right, #fff, #94a3b8)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
         }}>
           Explore Career Certification Paths
         </h1>
@@ -145,7 +142,7 @@ export default function ExploreClient({ initialRoles }: { initialRoles: Role[] }
               padding: '14px 16px 14px 48px',
               borderRadius: 12,
               border: '1px solid var(--border)',
-              background: 'rgba(13,15,20,0.6)',
+              background: 'var(--bg-card)',
               color: 'var(--text-primary)',
               fontSize: 15,
               outline: 'none',

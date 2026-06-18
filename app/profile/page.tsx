@@ -244,7 +244,7 @@ export default function ProfilePage() {
                 padding: '10px 14px',
                 borderRadius: 8,
                 border: '1px solid var(--border)',
-                background: 'var(--bg-primary, #0c0a09)',
+                background: 'var(--bg)',
                 color: 'var(--text-primary)',
                 fontSize: 14,
                 outline: 'none',
@@ -265,7 +265,7 @@ export default function ProfilePage() {
                 padding: '10px 14px',
                 borderRadius: 8,
                 border: '1px solid var(--border)',
-                background: 'var(--bg-primary, #0c0a09)',
+                background: 'var(--bg)',
                 color: 'var(--text-primary)',
                 fontSize: 14,
                 outline: 'none',
@@ -332,7 +332,7 @@ export default function ProfilePage() {
                   padding: '8px 12px',
                   borderRadius: 8,
                   border: '1px solid var(--border)',
-                  background: 'var(--bg-primary, #0c0a09)',
+                  background: 'var(--bg)',
                   color: 'var(--text-primary)',
                   fontSize: 14,
                   outline: 'none',
@@ -450,7 +450,7 @@ export default function ProfilePage() {
 
         {completedCerts.length === 0 ? (
           <div style={{
-            background: 'var(--bg-primary, #0c0a09)',
+            background: 'var(--bg-card-hover)',
             borderRadius: 10,
             padding: 24,
             textAlign: 'center',
@@ -483,7 +483,7 @@ export default function ProfilePage() {
               <div 
                 key={c.id}
                 style={{
-                  background: 'var(--bg-primary, #0c0a09)',
+                  background: 'var(--bg-card-hover)',
                   borderRadius: 12,
                   padding: 16,
                   border: '1px solid var(--border)',
