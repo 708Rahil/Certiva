@@ -308,8 +308,8 @@ export default function JobDetailPage() {
             {/* Stats */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12, minWidth: 140 }}>
               <StatBubble label="Best Match" value={`${topScore}`} unit="/ 100" accent />
-              <StatBubble label="Certs Found" value={`${recs.length}`} />
-              <StatBubble label="Skills Detected" value={`${skills.length}`} />
+              <StatBubble label="Certs Found" value={`${recs.length}`} accent />
+              <StatBubble label="Skills Detected" value={`${skills.length}`} accent />
             </div>
           </div>
         </div>
