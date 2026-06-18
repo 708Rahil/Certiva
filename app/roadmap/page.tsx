@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, Suspense } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { Award, Briefcase, ChevronRight, CheckCircle, Clock, BookOpen, AlertCircle, Sparkles, Map } from 'lucide-react';
 import { getSlug } from '@/lib/slug';
 import AddCertButton from '@/components/AddCertButton';
@@ -43,11 +44,14 @@ const INDUSTRY_LABELS: Record<string, string> = {
 
 const INDUSTRY_ORDER = ['cloud', 'networking', 'cybersecurity', 'data', 'ai_ml', 'finance', 'marketing', 'management', 'business'];
 
-export default function RoadmapPage() {
+function RoadmapContent() {
+  const searchParams = useSearchParams();
+  const urlJobId = searchParams.get('jobId');
+
   const [loading, setLoading] = useState(true);
   const [mode, setMode] = useState<'job-specific' | 'role-specific' | 'generic'>('job-specific');
   const [jobs, setJobs] = useState<Job[]>([]);
-  const [selectedJobId, setSelectedJobId] = useState<string>('');
+  const [selectedJobId, setSelectedJobId] = useState<string>(urlJobId || '');
   const [selectedJob, setSelectedJob] = useState<any>(null);
   const [recommendations, setRecommendations] = useState<Cert[]>([]);
   const [genericRoadmaps, setGenericRoadmaps] = useState<Record<string, Cert[]>>({});
@@ -58,6 +62,7 @@ export default function RoadmapPage() {
 
   // Fetch roadmap data for a specific jobId or default
   const fetchRoadmapData = (jobId?: string) => {
+
     setLoading(true);
     setError(null);
     const url = jobId ? `/api/roadmap?jobId=${jobId}` : '/api/roadmap';
@@ -1002,5 +1007,13 @@ function CertCard({ cert }: { cert: Cert }) {
         </div>
       )}
     </div>
+  );
+}
+
+export default function RoadmapPage() {
+  return (
+    <Suspense fallback={<div style={{ maxWidth: 1100, margin: '0 auto', padding: '40px 24px', textAlign: 'center' }}>Loading roadmap...</div>}>
+      <RoadmapContent />
+    </Suspense>
   );
 }

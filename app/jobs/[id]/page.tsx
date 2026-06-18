@@ -520,13 +520,32 @@ export default function JobDetailPage() {
         {/* Recommendations */}
         <div>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 12 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
               <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600, color: 'var(--text-primary)', letterSpacing: '-0.3px' }}>
                 Recommended Certifications
               </h2>
               <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>
                 {filteredAndSorted.length} result{filteredAndSorted.length !== 1 ? 's' : ''}
               </span>
+              <Link 
+                href={`/roadmap?jobId=${job?.id}`}
+                style={{
+                  fontSize: 13,
+                  fontWeight: 500,
+                  color: 'var(--accent)',
+                  background: 'var(--accent-dim)',
+                  padding: '6px 12px',
+                  borderRadius: 6,
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  transition: 'background 0.2s',
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--bg-card)'; e.currentTarget.style.border = '1px solid var(--accent)'; e.currentTarget.style.padding = '5px 11px'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--accent-dim)'; e.currentTarget.style.border = 'none'; e.currentTarget.style.padding = '6px 12px'; }}
+              >
+                View Job Roadmap →
+              </Link>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>

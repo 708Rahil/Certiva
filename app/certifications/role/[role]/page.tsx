@@ -93,6 +93,27 @@ export default async function RoleCertificationsPage({ params }: PageProps) {
     );
   }
 
+  // Generate JSON-LD ItemList Schema
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    'name': `Best Certifications for a ${roleName}`,
+    'description': `Top certifications for ${roleName} ranked by market demand and salary boost.`,
+    'itemListElement': certs.map((cert, index) => ({
+      '@type': 'ListItem',
+      'position': index + 1,
+      'item': {
+        '@type': 'Course',
+        'name': cert.name,
+        'provider': {
+          '@type': 'Organization',
+          'name': cert.provider
+        },
+        'url': `https://certroute.co/certifications/${getSlug(cert.name)}`
+      }
+    }))
+  };
+
   return (
     <main style={{
       minHeight: '100vh',
@@ -100,6 +121,11 @@ export default async function RoleCertificationsPage({ params }: PageProps) {
       color: 'var(--text-primary)',
       padding: '40px 20px 80px',
     }}>
+      {/* Inject JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div style={{ maxWidth: 900, margin: '0 auto' }}>
         
         {/* Navigation */}
@@ -123,10 +149,10 @@ export default async function RoleCertificationsPage({ params }: PageProps) {
         {/* Header */}
         <div style={{ marginBottom: 48 }}>
           <h1 style={{ fontSize: 'clamp(28px, 4vw, 38px)', fontWeight: 800, margin: '0 0 12px', letterSpacing: '-0.5px' }}>
-            Best Certifications for a {roleName}
+            Best Certifications for a {roleName} (2026 Guide)
           </h1>
           <p style={{ fontSize: 16, color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6 }}>
-            Sourced and verified directory of the most demanded credentials in the market to help you land a role as a {roleName}.
+            Sourced and verified directory of the most demanded credentials in the market to help you land a role as a {roleName}. We've filtered these certifications by market demand, salary increase, and exam difficulty to give you the best return on your study time.
           </p>
         </div>
 
