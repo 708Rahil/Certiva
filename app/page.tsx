@@ -45,8 +45,8 @@ export default function LandingPage() {
               marginBottom: 20,
               color: 'var(--text-primary)',
             }}>
-              Stop Guessing Your Next <br />
-              <span style={{ color: 'var(--accent)' }}>Tech Certification.</span>
+              Stop Guessing Your <br />
+              <span style={{ color: 'var(--accent)' }}>Next Certification.</span>
             </h1>
 
             <p style={{
@@ -304,6 +304,27 @@ export default function LandingPage() {
                     border: '3px solid #fff',
                   }} />
                   <div style={{ fontSize: 12, fontWeight: 700, color: '#64748b' }}>Step 2: Associate Certifications</div>
+                  
+                  {/* Step Card for Step 2 */}
+                  <div style={{
+                    background: '#f8fafc',
+                    border: '1px solid #e2e8f0',
+                    borderRadius: 10,
+                    padding: '10px 14px',
+                    marginTop: 8,
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    opacity: 0.85,
+                  }}>
+                    <div>
+                      <div style={{ fontSize: 12, fontWeight: 700, color: '#0f172a' }}>AWS Certified Developer - Associate</div>
+                      <div style={{ fontSize: 10, color: '#64748b' }}>Amazon Web Services · Lvl 3/5</div>
+                    </div>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: '#64748b', background: '#e2e8f0', padding: '4px 8px', borderRadius: 6 }}>
+                      + Add
+                    </span>
+                  </div>
                 </div>
 
               </div>

@@ -59,7 +59,9 @@
       "AWS Developer",
       "Solutions Architect",
       "Cloud Support Associate",
-      "Junior Cloud Engineer"
+      "Junior Cloud Engineer",
+      "Software Developer",
+      "Software Engineer"
     ],
     "job_postings_count": 50000,
     "job_postings_source": "LinkedIn Jobs (2026)",
@@ -135,6 +137,7 @@
       "Cloud Architect",
       "Cloud Engineer",
       "Infrastructure Engineer",
+      "Software Engineer",
       "Senior Cloud Engineer"
     ],
     "job_postings_count": 45000,
@@ -210,7 +213,7 @@
       "AWS Developer",
       "Backend Engineer",
       "DevOps Engineer",
-      "Software Engineer",
+      "Software Developer",
       "Cloud Application Developer"
     ],
     "job_postings_count": 40000,
@@ -280,7 +283,9 @@
       "Azure Developer",
       "Systems Administrator",
       "Cloud Support Associate",
-      "Junior Cloud Engineer"
+      "Junior Cloud Engineer",
+      "Software Developer",
+      "Software Engineer"
     ],
     "job_postings_count": 35000,
     "job_postings_source": "LinkedIn Jobs (2026)",
@@ -506,7 +511,8 @@
       "Platform Engineer",
       "Site Reliability Engineer",
       "Cloud Engineer",
-      "Release Engineer"
+      "Release Engineer",
+      "Software Engineer"
     ],
     "job_postings_count": 35000,
     "job_postings_source": "LinkedIn Jobs (2026)",
@@ -583,6 +589,7 @@
       "Platform Engineer",
       "Cloud Engineer",
       "Site Reliability Engineer",
+      "Software Engineer",
       "Infrastructure Engineer"
     ],
     "job_postings_count": 28000,
@@ -806,6 +813,7 @@
       "Solutions Architect (Enterprise)",
       "Principal Cloud Engineer",
       "Cloud Consultant",
+      "Software Engineer",
       "Technical Architect"
     ],
     "job_postings_count": 38000,
@@ -1360,7 +1368,7 @@
       "Associate Cloud Engineer knowledge"
     ],
     "target_job_titles": [
-      "Cloud Software Engineer",
+      "Software Developer",
       "Backend Engineer (GCP)",
       "Serverless Developer",
       "Platform Engineer",
@@ -1807,7 +1815,7 @@
       "Azure Developer",
       "Cloud Developer",
       "Backend Engineer",
-      "Software Engineer",
+      "Software Developer",
       "Full Stack Developer",
       "Cloud Application Developer"
     ],
@@ -1888,6 +1896,7 @@
       "Azure Architect",
       "Infrastructure Architect",
       "Senior Cloud Engineer",
+      "Software Engineer",
       "Enterprise Architect"
     ],
     "job_postings_count": 48000,
