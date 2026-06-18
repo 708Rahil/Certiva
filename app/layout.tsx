@@ -62,22 +62,22 @@ export default function RootLayout({
       appearance={{
       variables: {
         colorPrimary: '#4f6ef7',
-        colorBackground: '#131514',
-        colorInputBackground: '#1d202b',
-        colorInputText: '#ffffff',
-        colorText: '#ffffff',
-        colorTextSecondary: '#ffffff',
-        colorBorder: 'rgba(255, 255, 255, 0.12)',
+        colorBackground: '#ffffff',
+        colorInputBackground: '#f8fafc',
+        colorInputText: '#0f172a',
+        colorText: '#0f172a',
+        colorTextSecondary: '#475569',
+        colorBorder: '#e2e8f0',
       },
       elements: {
         userButtonPopoverTextSecondary: {
-          color: '#ffffff',
+          color: '#475569',
         },
         activeDeviceSubtitle: {
-          color: '#ffffff',
+          color: '#475569',
         },
         sessionItemSubtitle: {
-          color: '#ffffff',
+          color: '#475569',
         }
       }
     }}>
