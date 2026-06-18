@@ -48,11 +48,40 @@ export default function ExploreClient({ initialRoles }: { initialRoles: Role[] }
   }, [initialRoles]);
 
   const filteredRoles = useMemo(() => {
-    return initialRoles.filter(role => {
+    const filtered = initialRoles.filter(role => {
       const matchesSearch = role.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         role.certNames.some(c => c.toLowerCase().includes(searchQuery.toLowerCase()));
       const matchesIndustry = selectedIndustry === 'all' || role.industry === selectedIndustry;
       return matchesSearch && matchesIndustry;
+    });
+
+    if (!searchQuery) {
+      return filtered;
+    }
+
+    return [...filtered].sort((a, b) => {
+      const query = searchQuery.toLowerCase();
+      const aName = a.name.toLowerCase();
+      const bName = b.name.toLowerCase();
+
+      // Exact match on role name
+      if (aName === query && bName !== query) return -1;
+      if (bName === query && aName !== query) return 1;
+
+      // Starts with the search query
+      const aStartsWith = aName.startsWith(query);
+      const bStartsWith = bName.startsWith(query);
+      if (aStartsWith && !bStartsWith) return -1;
+      if (bStartsWith && !aStartsWith) return 1;
+
+      // Role name contains the query
+      const aContains = aName.includes(query);
+      const bContains = bName.includes(query);
+      if (aContains && !bContains) return -1;
+      if (bContains && !aContains) return 1;
+
+      // Fallback to cert count
+      return b.certCount - a.certCount;
     });
   }, [initialRoles, searchQuery, selectedIndustry]);
 
