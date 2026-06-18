@@ -23,7 +23,7 @@ export default function Nav() {
   return (
     <nav style={{
       borderBottom: '1px solid var(--border)',
-      background: 'rgba(13,15,20,0.95)',
+      background: 'rgba(255,255,255,0.85)',
       backdropFilter: 'blur(12px)',
       position: 'sticky',
       top: 0,
