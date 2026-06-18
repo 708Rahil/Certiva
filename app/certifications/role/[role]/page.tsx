@@ -12,7 +12,7 @@ interface PageProps {
 }
 
 const INDUSTRY_COLORS: Record<string, string> = {
-  cloud: '#4f6ef7',
+  cloud: '#2563eb',
   data: '#34d399',
   cybersecurity: '#f87171',
   finance: '#fbbf24',

@@ -16,7 +16,7 @@ export default function SignUpPage() {
         <SignUp
           appearance={{
             variables: {
-              colorPrimary: '#4f6ef7',
+              colorPrimary: '#2563eb',
               colorBackground: '#ffffff',
               colorInputBackground: '#f8fafc',
               colorInputText: '#0f172a',
@@ -52,7 +52,7 @@ export default function SignUpPage() {
                 color: '#0f172a',
                 border: '1px solid var(--border)',
                 '&:focus': {
-                  borderColor: '#4f6ef7',
+                  borderColor: '#2563eb',
                 }
               },
               formFieldLabelRow: {
@@ -72,9 +72,9 @@ export default function SignUpPage() {
                 fontWeight: 500,
               },
               formButtonPrimary: {
-                background: '#4f6ef7',
+                background: '#2563eb',
                 '&:hover': {
-                  background: '#6b83f9',
+                  background: '#3b82f6',
                 }
               },
               footerActionLink: {

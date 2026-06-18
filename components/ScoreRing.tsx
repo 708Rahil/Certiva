@@ -23,7 +23,7 @@ export default function ScoreRing({ score, size = 72 }: ScoreRingProps) {
     return () => clearTimeout(timeout);
   }, [score, circumference]);
 
-  const color = score >= 70 ? '#34d399' : score >= 45 ? '#fbbf24' : '#4f6ef7';
+  const color = score >= 70 ? '#34d399' : score >= 45 ? '#fbbf24' : '#2563eb';
 
   return (
     <div style={{ position: 'relative', width: size, height: size, flexShrink: 0 }}>
