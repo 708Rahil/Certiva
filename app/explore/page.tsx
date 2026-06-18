@@ -35,7 +35,7 @@ export default async function ExplorePage() {
       const cleanTitle = title.trim();
       if (!cleanTitle) return;
       const slug = cleanTitle.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-      const key = `${cert.industry || 'general'}:${slug}`;
+      const key = slug;
       if (!rolesMap.has(key)) {
         rolesMap.set(key, {
           name: cleanTitle,
@@ -47,7 +47,7 @@ export default async function ExplorePage() {
       }
       const roleObj = rolesMap.get(key)!;
       roleObj.certCount += 1;
-      if (roleObj.certNames.length < 3) {
+      if (!roleObj.certNames.includes(cert.name) && roleObj.certNames.length < 3) {
         roleObj.certNames.push(cert.name);
       }
     });

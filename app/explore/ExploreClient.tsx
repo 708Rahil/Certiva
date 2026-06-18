@@ -210,7 +210,7 @@ export default function ExploreClient({ initialRoles }: { initialRoles: Role[] }
         }}>
           {filteredRoles.map(role => (
             <Link
-              key={`${role.industry}-${role.slug}`}
+              key={role.slug}
               href={`/certifications/role/${role.slug}`}
               style={{
                 textDecoration: 'none',
