@@ -41,11 +41,22 @@ const INDUSTRY_ICONS: Record<string, string> = {
 export default function ExploreClient({ initialRoles }: { initialRoles: Role[] }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedIndustry, setSelectedIndustry] = useState('all');
+  const [currentPage, setCurrentPage] = useState(1);
 
   const industries = useMemo(() => {
     const active = new Set(initialRoles.map(r => r.industry));
     return ['all', ...Array.from(active)];
   }, [initialRoles]);
+
+  const handleSearchChange = (val: string) => {
+    setSearchQuery(val);
+    setCurrentPage(1);
+  };
+
+  const handleIndustryChange = (val: string) => {
+    setSelectedIndustry(val);
+    setCurrentPage(1);
+  };
 
   const filteredRoles = useMemo(() => {
     const filtered = initialRoles.filter(role => {
@@ -84,6 +95,14 @@ export default function ExploreClient({ initialRoles }: { initialRoles: Role[] }
       return b.certCount - a.certCount;
     });
   }, [initialRoles, searchQuery, selectedIndustry]);
+
+  const itemsPerPage = 12;
+  const totalPages = Math.ceil(filteredRoles.length / itemsPerPage);
+  const safeCurrentPage = Math.min(currentPage, Math.max(1, totalPages));
+
+  const paginatedRoles = useMemo(() => {
+    return filteredRoles.slice((safeCurrentPage - 1) * itemsPerPage, safeCurrentPage * itemsPerPage);
+  }, [filteredRoles, safeCurrentPage, itemsPerPage]);
 
   return (
     <div style={{
@@ -136,7 +155,7 @@ export default function ExploreClient({ initialRoles }: { initialRoles: Role[] }
             type="text"
             placeholder="Search roles (e.g. Software Engineer, Cloud Architect)..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => handleSearchChange(e.target.value)}
             style={{
               width: '100%',
               padding: '14px 16px 14px 48px',
@@ -166,7 +185,7 @@ export default function ExploreClient({ initialRoles }: { initialRoles: Role[] }
         {industries.map(ind => (
           <button
             key={ind}
-            onClick={() => setSelectedIndustry(ind)}
+            onClick={() => handleIndustryChange(ind)}
             style={{
               padding: '8px 16px',
               borderRadius: 100,
@@ -203,117 +222,193 @@ export default function ExploreClient({ initialRoles }: { initialRoles: Role[] }
           </p>
         </div>
       ) : (
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-          gap: 20,
-        }}>
-          {filteredRoles.map(role => (
-            <Link
-              key={role.slug}
-              href={`/certifications/role/${role.slug}`}
-              style={{
-                textDecoration: 'none',
-                background: 'var(--bg-secondary)',
-                border: '1px solid var(--border)',
-                borderRadius: 16,
-                padding: 24,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                transition: 'all 0.2s ease-in-out',
-                position: 'relative',
-              }}
-              className="explore-role-card"
-            >
-              <div>
-                <div style={{
+        <div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+            gap: 20,
+          }}>
+            {paginatedRoles.map(role => (
+              <Link
+                key={role.slug}
+                href={`/certifications/role/${role.slug}`}
+                style={{
+                  textDecoration: 'none',
+                  background: 'var(--bg-secondary)',
+                  border: '1px solid var(--border)',
+                  borderRadius: 16,
+                  padding: 24,
                   display: 'flex',
+                  flexDirection: 'column',
                   justifyContent: 'space-between',
-                  alignItems: 'flex-start',
-                  marginBottom: 16,
-                }}>
-                  <span style={{
-                    fontSize: 24,
-                    padding: '8px',
-                    borderRadius: 10,
-                    background: 'rgba(255,255,255,0.02)',
-                    display: 'inline-flex',
-                  }}>
-                    {INDUSTRY_ICONS[role.industry] || '⚙️'}
-                  </span>
-                  <span style={{
-                    fontSize: 12,
-                    fontWeight: 600,
-                    color: 'var(--accent-light)',
-                    background: 'var(--accent-dim)',
-                    padding: '4px 10px',
-                    borderRadius: 100,
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 4,
-                  }}>
-                    <Award size={12} />
-                    {role.certCount} {role.certCount === 1 ? 'Cert' : 'Certs'}
-                  </span>
-                </div>
-
-                <h3 style={{
-                  fontSize: 18,
-                  fontWeight: 700,
-                  color: 'var(--text-primary)',
-                  marginBottom: 6,
-                }}>{role.name}</h3>
-
-                <span style={{
-                  fontSize: 12,
-                  color: 'var(--text-muted)',
-                  display: 'block',
-                  marginBottom: 16,
-                }}>
-                  {INDUSTRY_LABELS[role.industry] || role.industry}
-                </span>
-
-                {role.certNames.length > 0 && (
+                  transition: 'all 0.2s ease-in-out',
+                  position: 'relative',
+                }}
+                className="explore-role-card"
+              >
+                <div>
                   <div style={{
                     display: 'flex',
-                    flexDirection: 'column',
-                    gap: 6,
-                    borderTop: '1px solid rgba(255,255,255,0.03)',
-                    paddingTop: 16,
-                    marginBottom: 20,
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    marginBottom: 16,
                   }}>
-                    <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                      Key Certifications
+                    <span style={{
+                      fontSize: 24,
+                      padding: '8px',
+                      borderRadius: 10,
+                      background: 'rgba(255,255,255,0.02)',
+                      display: 'inline-flex',
+                    }}>
+                      {INDUSTRY_ICONS[role.industry] || '⚙️'}
                     </span>
-                    {role.certNames.map((name, idx) => (
-                      <div key={idx} style={{
-                        fontSize: 13,
-                        color: 'var(--text-secondary)',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                      }}>
-                        • {name}
-                      </div>
-                    ))}
+                    <span style={{
+                      fontSize: 12,
+                      fontWeight: 600,
+                      color: 'var(--accent-light)',
+                      background: 'var(--accent-dim)',
+                      padding: '4px 10px',
+                      borderRadius: 100,
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 4,
+                    }}>
+                      <Award size={12} />
+                      {role.certCount} {role.certCount === 1 ? 'Cert' : 'Certs'}
+                    </span>
                   </div>
-                )}
-              </div>
 
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6,
-                fontSize: 13,
-                fontWeight: 600,
-                color: 'var(--text-primary)',
-                marginTop: 'auto',
-              }}>
-                View Career Path <ArrowRight size={14} />
-              </div>
-            </Link>
-          ))}
+                  <h3 style={{
+                    fontSize: 18,
+                    fontWeight: 700,
+                    color: 'var(--text-primary)',
+                    marginBottom: 6,
+                  }}>{role.name}</h3>
+
+                  <span style={{
+                    fontSize: 12,
+                    color: 'var(--text-muted)',
+                    display: 'block',
+                    marginBottom: 16,
+                  }}>
+                    {INDUSTRY_LABELS[role.industry] || role.industry}
+                  </span>
+
+                  {role.certNames.length > 0 && (
+                    <div style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 6,
+                      borderTop: '1px solid rgba(255,255,255,0.03)',
+                      paddingTop: 16,
+                      marginBottom: 20,
+                    }}>
+                      <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                        Key Certifications
+                      </span>
+                      {role.certNames.map((name, idx) => (
+                        <div key={idx} style={{
+                          fontSize: 13,
+                          color: 'var(--text-secondary)',
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                        }}>
+                          • {name}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: 'var(--text-primary)',
+                  marginTop: 'auto',
+                }}>
+                  View Career Path <ArrowRight size={14} />
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: 8,
+              marginTop: 48,
+              flexWrap: 'wrap',
+            }}>
+              {/* Previous Button */}
+              <button
+                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                disabled={safeCurrentPage === 1}
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: 8,
+                  border: '1px solid var(--border)',
+                  background: 'transparent',
+                  color: safeCurrentPage === 1 ? 'var(--text-muted)' : 'var(--text-primary)',
+                  fontSize: 13,
+                  fontWeight: 600,
+                  cursor: safeCurrentPage === 1 ? 'not-allowed' : 'pointer',
+                  opacity: safeCurrentPage === 1 ? 0.5 : 1,
+                  transition: 'all 0.15s',
+                }}
+              >
+                Previous
+              </button>
+
+              {/* Numbered Page Buttons */}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(pageNum => (
+                <button
+                  key={pageNum}
+                  onClick={() => setCurrentPage(pageNum)}
+                  style={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: 8,
+                    border: safeCurrentPage === pageNum ? '1px solid var(--accent)' : '1px solid var(--border)',
+                    background: safeCurrentPage === pageNum ? 'var(--accent)' : 'transparent',
+                    color: safeCurrentPage === pageNum ? '#ffffff' : 'var(--text-primary)',
+                    fontSize: 13,
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    transition: 'all 0.15s',
+                  }}
+                >
+                  {pageNum}
+                </button>
+              ))}
+
+              {/* Next Button */}
+              <button
+                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                disabled={safeCurrentPage === totalPages}
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: 8,
+                  border: '1px solid var(--border)',
+                  background: 'transparent',
+                  color: safeCurrentPage === totalPages ? 'var(--text-muted)' : 'var(--text-primary)',
+                  fontSize: 13,
+                  fontWeight: 600,
+                  cursor: safeCurrentPage === totalPages ? 'not-allowed' : 'pointer',
+                  opacity: safeCurrentPage === totalPages ? 0.5 : 1,
+                  transition: 'all 0.15s',
+                }}
+              >
+                Next
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -55,10 +55,10 @@ export default function Footer() {
               onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}>
               Home
             </Link>
-            <Link href="/jobs" style={{ fontSize: 13, color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.15s' }}
+            <Link href="/explore" style={{ fontSize: 13, color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.15s' }}
               onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-light)'}
               onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}>
-              Saved Jobs
+              Explore
             </Link>
             <Link href="/certifications" style={{ fontSize: 13, color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.15s' }}
               onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-light)'}
@@ -68,12 +68,17 @@ export default function Footer() {
             <Link href="/roadmap" style={{ fontSize: 13, color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.15s' }}
               onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-light)'}
               onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}>
-              Roadmap
+              My Roadmap
             </Link>
-            <Link href="/analytics" style={{ fontSize: 13, color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.15s' }}
+            <Link href="/jobs" style={{ fontSize: 13, color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.15s' }}
               onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-light)'}
               onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}>
-              Analytics
+              Saved Jobs
+            </Link>
+            <Link href="/analyze" style={{ fontSize: 13, color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.15s' }}
+              onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-light)'}
+              onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}>
+              Analyze
             </Link>
           </div>
         </div>
