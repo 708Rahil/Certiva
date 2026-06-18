@@ -17,7 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // Standard static marketing and tool pages
-  const routes = ['', '/certifications', '/jobs', '/profile', '/roadmap', '/terms', '/privacy'].map((route) => ({
+  const routes = ['', '/explore', '/certifications', '/jobs', '/profile', '/roadmap', '/terms', '/privacy'].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'daily' as const,
