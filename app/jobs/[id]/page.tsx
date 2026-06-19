@@ -500,6 +500,39 @@ export default function JobDetailPage() {
                       </div>
                     </>
                   )}
+
+                  {recs[0] && (
+                    <div style={{ marginTop: 8, borderTop: '1px solid rgba(79, 110, 247, 0.1)', paddingTop: 12 }}>
+                      <div style={{ fontSize: 9, color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', marginBottom: 6, letterSpacing: '0.05em' }}>
+                        TOP RECOMMENDATION
+                      </div>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 2 }}>
+                        {recs[0].name}
+                      </div>
+                      <div style={{ fontSize: 11, color: 'var(--text-secondary)', lineHeight: 1.4, marginBottom: 8 }}>
+                        {recs[0].explanation}
+                      </div>
+                      <button
+                        onClick={() => handleAddToCerts(recs[0].cert_id, recs[0].name)}
+                        style={{
+                          width: '100%',
+                          padding: '6px 12px',
+                          background: 'var(--accent)',
+                          color: '#fff',
+                          border: 'none',
+                          borderRadius: 6,
+                          fontSize: 11,
+                          fontWeight: 600,
+                          cursor: 'pointer',
+                          transition: 'opacity 0.2s',
+                        }}
+                        onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.9'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
+                      >
+                        Add to My Certifications
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

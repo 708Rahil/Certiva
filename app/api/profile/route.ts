@@ -28,6 +28,8 @@ export async function GET() {
         full_name: '',
         goal_job: '',
         current_skills: [],
+        resume_text: '',
+        resume_filename: '',
       });
     }
 
@@ -47,6 +49,8 @@ export async function GET() {
       full_name: data.full_name || '',
       goal_job: data.goal_job || '',
       current_skills: parsedSkills,
+      resume_text: data.resume_text || '',
+      resume_filename: data.resume_filename || '',
     });
   } catch (e) {
     console.error('Profile GET error:', e);
@@ -61,7 +65,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { full_name, goal_job, current_skills } = await req.json();
+    const { full_name, goal_job, current_skills, resume_text, resume_filename } = await req.json();
 
     await initDb();
     const supabase = getSupabase();
@@ -73,6 +77,8 @@ export async function POST(req: NextRequest) {
         full_name,
         goal_job,
         current_skills: JSON.stringify(current_skills || []),
+        resume_text: resume_text || null,
+        resume_filename: resume_filename || null,
         updated_at: new Date().toISOString(),
       })
       .select()
@@ -98,6 +104,8 @@ export async function POST(req: NextRequest) {
       full_name: data.full_name || '',
       goal_job: data.goal_job || '',
       current_skills: parsedSkills,
+      resume_text: data.resume_text || '',
+      resume_filename: data.resume_filename || '',
     });
   } catch (e) {
     console.error('Profile POST error:', e);

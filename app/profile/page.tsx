@@ -7,6 +7,8 @@ interface ProfileData {
   full_name: string;
   goal_job: string;
   current_skills: string[];
+  resume_text?: string;
+  resume_filename?: string;
 }
 
 interface UserCert {
@@ -23,12 +25,15 @@ export default function ProfilePage() {
     full_name: '',
     goal_job: '',
     current_skills: [],
+    resume_text: '',
+    resume_filename: '',
   });
   const [completedCerts, setCompletedCerts] = useState<UserCert[]>([]);
   const [newSkill, setNewSkill] = useState('');
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [saveSuccess, setSaveSuccess] = useState(false);
+  const [resumeParsing, setResumeParsing] = useState(false);
 
   // Suggested popular skills list
   const POPULAR_SKILLS = [
@@ -63,6 +68,8 @@ export default function ProfilePage() {
             full_name: profileResult.full_name || '',
             goal_job: profileResult.goal_job || '',
             current_skills: profileResult.current_skills || [],
+            resume_text: profileResult.resume_text || '',
+            resume_filename: profileResult.resume_filename || '',
           });
         }
 
@@ -78,6 +85,97 @@ export default function ProfilePage() {
         setLoading(false);
       });
   }, []);
+
+  const loadPdfJs = () => {
+    return new Promise<any>((resolve, reject) => {
+      if ((window as any).pdfjsLib) {
+        resolve((window as any).pdfjsLib);
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js';
+      script.onload = () => {
+        const pdfjsLib = (window as any).pdfjsLib;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+        resolve(pdfjsLib);
+      };
+      script.onerror = () => reject(new Error('Failed to load PDF parser library.'));
+      document.head.appendChild(script);
+    });
+  };
+
+  const handleResumeUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.type !== 'application/pdf') {
+      setError('Only PDF files are supported.');
+      return;
+    }
+
+    setResumeParsing(true);
+    setError(null);
+
+    const fileReader = new FileReader();
+    fileReader.onload = async function () {
+      try {
+        const typedarray = new Uint8Array(this.result as ArrayBuffer);
+        const pdfjsLib = await loadPdfJs();
+        const pdf = await pdfjsLib.getDocument(typedarray).promise;
+        let fullText = '';
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const textContent = await page.getTextContent();
+          const pageText = textContent.items.map((item: any) => item.str).join(' ');
+          fullText += pageText + '\n';
+        }
+
+        if (!fullText.trim()) {
+          throw new Error('No text content could be extracted from this PDF. It might be scanned/image-only.');
+        }
+
+        const extractRes = await fetch('/api/profile/extract-resume-skills', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ resumeText: fullText }),
+        });
+
+        if (!extractRes.ok) {
+          throw new Error('Failed to analyze resume text.');
+        }
+
+        const data = await extractRes.json();
+        const newSkillsSet = new Set([...profile.current_skills, ...(data.skills || [])]);
+        
+        setProfile(prev => ({
+          ...prev,
+          resume_text: fullText,
+          resume_filename: file.name,
+          current_skills: Array.from(newSkillsSet),
+        }));
+
+        setSaveSuccess(true);
+      } catch (err: any) {
+        console.error('Error parsing PDF:', err);
+        setError(err.message || 'Error parsing PDF resume.');
+      } finally {
+        setResumeParsing(false);
+      }
+    };
+    fileReader.onerror = () => {
+      setError('Error reading file.');
+      setResumeParsing(false);
+    };
+    fileReader.readAsArrayBuffer(file);
+  };
+
+  const handleDeleteResume = () => {
+    setProfile(prev => ({
+      ...prev,
+      resume_text: '',
+      resume_filename: '',
+    }));
+  };
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -99,6 +197,8 @@ export default function ProfilePage() {
           full_name: data.full_name,
           goal_job: data.goal_job,
           current_skills: data.current_skills,
+          resume_text: data.resume_text || '',
+          resume_filename: data.resume_filename || '',
         });
         setSaveSuccess(true);
         setTimeout(() => setSaveSuccess(false), 3000);
@@ -271,6 +371,93 @@ export default function ProfilePage() {
                 outline: 'none',
               }}
             />
+          </div>
+
+          {/* Resume Upload */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, borderTop: '1px solid var(--border)', paddingTop: 20 }}>
+            <label style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+              My Resume (PDF)
+            </label>
+            {profile.resume_filename ? (
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '10px 14px',
+                background: 'var(--bg)',
+                border: '1px solid var(--border)',
+                borderRadius: 8,
+              }}>
+                <span style={{ fontSize: 14, color: 'var(--text-primary)', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 170 }} title={profile.resume_filename}>
+                  📄 {profile.resume_filename}
+                </span>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <label
+                    style={{
+                      fontSize: 12,
+                      fontWeight: 600,
+                      color: 'var(--accent-light)',
+                      cursor: 'pointer',
+                      padding: '4px 8px',
+                      borderRadius: 4,
+                      background: 'var(--accent-dim)',
+                    }}
+                  >
+                    Replace
+                    <input
+                      type="file"
+                      accept=".pdf"
+                      onChange={handleResumeUpload}
+                      style={{ display: 'none' }}
+                    />
+                  </label>
+                  <button
+                    type="button"
+                    onClick={handleDeleteResume}
+                    style={{
+                      fontSize: 12,
+                      fontWeight: 600,
+                      color: '#ef4444',
+                      cursor: 'pointer',
+                      border: 'none',
+                      background: 'rgba(239, 68, 68, 0.1)',
+                      padding: '4px 8px',
+                      borderRadius: 4,
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div style={{
+                border: '2px dashed var(--border)',
+                borderRadius: 8,
+                padding: '20px',
+                textAlign: 'center',
+                background: 'rgba(255,255,255,0.01)',
+                position: 'relative',
+                cursor: 'pointer',
+              }}>
+                <input
+                  type="file"
+                  accept=".pdf"
+                  onChange={handleResumeUpload}
+                  disabled={resumeParsing}
+                  style={{
+                    position: 'absolute',
+                    top: 0, left: 0, width: '100%', height: '100%',
+                    opacity: 0, cursor: resumeParsing ? 'not-allowed' : 'pointer',
+                  }}
+                />
+                <span style={{ fontSize: 13, color: 'var(--text-secondary)', display: 'block', marginBottom: 4 }}>
+                  {resumeParsing ? '⏳ Scanning & extracting skills...' : 'Drag & drop or click to upload PDF resume'}
+                </span>
+                <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>
+                  Skills will be automatically extracted and added to your profile.
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Save Button & Status Alerts */}
