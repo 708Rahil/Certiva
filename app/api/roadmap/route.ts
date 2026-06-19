@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { initDb, getSupabase } from '@/lib/db';
 import { matchCertifications, Certification } from '@/lib/matcher';
 import { extractJobData } from '@/lib/llmExtractor';
+import { generateLlmExplanations } from '@/lib/llmExplainer';
 import { auth } from '@clerk/nextjs/server';
 
 export async function POST(req: NextRequest) {
@@ -90,6 +91,7 @@ export async function POST(req: NextRequest) {
     );
 
     const topRecs = recommendations.slice(0, 8);
+    const llmExplanations = await generateLlmExplanations(title, description, topRecs);
     const byIndustry: Record<string, any[]> = {};
 
     for (const rec of topRecs) {
@@ -115,7 +117,7 @@ export async function POST(req: NextRequest) {
           industry_match: rec.industryMatch,
           difficulty_fit: rec.difficultyFit,
           matched_skills: JSON.stringify(rec.matchedSkills),
-          explanation: rec.explanation,
+          explanation: llmExplanations[rec.cert.id] || rec.explanation,
         }))
       );
 
