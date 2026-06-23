@@ -54,7 +54,8 @@ export async function GET(
           pass_rate_percent,
           salary_boost_low,
           salary_boost_high,
-          official_url
+          official_url,
+          exam_parts
         )
       `)
       .eq('job_id', id)
@@ -67,10 +68,19 @@ export async function GET(
     const recommendations = (recs ?? []).map((rec) => {
       const cert = rec.certifications as unknown as Record<string, unknown> | null;
       const { certifications: _c, industry_match, ...rest } = rec;
+      let parsedParts = [];
+      if (cert?.exam_parts) {
+        try {
+          parsedParts = typeof cert.exam_parts === 'string'
+            ? JSON.parse(cert.exam_parts)
+            : cert.exam_parts;
+        } catch {}
+      }
       return {
         ...rest,
         ...(cert ?? {}),
         industry_match: industry_match ? 1 : 0,
+        exam_parts: parsedParts,
       };
     });
 

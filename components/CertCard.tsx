@@ -23,6 +23,7 @@ interface CertCardProps {
   official_url?: string;
   onAddToCerts?: (certId: number, certName: string) => Promise<void>;
   animDelay?: number;
+  exam_parts?: any[];
 }
 
 const INDUSTRY_COLORS: Record<string, string> = {
@@ -39,7 +40,8 @@ const DIFFICULTY_LABELS = ['', 'Beginner', 'Beginner+', 'Intermediate', 'Advance
 
 export default function CertCard({
   rank, certId, name, provider, industry, difficulty, score,
-  matchedSkills, explanation, description, cost, duration, official_url, onAddToCerts, animDelay = 0
+  matchedSkills, explanation, description, cost, duration, official_url, onAddToCerts, animDelay = 0,
+  exam_parts
 }: CertCardProps) {
   const [adding, setAdding] = useState(false);
   const industryColor = INDUSTRY_COLORS[industry] || '#94a3b8';
@@ -121,6 +123,53 @@ export default function CertCard({
         }}>
           {explanation}
         </div>
+
+        {/* Exam Sections (only if multiple sections exist) */}
+        {(() => {
+          const normalizedParts = (exam_parts || []).map((part: any): { name: string; description: string } => {
+            if (typeof part === 'string') {
+              return { name: part, description: '' };
+            }
+            if (part && typeof part === 'object' && part.name) {
+              return { name: part.name, description: part.description || '' };
+            }
+            return { name: String(part), description: '' };
+          });
+
+          if (normalizedParts.length <= 1) return null;
+
+          return (
+            <div style={{
+              marginTop: 12,
+              marginBottom: 16,
+              background: 'rgba(255, 255, 255, 0.01)',
+              border: '1px solid var(--border)',
+              borderRadius: 12,
+              padding: '14px 16px',
+            }}>
+              <div style={{ fontSize: 11, color: 'var(--text-secondary)', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 10 }}>
+                📚 Exam Sections
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 10 }}>
+                {normalizedParts.map(part => (
+                  <div key={part.name} style={{
+                    padding: '10px 12px',
+                    background: 'rgba(255, 255, 255, 0.02)',
+                    border: '1px solid var(--border-light)',
+                    borderRadius: 8,
+                  }}>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)' }}>{part.name}</div>
+                    {part.description && (
+                      <p style={{ margin: '4px 0 0 0', fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.3 }}>
+                        {part.description}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
 
         {/* Matched skills */}
         {matchedSkills.length > 0 && (

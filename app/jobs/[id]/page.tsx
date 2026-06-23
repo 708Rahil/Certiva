@@ -28,6 +28,7 @@ interface Rec {
   salary_boost_low?: number;
   salary_boost_high?: number;
   official_url?: string;
+  exam_parts?: any[];
 }
 
 interface Job {
@@ -628,6 +629,7 @@ export default function JobDetailPage() {
                   official_url={rec.official_url}
                   onAddToCerts={userId ? handleAddToCerts : undefined}
                   animDelay={i * 60}
+                  exam_parts={rec.exam_parts}
                 />
               ))}
             </div>
