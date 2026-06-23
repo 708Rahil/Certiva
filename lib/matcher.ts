@@ -371,6 +371,7 @@ export interface Certification {
   official_url?: string;
   prerequisites?: string[] | null;
   next_certs?: string[] | null;
+  exam_parts?: string;
 }
 
 export interface RecommendationResult {

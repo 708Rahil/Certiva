@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { getSlug } from '@/lib/slug';
 import AddCertButton from '@/components/AddCertButton';
+import ExamPartsChecklist from '@/components/ExamPartsChecklist';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -146,6 +147,7 @@ export default async function CertificationDetailPage({ params }: PageProps) {
   const prerequisites = parseJsonField(cert.prerequisites);
   const targetJobs = parseJsonField(cert.target_job_titles);
   const nextCerts = parseJsonField(cert.next_certs);
+  const examParts = parseJsonField(cert.exam_parts);
 
   const industryColor = INDUSTRY_COLORS[cert.industry] || '#94a3b8';
 
@@ -401,6 +403,10 @@ export default async function CertificationDetailPage({ params }: PageProps) {
                 </div>
               )}
             </div>
+
+            {examParts.length > 0 && (
+              <ExamPartsChecklist certId={cert.id} certName={cert.name} examParts={examParts} />
+            )}
 
             {/* Skills & Curriculum */}
             <div style={{

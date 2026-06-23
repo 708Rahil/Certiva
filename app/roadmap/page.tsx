@@ -22,6 +22,7 @@ interface Cert {
   next_certs?: string[];
   official_url?: string;
   target_job_titles?: string[];
+  exam_parts?: string[];
 }
 
 interface Job {
@@ -819,6 +820,48 @@ function TimelineStage({
 // Interactive Certification Card
 function CertCard({ cert }: { cert: Cert }) {
   const [showAlts, setShowAlts] = useState(false);
+  const [checkedParts, setCheckedParts] = useState<string[]>([]);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  const storageKey = `cert_parts_${cert.id}`;
+
+  const loadProgress = () => {
+    try {
+      const stored = localStorage.getItem(storageKey);
+      if (stored) {
+        setCheckedParts(JSON.parse(stored));
+      } else {
+        setCheckedParts([]);
+      }
+    } catch {}
+  };
+
+  useEffect(() => {
+    loadProgress();
+    setIsHydrated(true);
+
+    const handleUpdate = () => {
+      loadProgress();
+    };
+    window.addEventListener('exam-parts-updated', handleUpdate);
+    return () => {
+      window.removeEventListener('exam-parts-updated', handleUpdate);
+    };
+  }, [storageKey]);
+
+  const togglePart = (part: string) => {
+    let updated: string[];
+    if (checkedParts.includes(part)) {
+      updated = checkedParts.filter((p) => p !== part);
+    } else {
+      updated = [...checkedParts, part];
+    }
+    setCheckedParts(updated);
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(updated));
+      window.dispatchEvent(new Event('exam-parts-updated'));
+    } catch {}
+  };
 
   const getStatusBadge = (status?: string) => {
     switch (status) {
@@ -934,6 +977,64 @@ function CertCard({ cert }: { cert: Cert }) {
           </a>
         )}
       </div>
+
+      {/* Exam Parts progress inside roadmap timeline */}
+      {cert.exam_parts && cert.exam_parts.length > 0 && (
+        <div style={{
+          marginTop: 16,
+          background: 'rgba(255, 255, 255, 0.01)',
+          border: '1px solid var(--border)',
+          borderRadius: 10,
+          padding: 12,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 10,
+          marginBottom: 16,
+        }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-secondary)' }}>Exam Progress</span>
+            {isHydrated && (
+              <span style={{ fontSize: 11, fontWeight: 600, color: checkedParts.length === cert.exam_parts.length ? '#10b981' : 'var(--accent-light)' }}>
+                {checkedParts.filter(p => cert.exam_parts!.includes(p)).length}/{cert.exam_parts.length} Parts Passed
+              </span>
+            )}
+          </div>
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            {cert.exam_parts.map(part => {
+              const isChecked = checkedParts.includes(part);
+              return (
+                <button
+                  key={part}
+                  onClick={() => togglePart(part)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10,
+                    width: '100%',
+                    padding: '8px 10px',
+                    background: isChecked ? 'rgba(255, 255, 255, 0.02)' : 'transparent',
+                    border: '1px solid var(--border)',
+                    borderRadius: 8,
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    color: isChecked ? 'var(--text-primary)' : 'var(--text-secondary)',
+                    fontSize: 12,
+                    fontWeight: 500,
+                  }}
+                >
+                  {isHydrated && isChecked ? (
+                    <CheckCircle size={16} style={{ color: '#10b981', flexShrink: 0 }} />
+                  ) : (
+                    <div style={{ width: 16, height: 16, borderRadius: '50%', border: '1px solid var(--border)', flexShrink: 0 }} />
+                  )}
+                  <span>{part}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* Matched Skills Chips */}
       {cert.matchedSkills && cert.matchedSkills.length > 0 && (

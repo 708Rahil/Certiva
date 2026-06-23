@@ -474,6 +474,12 @@
     "duration_weeks": 52,
     "study_hours": 400,
     "exam_format": "4 exam sections (AUD, FAR, REG, BAR/ISC/TCP) \u2014 multiple choice + task-based simulations per section",
+    "exam_parts": [
+      "Auditing and Attestation (AUD)",
+      "Financial Accounting and Reporting (FAR)",
+      "Regulation (REG)",
+      "Discipline (BAR, ISC, or TCP)"
+    ],
     "exam_duration_minutes": 256,
     "passing_score": 75,
     "passing_score_note": "75 on a 0\u201399 scale required per section. Scaled score, not percentage.",
@@ -609,6 +615,316 @@
     "next_certs": [
       "CFA Level 1",
       "CAIA Level 1"
+    ]
+  },
+  {
+    "id": 200,
+    "name": "CMA (Certified Management Accountant)",
+    "provider": "IMA",
+    "industry": "finance",
+    "subdomain": "accounting",
+    "difficulty": 4,
+    "description": "The premier certification for management accounting and corporate financial management. Covers financial planning, performance, control, and decision analysis.",
+    "official_url": "https://www.imanet.org/cma-certification",
+    "cost": "$1,200\u2013$1,600",
+    "cost_source": "IMA Official (2026) \u2014 including enrollment, membership, and 2 exam parts fee",
+    "duration_weeks": 36,
+    "study_hours": 300,
+    "exam_format": "2 exam parts (multiple choice + essay questions per part)",
+    "exam_parts": [
+      "Part 1: Financial Planning, Performance, and Analytics",
+      "Part 2: Strategic Financial Management"
+    ],
+    "exam_duration_minutes": 480,
+    "passing_score": 360,
+    "passing_score_note": "Passing score is 360 on a scale of 0 to 500 per part.",
+    "pass_rate_percent": 45,
+    "pass_rate_source": "IMA historical average pass rates globally",
+    "valid_years": 999,
+    "renewal_required": true,
+    "renewal_cost": "$285",
+    "renewal_cost_note": "Annual IMA membership fee + 30 hours of CPE per year (including 2 hours of ethics)",
+    "salary_boost_low": 12000,
+    "salary_boost_high": 28000,
+    "salary_boost_source": "IMA Global Salary Survey (estimated)",
+    "worth_it_rating": 9.1,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-23",
+    "skills": [
+      "management accounting",
+      "corporate finance",
+      "financial planning",
+      "budgeting",
+      "forecasting",
+      "cost management",
+      "internal controls",
+      "decision analysis",
+      "performance management",
+      "ethics"
+    ],
+    "primary_skills": [
+      "management accounting",
+      "corporate finance",
+      "budgeting"
+    ],
+    "secondary_skills": [
+      "forecasting",
+      "cost management",
+      "internal controls",
+      "decision analysis"
+    ],
+    "prerequisites": [
+      "Bachelor's degree from an accredited college/university + 2 years of continuous professional experience in management accounting or financial management"
+    ],
+    "recommended_prior_knowledge": [
+      "Financial accounting",
+      "Management accounting basics",
+      "Corporate finance"
+    ],
+    "target_job_titles": [
+      "Management Accountant",
+      "Corporate Controller",
+      "Cost Accountant",
+      "FP&A Analyst",
+      "Finance Manager",
+      "CFO",
+      "Financial Analyst"
+    ],
+    "job_postings_count": 42000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "CPA (Certified Public Accountant)",
+      "CFA Level 1"
+    ]
+  },
+  {
+    "id": 201,
+    "name": "QuickBooks Certified User",
+    "provider": "Certiport / Intuit",
+    "industry": "finance",
+    "subdomain": "accounting",
+    "difficulty": 2,
+    "description": "Entry-level certification that validates proficiency in Intuit QuickBooks software, covering bookkeeping, payroll, invoicing, and reporting.",
+    "official_url": "https://certiport.pearsonvue.com/Certifications/Intuit/QuickBooks/Overview",
+    "cost": "$150",
+    "cost_source": "Certiport Official (2026) \u2014 exam voucher cost, learning materials optional",
+    "duration_weeks": 4,
+    "study_hours": 30,
+    "exam_format": "50 questions, mix of multiple choice and simulation tasks",
+    "exam_parts": [
+      "QuickBooks Desktop or Online User Exam"
+    ],
+    "exam_duration_minutes": 50,
+    "passing_score": 70,
+    "passing_score_note": "700/1000 scaled score required to pass.",
+    "pass_rate_percent": 75,
+    "pass_rate_source": "Certiport/instructor estimates",
+    "valid_years": 999,
+    "renewal_required": false,
+    "renewal_cost": "$0",
+    "renewal_cost_note": "No renewal required, though updating for newer software versions is recommended",
+    "salary_boost_low": 2000,
+    "salary_boost_high": 6000,
+    "salary_boost_source": "Payscale / Glassdoor (estimated)",
+    "worth_it_rating": 8.0,
+    "trending": false,
+    "data_confidence": "high",
+    "last_verified": "2026-06-23",
+    "skills": [
+      "QuickBooks",
+      "bookkeeping",
+      "invoicing",
+      "accounts receivable",
+      "accounts payable",
+      "bank reconciliation",
+      "financial reports",
+      "accounting software",
+      "payroll"
+    ],
+    "primary_skills": [
+      "QuickBooks",
+      "bookkeeping"
+    ],
+    "secondary_skills": [
+      "invoicing",
+      "bank reconciliation",
+      "accounting software"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic double-entry bookkeeping",
+      "Basic computer literacy"
+    ],
+    "target_job_titles": [
+      "Bookkeeper",
+      "Accounts Receivable Clerk",
+      "Accounts Payable Clerk",
+      "Accounting Assistant",
+      "Junior Bookkeeper",
+      "Office Manager"
+    ],
+    "job_postings_count": 28000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "CPA (Certified Public Accountant)",
+      "CMA (Certified Management Accountant)"
+    ]
+  },
+  {
+    "id": 202,
+    "name": "CFA Level 2",
+    "provider": "CFA Institute",
+    "industry": "finance",
+    "subdomain": "investment",
+    "difficulty": 5,
+    "description": "The second level of the CFA charter program, focusing on asset valuation, application of investment tools, and complex analysis of financial reporting.",
+    "official_url": "https://www.cfainstitute.org/en/programs/cfa/curriculum/level-ii",
+    "cost": "$940\u2013$1,250",
+    "cost_source": "CFA Institute Official (2026) \u2014 depending on early vs standard registration",
+    "duration_weeks": 24,
+    "study_hours": 320,
+    "exam_format": "88 item set questions (mini case studies with 4 multiple-choice questions each) across 2 sessions",
+    "exam_parts": [
+      "CFA Level II Exam - Morning Session",
+      "CFA Level II Exam - Afternoon Session"
+    ],
+    "exam_duration_minutes": 270,
+    "passing_score": 0,
+    "passing_score_note": "CFA Institute sets a Minimum Passing Score (MPS) after each exam administration based on psychometric analysis.",
+    "pass_rate_percent": 44,
+    "pass_rate_source": "CFA Institute historical average pass rate (~44-46%)",
+    "valid_years": 999,
+    "renewal_required": false,
+    "renewal_cost": "$0",
+    "renewal_cost_note": "No renewal required; progress directly to CFA Level 3",
+    "salary_boost_low": 15000,
+    "salary_boost_high": 35000,
+    "salary_boost_source": "CFA Institute / Glassdoor (estimated)",
+    "worth_it_rating": 9.4,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-23",
+    "skills": [
+      "financial analysis",
+      "asset valuation",
+      "equity analysis",
+      "fixed income valuation",
+      "derivatives valuation",
+      "corporate finance",
+      "portfolio management",
+      "financial reporting",
+      "quantitative methods",
+      "ethics"
+    ],
+    "primary_skills": [
+      "financial analysis",
+      "asset valuation",
+      "equity analysis"
+    ],
+    "secondary_skills": [
+      "fixed income valuation",
+      "derivatives valuation",
+      "portfolio management"
+    ],
+    "prerequisites": [
+      "CFA Level 1 (must have passed)"
+    ],
+    "recommended_prior_knowledge": [
+      "CFA Level 1 curriculum",
+      "Advanced financial statement analysis"
+    ],
+    "target_job_titles": [
+      "Equity Research Associate",
+      "Investment Analyst",
+      "Portfolio Manager",
+      "Fixed Income Analyst",
+      "Corporate Finance Analyst",
+      "Investment Banker",
+      "Financial Analyst"
+    ],
+    "job_postings_count": 25000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "CFA Level 3"
+    ]
+  },
+  {
+    "id": 203,
+    "name": "FRM Part 2 (Financial Risk Manager)",
+    "provider": "GARP",
+    "industry": "finance",
+    "subdomain": "risk",
+    "difficulty": 5,
+    "description": "The final part of the FRM designation, focusing on the practical application of risk management concepts including market, credit, operational, and liquidity risk, as well as current financial issues.",
+    "official_url": "https://www.garp.org/frm",
+    "cost": "$600\u2013$800",
+    "cost_source": "GARP Official (2026) \u2014 depending on early vs standard registration timing; enrollment fee paid in Part 1",
+    "duration_weeks": 20,
+    "study_hours": 270,
+    "exam_format": "Multiple choice, 80 questions",
+    "exam_parts": [
+      "FRM Part II Exam"
+    ],
+    "exam_duration_minutes": 240,
+    "passing_score": 0,
+    "passing_score_note": "GARP does not publish a fixed passing score; results reported as pass/fail with quartile breakdown",
+    "pass_rate_percent": 50,
+    "pass_rate_source": "GARP historical pass rate data (typically 50-60%)",
+    "valid_years": 999,
+    "renewal_required": true,
+    "renewal_cost": "$0",
+    "renewal_cost_note": "Annual CPD (Continuing Professional Development) required \u2014 no monetary fee but 40 CPD hours per 2-year cycle",
+    "salary_boost_low": 15000,
+    "salary_boost_high": 35000,
+    "salary_boost_source": "GARP / Glassdoor (estimated)",
+    "worth_it_rating": 9.2,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-23",
+    "skills": [
+      "risk management",
+      "market risk",
+      "credit risk",
+      "operational risk",
+      "liquidity risk",
+      "risk models",
+      "investment risk",
+      "financial markets",
+      "regulatory frameworks",
+      "current financial issues"
+    ],
+    "primary_skills": [
+      "risk management",
+      "credit risk",
+      "market risk"
+    ],
+    "secondary_skills": [
+      "operational risk",
+      "liquidity risk",
+      "regulatory frameworks",
+      "risk models"
+    ],
+    "prerequisites": [
+      "FRM Part 1 (must have passed)"
+    ],
+    "recommended_prior_knowledge": [
+      "FRM Part 1 curriculum",
+      "Advanced financial risk models"
+    ],
+    "target_job_titles": [
+      "Risk Manager",
+      "Senior Risk Analyst",
+      "Market Risk Manager",
+      "Credit Risk Officer",
+      "Chief Risk Officer",
+      "Quantitative Risk Analyst",
+      "Risk Analyst"
+    ],
+    "job_postings_count": 28000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "CFA Level 1"
     ]
   }
 ]

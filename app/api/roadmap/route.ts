@@ -217,6 +217,7 @@ export async function GET(req: NextRequest) {
       next_certs: safeParseJSON(c.next_certs),
       primary_skills: safeParseJSON(c.primary_skills),
       secondary_skills: safeParseJSON(c.secondary_skills),
+      exam_parts: safeParseJSON(c.exam_parts),
     }));
 
     // 5. Run dynamic real-time matching
@@ -272,6 +273,7 @@ export async function GET(req: NextRequest) {
         explanation: recResult.explanation,
         matchedSkills: recResult.matchedSkills,
         official_url: cert.official_url,
+        exam_parts: cert.exam_parts,
       };
     });
 
@@ -321,6 +323,7 @@ export async function GET(req: NextRequest) {
         description: cert.description,
         official_url: cert.official_url,
         target_job_titles: safeParseJSON(cert.target_job_titles),
+        exam_parts: cert.exam_parts,
       };
     });
 

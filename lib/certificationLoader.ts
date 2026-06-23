@@ -41,6 +41,7 @@ export interface EnrichedCertification {
   /** Optional: Link to the official certification page */
   official_url?: string;
   data_confidence: string;
+  exam_parts?: string[];
 }
 
 const INDUSTRIES = ['cloud', 'cybersecurity', 'data', 'finance', 'marketing', 'management', 'ai_ml', 'business', 'networking'];

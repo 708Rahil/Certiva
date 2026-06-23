@@ -45,6 +45,7 @@ export async function initDb() {
     last_verified: cert.last_verified || '',
     data_confidence: cert.data_confidence || 'medium',
     official_url: cert.official_url || null,
+    exam_parts: JSON.stringify(cert.exam_parts || []),
   }));
 
   const { error: insertError } = await supabase.from('certifications').insert(certs);
