@@ -84,7 +84,12 @@
       "Applied ML Engineer",
       "Data Scientist (Cloud-focused)",
       "Machine Learning Engineer (Junior)",
-      "MLOps Engineer (Junior)"
+      "MLOps Engineer (Junior)",
+      "SAP Cloud Consultant",
+      "Enterprise Cloud Architect (SAP workloads)",
+      "SAP Infrastructure Engineer",
+      "SAP Migration Specialist",
+      "Solutions Architect (SAP)"
     ],
     "job_postings_count": 50000,
     "job_postings_source": "LinkedIn Jobs (2026)",
@@ -166,7 +171,12 @@
       "Solutions Architect (Enterprise)",
       "Network Engineer",
       "Network Architect (Cloud)",
-      "Enterprise Network Architect"
+      "Enterprise Network Architect",
+      "SAP Cloud Consultant",
+      "Enterprise Cloud Architect (SAP workloads)",
+      "SAP Infrastructure Engineer",
+      "SAP Migration Specialist",
+      "Solutions Architect (SAP)"
     ],
     "job_postings_count": 45000,
     "job_postings_source": "LinkedIn Jobs (2026)",
@@ -328,13 +338,22 @@
       "Azure ML Engineer",
       "AI Solutions Architect",
       "Azure Data Scientist Associate",
-      "Azure DevOps Engineer Expert"
+      "Azure DevOps Engineer Expert",
+      "Cybersecurity Architect",
+      "Principal Security Engineer",
+      "Enterprise Security Architect",
+      "Azure AD Administrator",
+      "Directory Services Engineer",
+      "IAM Engineer",
+      "Identity and Access Management Engineer",
+      "Identity and Access Administrator"
     ],
     "job_postings_count": 35000,
     "job_postings_source": "LinkedIn Jobs (2026)",
     "next_certs": [
       "Azure Administrator Associate (AZ-104)",
-      "Azure Security Engineer Associate (AZ-500)"
+      "Azure Security Engineer Associate (AZ-500)",
+      "Azure Data Fundamentals (DP-900)"
     ]
   },
   {
@@ -401,7 +420,14 @@
       "DevOps Engineer",
       "Infrastructure Engineer",
       "Site Reliability Engineer",
-      "GCP Cloud Engineer"
+      "GCP Cloud Engineer",
+      "Cloud DBA",
+      "Database Engineer",
+      "Data Systems Engineer",
+      "Serverless Developer",
+      "Backend Engineer (GCP)",
+      "Full Stack Cloud Developer",
+      "Site Reliability Engineer (SRE)"
     ],
     "job_postings_count": 30000,
     "job_postings_source": "LinkedIn Jobs (2026)",
@@ -1070,7 +1096,14 @@
       "Business Analyst (Cloud teams)",
       "Technical Account Manager (Junior)",
       "Pre-sales Consultant",
-      "Cloud Support Associate"
+      "Cloud Support Associate",
+      "Cloud DBA",
+      "Database Engineer",
+      "Data Systems Engineer",
+      "Serverless Developer",
+      "Backend Engineer (GCP)",
+      "Full Stack Cloud Developer",
+      "Site Reliability Engineer (SRE)"
     ],
     "job_postings_count": 8000,
     "job_postings_source": "LinkedIn Jobs (2026)",

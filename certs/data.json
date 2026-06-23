@@ -1108,7 +1108,7 @@
       "deep learning"
     ],
     "prerequisites": [
-      "Azure Fundamentals (AZ-900) recommended",
+      "Azure Data Fundamentals (DP-900) or Azure Fundamentals (AZ-900) recommended",
       "Python and ML fundamentals"
     ],
     "recommended_prior_knowledge": [
@@ -1123,7 +1123,8 @@
       "Machine Learning Engineer",
       "Azure ML Engineer",
       "AI Engineer",
-      "Research Scientist"
+      "Research Scientist",
+      "Azure Data Scientist Associate"
     ],
     "job_postings_count": 42000,
     "job_postings_source": "LinkedIn Jobs (2026)",
@@ -1211,6 +1212,80 @@
     "next_certs": [
       "Azure Data Scientist Associate (DP-100)",
       "Azure Solutions Architect Expert (AZ-305)"
+    ]
+  },
+  {
+    "id": 67,
+    "name": "Azure Data Fundamentals (DP-900)",
+    "provider": "Microsoft",
+    "industry": "data",
+    "subdomain": "fundamentals",
+    "difficulty": 1,
+    "description": "Validates foundational knowledge of core data concepts and how they are implemented using Microsoft Azure data services.",
+    "official_url": "https://learn.microsoft.com/en-us/credentials/certifications/azure-data-fundamentals/",
+    "cost": "$99",
+    "cost_source": "Microsoft Official (May 2026)",
+    "duration_weeks": 3,
+    "study_hours": 30,
+    "exam_format": "Multiple choice, ~40 questions",
+    "exam_duration_minutes": 45,
+    "passing_score": 700,
+    "passing_score_note": "Scaled score out of 1000",
+    "pass_rate_percent": 80,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "$0",
+    "renewal_cost_note": "Free annual renewal via Microsoft Learn assessment",
+    "salary_boost_low": 1500,
+    "salary_boost_high": 4000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.4,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "Azure",
+      "Microsoft Azure",
+      "data concepts",
+      "relational data",
+      "non-relational data",
+      "data analytics",
+      "data warehousing",
+      "SQL",
+      "Cosmos DB",
+      "Azure Data Factory",
+      "Azure Synapse"
+    ],
+    "primary_skills": [
+      "Azure",
+      "data concepts",
+      "relational data"
+    ],
+    "secondary_skills": [
+      "non-relational data",
+      "data analytics",
+      "data warehousing"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic computer and database concepts"
+    ],
+    "target_job_titles": [
+      "Azure Data Scientist Associate",
+      "Data Scientist",
+      "Azure Data Engineer",
+      "Data Engineer",
+      "Business Intelligence Analyst",
+      "Database Administrator",
+      "Junior Data Engineer"
+    ],
+    "job_postings_count": 22000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Azure Data Scientist Associate (DP-100)",
+      "Azure Data Engineer Associate (DP-203)",
+      "Microsoft Power BI Data Analyst Associate (PL-300)"
     ]
   }
 ]
