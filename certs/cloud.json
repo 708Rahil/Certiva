@@ -1779,6 +1779,7 @@
       "Cloud Engineer",
       "IT Administrator",
       "Azure DevOps Engineer",
+      "Azure DevOps Engineer Expert",
       "Azure Solutions Architect",
       "Azure Architect",
       "Cloud Solutions Architect",
@@ -1868,7 +1869,8 @@
       "Software Developer",
       "Full Stack Developer",
       "Cloud Application Developer",
-      "Azure DevOps Engineer"
+      "Azure DevOps Engineer",
+      "Azure DevOps Engineer Expert"
     ],
     "job_postings_count": 55000,
     "job_postings_source": "LinkedIn Jobs (2026)",
@@ -2029,6 +2031,7 @@
       "Release Engineer",
       "Site Reliability Engineer",
       "Azure DevOps Engineer",
+      "Azure DevOps Engineer Expert",
       "Cloud Engineer"
     ],
     "job_postings_count": 42000,
