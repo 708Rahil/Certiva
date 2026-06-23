@@ -821,6 +821,7 @@ function TimelineStage({
 function CertCard({ cert }: { cert: Cert }) {
   const [showAlts, setShowAlts] = useState(false);
   const [checkedParts, setCheckedParts] = useState<string[]>([]);
+  const [isSaved, setIsSaved] = useState(!!cert.userStatus);
   const [isHydrated, setIsHydrated] = useState(false);
 
   const storageKey = `cert_parts_${cert.id}`;
@@ -849,7 +850,25 @@ function CertCard({ cert }: { cert: Cert }) {
     };
   }, [storageKey]);
 
+  useEffect(() => {
+    setIsSaved(!!cert.userStatus);
+  }, [cert.userStatus]);
+
+  useEffect(() => {
+    const handleUserCertsUpdate = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail && customEvent.detail.certId === cert.id) {
+        setIsSaved(!!customEvent.detail.status);
+      }
+    };
+    window.addEventListener('user-certs-updated', handleUserCertsUpdate as EventListener);
+    return () => {
+      window.removeEventListener('user-certs-updated', handleUserCertsUpdate as EventListener);
+    };
+  }, [cert.id]);
+
   const togglePart = (part: string) => {
+    if (!isSaved) return;
     let updated: string[];
     if (checkedParts.includes(part)) {
       updated = checkedParts.filter((p) => p !== part);
@@ -992,8 +1011,10 @@ function CertCard({ cert }: { cert: Cert }) {
           marginBottom: 16,
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-secondary)' }}>Exam Progress</span>
-            {isHydrated && (
+            <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-secondary)' }}>
+              {isSaved ? 'Exam Progress' : 'Exam Sections'}
+            </span>
+            {isHydrated && isSaved && (
               <span style={{ fontSize: 11, fontWeight: 600, color: checkedParts.length === cert.exam_parts.length ? '#10b981' : 'var(--accent-light)' }}>
                 {checkedParts.filter(p => cert.exam_parts!.includes(p)).length}/{cert.exam_parts.length} Parts Passed
               </span>
@@ -1002,7 +1023,36 @@ function CertCard({ cert }: { cert: Cert }) {
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             {cert.exam_parts.map(part => {
-              const isChecked = checkedParts.includes(part);
+              const isChecked = isSaved && checkedParts.includes(part);
+              
+              if (!isSaved) {
+                // Read-only style (not saved)
+                return (
+                  <div
+                    key={part}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 8,
+                      padding: '8px 10px',
+                      background: 'transparent',
+                      border: '1px dashed var(--border-light)',
+                      borderRadius: 8,
+                      color: 'var(--text-secondary)',
+                      fontSize: 12,
+                      fontWeight: 500,
+                      opacity: 0.85,
+                    }}
+                  >
+                    <div style={{ width: 14, height: 14, borderRadius: '50%', border: '1px solid var(--text-muted)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <span style={{ fontSize: 8, color: 'var(--text-muted)' }}>•</span>
+                    </div>
+                    <span>{part}</span>
+                  </div>
+                );
+              }
+
+              // Interactive button style (is saved)
               return (
                 <button
                   key={part}
@@ -1021,6 +1071,7 @@ function CertCard({ cert }: { cert: Cert }) {
                     color: isChecked ? 'var(--text-primary)' : 'var(--text-secondary)',
                     fontSize: 12,
                     fontWeight: 500,
+                    transition: 'all 0.15s ease',
                   }}
                 >
                   {isHydrated && isChecked ? (

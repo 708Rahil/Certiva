@@ -98,6 +98,7 @@ export default function AddCertButton({ certId, certName, small = false }: AddCe
         const found = certs.find(c => c.cert_id === certId);
         setUserCert(found || null);
       }
+      window.dispatchEvent(new CustomEvent('user-certs-updated', { detail: { certId, status } }));
     } catch (err) {
       console.error('Error updating certification:', err);
     } finally {
@@ -117,6 +118,7 @@ export default function AddCertButton({ certId, certName, small = false }: AddCe
 
       if (!response.ok) throw new Error('Failed to remove certification');
       setUserCert(null);
+      window.dispatchEvent(new CustomEvent('user-certs-updated', { detail: { certId, status: null } }));
     } catch (err) {
       console.error('Error removing certification:', err);
     } finally {
