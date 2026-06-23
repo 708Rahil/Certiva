@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { getSlug } from '@/lib/slug';
+import { CheckCircle, Circle } from 'lucide-react';
 
 interface UserCertification {
   id: number;
@@ -22,6 +23,7 @@ interface UserCertification {
   salary_boost_low: number;
   salary_boost_high: number;
   trending: number;
+  exam_parts?: string[];
 }
 
 interface CertificationRowProps {
@@ -38,7 +40,49 @@ const statusColors: Record<string, { bg: string; text: string; label: string }> 
 
 export default function CertificationRow({ cert, onUpdate, onDelete }: CertificationRowProps) {
   const [isDeleting, setIsDeleting] = useState(false);
+  const [checkedParts, setCheckedParts] = useState<string[]>([]);
+  const [isHydrated, setIsHydrated] = useState(false);
   const statusInfo = statusColors[cert.status] || statusColors.interested;
+
+  const storageKey = `cert_parts_${cert.cert_id}`;
+
+  const loadProgress = () => {
+    try {
+      const stored = localStorage.getItem(storageKey);
+      if (stored) {
+        setCheckedParts(JSON.parse(stored));
+      } else {
+        setCheckedParts([]);
+      }
+    } catch {}
+  };
+
+  useEffect(() => {
+    loadProgress();
+    setIsHydrated(true);
+
+    const handleUpdate = () => {
+      loadProgress();
+    };
+    window.addEventListener('exam-parts-updated', handleUpdate);
+    return () => {
+      window.removeEventListener('exam-parts-updated', handleUpdate);
+    };
+  }, [storageKey]);
+
+  const togglePart = (part: string) => {
+    let updated: string[];
+    if (checkedParts.includes(part)) {
+      updated = checkedParts.filter((p) => p !== part);
+    } else {
+      updated = [...checkedParts, part];
+    }
+    setCheckedParts(updated);
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(updated));
+      window.dispatchEvent(new Event('exam-parts-updated'));
+    } catch {}
+  };
 
   const handleStatusChange = (newStatus: string) => {
     onUpdate(cert.id, newStatus);
@@ -86,6 +130,62 @@ export default function CertificationRow({ cert, onUpdate, onDelete }: Certifica
             <span style={{ color: 'var(--green)' }}>+${cert.salary_boost_low.toLocaleString()}–${cert.salary_boost_high.toLocaleString()}</span>
           </div>
         </div>
+
+        {cert.exam_parts && cert.exam_parts.length > 0 && (
+          <div style={{
+            marginTop: 8,
+            marginBottom: 16,
+            background: 'rgba(255, 255, 255, 0.01)',
+            border: '1px solid var(--border)',
+            borderRadius: 10,
+            padding: '12px 14px',
+            maxWidth: 500,
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+              <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-secondary)' }}>Exam Progress</span>
+              {isHydrated && (
+                <span style={{ fontSize: 11, fontWeight: 600, color: checkedParts.length === cert.exam_parts.length ? '#10b981' : 'var(--accent-light)' }}>
+                  {checkedParts.filter(p => cert.exam_parts!.includes(p)).length}/{cert.exam_parts.length} Parts Passed
+                </span>
+              )}
+            </div>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+              {cert.exam_parts.map(part => {
+                const isChecked = checkedParts.includes(part);
+                return (
+                  <button
+                    key={part}
+                    onClick={() => togglePart(part)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 10,
+                      width: '100%',
+                      padding: '6px 10px',
+                      background: isChecked ? 'rgba(255, 255, 255, 0.02)' : 'transparent',
+                      border: '1px solid var(--border)',
+                      borderRadius: 6,
+                      cursor: 'pointer',
+                      textAlign: 'left',
+                      color: isChecked ? 'var(--text-primary)' : 'var(--text-secondary)',
+                      fontSize: 12,
+                      fontWeight: 500,
+                      transition: 'all 0.15s ease',
+                    }}
+                  >
+                    {isHydrated && isChecked ? (
+                      <CheckCircle size={14} style={{ color: '#10b981', flexShrink: 0 }} />
+                    ) : (
+                      <div style={{ width: 14, height: 14, borderRadius: '50%', border: '1px solid var(--border)', flexShrink: 0 }} />
+                    )}
+                    <span>{part}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {cert.notes && (
           <div style={{ fontSize: 13, color: 'var(--text-secondary)', fontStyle: 'italic' }}>

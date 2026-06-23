@@ -1010,80 +1010,110 @@ function CertCard({ cert }: { cert: Cert }) {
           gap: 10,
           marginBottom: 16,
         }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-secondary)' }}>
-              {isSaved ? 'Exam Progress' : 'Exam Sections'}
-            </span>
-            {isHydrated && isSaved && (
-              <span style={{ fontSize: 11, fontWeight: 600, color: checkedParts.length === cert.exam_parts.length ? '#10b981' : 'var(--accent-light)' }}>
-                {checkedParts.filter(p => cert.exam_parts!.includes(p)).length}/{cert.exam_parts.length} Parts Passed
-              </span>
-            )}
-          </div>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-            {cert.exam_parts.map(part => {
-              const isChecked = isSaved && checkedParts.includes(part);
-              
-              if (!isSaved) {
-                // Read-only style (not saved)
-                return (
-                  <div
-                    key={part}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 8,
-                      padding: '8px 10px',
-                      background: 'transparent',
-                      border: '1px dashed var(--border-light)',
-                      borderRadius: 8,
-                      color: 'var(--text-secondary)',
-                      fontSize: 12,
-                      fontWeight: 500,
-                      opacity: 0.85,
-                    }}
-                  >
-                    <div style={{ width: 14, height: 14, borderRadius: '50%', border: '1px solid var(--text-muted)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                      <span style={{ fontSize: 8, color: 'var(--text-muted)' }}>•</span>
-                    </div>
-                    <span>{part}</span>
-                  </div>
-                );
+          {(() => {
+            const normalizedParts = cert.exam_parts.map((part: any) => {
+              if (typeof part === 'string') {
+                return { name: part, description: '' };
               }
+              if (part && typeof part === 'object' && part.name) {
+                return { name: part.name, description: part.description || '' };
+              }
+              return { name: String(part), description: '' };
+            });
 
-              // Interactive button style (is saved)
-              return (
-                <button
-                  key={part}
-                  onClick={() => togglePart(part)}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 10,
-                    width: '100%',
-                    padding: '8px 10px',
-                    background: isChecked ? 'rgba(255, 255, 255, 0.02)' : 'transparent',
-                    border: '1px solid var(--border)',
-                    borderRadius: 8,
-                    cursor: 'pointer',
-                    textAlign: 'left',
-                    color: isChecked ? 'var(--text-primary)' : 'var(--text-secondary)',
-                    fontSize: 12,
-                    fontWeight: 500,
-                    transition: 'all 0.15s ease',
-                  }}
-                >
-                  {isHydrated && isChecked ? (
-                    <CheckCircle size={16} style={{ color: '#10b981', flexShrink: 0 }} />
-                  ) : (
-                    <div style={{ width: 16, height: 16, borderRadius: '50%', border: '1px solid var(--border)', flexShrink: 0 }} />
+            const totalParts = normalizedParts.length;
+            const completedParts = isHydrated && isSaved ? checkedParts.filter((p) => normalizedParts.some(np => np.name === p)).length : 0;
+
+            return (
+              <>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-secondary)' }}>
+                    {isSaved ? 'Exam Progress' : 'Exam Sections'}
+                  </span>
+                  {isHydrated && isSaved && (
+                    <span style={{ fontSize: 11, fontWeight: 600, color: completedParts === totalParts ? '#10b981' : 'var(--accent-light)' }}>
+                      {completedParts}/{totalParts} Parts Passed
+                    </span>
                   )}
-                  <span>{part}</span>
-                </button>
-              );
-            })}
-          </div>
+                </div>
+                
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  {normalizedParts.map(part => {
+                    const isChecked = isSaved && checkedParts.includes(part.name);
+                    
+                    if (!isSaved) {
+                      // Read-only style (not saved)
+                      return (
+                        <div
+                          key={part.name}
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: 2,
+                            padding: '8px 10px',
+                            background: 'transparent',
+                            border: '1px dashed var(--border-light)',
+                            borderRadius: 8,
+                            opacity: 0.85,
+                          }}
+                        >
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--text-secondary)', fontSize: 12, fontWeight: 600 }}>
+                            <div style={{ width: 14, height: 14, borderRadius: '50%', border: '1px solid var(--text-muted)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                              <span style={{ fontSize: 8, color: 'var(--text-muted)' }}>•</span>
+                            </div>
+                            <span>{part.name}</span>
+                          </div>
+                          {part.description && (
+                            <p style={{ margin: '2px 0 0 22px', fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.3 }}>
+                              {part.description}
+                            </p>
+                          )}
+                        </div>
+                      );
+                    }
+
+                    // Interactive button style (is saved)
+                    return (
+                      <button
+                        key={part.name}
+                        onClick={() => togglePart(part.name)}
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: 2,
+                          width: '100%',
+                          padding: '8px 10px',
+                          background: isChecked ? 'rgba(255, 255, 255, 0.02)' : 'transparent',
+                          border: isChecked ? '1px solid var(--accent)' : '1px solid var(--border)',
+                          borderRadius: 8,
+                          cursor: 'pointer',
+                          textAlign: 'left',
+                          color: isChecked ? 'var(--text-primary)' : 'var(--text-secondary)',
+                          fontSize: 12,
+                          fontWeight: 500,
+                          transition: 'all 0.15s ease',
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontWeight: 600 }}>
+                          {isHydrated && isChecked ? (
+                            <CheckCircle size={16} style={{ color: '#10b981', flexShrink: 0 }} />
+                          ) : (
+                            <div style={{ width: 16, height: 16, borderRadius: '50%', border: '1px solid var(--border)', flexShrink: 0 }} />
+                          )}
+                          <span>{part.name}</span>
+                        </div>
+                        {part.description && (
+                          <p style={{ margin: '2px 0 0 26px', fontSize: 11, color: isChecked ? 'var(--text-secondary)' : 'var(--text-muted)', lineHeight: 1.3, opacity: 0.85 }}>
+                            {part.description}
+                          </p>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
+            );
+          })()}
         </div>
       )}
 

@@ -36,7 +36,8 @@ export async function GET() {
           official_url,
           salary_boost_low,
           salary_boost_high,
-          trending
+          trending,
+          exam_parts
         )
       `)
       .eq('user_id', userId)
@@ -49,10 +50,19 @@ export async function GET() {
     const rows = (data ?? []).map((row) => {
       const cert = row.certifications as unknown as Record<string, unknown> | null;
       const { certifications: _c, ...rest } = row;
+      let parsedParts = [];
+      if (cert?.exam_parts) {
+        try {
+          parsedParts = typeof cert.exam_parts === 'string'
+            ? JSON.parse(cert.exam_parts)
+            : cert.exam_parts;
+        } catch {}
+      }
       return {
         ...rest,
         ...(cert ?? {}),
         trending: cert?.trending ? 1 : 0,
+        exam_parts: parsedParts,
       };
     });
 

@@ -24,6 +24,7 @@ interface UserCertification {
   salary_boost_low: number;
   salary_boost_high: number;
   trending: number;
+  exam_parts?: string[];
 }
 
 interface AvailableCert {

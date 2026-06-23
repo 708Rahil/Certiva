@@ -475,10 +475,22 @@
     "study_hours": 400,
     "exam_format": "4 exam sections (AUD, FAR, REG, BAR/ISC/TCP) \u2014 multiple choice + task-based simulations per section",
     "exam_parts": [
-      "Auditing and Attestation (AUD)",
-      "Financial Accounting and Reporting (FAR)",
-      "Regulation (REG)",
-      "Discipline (BAR, ISC, or TCP)"
+      {
+        "name": "Auditing and Attestation (AUD)",
+        "description": "Covers auditing procedures, professional responsibilities, ethics, and general principles."
+      },
+      {
+        "name": "Financial Accounting and Reporting (FAR)",
+        "description": "Covers financial statements, transactions, GAAP standards, and reporting requirements."
+      },
+      {
+        "name": "Regulation (REG)",
+        "description": "Covers federal taxation, business law, ethics, and professional responsibilities."
+      },
+      {
+        "name": "Discipline (BAR, ISC, or TCP)",
+        "description": "Allows candidates to choose one specialized track: Business Analysis (BAR), Info Systems (ISC), or Tax Compliance (TCP)."
+      }
     ],
     "exam_duration_minutes": 256,
     "passing_score": 75,
@@ -632,8 +644,14 @@
     "study_hours": 300,
     "exam_format": "2 exam parts (multiple choice + essay questions per part)",
     "exam_parts": [
-      "Part 1: Financial Planning, Performance, and Analytics",
-      "Part 2: Strategic Financial Management"
+      {
+        "name": "Part 1: Financial Planning, Performance, and Analytics",
+        "description": "Covers external financial reporting decisions, planning, budgeting, forecasting, performance management, cost management, and internal controls."
+      },
+      {
+        "name": "Part 2: Strategic Financial Management",
+        "description": "Covers financial statement analysis, corporate finance, decision analysis, risk management, investment decisions, and professional ethics."
+      }
     ],
     "exam_duration_minutes": 480,
     "passing_score": 360,
@@ -786,8 +804,14 @@
     "study_hours": 320,
     "exam_format": "88 item set questions (mini case studies with 4 multiple-choice questions each) across 2 sessions",
     "exam_parts": [
-      "CFA Level II Exam - Morning Session",
-      "CFA Level II Exam - Afternoon Session"
+      {
+        "name": "CFA Level II Exam - Morning Session",
+        "description": "First session of 44 item-set multiple-choice questions focusing on ethics, investment tools, and asset classes."
+      },
+      {
+        "name": "CFA Level II Exam - Afternoon Session",
+        "description": "Second session of 44 item-set multiple-choice questions focusing on application of valuation models and portfolio analysis."
+      }
     ],
     "exam_duration_minutes": 270,
     "passing_score": 0,

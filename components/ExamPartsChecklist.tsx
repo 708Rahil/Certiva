@@ -4,10 +4,15 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@clerk/nextjs';
 import { CheckCircle2, Circle, Lock } from 'lucide-react';
 
+interface ExamPartObj {
+  name: string;
+  description: string;
+}
+
 interface ExamPartsChecklistProps {
   certId: number;
   certName: string;
-  examParts: string[];
+  examParts: any[];
 }
 
 export default function ExamPartsChecklist({ certId, certName, examParts }: ExamPartsChecklistProps) {
@@ -17,6 +22,17 @@ export default function ExamPartsChecklist({ certId, certName, examParts }: Exam
   const [isHydrated, setIsHydrated] = useState(false);
 
   const storageKey = `cert_parts_${certId}`;
+
+  // Normalize exam parts to always be objects
+  const normalizedParts = (examParts || []).map((part): ExamPartObj => {
+    if (typeof part === 'string') {
+      return { name: part, description: '' };
+    }
+    if (part && typeof part === 'object' && part.name) {
+      return { name: part.name, description: part.description || '' };
+    }
+    return { name: String(part), description: '' };
+  });
 
   // Load checked parts and initial saved status
   useEffect(() => {
@@ -66,14 +82,14 @@ export default function ExamPartsChecklist({ certId, certName, examParts }: Exam
   }, [certId]);
 
   // Toggle a checklist item (only allowed if saved)
-  const handleToggle = (part: string) => {
+  const handleToggle = (partName: string) => {
     if (!isSaved) return;
 
     let updated: string[];
-    if (checkedParts.includes(part)) {
-      updated = checkedParts.filter((p) => p !== part);
+    if (checkedParts.includes(partName)) {
+      updated = checkedParts.filter((p) => p !== partName);
     } else {
-      updated = [...checkedParts, part];
+      updated = [...checkedParts, partName];
     }
     setCheckedParts(updated);
 
@@ -87,8 +103,8 @@ export default function ExamPartsChecklist({ certId, certName, examParts }: Exam
 
   if (!examParts || examParts.length === 0) return null;
 
-  const totalParts = examParts.length;
-  const completedParts = isHydrated && isSaved ? checkedParts.filter((p) => examParts.includes(p)).length : 0;
+  const totalParts = normalizedParts.length;
+  const completedParts = isHydrated && isSaved ? checkedParts.filter((p) => normalizedParts.some(np => np.name === p)).length : 0;
   const percentCompleted = totalParts > 0 ? Math.round((completedParts / totalParts) * 100) : 0;
 
   return (
@@ -142,30 +158,34 @@ export default function ExamPartsChecklist({ certId, certName, examParts }: Exam
 
       {/* Parts List */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-        {examParts.map((part) => {
-          const isChecked = isSaved && checkedParts.includes(part);
+        {normalizedParts.map((part) => {
+          const isChecked = isSaved && checkedParts.includes(part.name);
           
           if (!isSaved) {
             // Read-only style (not added to certifications yet)
             return (
               <div
-                key={part}
+                key={part.name}
                 style={{
                   display: 'flex',
-                  alignItems: 'center',
-                  gap: 14,
+                  flexDirection: 'column',
+                  gap: 4,
                   padding: '14px 16px',
                   background: 'rgba(255, 255, 255, 0.01)',
                   border: '1px solid var(--border-light)',
                   borderRadius: 12,
-                  color: 'var(--text-secondary)',
-                  fontSize: 14,
-                  fontWeight: 500,
                   opacity: 0.8,
                 }}
               >
-                <Lock size={16} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
-                <span style={{ lineHeight: 1.4 }}>{part}</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 14, color: 'var(--text-secondary)', fontSize: 14, fontWeight: 600 }}>
+                  <Lock size={16} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
+                  <span style={{ lineHeight: 1.4 }}>{part.name}</span>
+                </div>
+                {part.description && (
+                  <p style={{ margin: '2px 0 0 30px', fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                    {part.description}
+                  </p>
+                )}
               </div>
             );
           }
@@ -173,12 +193,12 @@ export default function ExamPartsChecklist({ certId, certName, examParts }: Exam
           // Interactive button style (is saved)
           return (
             <button
-              key={part}
-              onClick={() => handleToggle(part)}
+              key={part.name}
+              onClick={() => handleToggle(part.name)}
               style={{
                 display: 'flex',
-                alignItems: 'center',
-                gap: 14,
+                flexDirection: 'column',
+                gap: 4,
                 width: '100%',
                 padding: '14px 16px',
                 background: isChecked ? 'rgba(255, 255, 255, 0.02)' : 'var(--bg)',
@@ -200,12 +220,19 @@ export default function ExamPartsChecklist({ certId, certName, examParts }: Exam
                 }
               }}
             >
-              {isHydrated && isChecked ? (
-                <CheckCircle2 size={20} style={{ color: '#10b981', flexShrink: 0 }} />
-              ) : (
-                <Circle size={20} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14, fontWeight: 600 }}>
+                {isHydrated && isChecked ? (
+                  <CheckCircle2 size={20} style={{ color: '#10b981', flexShrink: 0 }} />
+                ) : (
+                  <Circle size={20} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
+                )}
+                <span style={{ lineHeight: 1.4 }}>{part.name}</span>
+              </div>
+              {part.description && (
+                <p style={{ margin: '2px 0 0 34px', fontSize: 12, color: isChecked ? 'var(--text-secondary)' : 'var(--text-muted)', lineHeight: 1.4, opacity: 0.85 }}>
+                  {part.description}
+                </p>
               )}
-              <span style={{ lineHeight: 1.4 }}>{part}</span>
             </button>
           );
         })}
