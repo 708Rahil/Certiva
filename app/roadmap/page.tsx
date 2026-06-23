@@ -290,13 +290,60 @@ function RoadmapContent() {
               fontSize: 15,
               color: 'var(--text-secondary)',
             }}>
-              Your customized step-by-step pathways built dynamically based on your saved jobs and skill gaps.
+              {mode === 'job-specific' 
+                ? 'Your customized step-by-step pathways built dynamically based on your saved jobs and skill gaps.'
+                : mode === 'role-specific'
+                  ? 'Explore step-by-step paths mapped directly to popular career tracks in the industry.'
+                  : 'Find out what certifications are recommended next steps after completing a credential.'}
             </p>
           </div>
         </div>
 
+        {/* Mode Selector Tab Bar */}
+        <div style={{
+          display: 'flex',
+          background: 'var(--bg-card-hover, #f8fafc)',
+          border: '1px solid var(--border)',
+          borderRadius: 12,
+          padding: 4,
+          alignSelf: 'flex-start',
+          gap: 4,
+          flexWrap: 'wrap',
+        }}>
+          {[
+            { id: 'job-specific', label: 'Job-Specific Path', icon: <Briefcase size={16} /> },
+            { id: 'role-specific', label: 'Career Tracks', icon: <Map size={16} /> },
+            { id: 'generic', label: 'Explore Paths', icon: <Sparkles size={16} /> }
+          ].map(tab => {
+            const active = mode === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setMode(tab.id as any)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  padding: '8px 16px',
+                  borderRadius: 10,
+                  border: 'none',
+                  background: active ? 'var(--accent)' : 'transparent',
+                  color: active ? '#fff' : 'var(--text-secondary)',
+                  fontSize: 14,
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                {tab.icon}
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
+
         {/* Dynamic Selector Dropdown */}
-        {!showEmptyJobs && (
+        {mode === 'job-specific' && !showEmptyJobs && (
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -347,6 +394,116 @@ function RoadmapContent() {
                 ▼
               </div>
             </div>
+          </div>
+        )}
+
+        {/* Industry and Role Selectors for Career/Explore Tracks */}
+        {(mode === 'role-specific' || mode === 'generic') && (
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 16,
+          }}>
+            {/* Industry Selector Tabs */}
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 8,
+            }}>
+              <label style={{
+                fontSize: 12,
+                fontWeight: 600,
+                color: 'var(--text-secondary)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em'
+              }}>
+                Select Industry Domain
+              </label>
+              <div style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: 8,
+              }}>
+                {INDUSTRY_ORDER.map(ind => {
+                  const active = selectedIndustry === ind;
+                  return (
+                    <button
+                      key={ind}
+                      onClick={() => setSelectedIndustry(ind)}
+                      style={{
+                        padding: '6px 14px',
+                        borderRadius: 20,
+                        border: '1px solid var(--border)',
+                        background: active ? 'var(--accent-dim)' : 'var(--bg-secondary)',
+                        color: active ? 'var(--accent-light)' : 'var(--text-secondary)',
+                        fontSize: 13,
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                        transition: 'all 0.15s ease',
+                        borderColor: active ? 'var(--accent-light)' : 'var(--border)',
+                      }}
+                    >
+                      {INDUSTRY_LABELS[ind] || ind}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Role Title Selector for Career Tracks */}
+            {mode === 'role-specific' && (
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 8,
+                maxWidth: 480,
+              }}>
+                <label style={{
+                  fontSize: 12,
+                  fontWeight: 600,
+                  color: 'var(--text-secondary)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em'
+                }}>
+                  Select Career Track Role
+                </label>
+                <div style={{ position: 'relative' }}>
+                  <select
+                    value={selectedRoleTitle}
+                    onChange={(e) => setSelectedRoleTitle(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '12px 16px',
+                      borderRadius: 10,
+                      border: '1px solid var(--border)',
+                      background: 'var(--bg-secondary)',
+                      color: 'var(--text-primary)',
+                      fontSize: 15,
+                      fontWeight: 500,
+                      cursor: 'pointer',
+                      outline: 'none',
+                      appearance: 'none',
+                    }}
+                  >
+                    {roleJobTitles.map(title => (
+                      <option key={title} value={title}>
+                        {title}
+                      </option>
+                    ))}
+                  </select>
+                  <div style={{
+                    position: 'absolute',
+                    right: 14,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    pointerEvents: 'none',
+                    color: 'var(--text-secondary)',
+                  }}>
+                    ▼
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -156,7 +156,8 @@ textarea {
 
 .cl-text,
 .cl-alertBox,
-p, span, div, label, button, a {
+.cl-card p, .cl-card span, .cl-card div, .cl-card label, .cl-card button, .cl-card a,
+.cl-main p, .cl-main span, .cl-main div, .cl-main label, .cl-main button, .cl-main a {
   color: var(--text-primary) !important;
 }
 
