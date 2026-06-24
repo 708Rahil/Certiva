@@ -1,971 +1,967 @@
 [
-    {
-        "id": 93,
-        "name": "Salesforce Certified Administrator",
-        "provider": "Salesforce",
-        "industry": "management",
-        "subdomain": "crm",
-        "difficulty": 2,
-        "description": "Validates ability to configure, manage, and maintain Salesforce CRM including users, data, security, workflows, and reports.",
-        "official_url": "https://trailhead.salesforce.com/credentials/administrator",
-        "cost": "$200",
-        "cost_source": "Salesforce Official (May 2026)",
-        "duration_weeks": 8,
-        "study_hours": 60,
-        "exam_format": "Multiple choice, 60 questions",
-        "exam_duration_minutes": 105,
-        "passing_score": 65,
-        "passing_score_note": "65% required to pass",
-        "pass_rate_percent": 65,
-        "pass_rate_source": "Community estimate",
-        "valid_years": 1,
-        "renewal_required": true,
-        "renewal_cost": "$100",
-        "renewal_cost_note": "Maintenance modules released 3x/year \u2014 free to complete",
-        "salary_boost_low": 5000,
-        "salary_boost_high": 14000,
-        "salary_boost_source": "Glassdoor/PayScale (estimated)",
-        "worth_it_rating": 9.0,
-        "trending": true,
-        "data_confidence": "high",
-        "last_verified": "2026-05-20",
-        "skills": [
-            "Salesforce",
-            "CRM",
-            "sales automation",
-            "workflow automation",
-            "data management",
-            "security",
-            "reporting",
-            "dashboards",
-            "user management",
-            "Lightning Experience"
-        ],
-        "primary_skills": [
-            "Salesforce",
-            "CRM",
-            "workflow automation"
-        ],
-        "secondary_skills": [
-            "data management",
-            "security",
-            "reporting",
-            "dashboards",
-            "Lightning Experience"
-        ],
-        "prerequisites": [],
-        "recommended_prior_knowledge": [
-            "Basic CRM concepts",
-            "Salesforce Trailhead fundamentals"
-        ],
-        "target_job_titles": [
-            "Salesforce Administrator",
-            "CRM Administrator",
-            "Salesforce Business Analyst",
-            "CRM Manager",
-            "Operations Manager",
-            "Revenue Operations Analyst"
-        ],
-        "job_postings_count": 48000,
-        "job_postings_source": "LinkedIn Jobs (2026)",
-        "next_certs": [
-            "Salesforce Platform App Builder",
-            "Salesforce Advanced Administrator"
-        ]
-    },
-    {
-        "id": 94,
-        "name": "Salesforce Certified Platform Developer I",
-        "provider": "Salesforce",
-        "industry": "management",
-        "subdomain": "crm",
-        "difficulty": 3,
-        "description": "Validates ability to build custom applications on the Salesforce platform using Apex, Visualforce, and Lightning Web Components.",
-        "official_url": "https://trailhead.salesforce.com/credentials/platformdeveloperI",
-        "cost": "$200",
-        "cost_source": "Salesforce Official (May 2026)",
-        "duration_weeks": 10,
-        "study_hours": 80,
-        "exam_format": "Multiple choice, 60 questions",
-        "exam_duration_minutes": 105,
-        "passing_score": 65,
-        "passing_score_note": "65% required to pass",
-        "pass_rate_percent": 58,
-        "pass_rate_source": "Community estimate",
-        "valid_years": 1,
-        "renewal_required": true,
-        "renewal_cost": "$100",
-        "salary_boost_low": 8000,
-        "salary_boost_high": 18000,
-        "salary_boost_source": "Glassdoor/PayScale (estimated)",
-        "worth_it_rating": 8.8,
-        "trending": true,
-        "data_confidence": "high",
-        "last_verified": "2026-05-20",
-        "skills": [
-            "Salesforce",
-            "Apex",
-            "Lightning Web Components",
-            "Visualforce",
-            "CRM",
-            "JavaScript",
-            "SOQL",
-            "REST APIs",
-            "data modeling",
-            "automation"
-        ],
-        "primary_skills": [
-            "Salesforce",
-            "Apex",
-            "Lightning Web Components"
-        ],
-        "secondary_skills": [
-            "Visualforce",
-            "SOQL",
-            "JavaScript",
-            "REST APIs",
-            "data modeling"
-        ],
-        "prerequisites": [
-            "Salesforce Administrator or equivalent experience"
-        ],
-        "recommended_prior_knowledge": [
-            "Object-oriented programming",
-            "JavaScript basics",
-            "Salesforce fundamentals"
-        ],
-        "target_job_titles": [
-            "Salesforce Developer",
-            "CRM Developer",
-            "Salesforce Engineer",
-            "Platform Developer",
-            "Salesforce Consultant",
-            "Full Stack Developer"
-        ],
-        "job_postings_count": 35000,
-        "job_postings_source": "LinkedIn Jobs (2026)",
-        "next_certs": [
-            "Salesforce Platform Developer II",
-            "Salesforce Integration Architect"
-        ]
-    },
-    {
-        "id": 95,
-        "name": "Salesforce Platform App Builder",
-        "provider": "Salesforce",
-        "industry": "management",
-        "subdomain": "crm",
-        "difficulty": 2,
-        "description": "Validates ability to design, build, and deploy custom apps using declarative tools on the Salesforce platform.",
-        "official_url": "https://trailhead.salesforce.com/credentials/platformappbuilder",
-        "cost": "$200",
-        "cost_source": "Salesforce Official (May 2026)",
-        "duration_weeks": 8,
-        "study_hours": 60,
-        "exam_format": "Multiple choice, 60 questions",
-        "exam_duration_minutes": 105,
-        "passing_score": 63,
-        "passing_score_note": "63% required to pass",
-        "pass_rate_percent": 62,
-        "pass_rate_source": "Community estimate",
-        "valid_years": 1,
-        "renewal_required": true,
-        "renewal_cost": "$100",
-        "salary_boost_low": 5000,
-        "salary_boost_high": 14000,
-        "salary_boost_source": "Glassdoor/PayScale (estimated)",
-        "worth_it_rating": 8.6,
-        "trending": true,
-        "data_confidence": "high",
-        "last_verified": "2026-05-20",
-        "skills": [
-            "Salesforce",
-            "CRM",
-            "app development",
-            "workflows",
-            "process builder",
-            "Flow",
-            "data modeling",
-            "Lightning Experience",
-            "validation rules",
-            "reports"
-        ],
-        "primary_skills": [
-            "Salesforce",
-            "app development",
-            "Flow"
-        ],
-        "secondary_skills": [
-            "workflows",
-            "data modeling",
-            "Lightning Experience",
-            "validation rules",
-            "reports"
-        ],
-        "prerequisites": [
-            "Salesforce Administrator recommended"
-        ],
-        "recommended_prior_knowledge": [
-            "Salesforce fundamentals",
-            "Data modeling concepts"
-        ],
-        "target_job_titles": [
-            "Salesforce App Builder",
-            "Salesforce Administrator",
-            "CRM Analyst",
-            "Salesforce Consultant",
-            "Business Systems Analyst",
-            "Operations Analyst"
-        ],
-        "job_postings_count": 30000,
-        "job_postings_source": "LinkedIn Jobs (2026)",
-        "next_certs": [
-            "Salesforce Platform Developer I",
-            "Salesforce Advanced Administrator"
-        ]
-    },
-    {
-        "id": 96,
-        "name": "ServiceNow Certified System Administrator (CSA)",
-        "provider": "ServiceNow",
-        "industry": "management",
-        "subdomain": "crm",
-        "difficulty": 2,
-        "description": "Validates ability to configure and manage the ServiceNow platform including ITSM workflows, user administration, and platform customization.",
-        "official_url": "https://www.servicenow.com/services/training-and-certification/certifications.html",
-        "cost": "$150",
-        "cost_source": "ServiceNow Official (May 2026)",
-        "duration_weeks": 6,
-        "study_hours": 50,
-        "exam_format": "Multiple choice, 60 questions",
-        "exam_duration_minutes": 90,
-        "passing_score": 70,
-        "passing_score_note": "70% required to pass",
-        "pass_rate_percent": 65,
-        "pass_rate_source": "Community estimate",
-        "valid_years": 2,
-        "renewal_required": true,
-        "renewal_cost": "$150",
-        "salary_boost_low": 5000,
-        "salary_boost_high": 14000,
-        "salary_boost_source": "Glassdoor/PayScale (estimated)",
-        "worth_it_rating": 8.7,
-        "trending": true,
-        "data_confidence": "high",
-        "last_verified": "2026-05-20",
-        "skills": [
-            "ServiceNow",
-            "ITSM",
-            "IT service management",
-            "workflow automation",
-            "incident management",
-            "change management",
-            "CMDB",
-            "scripting",
-            "reporting",
-            "user administration"
-        ],
-        "primary_skills": [
-            "ServiceNow",
-            "ITSM",
-            "workflow automation"
-        ],
-        "secondary_skills": [
-            "incident management",
-            "change management",
-            "CMDB",
-            "scripting",
-            "reporting"
-        ],
-        "prerequisites": [],
-        "recommended_prior_knowledge": [
-            "Basic ITSM concepts",
-            "ServiceNow fundamentals"
-        ],
-        "target_job_titles": [
-            "ServiceNow Administrator",
-            "ITSM Analyst",
-            "IT Operations Manager",
-            "ServiceNow Developer",
-            "IT Service Manager",
-            "Platform Administrator"
-        ],
-        "job_postings_count": 32000,
-        "job_postings_source": "LinkedIn Jobs (2026)",
-        "next_certs": [
-            "ServiceNow Certified Application Developer",
-            "ITIL 4 Foundation"
-        ]
-    },
-    {
-        "id": 97,
-        "name": "Microsoft Dynamics 365 Fundamentals (MB-910)",
-        "provider": "Microsoft",
-        "industry": "management",
-        "subdomain": "crm",
-        "difficulty": 1,
-        "description": "Entry-level certification covering Dynamics 365 CRM applications including Sales, Customer Service, Marketing, and Field Service fundamentals.",
-        "official_url": "https://learn.microsoft.com/en-us/credentials/certifications/d365-fundamentals-customer-engagement-apps-crm/",
-        "cost": "$99",
-        "cost_source": "Microsoft Official (May 2026) \u2014 Fundamentals tier",
-        "duration_weeks": 3,
-        "study_hours": 20,
-        "exam_format": "Multiple choice, 40\u201360 questions",
-        "exam_duration_minutes": 45,
-        "passing_score": 700,
-        "passing_score_note": "Scaled score out of 1000",
-        "pass_rate_percent": 78,
-        "pass_rate_source": "Community estimate",
-        "valid_years": 1,
-        "renewal_required": true,
-        "renewal_cost": "$0",
-        "renewal_cost_note": "Free annual renewal via Microsoft Learn assessment",
-        "salary_boost_low": 2000,
-        "salary_boost_high": 6000,
-        "salary_boost_source": "Glassdoor/PayScale (estimated)",
-        "worth_it_rating": 7.8,
-        "trending": true,
-        "data_confidence": "high",
-        "last_verified": "2026-05-20",
-        "skills": [
-            "Microsoft Dynamics 365",
-            "CRM",
-            "sales automation",
-            "customer service",
-            "marketing automation",
-            "Power Platform",
-            "customer engagement",
-            "reporting"
-        ],
-        "primary_skills": [
-            "Microsoft Dynamics 365",
-            "CRM",
-            "customer engagement"
-        ],
-        "secondary_skills": [
-            "sales automation",
-            "customer service",
-            "marketing automation",
-            "Power Platform"
-        ],
-        "prerequisites": [],
-        "recommended_prior_knowledge": [
-            "Basic CRM concepts"
-        ],
-        "target_job_titles": [
-            "CRM Analyst",
-            "Dynamics 365 Administrator",
-            "Sales Operations Analyst",
-            "Business Analyst",
-            "Customer Success Manager"
-        ],
-        "job_postings_count": 22000,
-        "job_postings_source": "LinkedIn Jobs (2026)",
-        "next_certs": [
-            "Microsoft Dynamics 365 Sales Functional Consultant (MB-210)",
-            "Power Platform Fundamentals (PL-900)"
-        ]
-    },
-    {
-        "id": 98,
-        "name": "ITIL 4 Foundation",
-        "provider": "Axelos / PeopleCert",
-        "industry": "management",
-        "subdomain": "project_management",
-        "difficulty": 2,
-        "description": "The world's most widely adopted IT service management framework certification covering the ITIL 4 service value system, practices, and guiding principles.",
-        "official_url": "https://www.axelos.com/certifications/itil-certifications/itil-4-foundation",
-        "cost": "$415",
-        "cost_source": "PeopleCert Official (May 2026)",
-        "duration_weeks": 4,
-        "study_hours": 20,
-        "exam_format": "Multiple choice, 40 questions",
-        "exam_duration_minutes": 60,
-        "passing_score": 65,
-        "passing_score_note": "26 out of 40 questions (65%) required",
-        "pass_rate_percent": 75,
-        "pass_rate_source": "Community estimate",
-        "valid_years": 999,
-        "renewal_required": false,
-        "renewal_cost": "$0",
-        "salary_boost_low": 3000,
-        "salary_boost_high": 9000,
-        "salary_boost_source": "Glassdoor/PayScale (estimated)",
-        "worth_it_rating": 8.4,
-        "trending": true,
-        "data_confidence": "high",
-        "last_verified": "2026-05-20",
-        "skills": [
-            "ITIL",
-            "IT service management",
-            "ITSM",
-            "incident management",
-            "change management",
-            "problem management",
-            "service desk",
-            "service value chain",
-            "continual improvement"
-        ],
-        "primary_skills": [
-            "ITIL",
-            "IT service management",
-            "ITSM"
-        ],
-        "secondary_skills": [
-            "incident management",
-            "change management",
-            "problem management",
-            "service desk"
-        ],
-        "prerequisites": [],
-        "recommended_prior_knowledge": [
-            "Basic IT operations knowledge"
-        ],
-        "target_job_titles": [
-            "IT Service Manager",
-            "ITSM Analyst",
-            "IT Operations Manager",
-            "Service Desk Manager",
-            "IT Support Manager",
-            "Change Manager"
-        ],
-        "job_postings_count": 38000,
-        "job_postings_source": "LinkedIn Jobs (2026)",
-        "next_certs": [
-            "ITIL 4 Managing Professional",
-            "ServiceNow Certified System Administrator"
-        ]
-    },
-    {
-        "id": 99,
-        "name": "PMI Agile Certified Practitioner (PMI-ACP)",
-        "provider": "PMI",
-        "industry": "management",
-        "subdomain": "project_management",
-        "difficulty": 3,
-        "description": "Validates agile principles and practices across Scrum, Kanban, Lean, XP, and SAFe frameworks. Recognised across tech and non-tech industries.",
-        "official_url": "https://www.pmi.org/certifications/agile-acp",
-        "cost": "$435\u2013$495",
-        "cost_source": "PMI Official (May 2026) \u2014 $435 members, $495 non-members",
-        "duration_weeks": 12,
-        "study_hours": 80,
-        "exam_format": "Multiple choice & scenario-based, 120 questions",
-        "exam_duration_minutes": 180,
-        "passing_score": 0,
-        "passing_score_note": "PMI uses proficiency-level scoring \u2014 no fixed passing score published",
-        "pass_rate_percent": 65,
-        "pass_rate_source": "Community estimate",
-        "valid_years": 3,
-        "renewal_required": true,
-        "renewal_cost": "$60\u2013$150",
-        "renewal_cost_note": "$60 for PMI members, $150 non-members \u2014 30 PDUs required",
-        "salary_boost_low": 5000,
-        "salary_boost_high": 14000,
-        "salary_boost_source": "Glassdoor/PayScale (estimated)",
-        "worth_it_rating": 8.7,
-        "trending": true,
-        "data_confidence": "high",
-        "last_verified": "2026-05-20",
-        "skills": [
-            "agile",
-            "scrum",
-            "kanban",
-            "Lean",
-            "XP",
-            "SAFe",
-            "sprint planning",
-            "backlog management",
-            "retrospectives",
-            "project management",
-            "stakeholder management",
-            "Jira"
-        ],
-        "primary_skills": [
-            "agile",
-            "scrum",
-            "project management"
-        ],
-        "secondary_skills": [
-            "kanban",
-            "SAFe",
-            "sprint planning",
-            "backlog management",
-            "Jira"
-        ],
-        "prerequisites": [
-            "2,000 hours of project team experience + 1,500 hours on agile teams + 21 hours agile education"
-        ],
-        "recommended_prior_knowledge": [
-            "Agile fundamentals",
-            "Scrum basics",
-            "Project management experience"
-        ],
-        "target_job_titles": [
-            "Scrum Master",
-            "Agile Coach",
-            "Product Owner",
-            "Project Manager",
-            "Delivery Manager",
-            "Program Manager"
-        ],
-        "job_postings_count": 35000,
-        "job_postings_source": "LinkedIn Jobs (2026)",
-        "next_certs": [
-            "SAFe Agilist",
-            "Certified Scrum Master"
-        ]
-    },
-    {
-        "id": 100,
-        "name": "Certified Scrum Master (CSM)",
-        "provider": "Scrum Alliance",
-        "industry": "management",
-        "subdomain": "project_management",
-        "difficulty": 2,
-        "description": "Foundational Scrum certification validating understanding of Scrum framework, roles, events, and artifacts for agile software delivery.",
-        "official_url": "https://www.scrumalliance.org/get-certified/scrum-master-track/certified-scrummaster",
-        "cost": "$495\u2013$1,495",
-        "cost_source": "Scrum Alliance Official (May 2026) \u2014 price varies by training provider, includes 2-day course",
-        "duration_weeks": 2,
-        "study_hours": 16,
-        "exam_format": "Multiple choice, 50 questions \u2014 taken after 2-day course",
-        "exam_duration_minutes": 60,
-        "passing_score": 74,
-        "passing_score_note": "37 out of 50 questions (74%) required",
-        "pass_rate_percent": 78,
-        "pass_rate_source": "Community estimate",
-        "valid_years": 2,
-        "renewal_required": true,
-        "renewal_cost": "$100",
-        "renewal_cost_note": "Earn 20 SEUs (Scrum Education Units) and pay $100 renewal fee",
-        "salary_boost_low": 4000,
-        "salary_boost_high": 12000,
-        "salary_boost_source": "Glassdoor/PayScale (estimated)",
-        "worth_it_rating": 8.5,
-        "trending": true,
-        "data_confidence": "high",
-        "last_verified": "2026-05-20",
-        "skills": [
-            "scrum",
-            "agile",
-            "sprint planning",
-            "backlog management",
-            "retrospectives",
-            "stakeholder management",
-            "facilitation",
-            "project management",
-            "Jira",
-            "team management"
-        ],
-        "primary_skills": [
-            "scrum",
-            "agile",
-            "facilitation"
-        ],
-        "secondary_skills": [
-            "sprint planning",
-            "backlog management",
-            "stakeholder management",
-            "Jira"
-        ],
-        "prerequisites": [
-            "Attendance at a 2-day Certified Scrum Master course"
-        ],
-        "recommended_prior_knowledge": [
-            "Basic project management concepts"
-        ],
-        "target_job_titles": [
-            "Scrum Master",
-            "Agile Coach",
-            "Project Manager",
-            "Delivery Manager",
-            "Product Owner",
-            "Team Lead"
-        ],
-        "job_postings_count": 40000,
-        "job_postings_source": "LinkedIn Jobs (2026)",
-        "next_certs": [
-            "PMI-ACP",
-            "SAFe Scrum Master",
-            "Certified Scrum Product Owner"
-        ]
-    },
-    {
-        "id": 119,
-        "name": "Salesforce Advanced Administrator",
-        "provider": "Salesforce",
-        "industry": "management",
-        "subdomain": "crm",
-        "difficulty": 3,
-        "description": "Advanced Salesforce certification for experienced admins covering complex automation, data management, advanced reporting, security, and platform features beyond the core Admin exam.",
-        "official_url": "https://trailhead.salesforce.com/credentials/advancedadministrator",
-        "cost": "$200",
-        "cost_source": "Salesforce Official (June 2026)",
-        "duration_weeks": 10,
-        "study_hours": 80,
-        "exam_format": "Multiple choice, 60 questions",
-        "exam_duration_minutes": 105,
-        "passing_score": 65,
-        "passing_score_note": "65% required to pass",
-        "pass_rate_percent": 55,
-        "pass_rate_source": "Community estimate",
-        "valid_years": 1,
-        "renewal_required": true,
-        "renewal_cost": "$100",
-        "renewal_cost_note": "Annual maintenance modules \u2014 free to complete",
-        "salary_boost_low": 8000,
-        "salary_boost_high": 20000,
-        "salary_boost_source": "Glassdoor/PayScale (estimated)",
-        "worth_it_rating": 9.0,
-        "trending": true,
-        "data_confidence": "high",
-        "last_verified": "2026-06-04",
-        "skills": [
-            "Salesforce",
-            "CRM",
-            "advanced automation",
-            "Flow",
-            "data management",
-            "security",
-            "reporting",
-            "dashboards",
-            "change management",
-            "Lightning Experience",
-            "integration"
-        ],
-        "primary_skills": [
-            "Salesforce",
-            "advanced automation",
-            "data management"
-        ],
-        "secondary_skills": [
-            "Flow",
-            "security",
-            "reporting",
-            "dashboards",
-            "integration"
-        ],
-        "prerequisites": [
-            "Salesforce Certified Administrator (required)"
-        ],
-        "recommended_prior_knowledge": [
-            "2+ years Salesforce admin experience",
-            "Salesforce Administrator certification"
-        ],
-        "target_job_titles": [
-            "Senior Salesforce Administrator",
-            "Salesforce Business Analyst",
-            "CRM Manager",
-            "Salesforce Consultant",
-            "Revenue Operations Manager",
-            "Salesforce Architect"
-        ],
-        "job_postings_count": 30000,
-        "job_postings_source": "LinkedIn Jobs (2026)",
-        "next_certs": [
-            "Salesforce Platform Developer I",
-            "Salesforce Platform App Builder"
-        ]
-    },
-    {
-        "id": 120,
-        "name": "ServiceNow Certified Application Developer (CAD)",
-        "provider": "ServiceNow",
-        "industry": "management",
-        "subdomain": "crm",
-        "difficulty": 3,
-        "description": "Validates ability to build custom applications on the ServiceNow platform using scripting, UI policies, business rules, REST APIs, and client-side development.",
-        "official_url": "https://www.servicenow.com/services/training-and-certification/certifications.html",
-        "cost": "$150",
-        "cost_source": "ServiceNow Official (June 2026)",
-        "duration_weeks": 10,
-        "study_hours": 80,
-        "exam_format": "Multiple choice, 60 questions",
-        "exam_duration_minutes": 90,
-        "passing_score": 70,
-        "passing_score_note": "70% required to pass",
-        "pass_rate_percent": 58,
-        "pass_rate_source": "Community estimate",
-        "valid_years": 2,
-        "renewal_required": true,
-        "renewal_cost": "$150",
-        "salary_boost_low": 8000,
-        "salary_boost_high": 22000,
-        "salary_boost_source": "Glassdoor/PayScale (estimated)",
-        "worth_it_rating": 8.9,
-        "trending": true,
-        "data_confidence": "high",
-        "last_verified": "2026-06-04",
-        "skills": [
-            "ServiceNow",
-            "JavaScript",
-            "scripting",
-            "REST APIs",
-            "business rules",
-            "UI policies",
-            "ITSM",
-            "application development",
-            "workflow automation",
-            "data modeling"
-        ],
-        "primary_skills": [
-            "ServiceNow",
-            "application development",
-            "scripting"
-        ],
-        "secondary_skills": [
-            "JavaScript",
-            "REST APIs",
-            "business rules",
-            "workflow automation",
-            "data modeling"
-        ],
-        "prerequisites": [
-            "ServiceNow Certified System Administrator (CSA) strongly recommended"
-        ],
-        "recommended_prior_knowledge": [
-            "JavaScript",
-            "ServiceNow CSA-level knowledge",
-            "REST API concepts"
-        ],
-        "target_job_titles": [
-            "ServiceNow Developer",
-            "ServiceNow Architect",
-            "ITSM Developer",
-            "Platform Developer",
-            "IT Automation Engineer",
-            "ServiceNow Consultant"
-        ],
-        "job_postings_count": 25000,
-        "job_postings_source": "LinkedIn Jobs (2026)",
-        "next_certs": [
-            "ServiceNow Certified Implementation Specialist",
-            "Salesforce Platform Developer I"
-        ]
-    },
-    {
-        "id": 121,
-        "name": "Workday HCM Core Certification",
-        "provider": "Workday",
-        "industry": "management",
-        "subdomain": "erp",
-        "difficulty": 3,
-        "description": "Validates ability to configure and maintain Workday's Human Capital Management application including org management, staffing, compensation, and business process configuration.",
-        "official_url": "https://www.workday.com/en-us/services/training/certification.html",
-        "cost": "$1,000",
-        "cost_source": "Workday Official (June 2026) \u2014 includes exam + evaluation fee; mandatory training course additional",
-        "duration_weeks": 8,
-        "study_hours": 60,
-        "exam_format": "Multiple choice & scenario-based questions, 90 minutes",
-        "exam_duration_minutes": 90,
-        "passing_score": 70,
-        "passing_score_note": "70% required to pass",
-        "pass_rate_percent": 60,
-        "pass_rate_source": "Community estimate",
-        "valid_years": 1,
-        "renewal_required": true,
-        "renewal_cost": "$500",
-        "renewal_cost_note": "Annual update training + exam required",
-        "salary_boost_low": 10000,
-        "salary_boost_high": 28000,
-        "salary_boost_source": "Glassdoor/PayScale (estimated)",
-        "worth_it_rating": 9.0,
-        "trending": true,
-        "data_confidence": "high",
-        "last_verified": "2026-06-04",
-        "skills": [
-            "Workday",
-            "HCM",
-            "HR systems",
-            "org management",
-            "staffing",
-            "compensation management",
-            "business process",
-            "reporting",
-            "data management",
-            "HRIS",
-            "payroll"
-        ],
-        "primary_skills": [
-            "Workday",
-            "HCM",
-            "HR systems"
-        ],
-        "secondary_skills": [
-            "org management",
-            "compensation management",
-            "business process",
-            "reporting",
-            "payroll"
-        ],
-        "prerequisites": [
-            "Completion of Workday HCM Core training course (mandatory)"
-        ],
-        "recommended_prior_knowledge": [
-            "HR operations experience",
-            "HRIS fundamentals"
-        ],
-        "target_job_titles": [
-            "Workday Consultant",
-            "HRIS Analyst",
-            "HR Systems Manager",
-            "Workday Administrator",
-            "Workday Functional Analyst",
-            "HR Technology Manager"
-        ],
-        "job_postings_count": 22000,
-        "job_postings_source": "LinkedIn Jobs (2026)",
-        "next_certs": [
-            "Workday HCM Pro",
-            "SAP SuccessFactors Consultant"
-        ]
-    },
-    {
-        "id": 122,
-        "name": "SAP S/4HANA Finance Associate",
-        "provider": "SAP",
-        "industry": "management",
-        "subdomain": "erp",
-        "difficulty": 3,
-        "description": "SAP Associate-level certification for financial accounting and controlling in SAP S/4HANA \u2014 one of the highest-demand SAP modules. Covers GL, AP, AR, asset accounting, and controlling.",
-        "official_url": "https://training.sap.com/certification",
-        "cost": "$560",
-        "cost_source": "SAP Certification Hub Official (June 2026)",
-        "duration_weeks": 12,
-        "study_hours": 80,
-        "exam_format": "Multiple choice, 80 questions, 3 hours",
-        "exam_duration_minutes": 180,
-        "passing_score": 65,
-        "passing_score_note": "Approximately 65% required \u2014 varies by module",
-        "pass_rate_percent": 62,
-        "pass_rate_source": "Community estimate \u2014 typically 60\u201370% first attempt",
-        "valid_years": 1,
-        "renewal_required": true,
-        "renewal_cost": "$560",
-        "renewal_cost_note": "Annual SAP Certification Hub subscription renewal",
-        "salary_boost_low": 10000,
-        "salary_boost_high": 30000,
-        "salary_boost_source": "Glassdoor/PayScale (estimated)",
-        "worth_it_rating": 9.1,
-        "trending": true,
-        "data_confidence": "high",
-        "last_verified": "2026-06-04",
-        "skills": [
-            "SAP",
-            "SAP S/4HANA",
-            "financial accounting",
-            "controlling",
-            "ERP",
-            "general ledger",
-            "accounts payable",
-            "accounts receivable",
-            "asset accounting",
-            "cost center accounting",
-            "financial reporting"
-        ],
-        "primary_skills": [
-            "SAP",
-            "SAP S/4HANA",
-            "financial accounting"
-        ],
-        "secondary_skills": [
-            "controlling",
-            "general ledger",
-            "accounts payable",
-            "accounts receivable",
-            "financial reporting"
-        ],
-        "prerequisites": [],
-        "recommended_prior_knowledge": [
-            "Financial accounting fundamentals",
-            "ERP concepts"
-        ],
-        "target_job_titles": [
-            "SAP FICO Consultant",
-            "Finance Systems Analyst",
-            "SAP Finance Analyst",
-            "ERP Functional Analyst",
-            "Financial Controller",
-            "SAP Consultant"
-        ],
-        "job_postings_count": 40000,
-        "job_postings_source": "LinkedIn Jobs (2026)",
-        "next_certs": [
-            "SAP Certified Professional",
-            "SAP S/4HANA Supply Chain Associate"
-        ]
-    },
-    {
-        "id": 123,
-        "name": "Zendesk Customer Experience Expert",
-        "provider": "Zendesk",
-        "industry": "management",
-        "subdomain": "crm",
-        "difficulty": 2,
-        "description": "Validates expertise in the Zendesk platform for customer support operations, covering ticketing, workflows, automation, reporting, and customer experience best practices.",
-        "official_url": "https://www.zendesk.com/training/certification/",
-        "cost": "$350",
-        "cost_source": "Zendesk Official (June 2026)",
-        "duration_weeks": 6,
-        "study_hours": 40,
-        "exam_format": "Multiple choice & scenario-based, 60 questions",
-        "exam_duration_minutes": 90,
-        "passing_score": 70,
-        "passing_score_note": "70% required to pass",
-        "pass_rate_percent": 65,
-        "pass_rate_source": "Community estimate",
-        "valid_years": 2,
-        "renewal_required": true,
-        "renewal_cost": "$350",
-        "salary_boost_low": 4000,
-        "salary_boost_high": 10000,
-        "salary_boost_source": "Glassdoor/PayScale (estimated)",
-        "worth_it_rating": 8.3,
-        "trending": true,
-        "data_confidence": "high",
-        "last_verified": "2026-06-04",
-        "skills": [
-            "Zendesk",
-            "customer support",
-            "ITSM",
-            "ticketing",
-            "workflow automation",
-            "reporting",
-            "customer experience",
-            "SLA management",
-            "help desk",
-            "CRM"
-        ],
-        "primary_skills": [
-            "Zendesk",
-            "customer support",
-            "workflow automation"
-        ],
-        "secondary_skills": [
-            "ticketing",
-            "reporting",
-            "SLA management",
-            "customer experience",
-            "CRM"
-        ],
-        "prerequisites": [],
-        "recommended_prior_knowledge": [
-            "Customer support operations",
-            "Zendesk platform basics"
-        ],
-        "target_job_titles": [
-            "Customer Support Manager",
-            "CX Operations Manager",
-            "Support Engineer",
-            "Help Desk Manager",
-            "Customer Success Manager",
-            "CX Analyst"
-        ],
-        "job_postings_count": 20000,
-        "job_postings_source": "LinkedIn Jobs (2026)",
-        "next_certs": [
-            "ServiceNow Certified System Administrator",
-            "ITIL 4 Foundation"
-        ]
-    }
+  {
+    "id": 93,
+    "name": "Salesforce Certified Administrator",
+    "provider": "Salesforce",
+    "industry": "management",
+    "subdomain": "crm",
+    "difficulty": 2,
+    "description": "Validates ability to configure, manage, and maintain Salesforce CRM including users, data, security, workflows, and reports.",
+    "official_url": "https://trailhead.salesforce.com/credentials/administrator",
+    "cost": "$200",
+    "cost_source": "Salesforce Official (May 2026)",
+    "duration_weeks": 8,
+    "study_hours": 60,
+    "exam_format": "Multiple choice, 60 questions",
+    "exam_duration_minutes": 105,
+    "passing_score": 65,
+    "passing_score_note": "65% required to pass",
+    "pass_rate_percent": 65,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "$100",
+    "renewal_cost_note": "Maintenance modules released 3x/year — free to complete",
+    "salary_boost_low": 5000,
+    "salary_boost_high": 14000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 9,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "Salesforce",
+      "CRM",
+      "sales automation",
+      "workflow automation",
+      "data management",
+      "security",
+      "reporting",
+      "dashboards",
+      "user management",
+      "Lightning Experience"
+    ],
+    "primary_skills": [
+      "Salesforce",
+      "CRM",
+      "workflow automation"
+    ],
+    "secondary_skills": [
+      "data management",
+      "security",
+      "reporting",
+      "dashboards",
+      "Lightning Experience"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic CRM concepts",
+      "Salesforce Trailhead fundamentals"
+    ],
+    "target_job_titles": [
+      "Salesforce Administrator",
+      "CRM Administrator",
+      "Salesforce Business Analyst",
+      "CRM Manager",
+      "Operations Manager",
+      "Revenue Operations Analyst"
+    ],
+    "job_postings_count": 48000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Salesforce Platform App Builder",
+      "Salesforce Advanced Administrator"
+    ]
+  },
+  {
+    "id": 94,
+    "name": "Salesforce Certified Platform Developer I",
+    "provider": "Salesforce",
+    "industry": "management",
+    "subdomain": "crm",
+    "difficulty": 3,
+    "description": "Validates ability to build custom applications on the Salesforce platform using Apex, Visualforce, and Lightning Web Components.",
+    "official_url": "https://trailhead.salesforce.com/credentials/platformdeveloperI",
+    "cost": "$200",
+    "cost_source": "Salesforce Official (May 2026)",
+    "duration_weeks": 10,
+    "study_hours": 80,
+    "exam_format": "Multiple choice, 60 questions",
+    "exam_duration_minutes": 105,
+    "passing_score": 65,
+    "passing_score_note": "65% required to pass",
+    "pass_rate_percent": 58,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "$100",
+    "salary_boost_low": 8000,
+    "salary_boost_high": 18000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.8,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "Salesforce",
+      "Apex",
+      "Lightning Web Components",
+      "Visualforce",
+      "CRM",
+      "JavaScript",
+      "SOQL",
+      "REST APIs",
+      "data modeling",
+      "automation"
+    ],
+    "primary_skills": [
+      "Salesforce",
+      "Apex",
+      "Lightning Web Components"
+    ],
+    "secondary_skills": [
+      "Visualforce",
+      "SOQL",
+      "JavaScript",
+      "REST APIs",
+      "data modeling"
+    ],
+    "prerequisites": [
+      "Salesforce Administrator or equivalent experience"
+    ],
+    "recommended_prior_knowledge": [
+      "Object-oriented programming",
+      "JavaScript basics",
+      "Salesforce fundamentals"
+    ],
+    "target_job_titles": [
+      "Salesforce Developer",
+      "CRM Developer",
+      "Platform Developer",
+      "Salesforce Consultant",
+      "Full Stack Developer"
+    ],
+    "job_postings_count": 35000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Salesforce Platform Developer II",
+      "Salesforce Integration Architect"
+    ]
+  },
+  {
+    "id": 95,
+    "name": "Salesforce Platform App Builder",
+    "provider": "Salesforce",
+    "industry": "management",
+    "subdomain": "crm",
+    "difficulty": 2,
+    "description": "Validates ability to design, build, and deploy custom apps using declarative tools on the Salesforce platform.",
+    "official_url": "https://trailhead.salesforce.com/credentials/platformappbuilder",
+    "cost": "$200",
+    "cost_source": "Salesforce Official (May 2026)",
+    "duration_weeks": 8,
+    "study_hours": 60,
+    "exam_format": "Multiple choice, 60 questions",
+    "exam_duration_minutes": 105,
+    "passing_score": 63,
+    "passing_score_note": "63% required to pass",
+    "pass_rate_percent": 62,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "$100",
+    "salary_boost_low": 5000,
+    "salary_boost_high": 14000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.6,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "Salesforce",
+      "CRM",
+      "app development",
+      "workflows",
+      "process builder",
+      "Flow",
+      "data modeling",
+      "Lightning Experience",
+      "validation rules",
+      "reports"
+    ],
+    "primary_skills": [
+      "Salesforce",
+      "app development",
+      "Flow"
+    ],
+    "secondary_skills": [
+      "workflows",
+      "data modeling",
+      "Lightning Experience",
+      "validation rules",
+      "reports"
+    ],
+    "prerequisites": [
+      "Salesforce Administrator recommended"
+    ],
+    "recommended_prior_knowledge": [
+      "Salesforce fundamentals",
+      "Data modeling concepts"
+    ],
+    "target_job_titles": [
+      "Salesforce Administrator",
+      "CRM Analyst",
+      "Salesforce Consultant",
+      "Business Systems Analyst",
+      "Operations Analyst"
+    ],
+    "job_postings_count": 30000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Salesforce Platform Developer I",
+      "Salesforce Advanced Administrator"
+    ]
+  },
+  {
+    "id": 96,
+    "name": "ServiceNow Certified System Administrator (CSA)",
+    "provider": "ServiceNow",
+    "industry": "management",
+    "subdomain": "crm",
+    "difficulty": 2,
+    "description": "Validates ability to configure and manage the ServiceNow platform including ITSM workflows, user administration, and platform customization.",
+    "official_url": "https://www.servicenow.com/services/training-and-certification/certifications.html",
+    "cost": "$150",
+    "cost_source": "ServiceNow Official (May 2026)",
+    "duration_weeks": 6,
+    "study_hours": 50,
+    "exam_format": "Multiple choice, 60 questions",
+    "exam_duration_minutes": 90,
+    "passing_score": 70,
+    "passing_score_note": "70% required to pass",
+    "pass_rate_percent": 65,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 2,
+    "renewal_required": true,
+    "renewal_cost": "$150",
+    "salary_boost_low": 5000,
+    "salary_boost_high": 14000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.7,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "ServiceNow",
+      "ITSM",
+      "IT service management",
+      "workflow automation",
+      "incident management",
+      "change management",
+      "CMDB",
+      "scripting",
+      "reporting",
+      "user administration"
+    ],
+    "primary_skills": [
+      "ServiceNow",
+      "ITSM",
+      "workflow automation"
+    ],
+    "secondary_skills": [
+      "incident management",
+      "change management",
+      "CMDB",
+      "scripting",
+      "reporting"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic ITSM concepts",
+      "ServiceNow fundamentals"
+    ],
+    "target_job_titles": [
+      "ServiceNow Administrator",
+      "ITSM Analyst",
+      "IT Operations Manager",
+      "ServiceNow Developer",
+      "IT Service Manager",
+      "Platform Administrator"
+    ],
+    "job_postings_count": 32000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "ServiceNow Certified Application Developer",
+      "ITIL 4 Foundation"
+    ]
+  },
+  {
+    "id": 97,
+    "name": "Microsoft Dynamics 365 Fundamentals (MB-910)",
+    "provider": "Microsoft",
+    "industry": "management",
+    "subdomain": "crm",
+    "difficulty": 1,
+    "description": "Entry-level certification covering Dynamics 365 CRM applications including Sales, Customer Service, Marketing, and Field Service fundamentals.",
+    "official_url": "https://learn.microsoft.com/en-us/credentials/certifications/d365-fundamentals-customer-engagement-apps-crm/",
+    "cost": "$99",
+    "cost_source": "Microsoft Official (May 2026) — Fundamentals tier",
+    "duration_weeks": 3,
+    "study_hours": 20,
+    "exam_format": "Multiple choice, 40–60 questions",
+    "exam_duration_minutes": 45,
+    "passing_score": 700,
+    "passing_score_note": "Scaled score out of 1000",
+    "pass_rate_percent": 78,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "$0",
+    "renewal_cost_note": "Free annual renewal via Microsoft Learn assessment",
+    "salary_boost_low": 2000,
+    "salary_boost_high": 6000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 7.8,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "Microsoft Dynamics 365",
+      "CRM",
+      "sales automation",
+      "customer service",
+      "marketing automation",
+      "Power Platform",
+      "customer engagement",
+      "reporting"
+    ],
+    "primary_skills": [
+      "Microsoft Dynamics 365",
+      "CRM",
+      "customer engagement"
+    ],
+    "secondary_skills": [
+      "sales automation",
+      "customer service",
+      "marketing automation",
+      "Power Platform"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic CRM concepts"
+    ],
+    "target_job_titles": [
+      "CRM Analyst",
+      "Dynamics 365 Administrator",
+      "Sales Operations Analyst",
+      "Business Analyst",
+      "Customer Success Manager"
+    ],
+    "job_postings_count": 22000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Microsoft Dynamics 365 Sales Functional Consultant (MB-210)",
+      "Power Platform Fundamentals (PL-900)"
+    ]
+  },
+  {
+    "id": 98,
+    "name": "ITIL 4 Foundation",
+    "provider": "Axelos / PeopleCert",
+    "industry": "management",
+    "subdomain": "project_management",
+    "difficulty": 2,
+    "description": "The world's most widely adopted IT service management framework certification covering the ITIL 4 service value system, practices, and guiding principles.",
+    "official_url": "https://www.axelos.com/certifications/itil-certifications/itil-4-foundation",
+    "cost": "$415",
+    "cost_source": "PeopleCert Official (May 2026)",
+    "duration_weeks": 4,
+    "study_hours": 20,
+    "exam_format": "Multiple choice, 40 questions",
+    "exam_duration_minutes": 60,
+    "passing_score": 65,
+    "passing_score_note": "26 out of 40 questions (65%) required",
+    "pass_rate_percent": 75,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 999,
+    "renewal_required": false,
+    "renewal_cost": "$0",
+    "salary_boost_low": 3000,
+    "salary_boost_high": 9000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.4,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "ITIL",
+      "IT service management",
+      "ITSM",
+      "incident management",
+      "change management",
+      "problem management",
+      "service desk",
+      "service value chain",
+      "continual improvement"
+    ],
+    "primary_skills": [
+      "ITIL",
+      "IT service management",
+      "ITSM"
+    ],
+    "secondary_skills": [
+      "incident management",
+      "change management",
+      "problem management",
+      "service desk"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Basic IT operations knowledge"
+    ],
+    "target_job_titles": [
+      "IT Service Manager",
+      "ITSM Analyst",
+      "IT Operations Manager",
+      "Service Desk Manager",
+      "IT Support Manager",
+      "Change Manager"
+    ],
+    "job_postings_count": 38000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "ITIL 4 Managing Professional",
+      "ServiceNow Certified System Administrator"
+    ]
+  },
+  {
+    "id": 99,
+    "name": "PMI Agile Certified Practitioner (PMI-ACP)",
+    "provider": "PMI",
+    "industry": "management",
+    "subdomain": "project_management",
+    "difficulty": 3,
+    "description": "Validates agile principles and practices across Scrum, Kanban, Lean, XP, and SAFe frameworks. Recognised across tech and non-tech industries.",
+    "official_url": "https://www.pmi.org/certifications/agile-acp",
+    "cost": "$435–$495",
+    "cost_source": "PMI Official (May 2026) — $435 members, $495 non-members",
+    "duration_weeks": 12,
+    "study_hours": 80,
+    "exam_format": "Multiple choice & scenario-based, 120 questions",
+    "exam_duration_minutes": 180,
+    "passing_score": 0,
+    "passing_score_note": "PMI uses proficiency-level scoring — no fixed passing score published",
+    "pass_rate_percent": 65,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$60–$150",
+    "renewal_cost_note": "$60 for PMI members, $150 non-members — 30 PDUs required",
+    "salary_boost_low": 5000,
+    "salary_boost_high": 14000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.7,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "agile",
+      "scrum",
+      "kanban",
+      "Lean",
+      "XP",
+      "SAFe",
+      "sprint planning",
+      "backlog management",
+      "retrospectives",
+      "project management",
+      "stakeholder management",
+      "Jira"
+    ],
+    "primary_skills": [
+      "agile",
+      "scrum",
+      "project management"
+    ],
+    "secondary_skills": [
+      "kanban",
+      "SAFe",
+      "sprint planning",
+      "backlog management",
+      "Jira"
+    ],
+    "prerequisites": [
+      "2,000 hours of project team experience + 1,500 hours on agile teams + 21 hours agile education"
+    ],
+    "recommended_prior_knowledge": [
+      "Agile fundamentals",
+      "Scrum basics",
+      "Project management experience"
+    ],
+    "target_job_titles": [
+      "Scrum Master",
+      "Agile Coach",
+      "Product Owner",
+      "Project Manager",
+      "Delivery Manager",
+      "Program Manager"
+    ],
+    "job_postings_count": 35000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "SAFe Agilist",
+      "Certified Scrum Master"
+    ]
+  },
+  {
+    "id": 100,
+    "name": "Certified Scrum Master (CSM)",
+    "provider": "Scrum Alliance",
+    "industry": "management",
+    "subdomain": "project_management",
+    "difficulty": 2,
+    "description": "Foundational Scrum certification validating understanding of Scrum framework, roles, events, and artifacts for agile software delivery.",
+    "official_url": "https://www.scrumalliance.org/get-certified/scrum-master-track/certified-scrummaster",
+    "cost": "$495–$1,495",
+    "cost_source": "Scrum Alliance Official (May 2026) — price varies by training provider, includes 2-day course",
+    "duration_weeks": 2,
+    "study_hours": 16,
+    "exam_format": "Multiple choice, 50 questions — taken after 2-day course",
+    "exam_duration_minutes": 60,
+    "passing_score": 74,
+    "passing_score_note": "37 out of 50 questions (74%) required",
+    "pass_rate_percent": 78,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 2,
+    "renewal_required": true,
+    "renewal_cost": "$100",
+    "renewal_cost_note": "Earn 20 SEUs (Scrum Education Units) and pay $100 renewal fee",
+    "salary_boost_low": 4000,
+    "salary_boost_high": 12000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.5,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-05-20",
+    "skills": [
+      "scrum",
+      "agile",
+      "sprint planning",
+      "backlog management",
+      "retrospectives",
+      "stakeholder management",
+      "facilitation",
+      "project management",
+      "Jira",
+      "team management"
+    ],
+    "primary_skills": [
+      "scrum",
+      "agile",
+      "facilitation"
+    ],
+    "secondary_skills": [
+      "sprint planning",
+      "backlog management",
+      "stakeholder management",
+      "Jira"
+    ],
+    "prerequisites": [
+      "Attendance at a 2-day Certified Scrum Master course"
+    ],
+    "recommended_prior_knowledge": [
+      "Basic project management concepts"
+    ],
+    "target_job_titles": [
+      "Scrum Master",
+      "Agile Coach",
+      "Project Manager",
+      "Delivery Manager",
+      "Product Owner",
+      "Team Lead"
+    ],
+    "job_postings_count": 40000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "PMI-ACP",
+      "SAFe Scrum Master",
+      "Certified Scrum Product Owner"
+    ]
+  },
+  {
+    "id": 119,
+    "name": "Salesforce Advanced Administrator",
+    "provider": "Salesforce",
+    "industry": "management",
+    "subdomain": "crm",
+    "difficulty": 3,
+    "description": "Advanced Salesforce certification for experienced admins covering complex automation, data management, advanced reporting, security, and platform features beyond the core Admin exam.",
+    "official_url": "https://trailhead.salesforce.com/credentials/advancedadministrator",
+    "cost": "$200",
+    "cost_source": "Salesforce Official (June 2026)",
+    "duration_weeks": 10,
+    "study_hours": 80,
+    "exam_format": "Multiple choice, 60 questions",
+    "exam_duration_minutes": 105,
+    "passing_score": 65,
+    "passing_score_note": "65% required to pass",
+    "pass_rate_percent": 55,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "$100",
+    "renewal_cost_note": "Annual maintenance modules — free to complete",
+    "salary_boost_low": 8000,
+    "salary_boost_high": 20000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 9,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-04",
+    "skills": [
+      "Salesforce",
+      "CRM",
+      "advanced automation",
+      "Flow",
+      "data management",
+      "security",
+      "reporting",
+      "dashboards",
+      "change management",
+      "Lightning Experience",
+      "integration"
+    ],
+    "primary_skills": [
+      "Salesforce",
+      "advanced automation",
+      "data management"
+    ],
+    "secondary_skills": [
+      "Flow",
+      "security",
+      "reporting",
+      "dashboards",
+      "integration"
+    ],
+    "prerequisites": [
+      "Salesforce Certified Administrator (required)"
+    ],
+    "recommended_prior_knowledge": [
+      "2+ years Salesforce admin experience",
+      "Salesforce Administrator certification"
+    ],
+    "target_job_titles": [
+      "Senior Salesforce Administrator",
+      "Salesforce Business Analyst",
+      "CRM Manager",
+      "Salesforce Consultant",
+      "Revenue Operations Manager",
+      "Salesforce Architect"
+    ],
+    "job_postings_count": 30000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Salesforce Platform Developer I",
+      "Salesforce Platform App Builder"
+    ]
+  },
+  {
+    "id": 120,
+    "name": "ServiceNow Certified Application Developer (CAD)",
+    "provider": "ServiceNow",
+    "industry": "management",
+    "subdomain": "crm",
+    "difficulty": 3,
+    "description": "Validates ability to build custom applications on the ServiceNow platform using scripting, UI policies, business rules, REST APIs, and client-side development.",
+    "official_url": "https://www.servicenow.com/services/training-and-certification/certifications.html",
+    "cost": "$150",
+    "cost_source": "ServiceNow Official (June 2026)",
+    "duration_weeks": 10,
+    "study_hours": 80,
+    "exam_format": "Multiple choice, 60 questions",
+    "exam_duration_minutes": 90,
+    "passing_score": 70,
+    "passing_score_note": "70% required to pass",
+    "pass_rate_percent": 58,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 2,
+    "renewal_required": true,
+    "renewal_cost": "$150",
+    "salary_boost_low": 8000,
+    "salary_boost_high": 22000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.9,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-04",
+    "skills": [
+      "ServiceNow",
+      "JavaScript",
+      "scripting",
+      "REST APIs",
+      "business rules",
+      "UI policies",
+      "ITSM",
+      "application development",
+      "workflow automation",
+      "data modeling"
+    ],
+    "primary_skills": [
+      "ServiceNow",
+      "application development",
+      "scripting"
+    ],
+    "secondary_skills": [
+      "JavaScript",
+      "REST APIs",
+      "business rules",
+      "workflow automation",
+      "data modeling"
+    ],
+    "prerequisites": [
+      "ServiceNow Certified System Administrator (CSA) strongly recommended"
+    ],
+    "recommended_prior_knowledge": [
+      "JavaScript",
+      "ServiceNow CSA-level knowledge",
+      "REST API concepts"
+    ],
+    "target_job_titles": [
+      "ServiceNow Developer",
+      "ServiceNow Architect",
+      "ITSM Developer",
+      "Platform Developer",
+      "IT Automation Engineer",
+      "ServiceNow Consultant"
+    ],
+    "job_postings_count": 25000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "ServiceNow Certified Implementation Specialist",
+      "Salesforce Platform Developer I"
+    ]
+  },
+  {
+    "id": 121,
+    "name": "Workday HCM Core Certification",
+    "provider": "Workday",
+    "industry": "management",
+    "subdomain": "erp",
+    "difficulty": 3,
+    "description": "Validates ability to configure and maintain Workday's Human Capital Management application including org management, staffing, compensation, and business process configuration.",
+    "official_url": "https://www.workday.com/en-us/services/training/certification.html",
+    "cost": "$1,000",
+    "cost_source": "Workday Official (June 2026) — includes exam + evaluation fee; mandatory training course additional",
+    "duration_weeks": 8,
+    "study_hours": 60,
+    "exam_format": "Multiple choice & scenario-based questions, 90 minutes",
+    "exam_duration_minutes": 90,
+    "passing_score": 70,
+    "passing_score_note": "70% required to pass",
+    "pass_rate_percent": 60,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "$500",
+    "renewal_cost_note": "Annual update training + exam required",
+    "salary_boost_low": 10000,
+    "salary_boost_high": 28000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 9,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-04",
+    "skills": [
+      "Workday",
+      "HCM",
+      "HR systems",
+      "org management",
+      "staffing",
+      "compensation management",
+      "business process",
+      "reporting",
+      "data management",
+      "HRIS",
+      "payroll"
+    ],
+    "primary_skills": [
+      "Workday",
+      "HCM",
+      "HR systems"
+    ],
+    "secondary_skills": [
+      "org management",
+      "compensation management",
+      "business process",
+      "reporting",
+      "payroll"
+    ],
+    "prerequisites": [
+      "Completion of Workday HCM Core training course (mandatory)"
+    ],
+    "recommended_prior_knowledge": [
+      "HR operations experience",
+      "HRIS fundamentals"
+    ],
+    "target_job_titles": [
+      "Workday Consultant",
+      "HRIS Analyst",
+      "HR Systems Manager",
+      "Workday Administrator",
+      "Workday Functional Analyst",
+      "HR Technology Manager"
+    ],
+    "job_postings_count": 22000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "Workday HCM Pro",
+      "SAP SuccessFactors Consultant"
+    ]
+  },
+  {
+    "id": 122,
+    "name": "SAP S/4HANA Finance Associate",
+    "provider": "SAP",
+    "industry": "management",
+    "subdomain": "erp",
+    "difficulty": 3,
+    "description": "SAP Associate-level certification for financial accounting and controlling in SAP S/4HANA — one of the highest-demand SAP modules. Covers GL, AP, AR, asset accounting, and controlling.",
+    "official_url": "https://training.sap.com/certification",
+    "cost": "$560",
+    "cost_source": "SAP Certification Hub Official (June 2026)",
+    "duration_weeks": 12,
+    "study_hours": 80,
+    "exam_format": "Multiple choice, 80 questions, 3 hours",
+    "exam_duration_minutes": 180,
+    "passing_score": 65,
+    "passing_score_note": "Approximately 65% required — varies by module",
+    "pass_rate_percent": 62,
+    "pass_rate_source": "Community estimate — typically 60–70% first attempt",
+    "valid_years": 1,
+    "renewal_required": true,
+    "renewal_cost": "$560",
+    "renewal_cost_note": "Annual SAP Certification Hub subscription renewal",
+    "salary_boost_low": 10000,
+    "salary_boost_high": 30000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 9.1,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-04",
+    "skills": [
+      "SAP",
+      "SAP S/4HANA",
+      "financial accounting",
+      "controlling",
+      "ERP",
+      "general ledger",
+      "accounts payable",
+      "accounts receivable",
+      "asset accounting",
+      "cost center accounting",
+      "financial reporting"
+    ],
+    "primary_skills": [
+      "SAP",
+      "SAP S/4HANA",
+      "financial accounting"
+    ],
+    "secondary_skills": [
+      "controlling",
+      "general ledger",
+      "accounts payable",
+      "accounts receivable",
+      "financial reporting"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Financial accounting fundamentals",
+      "ERP concepts"
+    ],
+    "target_job_titles": [
+      "Finance Systems Analyst",
+      "ERP Functional Analyst",
+      "Financial Controller",
+      "SAP Consultant"
+    ],
+    "job_postings_count": 40000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "SAP Certified Professional",
+      "SAP S/4HANA Supply Chain Associate"
+    ]
+  },
+  {
+    "id": 123,
+    "name": "Zendesk Customer Experience Expert",
+    "provider": "Zendesk",
+    "industry": "management",
+    "subdomain": "crm",
+    "difficulty": 2,
+    "description": "Validates expertise in the Zendesk platform for customer support operations, covering ticketing, workflows, automation, reporting, and customer experience best practices.",
+    "official_url": "https://www.zendesk.com/training/certification/",
+    "cost": "$350",
+    "cost_source": "Zendesk Official (June 2026)",
+    "duration_weeks": 6,
+    "study_hours": 40,
+    "exam_format": "Multiple choice & scenario-based, 60 questions",
+    "exam_duration_minutes": 90,
+    "passing_score": 70,
+    "passing_score_note": "70% required to pass",
+    "pass_rate_percent": 65,
+    "pass_rate_source": "Community estimate",
+    "valid_years": 2,
+    "renewal_required": true,
+    "renewal_cost": "$350",
+    "salary_boost_low": 4000,
+    "salary_boost_high": 10000,
+    "salary_boost_source": "Glassdoor/PayScale (estimated)",
+    "worth_it_rating": 8.3,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-04",
+    "skills": [
+      "Zendesk",
+      "customer support",
+      "ITSM",
+      "ticketing",
+      "workflow automation",
+      "reporting",
+      "customer experience",
+      "SLA management",
+      "help desk",
+      "CRM"
+    ],
+    "primary_skills": [
+      "Zendesk",
+      "customer support",
+      "workflow automation"
+    ],
+    "secondary_skills": [
+      "ticketing",
+      "reporting",
+      "SLA management",
+      "customer experience",
+      "CRM"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "Customer support operations",
+      "Zendesk platform basics"
+    ],
+    "target_job_titles": [
+      "Customer Support Manager",
+      "CX Operations Manager",
+      "Support Engineer",
+      "Help Desk Manager",
+      "Customer Success Manager",
+      "CX Analyst"
+    ],
+    "job_postings_count": 20000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "ServiceNow Certified System Administrator",
+      "ITIL 4 Foundation"
+    ]
+  }
 ]
