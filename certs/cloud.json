@@ -1103,10 +1103,7 @@
       "Basic IT and business knowledge"
     ],
     "target_job_titles": [
-      "Cloud Sales Associate",
       "Business Analyst (Cloud teams)",
-      "Technical Account Manager (Junior)",
-      "Pre-sales Consultant",
       "Cloud Support Associate",
       "Cloud DBA",
       "Database Engineer",
@@ -1118,7 +1115,9 @@
       "Cloud Engineer (Junior)",
       "GCP Cloud Engineer",
       "Data Scientist (Production ML)",
-      "MLOps Engineer"
+      "MLOps Engineer",
+      "Technical Account Manager",
+      "Cloud Sales Engineer"
     ],
     "job_postings_count": 8000,
     "job_postings_source": "LinkedIn Jobs (2026)",
@@ -1183,8 +1182,9 @@
       "AI Product Specialist",
       "GenAI Solutions Consultant",
       "Business Analyst (AI-focused)",
-      "AI Sales Engineer (Entry-level)",
-      "Digital Transformation Associate"
+      "Digital Transformation Associate",
+      "Technical Account Manager",
+      "Cloud Sales Engineer"
     ],
     "job_postings_count": 12000,
     "job_postings_source": "LinkedIn Jobs (2026)",
@@ -1319,11 +1319,10 @@
       "Google Workspace familiarity"
     ],
     "target_job_titles": [
-      "Google Workspace Admin",
       "IT Administrator",
       "Systems Admin (Workspace-focused)",
       "IT Support Engineer",
-      "SaaS Admin Specialist"
+      "Workspace Administrator"
     ],
     "job_postings_count": 15000,
     "job_postings_source": "LinkedIn Jobs (2026)",
@@ -1742,11 +1741,8 @@
       "Security governance"
     ],
     "target_job_titles": [
-      "Enterprise Workspace Admin",
       "IT Operations Manager",
-      "Collaboration Systems Engineer",
-      "SaaS Infrastructure Admin",
-      "Identity & Access Admin (Workspace)"
+      "Workspace Administrator"
     ],
     "job_postings_count": 18000,
     "job_postings_source": "LinkedIn Jobs (2026)",

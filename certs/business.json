@@ -285,8 +285,7 @@
       "ITSM Analyst",
       "IT Operations Manager",
       "ServiceNow Developer",
-      "IT Service Manager",
-      "Platform Administrator"
+      "IT Service Manager"
     ],
     "job_postings_count": 32000,
     "job_postings_source": "LinkedIn Jobs (2026)",
@@ -728,11 +727,7 @@
     ],
     "target_job_titles": [
       "ServiceNow Developer",
-      "ServiceNow Architect",
-      "ITSM Developer",
-      "Platform Developer",
-      "IT Automation Engineer",
-      "ServiceNow Consultant"
+      "Platform Developer"
     ],
     "job_postings_count": 25000,
     "job_postings_source": "LinkedIn Jobs (2026)",
@@ -804,12 +799,8 @@
       "HRIS fundamentals"
     ],
     "target_job_titles": [
-      "Workday Consultant",
       "HRIS Analyst",
-      "HR Systems Manager",
-      "Workday Administrator",
-      "Workday Functional Analyst",
-      "HR Technology Manager"
+      "Workday Administrator"
     ],
     "job_postings_count": 22000,
     "job_postings_source": "LinkedIn Jobs (2026)",
