@@ -29,7 +29,7 @@ const { createClient } = require('@supabase/supabase-js');
 
 async function main() {
   const supabase = createClient(supabaseUrl, supabaseKey);
-  const { data: allCerts, error } = await supabase.from('certifications').select('name, industry, target_job_titles');
+  const { data: allCerts, error } = await supabase.from('certifications').select('name, target_job_titles');
   if (error) {
     console.error('Error fetching from Supabase:', error.message);
     process.exit(1);
@@ -60,10 +60,10 @@ async function main() {
         rolesMap.set(key, {
           name: cleanTitle,
           slug,
-          industry: cert.industry || 'general',
           certs: []
         });
       }
+      // Deduplicate cert names just in case
       const roleObj = rolesMap.get(key);
       if (!roleObj.certs.includes(cert.name)) {
         roleObj.certs.push(cert.name);
@@ -71,30 +71,38 @@ async function main() {
     });
   });
 
-  const singleCertRoles = Array.from(rolesMap.values())
-    .filter(r => r.certs.length === 1)
-    .sort((a, b) => {
-      const indA = a.industry || 'general';
-      const indB = b.industry || 'general';
-      const indCompare = indA.localeCompare(indB);
-      if (indCompare !== 0) return indCompare;
-      return a.name.localeCompare(b.name);
-    });
+  const rolesList = Array.from(rolesMap.values());
+  const lowCertRoles = rolesList.filter(r => r.certs.length <= 2);
+  
+  console.log(`=== Role Certification Statistics ===`);
+  console.log(`Total unique roles: ${rolesList.length}`);
+  console.log(`Roles with 2 or less certifications: ${lowCertRoles.length} (${((lowCertRoles.length / rolesList.length) * 100).toFixed(1)}% of all roles)\n`);
 
-  // Build markdown content
-  let md = `# Career Roles with Exactly 1 Certification\n\n`;
-  md += `This document lists the **${singleCertRoles.length}** career paths on CertRoute that have only **one** targeted certification in their roadmap.\n\n`;
-  md += `| # | Career Role | Industry | Target Certification |\n`;
-  md += `|---|-------------|----------|----------------------|\n`;
-
-  singleCertRoles.forEach((r, idx) => {
-    const formattedIndustry = r.industry.charAt(0).toUpperCase() + r.industry.slice(1);
-    md += `| ${idx + 1} | **${r.name}** | ${formattedIndustry} | ${r.certs[0]} |\n`;
+  // Count exact distribution
+  const dist = { 1: 0, 2: 0, 3: 0, '4+': 0 };
+  rolesList.forEach(r => {
+    const len = r.certs.length;
+    if (len === 1) dist[1]++;
+    else if (len === 2) dist[2]++;
+    else if (len === 3) dist[3]++;
+    else dist['4+']++;
   });
 
-  const artifactPath = '/Users/rahilgandhi/.gemini/antigravity-ide/brain/beb2c7a0-390b-4584-a68b-ccdefdd5d01f/roles_with_single_certification.md';
-  fs.writeFileSync(artifactPath, md);
-  console.log(`Saved list of ${singleCertRoles.length} roles to ${artifactPath}`);
+  console.log(`Distribution of certifications per role:`);
+  console.log(`- 1 Certification: ${dist[1]} roles`);
+  console.log(`- 2 Certifications: ${dist[2]} roles`);
+  console.log(`- 3 Certifications: ${dist[3]} roles`);
+  console.log(`- 4+ Certifications: ${dist['4+']} roles\n`);
+
+  console.log(`=== Examples of roles with 2 or less certifications ===`);
+  // Print some examples with their certifications
+  lowCertRoles.slice(0, 30).forEach(r => {
+    console.log(`- "${r.name}" (${r.certs.length} cert${r.certs.length > 1 ? 's' : ''}): ${r.certs.join(', ')}`);
+  });
+  
+  if (lowCertRoles.length > 30) {
+    console.log(`... and ${lowCertRoles.length - 30} more roles.`);
+  }
 }
 
 main().catch(console.error);
