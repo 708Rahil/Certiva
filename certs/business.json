@@ -872,7 +872,6 @@
     "target_job_titles": [
       "Finance Systems Analyst",
       "ERP Functional Analyst",
-      "Financial Controller",
       "SAP Consultant"
     ],
     "job_postings_count": 40000,
@@ -942,11 +941,8 @@
     ],
     "target_job_titles": [
       "Customer Support Manager",
-      "CX Operations Manager",
       "Support Engineer",
-      "Help Desk Manager",
-      "Customer Success Manager",
-      "CX Analyst"
+      "Customer Success Manager"
     ],
     "job_postings_count": 20000,
     "job_postings_source": "LinkedIn Jobs (2026)",
