@@ -509,7 +509,8 @@ function RoadmapContent() {
       </div>
 
       {/* JOB-SPECIFIC ROADMAP VIEW */}
-      {showEmptyJobs ? (
+      {mode === 'job-specific' && (
+        showEmptyJobs ? (
         <div style={{
           maxWidth: 800,
           margin: '40px auto',
@@ -708,6 +709,7 @@ function RoadmapContent() {
             </div>
           )}
         </>
+      )
       )}
 
       {/* ROLE-SPECIFIC ROADMAP MODE */}
