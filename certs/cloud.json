@@ -1103,7 +1103,6 @@
       "Basic IT and business knowledge"
     ],
     "target_job_titles": [
-      "Business Analyst (Cloud teams)",
       "Cloud Support Associate",
       "Cloud DBA",
       "Database Engineer",
@@ -1117,7 +1116,8 @@
       "Data Scientist (Production ML)",
       "MLOps Engineer",
       "Technical Account Manager",
-      "Cloud Sales Engineer"
+      "Cloud Sales Engineer",
+      "Business Analyst"
     ],
     "job_postings_count": 8000,
     "job_postings_source": "LinkedIn Jobs (2026)",
@@ -1181,10 +1181,10 @@
     "target_job_titles": [
       "AI Product Specialist",
       "GenAI Solutions Consultant",
-      "Business Analyst (AI-focused)",
       "Digital Transformation Associate",
       "Technical Account Manager",
-      "Cloud Sales Engineer"
+      "Cloud Sales Engineer",
+      "Business Analyst"
     ],
     "job_postings_count": 12000,
     "job_postings_source": "LinkedIn Jobs (2026)",
