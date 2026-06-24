@@ -92,7 +92,10 @@
       "Solutions Architect (SAP)",
       "Senior Cloud Architect",
       "Database Administrator (Cloud)",
-      "Database Architect"
+      "Database Architect",
+      "Cloud Database Engineer",
+      "Cloud Data Platform Engineer",
+      "BI Engineer (Cloud stack)"
     ],
     "job_postings_count": 50000,
     "job_postings_source": "LinkedIn Jobs (2026)",
@@ -183,7 +186,9 @@
       "Senior Cloud Architect",
       "Database Administrator (Cloud)",
       "Database Architect",
-      "Senior Cloud Security Engineer"
+      "Senior Cloud Security Engineer",
+      "Cloud Database Engineer",
+      "Cloud Data Platform Engineer"
     ],
     "job_postings_count": 45000,
     "job_postings_source": "LinkedIn Jobs (2026)",
@@ -1112,7 +1117,9 @@
       "Full Stack Cloud Developer",
       "Site Reliability Engineer (SRE)",
       "Cloud Engineer (Junior)",
-      "GCP Cloud Engineer"
+      "GCP Cloud Engineer",
+      "Data Scientist (Production ML)",
+      "MLOps Engineer"
     ],
     "job_postings_count": 8000,
     "job_postings_source": "LinkedIn Jobs (2026)",
