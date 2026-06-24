@@ -719,5 +719,252 @@
       "CCSP",
       "AWS Security Specialty (SCS-C02) (SCS-C02)"
     ]
+  },
+  {
+    "id": 204,
+    "name": "OSCP (Offensive Security Certified Professional)",
+    "provider": "OffSec",
+    "industry": "cybersecurity",
+    "subdomain": "offensive_security",
+    "difficulty": 4,
+    "description": "A grueling, 100% hands-on penetration testing certification. OSCP is the industry gold standard for offensive security professionals, proving practical ability to compromise network infrastructure.",
+    "official_url": "https://www.offsec.com/certifications/oscp/",
+    "cost": "$1,749",
+    "cost_source": "OffSec Official Course + Cert Bundle (2026)",
+    "duration_weeks": 12,
+    "study_hours": 300,
+    "exam_format": "Practical hacking lab (24 hours) + written report (24 hours)",
+    "exam_duration_minutes": 1440,
+    "passing_score": 70,
+    "passing_score_note": "70 points out of 100",
+    "pass_rate_percent": 35,
+    "pass_rate_source": "Industry estimate",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$0",
+    "salary_boost_low": 15000,
+    "salary_boost_high": 30000,
+    "salary_boost_source": "PayScale (estimated)",
+    "worth_it_rating": 9.8,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-01",
+    "skills": [
+      "Penetration testing",
+      "Exploit development",
+      "Vulnerability assessment",
+      "Active Directory exploitation",
+      "Privilege escalation",
+      "Bash/Python scripting"
+    ],
+    "primary_skills": [
+      "Penetration testing",
+      "Active Directory exploitation"
+    ],
+    "secondary_skills": [
+      "Exploit development",
+      "Privilege escalation"
+    ],
+    "prerequisites": [
+      "CEH (Certified Ethical Hacker)"
+    ],
+    "recommended_prior_knowledge": [
+      "Deep understanding of networking, Linux, and Windows internals"
+    ],
+    "target_job_titles": [
+      "Offensive Security Engineer",
+      "Security Researcher",
+      "Vulnerability Analyst",
+      "Penetration Tester"
+    ],
+    "job_postings_count": 18000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "OSEP (Offensive Security Experienced Penetration Tester)"
+    ]
+  },
+  {
+    "id": 205,
+    "name": "CISM (Certified Information Security Manager)",
+    "provider": "ISACA",
+    "industry": "cybersecurity",
+    "subdomain": "management",
+    "difficulty": 4,
+    "description": "A premier management-focused certification that validates expertise in information security governance, program development, and incident management.",
+    "official_url": "https://www.isaca.org/credentialing/cism",
+    "cost": "$760",
+    "cost_source": "ISACA Official (Non-member price, 2026)",
+    "duration_weeks": 8,
+    "study_hours": 120,
+    "exam_format": "Multiple choice, 150 questions",
+    "exam_duration_minutes": 240,
+    "passing_score": 450,
+    "passing_score_note": "Scale of 200-800",
+    "pass_rate_percent": 55,
+    "pass_rate_source": "Industry estimate",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$85",
+    "salary_boost_low": 12000,
+    "salary_boost_high": 25000,
+    "salary_boost_source": "PayScale (estimated)",
+    "worth_it_rating": 9.2,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-01",
+    "skills": [
+      "Information security governance",
+      "Risk management",
+      "Incident management",
+      "Program development",
+      "Security strategy"
+    ],
+    "primary_skills": [
+      "Information security governance",
+      "Risk management"
+    ],
+    "secondary_skills": [
+      "Incident management",
+      "Program development"
+    ],
+    "prerequisites": [
+      "CISSP (Certified Information Systems Security Professional)"
+    ],
+    "recommended_prior_knowledge": [
+      "5 years of information security work experience"
+    ],
+    "target_job_titles": [
+      "IT Director",
+      "Security Administrator",
+      "Information Security Manager",
+      "Chief Information Security Officer (CISO)"
+    ],
+    "job_postings_count": 22000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": []
+  },
+  {
+    "id": 206,
+    "name": "CompTIA CySA+ (Cybersecurity Analyst+)",
+    "provider": "CompTIA",
+    "industry": "cybersecurity",
+    "subdomain": "defense",
+    "difficulty": 3,
+    "description": "An intermediate-level certification focusing on continuous security monitoring, threat intelligence, and incident response. It is the perfect bridge between Security+ and advanced certifications.",
+    "official_url": "https://www.comptia.org/certifications/cybersecurity-analyst",
+    "cost": "$425",
+    "cost_source": "CompTIA Official (2026)",
+    "duration_weeks": 6,
+    "study_hours": 90,
+    "exam_format": "Multiple choice & performance-based, max 85 questions",
+    "exam_duration_minutes": 165,
+    "passing_score": 750,
+    "passing_score_note": "Scale of 100-900",
+    "pass_rate_percent": 65,
+    "pass_rate_source": "Industry estimate",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$150",
+    "salary_boost_low": 5000,
+    "salary_boost_high": 12000,
+    "salary_boost_source": "PayScale (estimated)",
+    "worth_it_rating": 8.5,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-01",
+    "skills": [
+      "Threat intelligence",
+      "Vulnerability management",
+      "Incident response",
+      "Security monitoring",
+      "Log analysis"
+    ],
+    "primary_skills": [
+      "Threat intelligence",
+      "Incident response"
+    ],
+    "secondary_skills": [
+      "Vulnerability management",
+      "Log analysis"
+    ],
+    "prerequisites": [
+      "CompTIA Security+ (SY0-701)"
+    ],
+    "recommended_prior_knowledge": [
+      "3-4 years of hands-on information security or related experience"
+    ],
+    "target_job_titles": [
+      "IT Security Analyst",
+      "Security Analyst",
+      "SOC Analyst",
+      "Incident Responder"
+    ],
+    "job_postings_count": 28000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "CompTIA CASP+",
+      "CISSP (Certified Information Systems Security Professional)"
+    ]
+  },
+  {
+    "id": 207,
+    "name": "CISA (Certified Information Systems Auditor)",
+    "provider": "ISACA",
+    "industry": "cybersecurity",
+    "subdomain": "audit_compliance",
+    "difficulty": 4,
+    "description": "The globally recognized gold standard for auditing, controlling, and assuring enterprise information technology and business systems.",
+    "official_url": "https://www.isaca.org/credentialing/cisa",
+    "cost": "$760",
+    "cost_source": "ISACA Official (Non-member price, 2026)",
+    "duration_weeks": 8,
+    "study_hours": 120,
+    "exam_format": "Multiple choice, 150 questions",
+    "exam_duration_minutes": 240,
+    "passing_score": 450,
+    "passing_score_note": "Scale of 200-800",
+    "pass_rate_percent": 50,
+    "pass_rate_source": "Industry estimate",
+    "valid_years": 3,
+    "renewal_required": true,
+    "renewal_cost": "$85",
+    "salary_boost_low": 10000,
+    "salary_boost_high": 22000,
+    "salary_boost_source": "PayScale (estimated)",
+    "worth_it_rating": 9,
+    "trending": true,
+    "data_confidence": "high",
+    "last_verified": "2026-06-01",
+    "skills": [
+      "IT auditing",
+      "Compliance",
+      "Risk management",
+      "IT governance",
+      "Business resilience"
+    ],
+    "primary_skills": [
+      "IT auditing",
+      "Compliance"
+    ],
+    "secondary_skills": [
+      "Risk management",
+      "IT governance"
+    ],
+    "prerequisites": [],
+    "recommended_prior_knowledge": [
+      "5 years of professional IS auditing, control, or security work experience"
+    ],
+    "target_job_titles": [
+      "IT Auditor",
+      "Compliance Analyst",
+      "Information Systems Auditor",
+      "Risk Analyst"
+    ],
+    "job_postings_count": 25000,
+    "job_postings_source": "LinkedIn Jobs (2026)",
+    "next_certs": [
+      "CISM (Certified Information Security Manager)",
+      "CRISC (Certified in Risk and Information Systems Control)"
+    ]
   }
 ]
