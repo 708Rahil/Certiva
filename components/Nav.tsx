@@ -69,6 +69,7 @@ export default function Nav() {
               borderRadius: 8,
               fontSize: 14,
               fontWeight: 600,
+              whiteSpace: 'nowrap',
               color: path === link.href ? 'var(--accent)' : 'var(--text-primary)',
               background: path === link.href ? 'var(--accent-dim)' : 'transparent',
               transition: 'all 0.15s',
