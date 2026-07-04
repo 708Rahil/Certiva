@@ -60,6 +60,8 @@ function RoadmapContent() {
   const [selectedRoleTitle, setSelectedRoleTitle] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [roleSearchQuery, setRoleSearchQuery] = useState<string>('');
+  const [isRoleDropdownOpen, setIsRoleDropdownOpen] = useState<boolean>(false);
 
   // Fetch roadmap data for a specific jobId or default
   const fetchRoadmapData = (jobId?: string) => {
@@ -102,11 +104,15 @@ function RoadmapContent() {
     fetchRoadmapData(val);
   };
 
-  // 1. Get all unique job titles for the selected industry under role-specific mode
+  // 1. Flatten all certifications across all industries
+  const allGenericCerts = useMemo(() => {
+    return Object.values(genericRoadmaps).flat();
+  }, [genericRoadmaps]);
+
+  // 2. Get all unique job titles across all industries
   const roleJobTitles = useMemo(() => {
-    const certs = genericRoadmaps[selectedIndustry] || [];
     const titles = new Set<string>();
-    certs.forEach(cert => {
+    allGenericCerts.forEach(cert => {
       if (Array.isArray(cert.target_job_titles)) {
         cert.target_job_titles.forEach((title: string) => {
           if (title && title.trim()) {
@@ -116,29 +122,33 @@ function RoadmapContent() {
       }
     });
     return Array.from(titles).sort();
-  }, [genericRoadmaps, selectedIndustry]);
+  }, [allGenericCerts]);
 
-  // Auto-select the first job title when industry changes or roleJobTitles updates
+  // Auto-select the first job title when it's empty
   useEffect(() => {
-    if (roleJobTitles.length > 0) {
-      if (!roleJobTitles.includes(selectedRoleTitle)) {
-        setSelectedRoleTitle(roleJobTitles[0]);
-      }
-    } else {
-      setSelectedRoleTitle('');
+    if (roleJobTitles.length > 0 && !selectedRoleTitle) {
+      const dataAnalyst = roleJobTitles.find(t => t.toLowerCase() === 'data analyst');
+      setSelectedRoleTitle(dataAnalyst || roleJobTitles[0]);
     }
   }, [roleJobTitles, selectedRoleTitle]);
 
-  // 2. Filter certifications for the selected role title
+  // Filter the dropdown list based on search query
+  const filteredRoleTitles = useMemo(() => {
+    if (!roleSearchQuery) return roleJobTitles.slice(0, 50); // limit to 50 for performance
+    return roleJobTitles.filter(t => t.toLowerCase().includes(roleSearchQuery.toLowerCase())).slice(0, 50);
+  }, [roleJobTitles, roleSearchQuery]);
+
+  // 3. Filter certifications for the selected role title
   const roleCerts = useMemo(() => {
     if (!selectedRoleTitle) return [];
-    const certs = genericRoadmaps[selectedIndustry] || [];
-    const filtered = certs.filter(cert => 
+    const filtered = allGenericCerts.filter(cert => 
       Array.isArray(cert.target_job_titles) && 
       cert.target_job_titles.some((t: string) => t.trim().toLowerCase() === selectedRoleTitle.trim().toLowerCase())
     );
-    return [...filtered].sort((a, b) => a.difficulty - b.difficulty);
-  }, [genericRoadmaps, selectedIndustry, selectedRoleTitle]);
+    // Deduplicate in case of cross-industry copies
+    const unique = Array.from(new Map(filtered.map(c => [c.id, c])).values());
+    return unique.sort((a, b) => a.difficulty - b.difficulty);
+  }, [allGenericCerts, selectedRoleTitle]);
 
   const roleStage1 = useMemo(() => roleCerts.filter(c => c.difficulty <= 2), [roleCerts]);
   const roleStage2 = useMemo(() => roleCerts.filter(c => c.difficulty === 3), [roleCerts]);
@@ -398,57 +408,60 @@ function RoadmapContent() {
         )}
 
         {/* Industry and Role Selectors for Career/Explore Tracks */}
+        {/* Industry and Role Selectors for Career/Explore Tracks */}
         {(mode === 'role-specific' || mode === 'generic') && (
           <div style={{
             display: 'flex',
             flexDirection: 'column',
             gap: 16,
           }}>
-            {/* Industry Selector Tabs */}
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 8,
-            }}>
-              <label style={{
-                fontSize: 12,
-                fontWeight: 600,
-                color: 'var(--text-secondary)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.05em'
-              }}>
-                Select Industry Domain
-              </label>
+            {/* Industry Selector Tabs (Only for Generic mode) */}
+            {mode === 'generic' && (
               <div style={{
                 display: 'flex',
-                flexWrap: 'wrap',
+                flexDirection: 'column',
                 gap: 8,
               }}>
-                {INDUSTRY_ORDER.map(ind => {
-                  const active = selectedIndustry === ind;
-                  return (
-                    <button
-                      key={ind}
-                      onClick={() => setSelectedIndustry(ind)}
-                      style={{
-                        padding: '6px 14px',
-                        borderRadius: 20,
-                        border: '1px solid var(--border)',
-                        background: active ? 'var(--accent-dim)' : 'var(--bg-secondary)',
-                        color: active ? 'var(--accent-light)' : 'var(--text-secondary)',
-                        fontSize: 13,
-                        fontWeight: 600,
-                        cursor: 'pointer',
-                        transition: 'all 0.15s ease',
-                        borderColor: active ? 'var(--accent-light)' : 'var(--border)',
-                      }}
-                    >
-                      {INDUSTRY_LABELS[ind] || ind}
-                    </button>
-                  );
-                })}
+                <label style={{
+                  fontSize: 12,
+                  fontWeight: 600,
+                  color: 'var(--text-secondary)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em'
+                }}>
+                  Select Industry Domain
+                </label>
+                <div style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: 8,
+                }}>
+                  {INDUSTRY_ORDER.map(ind => {
+                    const active = selectedIndustry === ind;
+                    return (
+                      <button
+                        key={ind}
+                        onClick={() => setSelectedIndustry(ind)}
+                        style={{
+                          padding: '6px 14px',
+                          borderRadius: 20,
+                          border: '1px solid var(--border)',
+                          background: active ? 'var(--accent-dim)' : 'var(--bg-secondary)',
+                          color: active ? 'var(--accent-light)' : 'var(--text-secondary)',
+                          fontSize: 13,
+                          fontWeight: 600,
+                          cursor: 'pointer',
+                          transition: 'all 0.15s ease',
+                          borderColor: active ? 'var(--accent-light)' : 'var(--border)',
+                        }}
+                      >
+                        {INDUSTRY_LABELS[ind] || ind}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Role Title Selector for Career Tracks */}
             {mode === 'role-specific' && (
@@ -465,12 +478,21 @@ function RoadmapContent() {
                   textTransform: 'uppercase',
                   letterSpacing: '0.05em'
                 }}>
-                  Select Career Track Role
+                  Search Career Track Role
                 </label>
                 <div style={{ position: 'relative' }}>
-                  <select
-                    value={selectedRoleTitle}
-                    onChange={(e) => setSelectedRoleTitle(e.target.value)}
+                  <input
+                    type="text"
+                    placeholder="Search role (e.g. Data Analyst)..."
+                    value={isRoleDropdownOpen ? roleSearchQuery : selectedRoleTitle}
+                    onFocus={() => {
+                      setIsRoleDropdownOpen(true);
+                      setRoleSearchQuery('');
+                    }}
+                    onBlur={() => {
+                      setTimeout(() => setIsRoleDropdownOpen(false), 200);
+                    }}
+                    onChange={(e) => setRoleSearchQuery(e.target.value)}
                     style={{
                       width: '100%',
                       padding: '12px 16px',
@@ -480,27 +502,54 @@ function RoadmapContent() {
                       color: 'var(--text-primary)',
                       fontSize: 15,
                       fontWeight: 500,
-                      cursor: 'pointer',
                       outline: 'none',
-                      appearance: 'none',
+                      transition: 'border-color 0.2s',
                     }}
-                  >
-                    {roleJobTitles.map(title => (
-                      <option key={title} value={title}>
-                        {title}
-                      </option>
-                    ))}
-                  </select>
-                  <div style={{
-                    position: 'absolute',
-                    right: 14,
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    pointerEvents: 'none',
-                    color: 'var(--text-secondary)',
-                  }}>
-                    ▼
-                  </div>
+                  />
+                  {isRoleDropdownOpen && (
+                    <div style={{
+                      position: 'absolute',
+                      top: '100%',
+                      left: 0,
+                      right: 0,
+                      marginTop: 8,
+                      background: 'var(--bg-card)',
+                      border: '1px solid var(--border)',
+                      borderRadius: 10,
+                      maxHeight: 300,
+                      overflowY: 'auto',
+                      zIndex: 10,
+                      boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+                    }}>
+                      {filteredRoleTitles.length === 0 ? (
+                        <div style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: 14 }}>
+                          No roles found
+                        </div>
+                      ) : (
+                        filteredRoleTitles.map(title => (
+                          <div
+                            key={title}
+                            onMouseDown={() => {
+                              setSelectedRoleTitle(title);
+                              setIsRoleDropdownOpen(false);
+                            }}
+                            style={{
+                              padding: '12px 16px',
+                              cursor: 'pointer',
+                              color: 'var(--text-primary)',
+                              fontSize: 14,
+                              borderBottom: '1px solid var(--border)',
+                              background: 'transparent',
+                            }}
+                            onMouseOver={(e) => e.currentTarget.style.background = 'var(--bg-secondary)'}
+                            onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}
+                          >
+                            {title}
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             )}
@@ -729,9 +778,6 @@ function RoadmapContent() {
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
               <span style={{ fontSize: 24, fontWeight: 800, color: 'var(--text-primary)' }}>
                 {selectedRoleTitle || 'Select a Job Title'}
-              </span>
-              <span style={{ fontSize: 14, color: 'var(--text-secondary)' }}>
-                in {INDUSTRY_LABELS[selectedIndustry] || selectedIndustry}
               </span>
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginTop: 4 }}>
