@@ -3,7 +3,7 @@
 import { useEffect, useState, useMemo, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { Award, Briefcase, ChevronRight, CheckCircle, Clock, BookOpen, AlertCircle, Sparkles, Map } from 'lucide-react';
+import { Award, Briefcase, ChevronRight, CheckCircle, Clock, BookOpen, AlertCircle, Sparkles, Map as MapIcon } from 'lucide-react';
 import { getSlug } from '@/lib/slug';
 import AddCertButton from '@/components/AddCertButton';
 
@@ -69,7 +69,7 @@ function RoadmapContent() {
     setLoading(true);
     setError(null);
     const url = jobId ? `/api/roadmap?jobId=${jobId}` : '/api/roadmap';
-    
+
     fetch(url)
       .then(res => res.json())
       .then(result => {
@@ -141,13 +141,13 @@ function RoadmapContent() {
   // 3. Filter certifications for the selected role title
   const roleCerts = useMemo(() => {
     if (!selectedRoleTitle) return [];
-    const filtered = allGenericCerts.filter(cert => 
-      Array.isArray(cert.target_job_titles) && 
+    const filtered = allGenericCerts.filter(cert =>
+      Array.isArray(cert.target_job_titles) &&
       cert.target_job_titles.some((t: string) => t.trim().toLowerCase() === selectedRoleTitle.trim().toLowerCase())
     );
     // Deduplicate in case of cross-industry copies
-    const unique = Array.from(new Map(filtered.map(c => [c.id, c])).values());
-    return unique.sort((a, b) => a.difficulty - b.difficulty);
+    const unique = Array.from(new Map(filtered.map((c: any) => [c.id, c as Cert])).values()) as Cert[];
+    return unique.sort((a: Cert, b: Cert) => a.difficulty - b.difficulty);
   }, [allGenericCerts, selectedRoleTitle]);
 
   const roleStage1 = useMemo(() => roleCerts.filter(c => c.difficulty <= 2), [roleCerts]);
@@ -188,7 +188,7 @@ function RoadmapContent() {
           <p style={{ color: 'var(--text-secondary)', fontSize: 15, lineHeight: 1.6, maxWidth: 460, margin: '0 auto 28px' }}>
             Sign in to analyze your saved jobs, generate customized certification pathways, track your certification progress, and map out your next career moves.
           </p>
-          <a 
+          <a
             href="/sign-in?redirect_url=/roadmap"
             style={{
               display: 'inline-block',
@@ -221,7 +221,7 @@ function RoadmapContent() {
           <h2 style={{ fontSize: 20, fontWeight: 600 }}>Error Loading Roadmap</h2>
         </div>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 24 }}>{error}</p>
-        <button 
+        <button
           onClick={() => fetchRoadmapData()}
           style={{
             padding: '10px 20px',
@@ -300,7 +300,7 @@ function RoadmapContent() {
               fontSize: 15,
               color: 'var(--text-secondary)',
             }}>
-              {mode === 'job-specific' 
+              {mode === 'job-specific'
                 ? 'Your customized step-by-step pathways built dynamically based on your saved jobs and skill gaps.'
                 : mode === 'role-specific'
                   ? 'Explore step-by-step paths mapped directly to popular career tracks in the industry.'
@@ -322,7 +322,7 @@ function RoadmapContent() {
         }}>
           {[
             { id: 'job-specific', label: 'Job-Specific Path', icon: <Briefcase size={16} /> },
-            { id: 'role-specific', label: 'Career Tracks', icon: <Map size={16} /> },
+            { id: 'role-specific', label: 'Career Tracks', icon: <MapIcon size={16} /> },
             { id: 'generic', label: 'Explore Paths', icon: <Sparkles size={16} /> }
           ].map(tab => {
             const active = mode === tab.id;
@@ -560,205 +560,205 @@ function RoadmapContent() {
       {/* JOB-SPECIFIC ROADMAP VIEW */}
       {mode === 'job-specific' && (
         showEmptyJobs ? (
-        <div style={{
-          maxWidth: 800,
-          margin: '40px auto',
-          padding: '40px 24px',
-          textAlign: 'center',
-          background: 'var(--bg-secondary)',
-          borderRadius: 16,
-          border: '1px solid var(--border)',
-        }}>
-          <Briefcase size={48} style={{ color: 'var(--text-secondary)', marginBottom: 16, opacity: 0.7 }} />
-          <h2 style={{ fontSize: 22, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 12 }}>
-            No Jobs Saved Yet
-          </h2>
-          <p style={{ color: 'var(--text-secondary)', fontSize: 15, maxWidth: 500, margin: '0 auto 24px' }}>
-            We build customized certification pathways based on specific job listings. Go to the jobs page, add a job description, and we'll analyze it to map out your roadmap!
-          </p>
-          <a 
-            href="/jobs"
-            style={{
-              display: 'inline-block',
-              padding: '12px 24px',
-              background: 'var(--accent)',
-              color: '#fff',
-              borderRadius: 8,
-              textDecoration: 'none',
-              fontWeight: 600,
-              transition: 'background 0.2s',
-            }}
-          >
-            Add a Job Posting
-          </a>
-        </div>
-      ) : (
-        <>
-          {/* Pathway Summary Dashboard */}
           <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: 16,
-            marginBottom: 40,
+            maxWidth: 800,
+            margin: '40px auto',
+            padding: '40px 24px',
+            textAlign: 'center',
+            background: 'var(--bg-secondary)',
+            borderRadius: 16,
+            border: '1px solid var(--border)',
           }}>
-            <div style={{
-              background: 'var(--bg-secondary)',
-              borderRadius: 12,
-              padding: 20,
-              border: '1px solid var(--border)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 6
-            }}>
-              <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Skill Coverage</span>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-                <span style={{ fontSize: 28, fontWeight: 800, color: 'var(--text-primary)' }}>
-                  {totalSkillsCount > 0 ? Math.round((coveredSkillsCount / totalSkillsCount) * 100) : 0}%
-                </span>
-                <span style={{ fontSize: 14, color: 'var(--text-secondary)' }}>
-                  ({coveredSkillsCount}/{totalSkillsCount} skills)
-                </span>
-              </div>
-              <div style={{ width: '100%', height: 6, background: 'rgba(255,255,255,0.06)', borderRadius: 3, overflow: 'hidden', marginTop: 4 }}>
-                <div style={{ 
-                  width: `${totalSkillsCount > 0 ? (coveredSkillsCount / totalSkillsCount) * 100 : 0}%`, 
-                  height: '100%', 
-                  background: 'var(--accent)', 
-                  borderRadius: 3 
-                }} />
-              </div>
-            </div>
-
-            <div style={{
-              background: 'var(--bg-secondary)',
-              borderRadius: 12,
-              padding: 20,
-              border: '1px solid var(--border)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 6
-            }}>
-              <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Completed / In Progress</span>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-                <span style={{ fontSize: 28, fontWeight: 800, color: '#10b981' }}>
-                  {recommendations.filter(r => r.userStatus === 'completed').length}
-                </span>
-                <span style={{ fontSize: 14, color: 'var(--text-secondary)' }}>done</span>
-                <span style={{ fontSize: 20, fontWeight: 600, color: '#f59e0b', marginLeft: 8 }}>
-                  {recommendations.filter(r => r.userStatus === 'in-progress').length}
-                </span>
-                <span style={{ fontSize: 14, color: 'var(--text-secondary)' }}>started</span>
-              </div>
-            </div>
-
-            <div style={{
-              background: 'var(--bg-secondary)',
-              borderRadius: 12,
-              padding: 20,
-              border: '1px solid var(--border)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 6
-            }}>
-              <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Certifications Suggested</span>
-              <span style={{ fontSize: 28, fontWeight: 800, color: 'var(--text-primary)' }}>
-                {recommendations.length}
-              </span>
-            </div>
+            <Briefcase size={48} style={{ color: 'var(--text-secondary)', marginBottom: 16, opacity: 0.7 }} />
+            <h2 style={{ fontSize: 22, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 12 }}>
+              No Jobs Saved Yet
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: 15, maxWidth: 500, margin: '0 auto 24px' }}>
+              We build customized certification pathways based on specific job listings. Go to the jobs page, add a job description, and we'll analyze it to map out your roadmap!
+            </p>
+            <a
+              href="/jobs"
+              style={{
+                display: 'inline-block',
+                padding: '12px 24px',
+                background: 'var(--accent)',
+                color: '#fff',
+                borderRadius: 8,
+                textDecoration: 'none',
+                fontWeight: 600,
+                transition: 'background 0.2s',
+              }}
+            >
+              Add a Job Posting
+            </a>
           </div>
-
-          {/* Sequential Timeline Pathway */}
-          <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 24 }}>
-            Sequenced Roadmap Steps
-          </h2>
-
-          {recommendations.length === 0 ? (
+        ) : (
+          <>
+            {/* Pathway Summary Dashboard */}
             <div style={{
-              background: 'var(--bg-secondary)',
-              borderRadius: 12,
-              padding: 40,
-              textAlign: 'center',
-              color: 'var(--text-secondary)',
-              border: '1px solid var(--border)'
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gap: 16,
+              marginBottom: 40,
             }}>
-              No recommended certifications map directly to this job description.
-            </div>
-          ) : (
-            <div style={{ position: 'relative', paddingLeft: 32 }}>
               <div style={{
-                position: 'absolute',
-                left: 11,
-                top: 16,
-                bottom: 16,
-                width: 2,
-                background: 'linear-gradient(to bottom, var(--accent) 60%, var(--border))',
-              }} />
-
-              {/* DYNAMIC STAGES TIMELINE */}
-              {[
-                {
-                  title: "Foundational Credentials",
-                  subtitle: "Build fundamental domain and tool familiarity",
-                  certs: jobStage1
-                },
-                {
-                  title: "Associate Certifications",
-                  subtitle: "Demonstrate capability in standard frameworks and core tasks",
-                  certs: jobStage2
-                },
-                {
-                  title: "Advanced & Specialist Expertise",
-                  subtitle: "Establish advanced authority, architectural competence, or direct alignment",
-                  certs: jobStage3
-                }
-              ]
-                .filter(stage => stage.certs.length > 0)
-                .map((stage, index) => (
-                  <TimelineStage 
-                    key={index}
-                    title={`Step ${index + 1}: ${stage.title}`} 
-                    subtitle={stage.subtitle} 
-                    stepNumber={(index + 1).toString()} 
-                    certs={stage.certs} 
-                  />
-                ))
-              }
-            </div>
-          )}
-
-          {/* Remaining Gaps */}
-          {missingSkills.length > 0 && (
-            <div style={{
-              marginTop: 48,
-              background: 'rgba(255,255,255,0.02)',
-              border: '1px dashed var(--border)',
-              borderRadius: 16,
-              padding: 24,
-            }}>
-              <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 8 }}>
-                💡 Additional Skills Needed
-              </h3>
-              <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 16 }}>
-                These required skills are best verified through projects, experience, or specialized study rather than standard certifications:
-              </p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                {missingSkills.map((skill, index) => (
-                  <span key={index} style={{
-                    background: 'rgba(255,255,255,0.04)',
-                    color: 'var(--text-secondary)',
-                    fontSize: 12,
-                    fontWeight: 500,
-                    padding: '4px 10px',
-                    borderRadius: 6,
-                  }}>
-                    {skill}
+                background: 'var(--bg-secondary)',
+                borderRadius: 12,
+                padding: 20,
+                border: '1px solid var(--border)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 6
+              }}>
+                <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Skill Coverage</span>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+                  <span style={{ fontSize: 28, fontWeight: 800, color: 'var(--text-primary)' }}>
+                    {totalSkillsCount > 0 ? Math.round((coveredSkillsCount / totalSkillsCount) * 100) : 0}%
                   </span>
-                ))}
+                  <span style={{ fontSize: 14, color: 'var(--text-secondary)' }}>
+                    ({coveredSkillsCount}/{totalSkillsCount} skills)
+                  </span>
+                </div>
+                <div style={{ width: '100%', height: 6, background: 'rgba(255,255,255,0.06)', borderRadius: 3, overflow: 'hidden', marginTop: 4 }}>
+                  <div style={{
+                    width: `${totalSkillsCount > 0 ? (coveredSkillsCount / totalSkillsCount) * 100 : 0}%`,
+                    height: '100%',
+                    background: 'var(--accent)',
+                    borderRadius: 3
+                  }} />
+                </div>
+              </div>
+
+              <div style={{
+                background: 'var(--bg-secondary)',
+                borderRadius: 12,
+                padding: 20,
+                border: '1px solid var(--border)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 6
+              }}>
+                <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Completed / In Progress</span>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+                  <span style={{ fontSize: 28, fontWeight: 800, color: '#10b981' }}>
+                    {recommendations.filter(r => r.userStatus === 'completed').length}
+                  </span>
+                  <span style={{ fontSize: 14, color: 'var(--text-secondary)' }}>done</span>
+                  <span style={{ fontSize: 20, fontWeight: 600, color: '#f59e0b', marginLeft: 8 }}>
+                    {recommendations.filter(r => r.userStatus === 'in-progress').length}
+                  </span>
+                  <span style={{ fontSize: 14, color: 'var(--text-secondary)' }}>started</span>
+                </div>
+              </div>
+
+              <div style={{
+                background: 'var(--bg-secondary)',
+                borderRadius: 12,
+                padding: 20,
+                border: '1px solid var(--border)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 6
+              }}>
+                <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Certifications Suggested</span>
+                <span style={{ fontSize: 28, fontWeight: 800, color: 'var(--text-primary)' }}>
+                  {recommendations.length}
+                </span>
               </div>
             </div>
-          )}
-        </>
-      )
+
+            {/* Sequential Timeline Pathway */}
+            <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 24 }}>
+              Sequenced Roadmap Steps
+            </h2>
+
+            {recommendations.length === 0 ? (
+              <div style={{
+                background: 'var(--bg-secondary)',
+                borderRadius: 12,
+                padding: 40,
+                textAlign: 'center',
+                color: 'var(--text-secondary)',
+                border: '1px solid var(--border)'
+              }}>
+                No recommended certifications map directly to this job description.
+              </div>
+            ) : (
+              <div style={{ position: 'relative', paddingLeft: 32 }}>
+                <div style={{
+                  position: 'absolute',
+                  left: 11,
+                  top: 16,
+                  bottom: 16,
+                  width: 2,
+                  background: 'linear-gradient(to bottom, var(--accent) 60%, var(--border))',
+                }} />
+
+                {/* DYNAMIC STAGES TIMELINE */}
+                {[
+                  {
+                    title: "Foundational Credentials",
+                    subtitle: "Build fundamental domain and tool familiarity",
+                    certs: jobStage1
+                  },
+                  {
+                    title: "Associate Certifications",
+                    subtitle: "Demonstrate capability in standard frameworks and core tasks",
+                    certs: jobStage2
+                  },
+                  {
+                    title: "Advanced & Specialist Expertise",
+                    subtitle: "Establish advanced authority, architectural competence, or direct alignment",
+                    certs: jobStage3
+                  }
+                ]
+                  .filter(stage => stage.certs.length > 0)
+                  .map((stage, index) => (
+                    <TimelineStage
+                      key={index}
+                      title={`Step ${index + 1}: ${stage.title}`}
+                      subtitle={stage.subtitle}
+                      stepNumber={(index + 1).toString()}
+                      certs={stage.certs}
+                    />
+                  ))
+                }
+              </div>
+            )}
+
+            {/* Remaining Gaps */}
+            {missingSkills.length > 0 && (
+              <div style={{
+                marginTop: 48,
+                background: 'rgba(255,255,255,0.02)',
+                border: '1px dashed var(--border)',
+                borderRadius: 16,
+                padding: 24,
+              }}>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 8 }}>
+                  💡 Additional Skills Needed
+                </h3>
+                <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 16 }}>
+                  These required skills are best verified through projects, experience, or specialized study rather than standard certifications:
+                </p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                  {missingSkills.map((skill, index) => (
+                    <span key={index} style={{
+                      background: 'rgba(255,255,255,0.04)',
+                      color: 'var(--text-secondary)',
+                      fontSize: 12,
+                      fontWeight: 500,
+                      padding: '4px 10px',
+                      borderRadius: 6,
+                    }}>
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </>
+        )
       )}
 
       {/* ROLE-SPECIFIC ROADMAP MODE */}
@@ -832,12 +832,12 @@ function RoadmapContent() {
               ]
                 .filter(stage => stage.certs.length > 0)
                 .map((stage, index) => (
-                  <TimelineStage 
+                  <TimelineStage
                     key={index}
-                    title={`Step ${index + 1}: ${stage.title}`} 
-                    subtitle={stage.subtitle} 
-                    stepNumber={(index + 1).toString()} 
-                    certs={stage.certs} 
+                    title={`Step ${index + 1}: ${stage.title}`}
+                    subtitle={stage.subtitle}
+                    stepNumber={(index + 1).toString()}
+                    certs={stage.certs}
                   />
                 ))
               }
@@ -972,16 +972,16 @@ function RoadmapContent() {
 }
 
 // Stage grouping component
-function TimelineStage({ 
-  title, 
-  subtitle, 
-  stepNumber, 
-  certs 
-}: { 
-  title: string; 
-  subtitle: string; 
-  stepNumber: string; 
-  certs: Cert[] 
+function TimelineStage({
+  title,
+  subtitle,
+  stepNumber,
+  certs
+}: {
+  title: string;
+  subtitle: string;
+  stepNumber: string;
+  certs: Cert[]
 }) {
   return (
     <div style={{ marginBottom: 44, position: 'relative' }}>
@@ -1039,7 +1039,7 @@ function CertCard({ cert }: { cert: Cert }) {
       } else {
         setCheckedParts([]);
       }
-    } catch {}
+    } catch { }
   };
 
   useEffect(() => {
@@ -1084,7 +1084,7 @@ function CertCard({ cert }: { cert: Cert }) {
     try {
       localStorage.setItem(storageKey, JSON.stringify(updated));
       window.dispatchEvent(new Event('exam-parts-updated'));
-    } catch {}
+    } catch { }
   };
 
   const getStatusBadge = (status?: string) => {
@@ -1117,9 +1117,9 @@ function CertCard({ cert }: { cert: Cert }) {
             </h4>
             {getStatusBadge(cert.userStatus)}
           </div>
-          <span style={{ 
-            fontSize: 12, 
-            fontWeight: 600, 
+          <span style={{
+            fontSize: 12,
+            fontWeight: 600,
             color: cert.providerColor || 'var(--text-secondary)',
             letterSpacing: '0.025em'
           }}>
@@ -1241,11 +1241,11 @@ function CertCard({ cert }: { cert: Cert }) {
                     </span>
                   )}
                 </div>
-                
+
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                   {normalizedParts.map(part => {
                     const isChecked = isSaved && checkedParts.includes(part.name);
-                    
+
                     if (!isSaved) {
                       // Read-only style (not saved)
                       return (
@@ -1344,7 +1344,7 @@ function CertCard({ cert }: { cert: Cert }) {
       {/* Alternative Paths Expander */}
       {cert.alternatives && cert.alternatives.length > 0 && (
         <div style={{ borderTop: '1px solid rgba(255,255,255,0.04)', paddingTop: 14 }}>
-          <button 
+          <button
             onClick={() => setShowAlts(!showAlts)}
             style={{
               background: 'none',
