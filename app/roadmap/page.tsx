@@ -124,13 +124,7 @@ function RoadmapContent() {
     return Array.from(titles).sort();
   }, [allGenericCerts]);
 
-  // Auto-select the first job title when it's empty
-  useEffect(() => {
-    if (roleJobTitles.length > 0 && !selectedRoleTitle) {
-      const dataAnalyst = roleJobTitles.find(t => t.toLowerCase() === 'data analyst');
-      setSelectedRoleTitle(dataAnalyst || roleJobTitles[0]);
-    }
-  }, [roleJobTitles, selectedRoleTitle]);
+  // No longer auto-selecting a job title by default.
 
   // Filter the dropdown list based on search query
   const filteredRoleTitles = useMemo(() => {
@@ -763,6 +757,25 @@ function RoadmapContent() {
 
       {/* ROLE-SPECIFIC ROADMAP MODE */}
       {mode === 'role-specific' && (
+        !selectedRoleTitle ? (
+          <div style={{
+            maxWidth: 800,
+            margin: '40px auto',
+            padding: '40px 24px',
+            textAlign: 'center',
+            background: 'var(--bg-secondary)',
+            borderRadius: 16,
+            border: '1px solid var(--border)',
+          }}>
+            <MapIcon size={48} style={{ color: 'var(--text-secondary)', marginBottom: 16, opacity: 0.7, margin: '0 auto' }} />
+            <h2 style={{ fontSize: 22, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 12 }}>
+              Type in a job to view the roadmap
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: 15, maxWidth: 500, margin: '0 auto' }}>
+              Search and select a career track above to explore its tailored certification path.
+            </p>
+          </div>
+        ) : (
         <>
           <div style={{
             background: 'var(--bg-secondary)',
@@ -844,6 +857,7 @@ function RoadmapContent() {
             </div>
           )}
         </>
+        )
       )}
 
       {/* GENERIC ROADMAP MODE */}
