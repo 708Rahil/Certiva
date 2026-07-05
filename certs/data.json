@@ -285,9 +285,8 @@
     ],
     "target_job_titles": [
       "Data Scientist",
-      "ML Engineer",
-      "Analytics Engineer",
       "Machine Learning Engineer",
+      "Analytics Engineer",
       "AI Specialist",
       "Research Scientist"
     ],
@@ -662,7 +661,7 @@
       "AWS core services"
     ],
     "target_job_titles": [
-      "Data Engineer (Junior)",
+      "Data Engineer",
       "Analytics Engineer",
       "Cloud Data Platform Engineer",
       "ETL Developer",
@@ -737,11 +736,11 @@
       "AWS core services"
     ],
     "target_job_titles": [
-      "Machine Learning Engineer (Junior)",
+      "Machine Learning Engineer",
       "Applied ML Engineer",
-      "AI Engineer (Entry)",
+      "AI Engineer",
       "Data Scientist (Cloud-focused)",
-      "MLOps Engineer (Junior)"
+      "MLOps Engineer"
     ],
     "job_postings_count": 24000,
     "job_postings_source": "LinkedIn Jobs (2026)",
@@ -879,10 +878,10 @@
       "data fundamentals"
     ],
     "target_job_titles": [
-      "Data Analyst (Cloud tools)",
-      "Junior Data Engineer",
+      "Data Analyst",
+      "Data Engineer",
       "BI Analyst",
-      "Analytics Engineer (Entry)",
+      "Analytics Engineer",
       "Reporting Analyst",
       "Data Scientist (Production ML)",
       "MLOps Engineer"
@@ -1119,7 +1118,6 @@
     ],
     "target_job_titles": [
       "Data Scientist",
-      "ML Engineer",
       "Machine Learning Engineer",
       "Azure ML Engineer",
       "AI Engineer",
@@ -1277,8 +1275,7 @@
       "Azure Data Engineer",
       "Data Engineer",
       "Business Intelligence Analyst",
-      "Database Administrator",
-      "Junior Data Engineer"
+      "Database Administrator"
     ],
     "job_postings_count": 22000,
     "job_postings_source": "LinkedIn Jobs (2026)",

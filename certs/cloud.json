@@ -59,7 +59,6 @@
       "AWS Developer",
       "Solutions Architect",
       "Cloud Support Associate",
-      "Junior Cloud Engineer",
       "Software Developer",
       "Software Engineer",
       "Cloud Solutions Architect",
@@ -73,17 +72,15 @@
       "Network Architect (Cloud)",
       "Enterprise Network Architect",
       "Cloud Data Engineer",
-      "Data Engineer (Junior)",
+      "Data Engineer",
       "ETL Developer",
       "Machine Learning Engineer",
       "AI and Machine Learning Software Developer",
       "AI Software Developer",
-      "Junior ML Engineer",
-      "AI Engineer (Entry)",
+      "AI Engineer",
       "Applied ML Engineer",
       "Data Scientist (Cloud-focused)",
-      "Machine Learning Engineer (Junior)",
-      "MLOps Engineer (Junior)",
+      "MLOps Engineer",
       "SAP Cloud Consultant",
       "Enterprise Cloud Architect (SAP workloads)",
       "SAP Infrastructure Engineer",
@@ -334,7 +331,6 @@
       "Azure Developer",
       "Systems Administrator",
       "Cloud Support Associate",
-      "Junior Cloud Engineer",
       "Software Developer",
       "Software Engineer",
       "Azure DevOps Engineer",
@@ -438,8 +434,7 @@
       "Data Systems Engineer",
       "Serverless Developer",
       "Backend Engineer (GCP)",
-      "Full Stack Cloud Developer",
-      "Site Reliability Engineer (SRE)"
+      "Full Stack Cloud Developer"
     ],
     "job_postings_count": 30000,
     "job_postings_source": "LinkedIn Jobs (2026)",
@@ -816,7 +811,7 @@
       "Cloud Administrator",
       "Systems Administrator (Cloud)",
       "DevOps Engineer",
-      "Site Reliability Engineer (Junior)",
+      "Site Reliability Engineer",
       "Cloud Operations Engineer",
       "Cloud DevOps Engineer"
     ],
@@ -1110,8 +1105,8 @@
       "Serverless Developer",
       "Backend Engineer (GCP)",
       "Full Stack Cloud Developer",
-      "Site Reliability Engineer (SRE)",
-      "Cloud Engineer (Junior)",
+      "Site Reliability Engineer",
+      "Cloud Engineer",
       "GCP Cloud Engineer",
       "Data Scientist (Production ML)",
       "MLOps Engineer",
@@ -1251,10 +1246,10 @@
       "command line experience"
     ],
     "target_job_titles": [
-      "Cloud Engineer (Junior)",
+      "Cloud Engineer",
       "DevOps Engineer",
       "Systems Administrator (Cloud)",
-      "Site Reliability Engineer (Junior)",
+      "Site Reliability Engineer",
       "Infrastructure Engineer"
     ],
     "job_postings_count": 28000,
@@ -1533,7 +1528,7 @@
     ],
     "target_job_titles": [
       "DevOps Engineer",
-      "Site Reliability Engineer (SRE)",
+      "Site Reliability Engineer",
       "Platform Engineer",
       "Infrastructure Engineer",
       "Release Engineer"
@@ -1606,7 +1601,7 @@
       "Network Architect",
       "Infrastructure Engineer (Networking focus)",
       "Telecom Cloud Engineer",
-      "Site Reliability Engineer (Network-heavy teams)"
+      "Site Reliability Engineer"
     ],
     "job_postings_count": 16000,
     "job_postings_source": "LinkedIn Jobs (2026)",
