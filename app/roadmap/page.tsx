@@ -49,6 +49,7 @@ function RoadmapContent() {
   const searchParams = useSearchParams();
   const urlJobId = searchParams.get('jobId');
 
+  const [loading, setLoading] = useState(true);
   const [mode, setMode] = useState<'job-specific' | 'generic'>('job-specific');
   const [jobs, setJobs] = useState<Job[]>([]);
   const [selectedJobId, setSelectedJobId] = useState<string>(urlJobId || '');
@@ -295,9 +296,7 @@ function RoadmapContent() {
             }}>
               {mode === 'job-specific'
                 ? 'Your customized step-by-step pathways built dynamically based on your saved jobs and skill gaps.'
-                : mode === 'role-specific'
-                  ? 'Explore step-by-step paths mapped directly to popular career tracks in the industry.'
-                  : 'Find out what certifications are recommended next steps after completing a credential.'}
+                : 'Find out what certifications are recommended next steps after completing a credential.'}
             </p>
           </div>
         </div>
