@@ -49,8 +49,7 @@ function RoadmapContent() {
   const searchParams = useSearchParams();
   const urlJobId = searchParams.get('jobId');
 
-  const [loading, setLoading] = useState(true);
-  const [mode, setMode] = useState<'job-specific' | 'role-specific' | 'generic'>('job-specific');
+  const [mode, setMode] = useState<'job-specific' | 'generic'>('job-specific');
   const [jobs, setJobs] = useState<Job[]>([]);
   const [selectedJobId, setSelectedJobId] = useState<string>(urlJobId || '');
   const [selectedJob, setSelectedJob] = useState<any>(null);
@@ -316,8 +315,7 @@ function RoadmapContent() {
         }}>
           {[
             { id: 'job-specific', label: 'Job-Specific Path', icon: <Briefcase size={16} /> },
-            { id: 'role-specific', label: 'Career Tracks', icon: <MapIcon size={16} /> },
-            { id: 'generic', label: 'Explore Paths', icon: <Sparkles size={16} /> }
+            { id: 'generic', label: 'Certification Path', icon: <Sparkles size={16} /> }
           ].map(tab => {
             const active = mode === tab.id;
             return (
@@ -402,17 +400,16 @@ function RoadmapContent() {
         )}
 
         {/* Industry and Role Selectors for Career/Explore Tracks */}
-        {/* Industry and Role Selectors for Career/Explore Tracks */}
-        {(mode === 'role-specific' || mode === 'generic') && (
+        {/* Industry Selectors for Certification Path */}
+        {mode === 'generic' && (
           <div style={{
             display: 'flex',
             flexDirection: 'column',
             gap: 16,
           }}>
-            {/* Industry Selector Tabs (Only for Generic mode) */}
-            {mode === 'generic' && (
-              <div style={{
-                display: 'flex',
+            {/* Industry Selector Tabs */}
+            <div style={{
+              display: 'flex',
                 flexDirection: 'column',
                 gap: 8,
               }}>
@@ -455,98 +452,6 @@ function RoadmapContent() {
                   })}
                 </div>
               </div>
-            )}
-
-            {/* Role Title Selector for Career Tracks */}
-            {mode === 'role-specific' && (
-              <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 8,
-                maxWidth: 480,
-              }}>
-                <label style={{
-                  fontSize: 12,
-                  fontWeight: 600,
-                  color: 'var(--text-secondary)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em'
-                }}>
-                  Search Career Track Role
-                </label>
-                <div style={{ position: 'relative' }}>
-                  <input
-                    type="text"
-                    placeholder="Search role (e.g. Data Analyst)..."
-                    value={isRoleDropdownOpen ? roleSearchQuery : selectedRoleTitle}
-                    onFocus={() => {
-                      setIsRoleDropdownOpen(true);
-                      setRoleSearchQuery('');
-                    }}
-                    onBlur={() => {
-                      setTimeout(() => setIsRoleDropdownOpen(false), 200);
-                    }}
-                    onChange={(e) => setRoleSearchQuery(e.target.value)}
-                    style={{
-                      width: '100%',
-                      padding: '12px 16px',
-                      borderRadius: 10,
-                      border: '1px solid var(--border)',
-                      background: 'var(--bg-secondary)',
-                      color: 'var(--text-primary)',
-                      fontSize: 15,
-                      fontWeight: 500,
-                      outline: 'none',
-                      transition: 'border-color 0.2s',
-                    }}
-                  />
-                  {isRoleDropdownOpen && (
-                    <div style={{
-                      position: 'absolute',
-                      top: '100%',
-                      left: 0,
-                      right: 0,
-                      marginTop: 8,
-                      background: 'var(--bg-card)',
-                      border: '1px solid var(--border)',
-                      borderRadius: 10,
-                      maxHeight: 300,
-                      overflowY: 'auto',
-                      zIndex: 10,
-                      boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-                    }}>
-                      {filteredRoleTitles.length === 0 ? (
-                        <div style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: 14 }}>
-                          No roles found
-                        </div>
-                      ) : (
-                        filteredRoleTitles.map(title => (
-                          <div
-                            key={title}
-                            onMouseDown={() => {
-                              setSelectedRoleTitle(title);
-                              setIsRoleDropdownOpen(false);
-                            }}
-                            style={{
-                              padding: '12px 16px',
-                              cursor: 'pointer',
-                              color: 'var(--text-primary)',
-                              fontSize: 14,
-                              borderBottom: '1px solid var(--border)',
-                              background: 'transparent',
-                            }}
-                            onMouseOver={(e) => e.currentTarget.style.background = 'var(--bg-secondary)'}
-                            onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}
-                          >
-                            {title}
-                          </div>
-                        ))
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
           </div>
         )}
       </div>
@@ -755,112 +660,7 @@ function RoadmapContent() {
         )
       )}
 
-      {/* ROLE-SPECIFIC ROADMAP MODE */}
-      {mode === 'role-specific' && (
-        !selectedRoleTitle ? (
-          <div style={{
-            maxWidth: 800,
-            margin: '40px auto',
-            padding: '40px 24px',
-            textAlign: 'center',
-            background: 'var(--bg-secondary)',
-            borderRadius: 16,
-            border: '1px solid var(--border)',
-          }}>
-            <MapIcon size={48} style={{ color: 'var(--text-secondary)', marginBottom: 16, opacity: 0.7, margin: '0 auto' }} />
-            <h2 style={{ fontSize: 22, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 12 }}>
-              Type in a job to view the roadmap
-            </h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: 15, maxWidth: 500, margin: '0 auto' }}>
-              Search and select a career track above to explore its tailored certification path.
-            </p>
-          </div>
-        ) : (
-        <>
-          <div style={{
-            background: 'var(--bg-secondary)',
-            borderRadius: 12,
-            padding: 20,
-            border: '1px solid var(--border)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 6,
-            marginBottom: 40,
-          }}>
-            <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Roadmap Career Track</span>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-              <span style={{ fontSize: 24, fontWeight: 800, color: 'var(--text-primary)' }}>
-                {selectedRoleTitle || 'Select a Job Title'}
-              </span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginTop: 4 }}>
-              <span style={{ fontSize: 14, color: 'var(--text-secondary)' }}>
-                Progressive {roleCerts.length} step certification path
-              </span>
-            </div>
-          </div>
-
-          <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 24 }}>
-            Sequenced Role Roadmap Steps
-          </h2>
-
-          {roleCerts.length === 0 ? (
-            <div style={{
-              background: 'var(--bg-secondary)',
-              borderRadius: 12,
-              padding: 40,
-              textAlign: 'center',
-              color: 'var(--text-secondary)',
-              border: '1px solid var(--border)'
-            }}>
-              No mapped certifications for this role title in the selected industry.
-            </div>
-          ) : (
-            <div style={{ position: 'relative', paddingLeft: 32 }}>
-              <div style={{
-                position: 'absolute',
-                left: 11,
-                top: 16,
-                bottom: 16,
-                width: 2,
-                background: 'linear-gradient(to bottom, var(--accent) 60%, var(--border))',
-              }} />
-
-              {[
-                {
-                  title: "Foundational Credentials",
-                  subtitle: "Build fundamental domain and tool familiarity",
-                  certs: roleStage1
-                },
-                {
-                  title: "Associate Certifications",
-                  subtitle: "Demonstrate capability in standard frameworks and core tasks",
-                  certs: roleStage2
-                },
-                {
-                  title: "Advanced & Specialist Expertise",
-                  subtitle: "Establish advanced authority, architectural competence, or direct alignment",
-                  certs: roleStage3
-                }
-              ]
-                .filter(stage => stage.certs.length > 0)
-                .map((stage, index) => (
-                  <TimelineStage
-                    key={index}
-                    title={`Step ${index + 1}: ${stage.title}`}
-                    subtitle={stage.subtitle}
-                    stepNumber={(index + 1).toString()}
-                    certs={stage.certs}
-                  />
-                ))
-              }
-            </div>
-          )}
-        </>
-        )
-      )}
-
-      {/* GENERIC ROADMAP MODE */}
+      {/* CERTIFICATION PATH MODE */}
       {mode === 'generic' && (
         <>
           <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 8 }}>
