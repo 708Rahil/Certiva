@@ -3,7 +3,7 @@ import ExploreClient from './ExploreClient';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Explore Career Guides & Certifications | CertRoute',
+  title: 'Job Guides & Certifications | CertRoute',
   description: 'Browse the best certifications and structured career paths for popular technical roles in cloud, data science, cybersecurity, and management.',
 };
 

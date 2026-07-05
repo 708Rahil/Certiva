@@ -122,7 +122,7 @@ export default function ExploreClient({ initialRoles }: { initialRoles: Role[] }
           letterSpacing: '-0.03em',
           marginBottom: 16,
         }}>
-          Explore Career Certification Paths
+          Job Guides & Certification Paths
         </h1>
         <p style={{
           fontSize: 16,
