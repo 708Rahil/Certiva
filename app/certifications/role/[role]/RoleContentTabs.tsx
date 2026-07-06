@@ -112,10 +112,68 @@ export default function RoleContentTabs({
     }));
   };
 
+  const [activeTab, setActiveTab] = useState<'roadmap' | 'certs'>('roadmap');
+
   return (
     <div>
+      {/* Tabs Controller */}
+      <div style={{
+        display: 'flex',
+        background: 'var(--bg-secondary)',
+        borderRadius: 12,
+        padding: 4,
+        border: '1px solid var(--border)',
+        marginBottom: 32,
+        maxWidth: 400,
+      }}>
+        <button
+          onClick={() => setActiveTab('roadmap')}
+          style={{
+            flex: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 8,
+            padding: '10px 16px',
+            borderRadius: 8,
+            border: 'none',
+            background: activeTab === 'roadmap' ? 'var(--accent)' : 'transparent',
+            color: activeTab === 'roadmap' ? '#fff' : 'var(--text-secondary)',
+            fontSize: 14,
+            fontWeight: 600,
+            cursor: 'pointer',
+            transition: 'all 0.15s',
+          }}
+        >
+          <Map size={16} />
+          Step-by-Step Roadmap
+        </button>
+        <button
+          onClick={() => setActiveTab('certs')}
+          style={{
+            flex: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 8,
+            padding: '10px 16px',
+            borderRadius: 8,
+            border: 'none',
+            background: activeTab === 'certs' ? 'var(--accent)' : 'transparent',
+            color: activeTab === 'certs' ? '#fff' : 'var(--text-secondary)',
+            fontSize: 14,
+            fontWeight: 600,
+            cursor: 'pointer',
+            transition: 'all 0.15s',
+          }}
+        >
+          <Award size={16} />
+          All Recommended Certs
+        </button>
+      </div>
+
       {/* Role Roadmap View */}
-      <div style={{ marginBottom: 64 }}>
+      <div style={{ marginBottom: 64, display: activeTab === 'roadmap' ? 'block' : 'none' }}>
         <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 24, color: 'var(--text-primary)' }}>
           {roleName} Step-by-Step Roadmap
         </h2>
@@ -317,7 +375,7 @@ export default function RoleContentTabs({
       </div>
 
       {/* Recommended Certs View */}
-      <div>
+      <div style={{ display: activeTab === 'certs' ? 'block' : 'none' }}>
         <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 24, color: 'var(--text-primary)' }}>
           All Recommended {roleName} Certifications
         </h2>
