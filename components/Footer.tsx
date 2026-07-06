@@ -89,27 +89,45 @@ export default function Footer() {
         {/* Bottom section */}
         <div style={{
           display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
+          flexDirection: 'column',
           gap: 16,
         }}>
-          <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>
-            © {currentYear} CertRoute. All rights reserved.
-          </span>
+          {/* Disclosure */}
+          <p style={{ 
+            margin: 0, 
+            fontSize: 11, 
+            color: 'var(--text-muted)', 
+            lineHeight: 1.5,
+            maxWidth: 800
+          }}>
+            <strong>Affiliate Disclosure:</strong> Some of the links on this website (such as certification course links) are affiliate links, meaning we may earn a small commission if you click them and make a purchase, at no additional cost to you. We only recommend courses and resources we believe provide genuine value to your career journey.
+          </p>
 
-          {/* Legal Links */}
-          <div style={{ display: 'flex', gap: 16 }}>
-            <Link href="/privacy" style={{ fontSize: 12, color: 'var(--text-muted)', textDecoration: 'none', transition: 'color 0.15s' }}
-              onMouseEnter={e => e.currentTarget.style.color = 'var(--text-secondary)'}
-              onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}>
-              Privacy Policy
-            </Link>
-            <Link href="/terms" style={{ fontSize: 12, color: 'var(--text-muted)', textDecoration: 'none', transition: 'color 0.15s' }}
-              onMouseEnter={e => e.currentTarget.style.color = 'var(--text-secondary)'}
-              onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}>
-              Terms of Service
-            </Link>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: 16,
+            width: '100%'
+          }}>
+            <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>
+              © {currentYear} CertRoute. All rights reserved.
+            </span>
+
+            {/* Legal Links */}
+            <div style={{ display: 'flex', gap: 16 }}>
+              <Link href="/privacy" style={{ fontSize: 12, color: 'var(--text-muted)', textDecoration: 'none', transition: 'color 0.15s' }}
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--text-secondary)'}
+                onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}>
+                Privacy Policy
+              </Link>
+              <Link href="/terms" style={{ fontSize: 12, color: 'var(--text-muted)', textDecoration: 'none', transition: 'color 0.15s' }}
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--text-secondary)'}
+                onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}>
+                Terms of Service
+              </Link>
+            </div>
           </div>
         </div>
       </div>
