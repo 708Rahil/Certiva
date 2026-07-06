@@ -10,9 +10,9 @@ export const metadata: Metadata = {
   title: "CertRoute — Career Intelligence Platform",
   description: "Paste any job listing to instantly map the exact certifications you need to stand out to recruiters, pass resume filters, and get hired. Compare costs and salary boosts in seconds.",
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/icon.png",
+    icon: "/icon-192.png?v=2",
+    shortcut: "/icon-192.png?v=2",
+    apple: "/icon-192.png?v=2",
   },
   openGraph: {
     title: "CertRoute — Career Intelligence Platform",
