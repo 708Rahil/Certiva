@@ -80,7 +80,13 @@ export default function Nav() {
         </div>
 
         {/* Desktop Authenticated / Auth Actions (Hidden on mobile via nav-desktop-actions class) */}
-        <div className="nav-desktop-actions" style={{ display: 'flex', alignItems: 'center', gap: 16, minHeight: 32 }}>
+        <div className="nav-desktop-actions" style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          gap: 16, 
+          minHeight: 32,
+          flexShrink: 0
+        }}>
           {isLoaded && (
             userId ? (
               <UserButton appearance={{
@@ -100,6 +106,8 @@ export default function Nav() {
                   fontWeight: 500,
                   color: 'var(--text-secondary)',
                   transition: 'all 0.15s',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0
                 }}>
                   Sign In
                 </Link>
@@ -112,6 +120,8 @@ export default function Nav() {
                   padding: '6px 16px',
                   borderRadius: 8,
                   transition: 'all 0.15s',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0
                 }}>
                   Sign Up
                 </Link>
