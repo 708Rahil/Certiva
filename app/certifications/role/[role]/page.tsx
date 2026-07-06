@@ -66,8 +66,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { role } = await params;
   const roleName = formatRoleName(role);
   return {
-    title: `Best Certifications for a ${roleName} (2026 Guide) | CertRoute`,
-    description: `Compare the top certifications to become a ${roleName}. Review exam costs, difficulties, study times, salary boosts, and market demand statistics.`,
+    title: `${roleName} Certification Roadmap & Career Guide (2026) | CertRoute`,
+    description: `Explore the definitive certification roadmap to become a ${roleName}. Compare exam costs, study times, difficulty levels, and expected salary boosts.`,
   };
 }
 
@@ -97,8 +97,8 @@ export default async function RoleCertificationsPage({ params }: PageProps) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    'name': `Best Certifications for a ${roleName}`,
-    'description': `Top certifications for ${roleName} ranked by market demand and salary boost.`,
+    'name': `${roleName} Certification Roadmap`,
+    'description': `Top certifications and structured career path roadmap for ${roleName}.`,
     'itemListElement': certs.map((cert, index) => ({
       '@type': 'ListItem',
       'position': index + 1,
@@ -149,10 +149,10 @@ export default async function RoleCertificationsPage({ params }: PageProps) {
         {/* Header */}
         <div style={{ marginBottom: 48 }}>
           <h1 style={{ fontSize: 'clamp(28px, 4vw, 38px)', fontWeight: 800, margin: '0 0 12px', letterSpacing: '-0.5px' }}>
-            Best Certifications for a {roleName} (2026 Guide)
+            {roleName} Certification Roadmap (2026 Guide)
           </h1>
           <p style={{ fontSize: 16, color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6 }}>
-            Sourced and verified directory of the most demanded credentials in the market to help you land a role as a {roleName}. We've filtered these certifications by market demand, salary increase, and exam difficulty to give you the best return on your study time.
+            The definitive career roadmap and sourced directory of the most demanded credentials in the market to help you land a role as a {roleName}. We've filtered these certifications by market demand, salary increase, and exam difficulty to give you the exact steps needed for your career.
           </p>
         </div>
 

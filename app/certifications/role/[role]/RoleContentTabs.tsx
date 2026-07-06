@@ -32,7 +32,6 @@ export default function RoleContentTabs({
   INDUSTRY_COLORS,
   DIFFICULTY_LABELS,
 }: RoleContentTabsProps) {
-  const [activeTab, setActiveTab] = useState<'certs' | 'roadmap'>('certs');
   const [difficultyFilter, setDifficultyFilter] = useState<string>('all');
   const [costFilter, setCostFilter] = useState<string>('all');
   const [sortOption, setSortOption] = useState<string>('default');
@@ -115,65 +114,213 @@ export default function RoleContentTabs({
 
   return (
     <div>
-      {/* Tabs Controller */}
-      <div style={{
-        display: 'flex',
-        background: 'var(--bg-secondary)',
-        borderRadius: 12,
-        padding: 4,
-        border: '1px solid var(--border)',
-        marginBottom: 32,
-        maxWidth: 400,
-      }}>
-        <button
-          onClick={() => setActiveTab('certs')}
-          style={{
-            flex: 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 8,
-            padding: '10px 16px',
-            borderRadius: 8,
-            border: 'none',
-            background: activeTab === 'certs' ? 'var(--accent)' : 'transparent',
-            color: activeTab === 'certs' ? '#fff' : 'var(--text-secondary)',
-            fontSize: 14,
-            fontWeight: 600,
-            cursor: 'pointer',
-            transition: 'all 0.15s',
-          }}
-        >
-          <Award size={16} />
-          Recommended Certs
-        </button>
-        <button
-          onClick={() => setActiveTab('roadmap')}
-          style={{
-            flex: 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 8,
-            padding: '10px 16px',
-            borderRadius: 8,
-            border: 'none',
-            background: activeTab === 'roadmap' ? 'var(--accent)' : 'transparent',
-            color: activeTab === 'roadmap' ? '#fff' : 'var(--text-secondary)',
-            fontSize: 14,
-            fontWeight: 600,
-            cursor: 'pointer',
-            transition: 'all 0.15s',
-          }}
-        >
-          <Map size={16} />
-          Career Roadmap
-        </button>
+      {/* Role Roadmap View */}
+      <div style={{ marginBottom: 64 }}>
+        <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 24, color: 'var(--text-primary)' }}>
+          {roleName} Step-by-Step Roadmap
+        </h2>
+        <div style={{ position: 'relative', paddingLeft: 32 }}>
+          {/* Timeline connector line */}
+          <div style={{
+            position: 'absolute',
+            left: 11,
+            top: 16,
+            bottom: 16,
+            width: 2,
+            background: 'linear-gradient(to bottom, var(--accent) 60%, var(--border))',
+          }} />
+
+          {[
+            {
+              title: "Foundational Credentials",
+              subtitle: "Build fundamental domain and tool familiarity",
+              certs: stage1
+            },
+            {
+              title: "Associate Certifications",
+              subtitle: "Demonstrate capability in standard frameworks and core tasks",
+              certs: stage2
+            },
+            {
+              title: "Advanced & Specialist Expertise",
+              subtitle: "Establish advanced authority, architectural competence, or direct alignment",
+              certs: stage3
+            }
+          ]
+            .filter(stage => stage.certs.length > 0)
+            .map((stage, index) => {
+              const mainCerts = stage.certs.slice(0, 2); // Show top 2 certs
+              const altCerts = stage.certs.slice(2); // Hide others as alternatives
+              const isExpanded = !!expandedStages[index];
+
+              return (
+                <div key={index} style={{ marginBottom: 44, position: 'relative' }}>
+                  {/* Node Circle */}
+                  <div style={{
+                    position: 'absolute',
+                    left: -32,
+                    top: 2,
+                    transform: 'translateX(-50%)',
+                    width: 24,
+                    height: 24,
+                    borderRadius: '50%',
+                    background: 'var(--accent)',
+                    border: '4px solid var(--bg)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 2,
+                  }}>
+                    <span style={{ fontSize: 11, fontWeight: 800, color: '#fff' }}>{index + 1}</span>
+                  </div>
+
+                  <div style={{ marginBottom: 20 }}>
+                    <h3 style={{ fontSize: 18, fontWeight: 700, color: 'var(--text-primary)' }}>
+                      Step {index + 1}: {stage.title}
+                    </h3>
+                    <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>
+                      {stage.subtitle}
+                    </p>
+                  </div>
+
+                  {/* Main Cards List */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                    {mainCerts.map(c => (
+                      <div
+                        key={c.id}
+                        style={{
+                          background: 'var(--bg-card)',
+                          borderRadius: 14,
+                          border: '1px solid var(--border)',
+                          padding: 20,
+                        }}
+                      >
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12, marginBottom: 8 }}>
+                          <div>
+                            <h4 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
+                              {c.name}
+                            </h4>
+                            <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
+                              {c.provider} • Difficulty {c.difficulty}/5
+                            </span>
+                          </div>
+                          <div style={{ display: 'flex', gap: 8 }}>
+                            <AddCertButton certId={c.id} certName={c.name} small />
+                            <Link
+                              href={`/certifications/${getSlug(c.name)}`}
+                              style={{
+                                fontSize: 12,
+                                fontWeight: 600,
+                                color: 'var(--text-primary)',
+                                textDecoration: 'none',
+                                border: '1px solid var(--border)',
+                                padding: '6px 14px',
+                                borderRadius: 8,
+                              }}
+                            >
+                              View Details
+                            </Link>
+                          </div>
+                        </div>
+                        <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.5, margin: 0 }}>
+                          {c.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Alternatives Expander */}
+                  {altCerts.length > 0 && (
+                    <div style={{ marginTop: 16 }}>
+                      <button
+                        onClick={() => toggleStage(index)}
+                        style={{
+                          background: 'rgba(255,255,255,0.02)',
+                          border: '1px solid var(--border)',
+                          color: 'var(--text-secondary)',
+                          fontSize: 12,
+                          fontWeight: 600,
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 6,
+                          padding: '6px 14px',
+                          borderRadius: 8,
+                          transition: 'all 0.15s',
+                        }}
+                        onMouseOver={(e) => e.currentTarget.style.borderColor = 'var(--text-muted)'}
+                        onMouseOut={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
+                      >
+                        <ChevronRight size={14} style={{ transform: isExpanded ? 'rotate(90deg)' : 'none', transition: 'transform 0.2s' }} />
+                        {isExpanded ? 'Hide' : 'Show'} Alternative Options ({altCerts.length})
+                      </button>
+
+                      {isExpanded && (
+                        <div style={{
+                          display: 'grid',
+                          gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+                          gap: 12,
+                          marginTop: 12,
+                          paddingLeft: 12,
+                          borderLeft: '2px solid var(--border)',
+                        }}>
+                          {altCerts.map(c => (
+                            <div
+                              key={c.id}
+                              style={{
+                                background: 'rgba(255,255,255,0.01)',
+                                border: '1px solid var(--border)',
+                                borderRadius: 10,
+                                padding: 14,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'space-between',
+                                gap: 8,
+                              }}
+                            >
+                              <div>
+                                <h5 style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', margin: 0, lineHeight: 1.4 }}>
+                                  {c.name}
+                                </h5>
+                                <span style={{ fontSize: 11, color: 'var(--text-secondary)' }}>
+                                  {c.provider} • Lvl {c.difficulty}
+                                </span>
+                              </div>
+                              <div style={{ display: 'flex', gap: 6, marginTop: 4 }}>
+                                <AddCertButton certId={c.id} certName={c.name} small />
+                                <Link
+                                  href={`/certifications/${getSlug(c.name)}`}
+                                  style={{
+                                    fontSize: 11,
+                                    fontWeight: 600,
+                                    color: 'var(--text-primary)',
+                                    textDecoration: 'none',
+                                    border: '1px solid var(--border)',
+                                    padding: '4px 8px',
+                                    borderRadius: 6,
+                                  }}
+                                >
+                                  Details
+                                </Link>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })
+          }
+        </div>
       </div>
 
       {/* Recommended Certs View */}
-      {activeTab === 'certs' && (
-        <div>
+      <div>
+        <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 24, color: 'var(--text-primary)' }}>
+          All Recommended {roleName} Certifications
+        </h2>
           {/* Filters Bar */}
           <div style={{
             background: 'var(--bg-secondary)',
@@ -378,208 +525,6 @@ export default function RoleContentTabs({
             )}
           </div>
         </div>
-      )}
-
-      {/* Role Roadmap View */}
-      {activeTab === 'roadmap' && (
-        <div>
-          <div style={{ position: 'relative', paddingLeft: 32 }}>
-            {/* Timeline connector line */}
-            <div style={{
-              position: 'absolute',
-              left: 11,
-              top: 16,
-              bottom: 16,
-              width: 2,
-              background: 'linear-gradient(to bottom, var(--accent) 60%, var(--border))',
-            }} />
-
-            {[
-              {
-                title: "Foundational Credentials",
-                subtitle: "Build fundamental domain and tool familiarity",
-                certs: stage1
-              },
-              {
-                title: "Associate Certifications",
-                subtitle: "Demonstrate capability in standard frameworks and core tasks",
-                certs: stage2
-              },
-              {
-                title: "Advanced & Specialist Expertise",
-                subtitle: "Establish advanced authority, architectural competence, or direct alignment",
-                certs: stage3
-              }
-            ]
-              .filter(stage => stage.certs.length > 0)
-              .map((stage, index) => {
-                const mainCerts = stage.certs.slice(0, 2); // Show top 2 certs
-                const altCerts = stage.certs.slice(2); // Hide others as alternatives
-                const isExpanded = !!expandedStages[index];
-
-                return (
-                  <div key={index} style={{ marginBottom: 44, position: 'relative' }}>
-                    {/* Node Circle */}
-                    <div style={{
-                      position: 'absolute',
-                      left: -32,
-                      top: 2,
-                      transform: 'translateX(-50%)',
-                      width: 24,
-                      height: 24,
-                      borderRadius: '50%',
-                      background: 'var(--accent)',
-                      border: '4px solid var(--bg)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      zIndex: 2,
-                    }}>
-                      <span style={{ fontSize: 11, fontWeight: 800, color: '#fff' }}>{index + 1}</span>
-                    </div>
-
-                    <div style={{ marginBottom: 20 }}>
-                      <h3 style={{ fontSize: 18, fontWeight: 700, color: 'var(--text-primary)' }}>
-                        Step {index + 1}: {stage.title}
-                      </h3>
-                      <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>
-                        {stage.subtitle}
-                      </p>
-                    </div>
-
-                    {/* Main Cards List */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                      {mainCerts.map(c => (
-                        <div
-                          key={c.id}
-                          style={{
-                            background: 'var(--bg-card)',
-                            borderRadius: 14,
-                            border: '1px solid var(--border)',
-                            padding: 20,
-                          }}
-                        >
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12, marginBottom: 8 }}>
-                            <div>
-                              <h4 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
-                                {c.name}
-                              </h4>
-                              <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
-                                {c.provider} • Difficulty {c.difficulty}/5
-                              </span>
-                            </div>
-                            <div style={{ display: 'flex', gap: 8 }}>
-                              <AddCertButton certId={c.id} certName={c.name} small />
-                              <Link
-                                href={`/certifications/${getSlug(c.name)}`}
-                                style={{
-                                  fontSize: 12,
-                                  fontWeight: 600,
-                                  color: 'var(--text-primary)',
-                                  textDecoration: 'none',
-                                  border: '1px solid var(--border)',
-                                  padding: '6px 14px',
-                                  borderRadius: 8,
-                                }}
-                              >
-                                View Details
-                              </Link>
-                            </div>
-                          </div>
-                          <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.5, margin: 0 }}>
-                            {c.description}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Alternatives Expander */}
-                    {altCerts.length > 0 && (
-                      <div style={{ marginTop: 16 }}>
-                        <button
-                          onClick={() => toggleStage(index)}
-                          style={{
-                            background: 'rgba(255,255,255,0.02)',
-                            border: '1px solid var(--border)',
-                            color: 'var(--text-secondary)',
-                            fontSize: 12,
-                            fontWeight: 600,
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: 6,
-                            padding: '6px 14px',
-                            borderRadius: 8,
-                            transition: 'all 0.15s',
-                          }}
-                          onMouseOver={(e) => e.currentTarget.style.borderColor = 'var(--text-muted)'}
-                          onMouseOut={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
-                        >
-                          <ChevronRight size={14} style={{ transform: isExpanded ? 'rotate(90deg)' : 'none', transition: 'transform 0.2s' }} />
-                          {isExpanded ? 'Hide' : 'Show'} Alternative Options ({altCerts.length})
-                        </button>
-
-                        {isExpanded && (
-                          <div style={{
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-                            gap: 12,
-                            marginTop: 12,
-                            paddingLeft: 12,
-                            borderLeft: '2px solid var(--border)',
-                          }}>
-                            {altCerts.map(c => (
-                              <div
-                                key={c.id}
-                                style={{
-                                  background: 'rgba(255,255,255,0.01)',
-                                  border: '1px solid var(--border)',
-                                  borderRadius: 10,
-                                  padding: 14,
-                                  display: 'flex',
-                                  flexDirection: 'column',
-                                  justifyContent: 'space-between',
-                                  gap: 8,
-                                }}
-                              >
-                                <div>
-                                  <h5 style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', margin: 0, lineHeight: 1.4 }}>
-                                    {c.name}
-                                  </h5>
-                                  <span style={{ fontSize: 11, color: 'var(--text-secondary)' }}>
-                                    {c.provider} • Lvl {c.difficulty}
-                                  </span>
-                                </div>
-                                <div style={{ display: 'flex', gap: 6, marginTop: 4 }}>
-                                  <AddCertButton certId={c.id} certName={c.name} small />
-                                  <Link
-                                    href={`/certifications/${getSlug(c.name)}`}
-                                    style={{
-                                      fontSize: 11,
-                                      fontWeight: 600,
-                                      color: 'var(--text-primary)',
-                                      textDecoration: 'none',
-                                      border: '1px solid var(--border)',
-                                      padding: '4px 8px',
-                                      borderRadius: 6,
-                                    }}
-                                  >
-                                    Details
-                                  </Link>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                );
-              })
-            }
-          </div>
-        </div>
-      )}
     </div>
   );
 }
