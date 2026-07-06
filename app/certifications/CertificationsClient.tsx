@@ -210,19 +210,24 @@ export default function CertificationsClient() {
       padding: '40px 24px',
     }}>
       {/* Header */}
-      <div className="responsive-header">
+      <div className="responsive-header" style={{
+        marginBottom: 32,
+        borderBottom: '1px solid var(--border)',
+        paddingBottom: 24,
+      }}>
         <div>
           <h1 style={{
             fontSize: 32,
-            fontWeight: 700,
+            fontWeight: 800,
             color: 'var(--text-primary)',
+            letterSpacing: '-0.025em',
             margin: '0 0 8px',
             fontFamily: 'var(--font-display)',
           }}>
             My Certifications
           </h1>
           <p style={{
-            fontSize: 16,
+            fontSize: 15,
             color: 'var(--text-secondary)',
             margin: 0,
           }}>

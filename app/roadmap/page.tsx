@@ -282,6 +282,7 @@ function RoadmapContent() {
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 16 }}>
           <div>
             <h1 style={{
+              fontFamily: 'var(--font-display)',
               fontSize: 32,
               fontWeight: 800,
               color: 'var(--text-primary)',

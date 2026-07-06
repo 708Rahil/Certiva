@@ -295,6 +295,7 @@ export default function ProfilePage() {
         paddingBottom: 24,
       }}>
         <h1 style={{
+          fontFamily: 'var(--font-display)',
           fontSize: 32,
           fontWeight: 800,
           color: 'var(--text-primary)',

@@ -58,14 +58,29 @@ export default function AnalyticsPage() {
   return (
     <div style={{ maxWidth: 1000, margin: '0 auto', padding: '48px 24px 80px' }}>
       {/* Header */}
-      <div className="animate-fade-up" style={{ marginBottom: 40 }}>
+      <div className="animate-fade-up" style={{
+        marginBottom: 32,
+        borderBottom: '1px solid var(--border)',
+        paddingBottom: 24,
+      }}>
         <div style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>
           Insights
         </div>
-        <h1 style={{ margin: '0 0 8px', fontFamily: 'var(--font-display)', fontSize: 32, fontWeight: 400, letterSpacing: '-0.5px' }}>
+        <h1 style={{
+          fontSize: 32,
+          fontWeight: 800,
+          color: 'var(--text-primary)',
+          letterSpacing: '-0.025em',
+          margin: '0 0 8px',
+          fontFamily: 'var(--font-display)',
+        }}>
           Analytics Dashboard
         </h1>
-        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: 15 }}>
+        <p style={{
+          margin: 0,
+          fontSize: 15,
+          color: 'var(--text-secondary)',
+        }}>
           Patterns across all your analyzed job postings
         </p>
       </div>
@@ -282,10 +297,10 @@ function EmptyState() {
       background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 20,
     }}>
       <div style={{ fontSize: 48, marginBottom: 16 }}>📊</div>
-      <h2 style={{ margin: '0 0 10px', fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 24, color: 'var(--text-primary)' }}>
+      <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 32, fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.025em', marginBottom: 8 }}>
         No data yet
       </h2>
-      <p style={{ margin: '0 0 24px', color: 'var(--text-secondary)', fontSize: 15 }}>
+      <p style={{ margin: '0 0 24px', fontSize: 15, color: 'var(--text-secondary)' }}>
         Analyze a few job postings to start seeing patterns and insights.
       </p>
       <Link href="/" style={{

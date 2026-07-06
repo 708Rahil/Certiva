@@ -106,18 +106,40 @@ export default function JobsPage() {
   return (
     <div style={{ maxWidth: 860, margin: '0 auto', padding: '48px 24px 80px' }}>
       {/* Header */}
-      <div className="animate-fade-up" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 36 }}>
+      <div className="animate-fade-up" style={{
+        display: 'flex',
+        alignItems: 'flex-end',
+        justifyContent: 'space-between',
+        marginBottom: 32,
+        borderBottom: '1px solid var(--border)',
+        paddingBottom: 24,
+      }}>
         <div>
           <div style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>
             History
           </div>
-          <h1 style={{ margin: 0, fontFamily: 'var(--font-display)', fontSize: 32, fontWeight: 400, letterSpacing: '-0.5px' }}>
+          <h1 style={{
+            fontSize: 32,
+            fontWeight: 800,
+            color: 'var(--text-primary)',
+            letterSpacing: '-0.025em',
+            margin: '0 0 8px',
+            fontFamily: 'var(--font-display)',
+          }}>
             Saved Jobs
           </h1>
+          <p style={{
+            margin: 0,
+            fontSize: 15,
+            color: 'var(--text-secondary)',
+          }}>
+            Manage your analyzed job postings
+          </p>
         </div>
         <Link href="/" style={{
           background: 'var(--accent)', color: '#fff', textDecoration: 'none',
           padding: '10px 20px', borderRadius: 10, fontSize: 14, fontWeight: 600,
+          marginBottom: 8,
         }}>
           + New Analysis
         </Link>
