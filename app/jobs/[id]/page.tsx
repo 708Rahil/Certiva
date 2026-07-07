@@ -133,15 +133,20 @@ export default function JobDetailPage() {
   // Combined user skills from profile + completed certs
   const combinedUserSkills = [...userSkills, ...completedCertSkills];
 
-  // Intersect combinedUserSkills and skills case-insensitively
-  const matchedSkills = skills.filter(js => 
-    combinedUserSkills.some(us => us.toLowerCase() === js.toLowerCase())
-  );
+  // Intersect combinedUserSkills and skills with substring matching (e.g., 'AWS' matching 'AWS Cloud')
+  const matchedSkills = skills.filter(js => {
+    const jobSkillLower = js.toLowerCase().trim();
+    return combinedUserSkills.some(us => {
+      const userSkillLower = us.toLowerCase().trim();
+      if (!userSkillLower || !jobSkillLower) return false;
+      return jobSkillLower === userSkillLower ||
+        jobSkillLower.includes(userSkillLower) ||
+        userSkillLower.includes(jobSkillLower);
+    });
+  });
   
   // Find missing skills
-  const missingSkills = skills.filter(js => 
-    !combinedUserSkills.some(us => us.toLowerCase() === js.toLowerCase())
-  );
+  const missingSkills = skills.filter(js => !matchedSkills.includes(js));
 
   // Match score calculation
   const matchPercent = skills.length > 0 
