@@ -797,6 +797,10 @@ function TimelineStage({
   stepNumber: string;
   certs: Cert[]
 }) {
+  const [showAlts, setShowAlts] = useState(false);
+  const mainCerts = certs.slice(0, 3);
+  const altCerts = certs.slice(3);
+
   return (
     <div style={{ marginBottom: 44, position: 'relative' }}>
       {/* Node Indicator */}
@@ -828,10 +832,89 @@ function TimelineStage({
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-        {certs.map(cert => (
+        {mainCerts.map(cert => (
           <CertCard key={cert.id} cert={cert} />
         ))}
       </div>
+
+      {/* Alternatives Expander */}
+      {altCerts.length > 0 && (
+        <div style={{ marginTop: 16 }}>
+          <button
+            onClick={() => setShowAlts(!showAlts)}
+            style={{
+              background: 'rgba(255,255,255,0.02)',
+              border: '1px solid var(--border)',
+              color: 'var(--text-secondary)',
+              fontSize: 12,
+              fontWeight: 600,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+              padding: '6px 14px',
+              borderRadius: 8,
+              transition: 'all 0.15s',
+            }}
+          >
+            <ChevronRight size={14} style={{ transform: showAlts ? 'rotate(90deg)' : 'none', transition: 'transform 0.2s' }} />
+            {showAlts ? 'Hide' : 'Show'} Alternative Options ({altCerts.length})
+          </button>
+
+          {showAlts && (
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+              gap: 12,
+              marginTop: 12,
+              paddingLeft: 12,
+              borderLeft: '2px solid var(--border)',
+            }}>
+              {altCerts.map(c => (
+                <div
+                  key={c.id}
+                  style={{
+                    background: 'rgba(255,255,255,0.01)',
+                    border: '1px solid var(--border)',
+                    borderRadius: 10,
+                    padding: 14,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    gap: 8,
+                  }}
+                >
+                  <div>
+                    <h5 style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', margin: 0, lineHeight: 1.4 }}>
+                      {c.name}
+                    </h5>
+                    <span style={{ fontSize: 11, color: 'var(--text-secondary)' }}>
+                      {c.provider} • Lvl {c.difficulty}
+                    </span>
+                  </div>
+                  <div style={{ display: 'flex', gap: 6, marginTop: 4 }}>
+                    <AddCertButton certId={c.id} certName={c.name} small />
+                    <Link
+                      href={`/certifications/${getSlug(c.name)}`}
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 600,
+                        color: 'var(--text-primary)',
+                        textDecoration: 'none',
+                        border: '1px solid var(--border)',
+                        padding: '4px 8px',
+                        borderRadius: 6,
+                      }}
+                    >
+                      Details
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

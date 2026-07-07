@@ -207,8 +207,8 @@ export default function RoleContentTabs({
           ]
             .filter(stage => stage.certs.length > 0)
             .map((stage, index) => {
-              const mainCerts = stage.certs.slice(0, 2); // Show top 2 certs
-              const altCerts = stage.certs.slice(2); // Hide others as alternatives
+              const mainCerts = stage.certs.slice(0, 3); // Show top 3 certs
+              const altCerts = stage.certs.slice(3); // Hide others as alternatives
               const isExpanded = !!expandedStages[index];
 
               return (
