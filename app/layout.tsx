@@ -4,6 +4,7 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://certroute.co'),
@@ -82,6 +83,21 @@ export default function RootLayout({
       }
     }}>
       <html lang="en">
+        <head>
+          {/* Google Analytics (gtag.js) */}
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-1E2482W3WJ"
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-1E2482W3WJ');
+            `}
+          </Script>
+        </head>
         <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
           <Nav />
           <main style={{ flex: 1 }}>
