@@ -5,6 +5,56 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth, UserButton } from '@clerk/nextjs';
 
+const userButtonAppearance = {
+  elements: {
+    userButtonAvatarBox: { width: 32, height: 32, border: '1px solid var(--border)' },
+    userButtonPopoverCard: {
+      backgroundColor: 'var(--bg-card)',
+      border: '1px solid var(--border)',
+      borderRadius: '12px',
+      padding: '10px',
+      boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
+    },
+    userPreview: {
+      borderBottom: '1px solid var(--border-light, #cbd5e1)',
+      paddingBottom: '12px',
+      marginBottom: '10px',
+    },
+    userPreviewMainIdentifier: {
+      color: 'var(--text-primary)',
+      fontWeight: 600,
+    },
+    userPreviewSecondaryIdentifier: {
+      color: 'var(--text-secondary)',
+    },
+    userButtonPopoverActions: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '8px',
+    },
+    userButtonPopoverActionButton: {
+      border: '1px solid var(--border-light, #cbd5e1)',
+      borderRadius: '8px',
+      margin: '4px 0',
+      padding: '10px 14px',
+      backgroundColor: 'var(--bg-card, #ffffff)',
+      color: 'var(--text-primary)',
+      transition: 'all 0.15s ease',
+    },
+    userButtonPopoverActionButton__manageAccount: {
+      border: '1px solid var(--border-light, #cbd5e1)',
+    },
+    userButtonPopoverActionButton__signOut: {
+      border: '1px solid var(--border-light, #cbd5e1)',
+    },
+    userButtonPopoverFooter: {
+      borderTop: '1px solid var(--border, #e2e8f0)',
+      marginTop: '10px',
+      paddingTop: '10px',
+    },
+  }
+};
+
 export default function Nav() {
   const path = usePathname();
   const { isLoaded, userId } = useAuth();
@@ -89,15 +139,7 @@ export default function Nav() {
         }}>
           {isLoaded && (
             userId ? (
-              <UserButton appearance={{
-                elements: {
-                  userButtonAvatarBox: { width: 32, height: 32, border: '1px solid rgba(255,255,255,0.1)' },
-                  userPreviewMainIdentifier: { color: '#fff' },
-                  userPreviewSecondaryIdentifier: { color: '#fff' },
-                  userButtonBox: { flexDirection: 'row-reverse' },
-                  menuButton__avatar: { border: '1px solid rgba(255,255,255,0.1)' },
-                }
-              }} />
+              <UserButton appearance={userButtonAppearance} />
             ) : (
               <>
                 <Link href="/sign-in" style={{
@@ -184,11 +226,7 @@ export default function Nav() {
             userId ? (
               <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                 <span style={{ fontSize: 14, color: 'var(--text-secondary)' }}>Account Settings</span>
-                <UserButton appearance={{
-                  elements: {
-                    userButtonAvatarBox: { width: 32, height: 32, border: '1px solid rgba(255,255,255,0.1)' },
-                  }
-                }} />
+                <UserButton appearance={userButtonAppearance} />
               </div>
             ) : (
               <div style={{ display: 'flex', gap: 16, width: '100%' }}>
