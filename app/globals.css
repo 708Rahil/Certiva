@@ -77,95 +77,34 @@ body {
 }
 
 /* Clerk UserButton dropdown styling */
-.cl-userButtonPopoverCard,
-[class*="userButtonPopoverCard"] {
-  background: var(--bg-card, #ffffff) !important;
-  border: 1px solid var(--border, #e2e8f0) !important;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
-  border-radius: 12px !important;
-  padding: 10px !important;
-}
-
-/* User preview section at top */
-.cl-userButtonPopoverCard .cl-userPreview,
-[class*="userButtonPopoverCard"] [class*="userPreview"],
-.cl-userPreview {
-  border-bottom: 1px solid var(--border-light, #cbd5e1) !important;
-  padding: 8px 8px 14px 8px !important;
-  margin-bottom: 10px !important;
+.cl-userButtonPopoverCard {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
 }
 
 .cl-userPreviewMainIdentifier,
-[class*="userPreviewMainIdentifier"] {
-  color: var(--text-primary, #0f172a) !important;
-  font-weight: 600 !important;
+.cl-userPreviewSecondaryIdentifier {
+  color: var(--text-primary) !important;
 }
 
-.cl-userPreviewSecondaryIdentifier,
-[class*="userPreviewSecondaryIdentifier"] {
-  color: var(--text-secondary, #475569) !important;
-  font-weight: 400 !important;
+.cl-userPreviewMainIdentifier {
+  font-weight: 500;
 }
 
-/* Reset buttons inside preview if any */
-.cl-userPreview button,
-.cl-userPreviewAvatarContainer button {
-  border: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  background: transparent !important;
+.cl-userPreviewSecondaryIdentifier {
+  font-weight: 400;
 }
 
-/* Action buttons container */
-.cl-userButtonPopoverActions,
-[class*="userButtonPopoverActions"] {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 8px !important;
-  padding: 2px 0 !important;
+.cl-userButtonPopoverCard button,
+.cl-userButtonPopoverCard [role="button"],
+.cl-menuButton__root,
+[role="menuitem"] {
+  color: var(--text-primary) !important;
 }
 
-/* Separation and borders around each button (Manage account, Sign out) */
-.cl-userButtonPopoverActionButton,
-[class*="userButtonPopoverActionButton"],
-.cl-userButtonPopoverCard [role="menuitem"],
-.cl-userButtonPopoverCard button[class*="ActionButton"],
-.cl-userButtonPopoverCard .cl-menuButton__root {
-  border: 1px solid var(--border-light, #cbd5e1) !important;
-  border-radius: 8px !important;
-  margin: 4px 0 !important;
-  padding: 10px 14px !important;
-  background: var(--bg-card, #ffffff) !important;
-  color: var(--text-primary, #0f172a) !important;
-  transition: all 0.15s ease !important;
-  display: flex !important;
-  align-items: center !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-}
-
-.cl-userButtonPopoverActionButton:hover,
-[class*="userButtonPopoverActionButton"]:hover,
-.cl-userButtonPopoverCard [role="menuitem"]:hover,
-.cl-userButtonPopoverCard button[class*="ActionButton"]:hover,
-.cl-userButtonPopoverCard .cl-menuButton__root:hover {
-  background: var(--bg-card-hover, #f8fafc) !important;
-  border-color: #94a3b8 !important;
-}
-
-/* Icons inside action buttons */
-.cl-userButtonPopoverActionButtonIcon,
-[class*="userButtonPopoverActionButtonIcon"] {
-  margin-right: 10px !important;
-  color: var(--text-secondary, #475569) !important;
-}
-
-/* Footer: Secured by Clerk */
-.cl-userButtonPopoverFooter,
-[class*="userButtonPopoverFooter"] {
-  border-top: 1px solid var(--border, #e2e8f0) !important;
-  margin-top: 10px !important;
-  padding-top: 10px !important;
+.cl-userButtonPopoverCard button:hover,
+.cl-userButtonPopoverCard [role="button"]:hover {
+  background: var(--bg-card-hover) !important;
 }
 
 /* Target all text in the popover */
