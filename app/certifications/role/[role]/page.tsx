@@ -147,11 +147,18 @@ export default async function RoleCertificationsPage({ params }: PageProps) {
         </div>
 
         {/* Header */}
-        <div style={{ marginBottom: 48 }}>
-          <h1 style={{ fontSize: 'clamp(28px, 4vw, 38px)', fontWeight: 800, margin: '0 0 12px', letterSpacing: '-0.5px' }}>
+        <div style={{ marginBottom: 32, borderBottom: '1px solid var(--border)', paddingBottom: 24 }}>
+          <h1 style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 32,
+            fontWeight: 800,
+            margin: '0 0 8px',
+            letterSpacing: '-0.025em',
+            color: 'var(--text-primary)'
+          }}>
             {roleName} Certification Roadmap (2026 Guide)
           </h1>
-          <p style={{ fontSize: 16, color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6 }}>
+          <p style={{ fontSize: 15, color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6 }}>
             The definitive career roadmap and sourced directory of the most demanded credentials in the market to help you land a role as a {roleName}. We've filtered these certifications by market demand, salary increase, and exam difficulty to give you the exact steps needed for your career.
           </p>
         </div>

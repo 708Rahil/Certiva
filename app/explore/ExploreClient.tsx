@@ -116,20 +116,21 @@ export default function ExploreClient({ initialRoles }: { initialRoles: Role[] }
         marginBottom: 48,
       }}>
         <h1 style={{
-          fontSize: 'clamp(32px, 5vw, 48px)',
+          fontFamily: 'var(--font-display)',
+          fontSize: 32,
           fontWeight: 800,
           color: 'var(--text-primary)',
-          letterSpacing: '-0.03em',
-          marginBottom: 16,
+          letterSpacing: '-0.025em',
+          margin: '0 0 8px',
         }}>
           Job Guides & Certification Paths
         </h1>
         <p style={{
-          fontSize: 16,
+          fontSize: 15,
           color: 'var(--text-secondary)',
           maxWidth: 600,
-          margin: '0 auto 32px',
-          lineHeight: 1.6,
+          margin: '0 auto 28px',
+          lineHeight: 1.5,
         }}>
           Select your target career path to discover top-rated certifications, custom sequenced roadmaps, exam costs, and salary boosts.
         </p>

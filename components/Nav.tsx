@@ -11,8 +11,8 @@ export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
 
   const links = [
-    { href: '/explore', label: 'Job Guides' },
     { href: '/analyze', label: 'New Analysis' },
+    { href: '/explore', label: 'Job Guides' },
     { href: '/jobs', label: 'Saved Jobs' },
     { href: '/certifications', label: 'My Certifications' },
     { href: '/roadmap', label: 'My Roadmap' },
