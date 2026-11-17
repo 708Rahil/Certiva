@@ -15,3 +15,4 @@ export function getStripeCheckoutUrl(userId?: string | null, email?: string | nu
   const queryString = params.toString();
   return queryString ? `${STRIPE_PAYMENT_BASE_URL}?${queryString}` : STRIPE_PAYMENT_BASE_URL;
 }
+

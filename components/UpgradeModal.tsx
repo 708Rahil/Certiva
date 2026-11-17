@@ -246,7 +246,7 @@ export default function UpgradeModal({
           color: 'var(--text-muted, #64748b)',
         }}>
           <ShieldCheck size={14} />
-          <span>One-time payment · Instant digital unlock · Secured by Stripe</span>
+          <span>One-time payment · Instant digital delivery · Non-refundable</span>
         </div>
       </div>
     </div>

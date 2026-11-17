@@ -922,7 +922,7 @@ function TimelineStage({
               Unlock Lifetime Access — $9.99
             </a>
             <span style={{ fontSize: 11, color: '#94a3b8', marginTop: 8 }}>
-              One-time payment · Instant unlock · Zero subscriptions
+              One-time payment · Instant digital delivery · Non-refundable
             </span>
           </div>
         </div>
@@ -996,7 +996,7 @@ function TimelineStage({
                         Unlock with Lifetime Pass — $9.99
                       </a>
                       <span style={{ fontSize: 11, color: '#94a3b8', marginTop: 8 }}>
-                        One-time payment · Instant unlock · Zero subscriptions
+                        One-time payment · Instant digital delivery · Non-refundable
                       </span>
                     </div>
                   </div>

@@ -485,7 +485,7 @@ export default function JobDetailPage() {
                       Unlock Lifetime Access — $9.99
                     </a>
                     <span style={{ fontSize: 10, color: '#94a3b8', marginTop: 8 }}>
-                      One-time payment · Instant unlock · Unlimited scans
+                      One-time payment · Instant digital delivery · Non-refundable
                     </span>
                   </div>
                 )}
@@ -792,7 +792,7 @@ export default function JobDetailPage() {
                             Unlock Lifetime Access — $9.99
                           </a>
                           <span style={{ fontSize: 11, color: '#94a3b8', marginTop: 8 }}>
-                            One-time payment · Instant unlock · Zero subscriptions
+                            One-time payment · Instant digital delivery · Non-refundable
                           </span>
                         </div>
                       </div>
@@ -888,7 +888,7 @@ export default function JobDetailPage() {
                                     Unlock with Lifetime Pass — $9.99
                                   </a>
                                   <span style={{ fontSize: 11, color: '#94a3b8', marginTop: 8 }}>
-                                    One-time payment · Instant unlock · Zero subscriptions
+                                    One-time payment · Instant digital delivery · Non-refundable
                                   </span>
                                 </div>
                               </div>
