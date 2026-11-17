@@ -1059,49 +1059,6 @@ function TimelineStage({
           )}
         </>
       )}
-                  key={c.id}
-                  style={{
-                    background: 'rgba(255,255,255,0.01)',
-                    border: '1px solid var(--border)',
-                    borderRadius: 10,
-                    padding: 14,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                    gap: 8,
-                  }}
-                >
-                  <div>
-                    <h5 style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', margin: 0, lineHeight: 1.4 }}>
-                      {c.name}
-                    </h5>
-                    <span style={{ fontSize: 11, color: 'var(--text-secondary)' }}>
-                      {c.provider} • Lvl {c.difficulty}
-                    </span>
-                  </div>
-                  <div style={{ display: 'flex', gap: 6, marginTop: 4 }}>
-                    <AddCertButton certId={c.id} certName={c.name} small />
-                    <Link
-                      href={`/certifications/${getSlug(c.name)}`}
-                      style={{
-                        fontSize: 11,
-                        fontWeight: 600,
-                        color: 'var(--text-primary)',
-                        textDecoration: 'none',
-                        border: '1px solid var(--border)',
-                        padding: '4px 8px',
-                        borderRadius: 6,
-                      }}
-                    >
-                      Details
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 }
