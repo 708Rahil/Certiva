@@ -87,6 +87,29 @@ export default function Nav() {
           minHeight: 32,
           flexShrink: 0
         }}>
+          <a
+            href="https://buy.stripe.com/9B6eV69Tg85p3WAbiPdnW00"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
+              padding: '6px 14px',
+              borderRadius: 8,
+              fontSize: 13,
+              fontWeight: 700,
+              color: '#fff',
+              background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
+              boxShadow: '0 2px 8px rgba(37,99,235,0.3)',
+              textDecoration: 'none',
+              whiteSpace: 'nowrap',
+              transition: 'transform 0.15s ease',
+            }}
+          >
+            ⚡ Lifetime Pass $9.99
+          </a>
+
           {isLoaded && (
             userId ? (
               <UserButton appearance={{
@@ -177,6 +200,31 @@ export default function Nav() {
         ))}
 
         <div style={{ height: 1, background: 'var(--border)', margin: '8px 0' }} />
+
+        {/* Mobile Lifetime Pass CTA */}
+        <a
+          href="https://buy.stripe.com/9B6eV69Tg85p3WAbiPdnW00"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => setIsOpen(false)}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 6,
+            padding: '10px 14px',
+            borderRadius: 8,
+            fontSize: 14,
+            fontWeight: 700,
+            color: '#fff',
+            background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
+            textDecoration: 'none',
+            textAlign: 'center',
+            margin: '0 4px 6px',
+          }}
+        >
+          ⚡ Get Lifetime Pass — $9.99
+        </a>
 
         {/* Mobile Auth Actions */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '4px 12px' }}>

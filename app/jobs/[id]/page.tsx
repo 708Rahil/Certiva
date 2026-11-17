@@ -358,6 +358,18 @@ export default function JobDetailPage() {
               }}>
                 Career Readiness Scorecard
               </h3>
+              <span style={{
+                background: 'var(--accent-dim, rgba(37,99,235,0.1))',
+                border: '1px solid var(--accent, #2563eb)',
+                color: 'var(--accent, #2563eb)',
+                fontSize: 10,
+                fontWeight: 700,
+                padding: '2px 8px',
+                borderRadius: 6,
+                letterSpacing: '0.05em',
+              }}>
+                PRO PASS
+              </span>
             </div>
             
             <div style={{ display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
@@ -401,144 +413,161 @@ export default function JobDetailPage() {
                 </div>
               </div>
 
-              {/* Col 2: The Skill Gap */}
-              <div style={{ flex: '2 1 300px', paddingTop: 24 }}>
-                <h4 style={{ margin: '0 0 10px', fontSize: 12, color: 'var(--text-secondary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  Skill Breakdown ({skills.length})
-                </h4>
-                
-                {isLoaded && (!userId || userSkills.length === 0) ? (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    <p style={{ margin: 0, fontSize: 12, color: 'var(--text-secondary)', lineHeight: 1.4 }}>
-                      Add your skills in your profile to calculate your matching status!
-                    </p>
-                    <Link href={userId ? "/profile" : "/sign-in"} style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      alignSelf: 'flex-start',
-                      fontSize: 12,
-                      fontWeight: 600,
-                      color: 'var(--accent-light)',
-                      textDecoration: 'underline',
-                    }}>
-                      {userId ? "Edit Profile Skills →" : "Sign in to add skills →"}
-                    </Link>
-                  </div>
-                ) : (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                    {matchedSkills.length > 0 && (
-                      <div>
-                        <div style={{ fontSize: 10, color: 'var(--green)', fontWeight: 700, marginBottom: 4 }}>✓ MATCHED SKILLS ({matchedSkills.length})</div>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                          {matchedSkills.map(skill => (
-                            <span key={skill} style={{
-                              fontSize: 11, padding: '2px 8px', borderRadius: 6,
-                              background: 'var(--green-dim)', color: 'var(--green)', fontWeight: 500,
-                            }}>{skill}</span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                    {missingSkills.length > 0 && (
-                      <div>
-                        <div style={{ fontSize: 10, color: 'var(--text-secondary)', fontWeight: 700, marginBottom: 4 }}>⚠ MISSING SKILLS ({missingSkills.length})</div>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                          {missingSkills.slice(0, 10).map(skill => (
-                            <span key={skill} style={{
-                              fontSize: 11, padding: '2px 8px', borderRadius: 6,
-                              background: 'rgba(255, 255, 255, 0.05)', color: 'var(--text-secondary)',
-                            }}>{skill}</span>
-                          ))}
-                          {missingSkills.length > 10 && (
-                            <span style={{ fontSize: 11, color: 'var(--text-muted)', alignSelf: 'center' }}>+{missingSkills.length - 10} more</span>
-                          )}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-
-              {/* Col 3: Roadmap Bridge Impact */}
-              <div style={{ flex: '1.5 1 280px', paddingTop: 24 }}>
+              {/* Col 2 & 3: Detailed Breakdown & Bridge Score (Pro Locked) */}
+              <div style={{
+                flex: '3 1 500px',
+                position: 'relative',
+                borderRadius: 12,
+                overflow: 'hidden',
+                paddingTop: 24,
+                display: 'flex',
+                gap: 24,
+                flexWrap: 'wrap',
+              }}>
+                {/* Frosted Lock Overlay */}
                 <div style={{
-                  background: 'rgba(79, 110, 247, 0.04)',
-                  border: '1px solid rgba(79, 110, 247, 0.08)',
-                  borderRadius: 12,
-                  padding: 14,
+                  position: 'absolute',
+                  inset: 0,
+                  zIndex: 10,
+                  background: 'linear-gradient(180deg, rgba(15,23,42,0.55) 0%, rgba(15,23,42,0.92) 100%)',
+                  backdropFilter: 'blur(5px)',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: 8,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: 24,
+                  textAlign: 'center',
+                  borderRadius: 12,
+                  border: '1px solid var(--border)',
                 }}>
-                  <h4 style={{ margin: 0, fontSize: 12, fontWeight: 700, color: 'var(--accent-light)' }}>
-                    🚀 Roadmap Bridge Score
+                  <div style={{
+                    width: 38,
+                    height: 38,
+                    borderRadius: '50%',
+                    background: 'rgba(37,99,235,0.2)',
+                    border: '1px solid #3b82f6',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: 18,
+                    marginBottom: 10,
+                  }}>
+                    🔒
+                  </div>
+                  <h4 style={{ fontSize: 16, fontWeight: 700, color: '#fff', margin: '0 0 6px' }}>
+                    Unlock ATS Resume Match & Skill Gap Breakdown
+                  </h4>
+                  <p style={{ fontSize: 12, color: '#cbd5e1', maxWidth: 420, margin: '0 0 16px', lineHeight: 1.4 }}>
+                    See every missing keyword your resume needs to pass recruiter filters and how recommended certifications boost your match rate.
+                  </p>
+                  <a
+                    href="https://buy.stripe.com/9B6eV69Tg85p3WAbiPdnW00"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      background: 'var(--accent, #2563eb)',
+                      color: '#fff',
+                      fontWeight: 700,
+                      fontSize: 13,
+                      padding: '10px 22px',
+                      borderRadius: 8,
+                      textDecoration: 'none',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 6,
+                      boxShadow: '0 4px 14px rgba(37, 99, 235, 0.4)',
+                    }}
+                  >
+                    Unlock Lifetime Access — $9.99
+                  </a>
+                  <span style={{ fontSize: 10, color: '#94a3b8', marginTop: 8 }}>
+                    One-time payment · Instant unlock · Unlimited scans
+                  </span>
+                </div>
+
+                {/* Col 2: The Skill Gap */}
+                <div style={{ flex: '2 1 260px', opacity: 0.3, pointerEvents: 'none', userSelect: 'none' }}>
+                  <h4 style={{ margin: '0 0 10px', fontSize: 12, color: 'var(--text-secondary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Skill Breakdown ({skills.length})
                   </h4>
                   
-                  {missingSkills.length === 0 ? (
-                    <p style={{ margin: 0, fontSize: 12, color: 'var(--text-secondary)', lineHeight: 1.4 }}>
-                      You match all extracted skills for this job!
-                    </p>
-                  ) : (
-                    <>
-                      <p style={{ margin: 0, fontSize: 12, color: 'var(--text-primary)', lineHeight: 1.4 }}>
-                        This roadmap teaches **{bridgedCount}** of your missing skills.
+                  {isLoaded && (!userId || userSkills.length === 0) ? (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                      <p style={{ margin: 0, fontSize: 12, color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+                        Add your skills in your profile to calculate your matching status!
                       </p>
-                      <div style={{
-                        background: 'var(--bg-card)',
-                        borderRadius: 8,
-                        height: 5,
-                        overflow: 'hidden',
-                        position: 'relative',
-                        marginTop: 2,
-                      }}>
-                        <div style={{
-                          position: 'absolute',
-                          top: 0, left: 0, height: '100%',
-                          width: `${bridgePercent}%`,
-                          background: 'var(--accent)',
-                          borderRadius: 8,
-                          transition: 'width 0.5s ease',
-                        }} />
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, color: 'var(--text-secondary)' }}>
-                        <span>Bridging {bridgePercent}% of the gap</span>
-                        <span>{bridgedCount}/{missingSkills.length}</span>
-                      </div>
-                    </>
-                  )}
-
-                  {recs[0] && (
-                    <div style={{ marginTop: 8, borderTop: '1px solid rgba(79, 110, 247, 0.1)', paddingTop: 12 }}>
-                      <div style={{ fontSize: 9, color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', marginBottom: 6, letterSpacing: '0.05em' }}>
-                        TOP RECOMMENDATION
-                      </div>
-                      <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 2 }}>
-                        {recs[0].name}
-                      </div>
-                      <div style={{ fontSize: 11, color: 'var(--text-secondary)', lineHeight: 1.4, marginBottom: 8 }}>
-                        {recs[0].explanation}
-                      </div>
-                      <button
-                        onClick={() => handleAddToCerts(recs[0].cert_id, recs[0].name)}
-                        style={{
-                          width: '100%',
-                          padding: '6px 12px',
-                          background: 'var(--accent)',
-                          color: '#fff',
-                          border: 'none',
-                          borderRadius: 6,
-                          fontSize: 11,
-                          fontWeight: 600,
-                          cursor: 'pointer',
-                          transition: 'opacity 0.2s',
-                        }}
-                        onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.9'; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
-                      >
-                        Add to My Certifications
-                      </button>
+                    </div>
+                  ) : (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                      {matchedSkills.length > 0 && (
+                        <div>
+                          <div style={{ fontSize: 10, color: 'var(--green)', fontWeight: 700, marginBottom: 4 }}>✓ MATCHED SKILLS ({matchedSkills.length})</div>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                            {matchedSkills.map(skill => (
+                              <span key={skill} style={{
+                                fontSize: 11, padding: '2px 8px', borderRadius: 6,
+                                background: 'var(--green-dim)', color: 'var(--green)', fontWeight: 500,
+                              }}>{skill}</span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      {missingSkills.length > 0 && (
+                        <div>
+                          <div style={{ fontSize: 10, color: 'var(--text-secondary)', fontWeight: 700, marginBottom: 4 }}>⚠ MISSING SKILLS ({missingSkills.length})</div>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                            {missingSkills.slice(0, 10).map(skill => (
+                              <span key={skill} style={{
+                                fontSize: 11, padding: '2px 8px', borderRadius: 6,
+                                background: 'rgba(255, 255, 255, 0.05)', color: 'var(--text-secondary)',
+                              }}>{skill}</span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
+                </div>
+
+                {/* Col 3: Roadmap Bridge Impact */}
+                <div style={{ flex: '1.5 1 240px', opacity: 0.3, pointerEvents: 'none', userSelect: 'none' }}>
+                  <div style={{
+                    background: 'rgba(79, 110, 247, 0.04)',
+                    border: '1px solid rgba(79, 110, 247, 0.08)',
+                    borderRadius: 12,
+                    padding: 14,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 8,
+                  }}>
+                    <h4 style={{ margin: 0, fontSize: 12, fontWeight: 700, color: 'var(--accent-light)' }}>
+                      🚀 Roadmap Bridge Score
+                    </h4>
+                    
+                    <p style={{ margin: 0, fontSize: 12, color: 'var(--text-primary)', lineHeight: 1.4 }}>
+                      This roadmap teaches **{bridgedCount}** of your missing skills.
+                    </p>
+                    <div style={{
+                      background: 'var(--bg-card)',
+                      borderRadius: 8,
+                      height: 5,
+                      overflow: 'hidden',
+                      position: 'relative',
+                      marginTop: 2,
+                    }}>
+                      <div style={{
+                        position: 'absolute',
+                        top: 0, left: 0, height: '100%',
+                        width: `${bridgePercent}%`,
+                        background: 'var(--accent)',
+                        borderRadius: 8,
+                      }} />
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, color: 'var(--text-secondary)' }}>
+                      <span>Bridging {bridgePercent}% of the gap</span>
+                      <span>{bridgedCount}/{missingSkills.length}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

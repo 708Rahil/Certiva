@@ -612,13 +612,14 @@ function RoadmapContent() {
                   }
                 ]
                   .filter(stage => stage.certs.length > 0)
-                  .map((stage, index) => (
+                  .map((stage, index, filteredArr) => (
                     <TimelineStage
                       key={index}
                       title={`Step ${index + 1}: ${stage.title}`}
                       subtitle={stage.subtitle}
                       stepNumber={(index + 1).toString()}
                       certs={stage.certs}
+                      isLocked={index === filteredArr.length - 1 && filteredArr.length >= 3}
                     />
                   ))
                 }
@@ -790,12 +791,14 @@ function TimelineStage({
   title,
   subtitle,
   stepNumber,
-  certs
+  certs,
+  isLocked,
 }: {
   title: string;
   subtitle: string;
   stepNumber: string;
-  certs: Cert[]
+  certs: Cert[];
+  isLocked?: boolean;
 }) {
   const [showAlts, setShowAlts] = useState(false);
   const mainCerts = certs.slice(0, 3);
@@ -812,66 +815,175 @@ function TimelineStage({
         width: 24,
         height: 24,
         borderRadius: '50%',
-        background: 'var(--accent)',
+        background: isLocked ? '#f59e0b' : 'var(--accent)',
         border: '4px solid var(--bg-primary, #0c0a09)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 2,
       }}>
-        <span style={{ fontSize: 11, fontWeight: 800, color: '#fff' }}>{stepNumber}</span>
+        <span style={{ fontSize: 11, fontWeight: 800, color: '#fff' }}>
+          {isLocked ? '🔒' : stepNumber}
+        </span>
       </div>
 
       <div style={{ marginBottom: 18 }}>
-        <h3 style={{ fontSize: 18, fontWeight: 700, color: 'var(--text-primary)' }}>
-          {title}
-        </h3>
-        <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <h3 style={{ fontSize: 18, fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
+            {title}
+          </h3>
+          {isLocked && (
+            <span style={{
+              background: 'var(--accent-dim, rgba(37,99,235,0.1))',
+              border: '1px solid var(--accent, #2563eb)',
+              color: 'var(--accent, #2563eb)',
+              fontSize: 10,
+              fontWeight: 700,
+              padding: '2px 8px',
+              borderRadius: 6,
+              letterSpacing: '0.05em',
+            }}>
+              PRO PASS
+            </span>
+          )}
+        </div>
+        <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 4 }}>
           {subtitle}
         </p>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-        {mainCerts.map(cert => (
-          <CertCard key={cert.id} cert={cert} />
-        ))}
-      </div>
+      {isLocked ? (
+        <div style={{
+          position: 'relative',
+          borderRadius: 16,
+          overflow: 'hidden',
+          border: '1px solid var(--border)',
+          background: 'var(--bg-card)',
+        }}>
+          {/* Blurred Teaser Card */}
+          <div style={{
+            filter: 'blur(8px)',
+            opacity: 0.35,
+            pointerEvents: 'none',
+            userSelect: 'none',
+            padding: 16,
+          }}>
+            {mainCerts.slice(0, 1).map(cert => (
+              <CertCard key={cert.id} cert={cert} />
+            ))}
+          </div>
 
-      {/* Alternatives Expander */}
-      {altCerts.length > 0 && (
-        <div style={{ marginTop: 16 }}>
-          <button
-            onClick={() => setShowAlts(!showAlts)}
-            style={{
-              background: 'rgba(255,255,255,0.02)',
-              border: '1px solid var(--border)',
-              color: 'var(--text-secondary)',
-              fontSize: 12,
-              fontWeight: 600,
-              cursor: 'pointer',
+          {/* Frosted Lock Overlay */}
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(180deg, rgba(15,23,42,0.45) 0%, rgba(15,23,42,0.92) 100%)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '24px 20px',
+            textAlign: 'center',
+            backdropFilter: 'blur(4px)',
+          }}>
+            <div style={{
+              width: 44,
+              height: 44,
+              borderRadius: '50%',
+              background: 'rgba(37,99,235,0.2)',
+              border: '1px solid #3b82f6',
               display: 'flex',
               alignItems: 'center',
-              gap: 6,
-              padding: '6px 14px',
-              borderRadius: 8,
-              transition: 'all 0.15s',
-            }}
-          >
-            <ChevronRight size={14} style={{ transform: showAlts ? 'rotate(90deg)' : 'none', transition: 'transform 0.2s' }} />
-            {showAlts ? 'Hide' : 'Show'} Alternative Options ({altCerts.length})
-          </button>
-
-          {showAlts && (
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-              gap: 12,
-              marginTop: 12,
-              paddingLeft: 12,
-              borderLeft: '2px solid var(--border)',
+              justifyContent: 'center',
+              fontSize: 20,
+              marginBottom: 10,
             }}>
-              {altCerts.map(c => (
-                <div
+              🔒
+            </div>
+            <h4 style={{ fontSize: 18, fontWeight: 700, color: '#fff', margin: '0 0 6px' }}>
+              Unlock Step 3: Senior Specialist Certifications
+            </h4>
+            <p style={{ fontSize: 13, color: '#cbd5e1', maxWidth: 460, margin: '0 0 16px', lineHeight: 1.5 }}>
+              Access the highest-salary specialist credentials, advanced authority paths, and unlimited job scans with the Lifetime Career Pass.
+            </p>
+            <a
+              href="https://buy.stripe.com/9B6eV69Tg85p3WAbiPdnW00"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                background: 'var(--accent, #2563eb)',
+                color: '#fff',
+                fontWeight: 700,
+                fontSize: 14,
+                padding: '12px 24px',
+                borderRadius: 10,
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                boxShadow: '0 4px 16px rgba(37, 99, 235, 0.4)',
+                transition: 'transform 0.15s ease',
+              }}
+            >
+              Unlock Lifetime Access — $9.99
+            </a>
+            <span style={{ fontSize: 11, color: '#94a3b8', marginTop: 8 }}>
+              One-time payment · Instant unlock · Zero subscriptions
+            </span>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            {mainCerts.map(cert => (
+              <CertCard key={cert.id} cert={cert} />
+            ))}
+          </div>
+
+          {/* Alternatives Expander */}
+          {altCerts.length > 0 && (
+            <div style={{ marginTop: 16 }}>
+              <button
+                onClick={() => setShowAlts(!showAlts)}
+                style={{
+                  background: 'rgba(255,255,255,0.02)',
+                  border: '1px solid var(--border)',
+                  color: 'var(--text-secondary)',
+                  fontSize: 12,
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  padding: '6px 14px',
+                  borderRadius: 8,
+                  transition: 'all 0.15s',
+                }}
+              >
+                <ChevronRight size={14} style={{ transform: showAlts ? 'rotate(90deg)' : 'none', transition: 'transform 0.2s' }} />
+                {showAlts ? 'Hide' : 'Show'} Alternative Options ({altCerts.length})
+              </button>
+
+              {showAlts && (
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+                  gap: 12,
+                  marginTop: 12,
+                  paddingLeft: 12,
+                  borderLeft: '2px solid var(--border)',
+                }}>
+                  {altCerts.map(c => (
+                    <div key={c.id}>
+                      <CertCard cert={c} />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </>
+      )}
                   key={c.id}
                   style={{
                     background: 'rgba(255,255,255,0.01)',

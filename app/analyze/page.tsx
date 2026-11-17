@@ -1,7 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import UpgradeModal from '@/components/UpgradeModal';
+import { Sparkles } from 'lucide-react';
 
 const EXAMPLE_JOBS = [
   {
@@ -29,12 +31,32 @@ export default function AnalyzePage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [charCount, setCharCount] = useState(0);
+  const [scanCount, setScanCount] = useState(0);
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('certroute_scan_count');
+      if (stored) {
+        setScanCount(parseInt(stored, 10) || 0);
+      }
+    } catch {
+      // Ignore localStorage errors
+    }
+  }, []);
 
   const handleSubmit = async () => {
     if (!title.trim() || !company.trim() || !description.trim()) {
       setError('Please fill in all fields.');
       return;
     }
+
+    // Check if free scan limit reached
+    if (scanCount >= 3) {
+      setShowUpgradeModal(true);
+      return;
+    }
+
     setLoading(true);
     setError('');
     try {
@@ -45,6 +67,12 @@ export default function AnalyzePage() {
       });
       const data = await res.json();
       if (data.jobId) {
+        // Increment scan count
+        try {
+          const nextCount = scanCount + 1;
+          localStorage.setItem('certroute_scan_count', nextCount.toString());
+          setScanCount(nextCount);
+        } catch {}
         router.push(`/jobs/${data.jobId}`);
       } else {
         setError(data.error || 'Something went wrong.');
@@ -204,6 +232,41 @@ export default function AnalyzePage() {
           </div>
         )}
 
+        {/* Free scan badge indicator */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginBottom: 12,
+          padding: '8px 12px',
+          borderRadius: 8,
+          background: scanCount >= 3 ? 'var(--amber-dim, rgba(245, 158, 11, 0.08))' : 'rgba(0, 0, 0, 0.02)',
+          border: `1px solid ${scanCount >= 3 ? 'var(--amber, #f59e0b)' : 'var(--border)'}`,
+          fontSize: 12,
+        }}>
+          <span style={{ color: scanCount >= 3 ? 'var(--amber, #f59e0b)' : 'var(--text-secondary)', fontWeight: 500 }}>
+            {scanCount >= 3 ? 'Free scan limit reached (3/3 used)' : `Free job scans remaining: ${Math.max(0, 3 - scanCount)} of 3`}
+          </span>
+          <button
+            onClick={() => setShowUpgradeModal(true)}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: 'var(--accent)',
+              fontSize: 12,
+              fontWeight: 700,
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 4,
+              padding: 0,
+            }}
+          >
+            <Sparkles size={12} />
+            {scanCount >= 3 ? 'Upgrade to Pro' : 'Unlock Unlimited'}
+          </button>
+        </div>
+
         <button
           onClick={handleSubmit}
           disabled={loading}
@@ -251,6 +314,13 @@ export default function AnalyzePage() {
           </div>
         ))}
       </div>
+
+      <UpgradeModal
+        isOpen={showUpgradeModal}
+        onClose={() => setShowUpgradeModal(false)}
+        title="You've used your 3 free job scans"
+        subtitle="Upgrade to the CertRoute Pro Lifetime Pass for unlimited job scans forever, complete senior-level Step 3 roadmaps, and the ATS resume match scorecard."
+      />
     </div>
   );
 }
