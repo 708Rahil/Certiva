@@ -41,20 +41,12 @@ interface Job {
   user_id?: string | null;
 }
 
-const INDUSTRY_COLORS: Record<string, string> = {
-  cloud: '#2563eb', data: '#34d399', cybersecurity: '#f87171',
-  finance: '#fbbf24', marketing: '#a78bfa', management: '#38bdf8', general: '#94a3b8',
-};
-
 export default function JobDetailPage() {
   const { id } = useParams();
   const [job, setJob] = useState<Job | null>(null);
   const [recs, setRecs] = useState<Rec[]>([]);
   const [loading, setLoading] = useState(true);
   const [showFullDesc, setShowFullDesc] = useState(false);
-  const [filterIndustry, setFilterIndustry] = useState<string>('all');
-  type SortOption = 'score' | 'difficulty' | 'cost';
-  const [sortBy, setSortBy] = useState<SortOption>('score');
   const { isLoaded, userId } = useAuth();
   const [userSkills, setUserSkills] = useState<string[]>([]);
   const [completedCertSkills, setCompletedCertSkills] = useState<string[]>([]);
@@ -128,7 +120,6 @@ export default function JobDetailPage() {
 
   const skills: string[] = JSON.parse(job.extracted_skills || '[]');
   const topScore = recs[0]?.score || 0;
-  const industries = [...new Set(recs.map(r => r.industry))];
 
   // Combined user skills from profile + completed certs
   const combinedUserSkills = [...userSkills, ...completedCertSkills];
@@ -169,27 +160,35 @@ export default function JobDetailPage() {
     ? Math.round((bridgedCount / missingSkills.length) * 100)
     : 0;
 
-  const getCostValue = (costStr: string | undefined) => {
-    if (!costStr || costStr.toLowerCase().includes('free')) return 0;
-    const match = costStr.match(/\d+/);
-    return match ? parseInt(match[0], 10) : 9999;
-  };
+  // Group recommendations into sequenced roadmap stages
+  const stage1 = recs.filter(r => r.difficulty <= 2).sort((a, b) => b.score - a.score);
+  const stage2 = recs.filter(r => r.difficulty === 3).sort((a, b) => b.score - a.score);
+  const stage3 = recs.filter(r => r.difficulty >= 4).sort((a, b) => b.score - a.score);
 
-  const filteredAndSorted = (filterIndustry === 'all' ? recs : recs.filter(r => r.industry === filterIndustry))
-    .sort((a, b) => {
-      if (sortBy === 'score') return b.score - a.score;
-      if (sortBy === 'difficulty') {
-        if (a.difficulty !== b.difficulty) return a.difficulty - b.difficulty;
-        return b.score - a.score; // Tiebreaker
-      }
-      if (sortBy === 'cost') {
-        const costA = getCostValue(a.cost);
-        const costB = getCostValue(b.cost);
-        if (costA !== costB) return costA - costB;
-        return b.score - a.score; // Tiebreaker
-      }
-      return 0;
-    });
+  const rawStages = [
+    {
+      title: 'Foundational Credentials',
+      subtitle: 'Build fundamental domain and tool familiarity',
+      certs: stage1,
+    },
+    {
+      title: 'Core Competency & Associate Credentials',
+      subtitle: 'Demonstrate capability in standard frameworks and core tasks',
+      certs: stage2,
+    },
+    {
+      title: 'Advanced & Specialist Expertise',
+      subtitle: 'Establish advanced authority and high-salary expertise',
+      certs: stage3,
+    },
+  ].filter(s => s.certs.length > 0);
+
+  const stages = rawStages.map((s, idx) => ({
+    ...s,
+    stepNumber: (idx + 1).toString(),
+  }));
+
+  const isMultiStage = stages.length > 1;
 
   return (
     <div style={{ maxWidth: 1100, margin: '0 auto', padding: '40px 24px 80px' }}>
@@ -574,199 +573,320 @@ export default function JobDetailPage() {
           )}
         </div>
 
-        {/* Filter bar */}
-        {industries.length > 1 && (
-          <div className="animate-fade-up delay-1" style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-            <FilterChip label="All" value="all" active={filterIndustry === 'all'} onClick={() => setFilterIndustry('all')} />
-            {industries.map(ind => (
-              <FilterChip key={ind} label={ind} value={ind} active={filterIndustry === ind}
-                onClick={() => setFilterIndustry(ind)} color={INDUSTRY_COLORS[ind]} />
-            ))}
-          </div>
-        )}
-
-        {/* Recommendations */}
+        {/* Career Certification Roadmap */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 12 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
-              <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600, color: 'var(--text-primary)', letterSpacing: '-0.3px' }}>
-                Recommended Certifications
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 28, flexWrap: 'wrap', gap: 12 }}>
+            <div>
+              <h2 style={{ margin: '0 0 4px', fontSize: 20, fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.3px' }}>
+                Career Certification Roadmap
               </h2>
-              <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>
-                {filteredAndSorted.length} result{filteredAndSorted.length !== 1 ? 's' : ''}
-              </span>
-              <Link 
-                href={`/roadmap?jobId=${job?.id}`}
-                style={{
-                  fontSize: 13,
-                  fontWeight: 600,
-                  color: '#fff',
-                  background: 'var(--accent)',
-                  padding: '7px 14px',
-                  borderRadius: 8,
-                  textDecoration: 'none',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  whiteSpace: 'nowrap',
-                  boxShadow: '0 2px 8px rgba(37, 99, 235, 0.25)',
-                  transition: 'opacity 0.15s ease',
-                }}
-                className="hover:opacity-90"
-              >
-                View Job Roadmap →
-              </Link>
+              <p style={{ margin: 0, fontSize: 13, color: 'var(--text-secondary)' }}>
+                Sequenced step-by-step credential path tailored to this role
+              </p>
             </div>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 500 }}>Sort by:</span>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as SortOption)}
-                style={{
-                  background: 'var(--bg-card)',
-                  border: '1px solid var(--border)',
-                  borderRadius: 8,
-                  padding: '6px 12px',
-                  fontSize: 13,
-                  color: 'var(--text-primary)',
-                  outline: 'none',
-                  cursor: 'pointer'
-                }}
-              >
-                <option value="score">Best Match</option>
-                <option value="difficulty">Difficulty (Low to High)</option>
-                <option value="cost">Cost (Low to High)</option>
-              </select>
-            </div>
+            <a
+              href="https://buy.stripe.com/9B6eV69Tg85p3WAbiPdnW00"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontSize: 13,
+                fontWeight: 700,
+                color: '#fff',
+                background: 'var(--accent, #2563eb)',
+                padding: '8px 16px',
+                borderRadius: 8,
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+                boxShadow: '0 2px 8px rgba(37, 99, 235, 0.25)',
+              }}
+            >
+              ⚡ Lifetime Pass $9.99
+            </a>
           </div>
 
-          {filteredAndSorted.length === 0 ? (
+          {stages.length === 0 ? (
             <EmptyState />
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-              {filteredAndSorted.map((rec, i) => {
-                const isLocked = i === 0;
-
-                if (isLocked) {
-                  return (
-                    <div key={rec.id} style={{
-                      position: 'relative',
-                      borderRadius: 16,
-                      overflow: 'hidden',
-                      border: '1px solid var(--border)',
-                      background: 'var(--bg-card)',
-                    }}>
-                      {/* Blurred background teaser */}
-                      <div style={{
-                        filter: 'blur(8px)',
-                        opacity: 0.35,
-                        pointerEvents: 'none',
-                        userSelect: 'none',
-                      }}>
-                        <CertCard
-                          rank={1}
-                          certId={rec.cert_id}
-                          name={rec.name}
-                          provider={rec.provider}
-                          industry={rec.industry}
-                          difficulty={rec.difficulty}
-                          score={rec.score}
-                          skillOverlap={rec.skill_overlap}
-                          industryMatch={!!rec.industry_match}
-                          matchedSkills={JSON.parse(rec.matched_skills || '[]')}
-                          explanation={rec.explanation}
-                          description={rec.description}
-                          cost={rec.cost}
-                          duration={rec.duration_weeks ? `${rec.duration_weeks} weeks` : undefined}
-                          official_url={rec.official_url}
-                        />
-                      </div>
-
-                      {/* Frosted Lock Overlay */}
-                      <div style={{
-                        position: 'absolute',
-                        inset: 0,
-                        background: 'linear-gradient(180deg, rgba(15,23,42,0.45) 0%, rgba(15,23,42,0.92) 100%)',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        padding: '24px 20px',
-                        textAlign: 'center',
-                        backdropFilter: 'blur(4px)',
-                      }}>
-                        <div style={{
-                          width: 40,
-                          height: 40,
-                          borderRadius: '50%',
-                          background: 'rgba(37,99,235,0.2)',
-                          border: '1px solid #3b82f6',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          fontSize: 18,
-                          marginBottom: 8,
-                        }}>
-                          🔒
-                        </div>
-                        <h4 style={{ fontSize: 17, fontWeight: 700, color: '#fff', margin: '0 0 6px' }}>
-                          Top Recommendation #1 Locked
-                        </h4>
-                        <p style={{ fontSize: 13, color: '#cbd5e1', maxWidth: 440, margin: '0 0 16px', lineHeight: 1.5 }}>
-                          Unlock the #1 ranked certification for this role, plus full ATS resume gap analysis with the Lifetime Career Pass.
-                        </p>
-                        <a
-                          href="https://buy.stripe.com/9B6eV69Tg85p3WAbiPdnW00"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{
-                            background: 'var(--accent, #2563eb)',
-                            color: '#fff',
-                            fontWeight: 700,
-                            fontSize: 14,
-                            padding: '11px 22px',
-                            borderRadius: 10,
-                            textDecoration: 'none',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: 8,
-                            boxShadow: '0 4px 16px rgba(37, 99, 235, 0.4)',
-                            transition: 'transform 0.15s ease',
-                          }}
-                        >
-                          Unlock with Lifetime Pass — $9.99
-                        </a>
-                        <span style={{ fontSize: 11, color: '#94a3b8', marginTop: 8 }}>
-                          One-time payment · Instant unlock · Zero subscriptions
-                        </span>
-                      </div>
-                    </div>
-                  );
-                }
+            <div style={{
+              position: 'relative',
+              paddingLeft: 32,
+              borderLeft: '2px solid var(--border)',
+              marginLeft: 16,
+            }}>
+              {stages.map((stage, stageIdx) => {
+                const isFinalStage = stageIdx === stages.length - 1;
+                const isStageLocked = isMultiStage && isFinalStage;
+                const lockLastCert = !isMultiStage && stage.certs.length >= 2;
 
                 return (
-                  <CertCard
-                    key={rec.id}
-                    rank={i + 1}
-                    certId={rec.cert_id}
-                    name={rec.name}
-                    provider={rec.provider}
-                    industry={rec.industry}
-                    difficulty={rec.difficulty}
-                    score={rec.score}
-                    skillOverlap={rec.skill_overlap}
-                    industryMatch={!!rec.industry_match}
-                    matchedSkills={JSON.parse(rec.matched_skills || '[]')}
-                    explanation={rec.explanation}
-                    description={rec.description}
-                    cost={rec.cost}
-                    duration={rec.duration_weeks ? `${rec.duration_weeks} weeks` : undefined}
-                    official_url={rec.official_url}
-                    onAddToCerts={userId ? handleAddToCerts : undefined}
-                    animDelay={i * 60}
-                    exam_parts={rec.exam_parts}
-                  />
+                  <div key={stage.stepNumber} style={{ marginBottom: 44, position: 'relative' }}>
+                    {/* Node Indicator */}
+                    <div style={{
+                      position: 'absolute',
+                      left: -32,
+                      top: 2,
+                      transform: 'translateX(-50%)',
+                      width: 24,
+                      height: 24,
+                      borderRadius: '50%',
+                      background: isStageLocked ? '#f59e0b' : 'var(--accent)',
+                      border: '4px solid var(--bg-primary, #0c0a09)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      zIndex: 2,
+                    }}>
+                      <span style={{ fontSize: 11, fontWeight: 800, color: '#fff' }}>
+                        {isStageLocked ? '🔒' : stage.stepNumber}
+                      </span>
+                    </div>
+
+                    <div style={{ marginBottom: 18 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <h3 style={{ fontSize: 18, fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
+                          {stage.title}
+                        </h3>
+                        {isStageLocked && (
+                          <span style={{
+                            background: 'var(--accent-dim, rgba(37,99,235,0.1))',
+                            border: '1px solid var(--accent, #2563eb)',
+                            color: 'var(--accent, #2563eb)',
+                            fontSize: 10,
+                            fontWeight: 700,
+                            padding: '2px 8px',
+                            borderRadius: 6,
+                            letterSpacing: '0.05em',
+                          }}>
+                            PRO PASS
+                          </span>
+                        )}
+                      </div>
+                      <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 4 }}>
+                        {stage.subtitle}
+                      </p>
+                    </div>
+
+                    {isStageLocked ? (
+                      <div style={{
+                        position: 'relative',
+                        borderRadius: 16,
+                        overflow: 'hidden',
+                        border: '1px solid var(--border)',
+                        background: 'var(--bg-card)',
+                      }}>
+                        {/* Blurred Teaser Card */}
+                        <div style={{
+                          filter: 'blur(8px)',
+                          opacity: 0.35,
+                          pointerEvents: 'none',
+                          userSelect: 'none',
+                        }}>
+                          <CertCard
+                            rank={stageIdx + 1}
+                            certId={stage.certs[0].cert_id}
+                            name={stage.certs[0].name}
+                            provider={stage.certs[0].provider}
+                            industry={stage.certs[0].industry}
+                            difficulty={stage.certs[0].difficulty}
+                            score={stage.certs[0].score}
+                            skillOverlap={stage.certs[0].skill_overlap}
+                            industryMatch={!!stage.certs[0].industry_match}
+                            matchedSkills={JSON.parse(stage.certs[0].matched_skills || '[]')}
+                            explanation={stage.certs[0].explanation}
+                            description={stage.certs[0].description}
+                            cost={stage.certs[0].cost}
+                            duration={stage.certs[0].duration_weeks ? `${stage.certs[0].duration_weeks} weeks` : undefined}
+                            official_url={stage.certs[0].official_url}
+                          />
+                        </div>
+
+                        {/* Frosted Lock Overlay */}
+                        <div style={{
+                          position: 'absolute',
+                          inset: 0,
+                          background: 'linear-gradient(180deg, rgba(15,23,42,0.45) 0%, rgba(15,23,42,0.92) 100%)',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          padding: '24px 20px',
+                          textAlign: 'center',
+                          backdropFilter: 'blur(4px)',
+                        }}>
+                          <div style={{
+                            width: 44,
+                            height: 44,
+                            borderRadius: '50%',
+                            background: 'rgba(37,99,235,0.2)',
+                            border: '1px solid #3b82f6',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: 20,
+                            marginBottom: 10,
+                          }}>
+                            🔒
+                          </div>
+                          <h4 style={{ fontSize: 18, fontWeight: 700, color: '#fff', margin: '0 0 6px' }}>
+                            Unlock Step {stage.stepNumber}: {stage.title}
+                          </h4>
+                          <p style={{ fontSize: 13, color: '#cbd5e1', maxWidth: 460, margin: '0 0 16px', lineHeight: 1.5 }}>
+                            Access the highest-salary specialist credentials, advanced authority paths, and unlimited job scans with the Lifetime Career Pass.
+                          </p>
+                          <a
+                            href="https://buy.stripe.com/9B6eV69Tg85p3WAbiPdnW00"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              background: 'var(--accent, #2563eb)',
+                              color: '#fff',
+                              fontWeight: 700,
+                              fontSize: 14,
+                              padding: '12px 24px',
+                              borderRadius: 10,
+                              textDecoration: 'none',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: 8,
+                              boxShadow: '0 4px 16px rgba(37, 99, 235, 0.4)',
+                              transition: 'transform 0.15s ease',
+                            }}
+                          >
+                            Unlock Lifetime Access — $9.99
+                          </a>
+                          <span style={{ fontSize: 11, color: '#94a3b8', marginTop: 8 }}>
+                            One-time payment · Instant unlock · Zero subscriptions
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                        {stage.certs.map((rec, ci) => {
+                          if (lockLastCert && ci === stage.certs.length - 1) {
+                            return (
+                              <div key={rec.id} style={{
+                                position: 'relative',
+                                borderRadius: 16,
+                                overflow: 'hidden',
+                                border: '1px solid var(--border)',
+                                background: 'var(--bg-card)',
+                              }}>
+                                {/* Blurred Teaser Card */}
+                                <div style={{
+                                  filter: 'blur(8px)',
+                                  opacity: 0.35,
+                                  pointerEvents: 'none',
+                                  userSelect: 'none',
+                                }}>
+                                  <CertCard
+                                    rank={ci + 1}
+                                    certId={rec.cert_id}
+                                    name={rec.name}
+                                    provider={rec.provider}
+                                    industry={rec.industry}
+                                    difficulty={rec.difficulty}
+                                    score={rec.score}
+                                    skillOverlap={rec.skill_overlap}
+                                    industryMatch={!!rec.industry_match}
+                                    matchedSkills={JSON.parse(rec.matched_skills || '[]')}
+                                    explanation={rec.explanation}
+                                    description={rec.description}
+                                    cost={rec.cost}
+                                    duration={rec.duration_weeks ? `${rec.duration_weeks} weeks` : undefined}
+                                    official_url={rec.official_url}
+                                  />
+                                </div>
+
+                                {/* Frosted Lock Overlay */}
+                                <div style={{
+                                  position: 'absolute',
+                                  inset: 0,
+                                  background: 'linear-gradient(180deg, rgba(15,23,42,0.45) 0%, rgba(15,23,42,0.92) 100%)',
+                                  display: 'flex',
+                                  flexDirection: 'column',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  padding: '24px 20px',
+                                  textAlign: 'center',
+                                  backdropFilter: 'blur(4px)',
+                                }}>
+                                  <div style={{
+                                    width: 40,
+                                    height: 40,
+                                    borderRadius: '50%',
+                                    background: 'rgba(37,99,235,0.2)',
+                                    border: '1px solid #3b82f6',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    fontSize: 18,
+                                    marginBottom: 8,
+                                  }}>
+                                    🔒
+                                  </div>
+                                  <h4 style={{ fontSize: 17, fontWeight: 700, color: '#fff', margin: '0 0 6px' }}>
+                                    Final Certification Locked
+                                  </h4>
+                                  <p style={{ fontSize: 13, color: '#cbd5e1', maxWidth: 440, margin: '0 0 16px', lineHeight: 1.5 }}>
+                                    Unlock the final certification on this career path, plus full ATS resume gap analysis with the Lifetime Career Pass.
+                                  </p>
+                                  <a
+                                    href="https://buy.stripe.com/9B6eV69Tg85p3WAbiPdnW00"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{
+                                      background: 'var(--accent, #2563eb)',
+                                      color: '#fff',
+                                      fontWeight: 700,
+                                      fontSize: 14,
+                                      padding: '11px 22px',
+                                      borderRadius: 10,
+                                      textDecoration: 'none',
+                                      display: 'inline-flex',
+                                      alignItems: 'center',
+                                      gap: 8,
+                                      boxShadow: '0 4px 16px rgba(37, 99, 235, 0.4)',
+                                    }}
+                                  >
+                                    Unlock with Lifetime Pass — $9.99
+                                  </a>
+                                  <span style={{ fontSize: 11, color: '#94a3b8', marginTop: 8 }}>
+                                    One-time payment · Instant unlock · Zero subscriptions
+                                  </span>
+                                </div>
+                              </div>
+                            );
+                          }
+
+                          return (
+                            <CertCard
+                              key={rec.id}
+                              rank={ci + 1}
+                              certId={rec.cert_id}
+                              name={rec.name}
+                              provider={rec.provider}
+                              industry={rec.industry}
+                              difficulty={rec.difficulty}
+                              score={rec.score}
+                              skillOverlap={rec.skill_overlap}
+                              industryMatch={!!rec.industry_match}
+                              matchedSkills={JSON.parse(rec.matched_skills || '[]')}
+                              explanation={rec.explanation}
+                              description={rec.description}
+                              cost={rec.cost}
+                              duration={rec.duration_weeks ? `${rec.duration_weeks} weeks` : undefined}
+                              official_url={rec.official_url}
+                              onAddToCerts={userId ? handleAddToCerts : undefined}
+                              animDelay={ci * 60}
+                              exam_parts={rec.exam_parts}
+                            />
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
                 );
               })}
             </div>
@@ -790,24 +910,6 @@ function StatBubble({ label, value, unit, accent }: { label: string; value: stri
         {value}<span style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 400 }}>{unit}</span>
       </div>
     </div>
-  );
-}
-
-function FilterChip({ label, value, active, onClick, color }: { label: string; value: string; active: boolean; onClick: () => void; color?: string }) {
-  const c = color || 'var(--accent)';
-  return (
-    <button
-      onClick={onClick}
-      style={{
-        background: active ? `${c}20` : 'var(--bg-card)',
-        border: `1px solid ${active ? `${c}60` : 'var(--border)'}`,
-        borderRadius: 100, padding: '5px 14px',
-        fontSize: 13, fontWeight: 500,
-        color: active ? c : 'var(--text-secondary)',
-        cursor: 'pointer', fontFamily: 'var(--font-body)',
-        textTransform: 'capitalize', transition: 'all 0.15s',
-      }}
-    >{label}</button>
   );
 }
 
