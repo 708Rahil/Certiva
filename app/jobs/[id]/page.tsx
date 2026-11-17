@@ -643,29 +643,130 @@ export default function JobDetailPage() {
             <EmptyState />
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-              {filteredAndSorted.map((rec, i) => (
-                <CertCard
-                  key={rec.id}
-                  rank={i + 1}
-                  certId={rec.cert_id}
-                  name={rec.name}
-                  provider={rec.provider}
-                  industry={rec.industry}
-                  difficulty={rec.difficulty}
-                  score={rec.score}
-                  skillOverlap={rec.skill_overlap}
-                  industryMatch={!!rec.industry_match}
-                  matchedSkills={JSON.parse(rec.matched_skills || '[]')}
-                  explanation={rec.explanation}
-                  description={rec.description}
-                  cost={rec.cost}
-                  duration={rec.duration_weeks ? `${rec.duration_weeks} weeks` : undefined}
-                  official_url={rec.official_url}
-                  onAddToCerts={userId ? handleAddToCerts : undefined}
-                  animDelay={i * 60}
-                  exam_parts={rec.exam_parts}
-                />
-              ))}
+              {filteredAndSorted.map((rec, i) => {
+                const isLastLocked = filteredAndSorted.length >= 2 && i === filteredAndSorted.length - 1;
+
+                if (isLastLocked) {
+                  return (
+                    <div key={rec.id} style={{
+                      position: 'relative',
+                      borderRadius: 16,
+                      overflow: 'hidden',
+                      border: '1px solid var(--border)',
+                      background: 'var(--bg-card)',
+                    }}>
+                      {/* Blurred background teaser */}
+                      <div style={{
+                        filter: 'blur(8px)',
+                        opacity: 0.35,
+                        pointerEvents: 'none',
+                        userSelect: 'none',
+                      }}>
+                        <CertCard
+                          rank={i + 1}
+                          certId={rec.cert_id}
+                          name={rec.name}
+                          provider={rec.provider}
+                          industry={rec.industry}
+                          difficulty={rec.difficulty}
+                          score={rec.score}
+                          skillOverlap={rec.skill_overlap}
+                          industryMatch={!!rec.industry_match}
+                          matchedSkills={JSON.parse(rec.matched_skills || '[]')}
+                          explanation={rec.explanation}
+                          description={rec.description}
+                          cost={rec.cost}
+                          duration={rec.duration_weeks ? `${rec.duration_weeks} weeks` : undefined}
+                          official_url={rec.official_url}
+                        />
+                      </div>
+
+                      {/* Frosted Lock Overlay */}
+                      <div style={{
+                        position: 'absolute',
+                        inset: 0,
+                        background: 'linear-gradient(180deg, rgba(15,23,42,0.45) 0%, rgba(15,23,42,0.92) 100%)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        padding: '24px 20px',
+                        textAlign: 'center',
+                        backdropFilter: 'blur(4px)',
+                      }}>
+                        <div style={{
+                          width: 40,
+                          height: 40,
+                          borderRadius: '50%',
+                          background: 'rgba(37,99,235,0.2)',
+                          border: '1px solid #3b82f6',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: 18,
+                          marginBottom: 8,
+                        }}>
+                          🔒
+                        </div>
+                        <h4 style={{ fontSize: 17, fontWeight: 700, color: '#fff', margin: '0 0 6px' }}>
+                          Final Recommendation #{i + 1} Locked
+                        </h4>
+                        <p style={{ fontSize: 13, color: '#cbd5e1', maxWidth: 440, margin: '0 0 16px', lineHeight: 1.5 }}>
+                          Unlock this certification, full ATS resume gap analysis, and senior career roadmaps with the Lifetime Career Pass.
+                        </p>
+                        <a
+                          href="https://buy.stripe.com/9B6eV69Tg85p3WAbiPdnW00"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            background: 'var(--accent, #2563eb)',
+                            color: '#fff',
+                            fontWeight: 700,
+                            fontSize: 14,
+                            padding: '11px 22px',
+                            borderRadius: 10,
+                            textDecoration: 'none',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 8,
+                            boxShadow: '0 4px 16px rgba(37, 99, 235, 0.4)',
+                            transition: 'transform 0.15s ease',
+                          }}
+                        >
+                          Unlock with Lifetime Pass — $9.99
+                        </a>
+                        <span style={{ fontSize: 11, color: '#94a3b8', marginTop: 8 }}>
+                          One-time payment · Instant unlock · Zero subscriptions
+                        </span>
+                      </div>
+                    </div>
+                  );
+                }
+
+                return (
+                  <CertCard
+                    key={rec.id}
+                    rank={i + 1}
+                    certId={rec.cert_id}
+                    name={rec.name}
+                    provider={rec.provider}
+                    industry={rec.industry}
+                    difficulty={rec.difficulty}
+                    score={rec.score}
+                    skillOverlap={rec.skill_overlap}
+                    industryMatch={!!rec.industry_match}
+                    matchedSkills={JSON.parse(rec.matched_skills || '[]')}
+                    explanation={rec.explanation}
+                    description={rec.description}
+                    cost={rec.cost}
+                    duration={rec.duration_weeks ? `${rec.duration_weeks} weeks` : undefined}
+                    official_url={rec.official_url}
+                    onAddToCerts={userId ? handleAddToCerts : undefined}
+                    animDelay={i * 60}
+                    exam_parts={rec.exam_parts}
+                  />
+                );
+              })}
             </div>
           )}
         </div>
