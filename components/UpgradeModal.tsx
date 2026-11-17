@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
+import { useUser } from '@clerk/nextjs';
+import { getStripeCheckoutUrl } from '@/lib/stripe';
 import { X, Sparkles, Check, ShieldCheck, Zap, Lock } from 'lucide-react';
-
-const STRIPE_PAYMENT_URL = 'https://buy.stripe.com/9B6eV69Tg85p3WAbiPdnW00';
 
 interface UpgradeModalProps {
   isOpen: boolean;
@@ -18,6 +18,9 @@ export default function UpgradeModal({
   title = "Unlock Unlimited Career Intelligence",
   subtitle = "You've reached the free limit. Upgrade to the Lifetime Career Pass for unlimited scans, full 3-step roadmaps, and the ATS resume match scorecard.",
 }: UpgradeModalProps) {
+  const { user } = useUser();
+  const checkoutUrl = getStripeCheckoutUrl(user?.id, user?.primaryEmailAddress?.emailAddress);
+
   if (!isOpen) return null;
 
   return (
@@ -208,7 +211,7 @@ export default function UpgradeModal({
 
         {/* CTA Button */}
         <a
-          href={STRIPE_PAYMENT_URL}
+          href={checkoutUrl}
           target="_blank"
           rel="noopener noreferrer"
           style={{

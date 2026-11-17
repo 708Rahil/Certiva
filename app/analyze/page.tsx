@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useUser } from '@clerk/nextjs';
 import UpgradeModal from '@/components/UpgradeModal';
 import { Sparkles } from 'lucide-react';
 
@@ -25,6 +26,9 @@ const EXAMPLE_JOBS = [
 
 export default function AnalyzePage() {
   const router = useRouter();
+  const { user } = useUser();
+  const isPro = Boolean(user?.publicMetadata?.hasLifetimePass);
+
   const [title, setTitle] = useState('');
   const [company, setCompany] = useState('');
   const [description, setDescription] = useState('');
@@ -51,8 +55,8 @@ export default function AnalyzePage() {
       return;
     }
 
-    // Check if free scan limit reached
-    if (scanCount >= 3) {
+    // Check if free scan limit reached for non-pro users
+    if (!isPro && scanCount >= 3) {
       setShowUpgradeModal(true);
       return;
     }
@@ -240,31 +244,54 @@ export default function AnalyzePage() {
           marginBottom: 12,
           padding: '8px 12px',
           borderRadius: 8,
-          background: scanCount >= 3 ? 'var(--amber-dim, rgba(245, 158, 11, 0.08))' : 'rgba(0, 0, 0, 0.02)',
-          border: `1px solid ${scanCount >= 3 ? 'var(--amber, #f59e0b)' : 'var(--border)'}`,
+          background: isPro
+            ? 'var(--green-dim, rgba(16, 185, 129, 0.08))'
+            : scanCount >= 3
+            ? 'var(--amber-dim, rgba(245, 158, 11, 0.08))'
+            : 'rgba(0, 0, 0, 0.02)',
+          border: `1px solid ${
+            isPro
+              ? 'var(--green, #10b981)'
+              : scanCount >= 3
+              ? 'var(--amber, #f59e0b)'
+              : 'var(--border)'
+          }`,
           fontSize: 12,
         }}>
-          <span style={{ color: scanCount >= 3 ? 'var(--amber, #f59e0b)' : 'var(--text-secondary)', fontWeight: 500 }}>
-            {scanCount >= 3 ? 'Free scan limit reached (3/3 used)' : `Free job scans remaining: ${Math.max(0, 3 - scanCount)} of 3`}
+          <span style={{
+            color: isPro
+              ? 'var(--green, #10b981)'
+              : scanCount >= 3
+              ? 'var(--amber, #f59e0b)'
+              : 'var(--text-secondary)',
+            fontWeight: 600,
+          }}>
+            {isPro
+              ? '⚡ Lifetime Pass Active · Unlimited Scans'
+              : scanCount >= 3
+              ? 'Free scan limit reached (3/3 used)'
+              : `Free job scans remaining: ${Math.max(0, 3 - scanCount)} of 3`}
           </span>
-          <button
-            onClick={() => setShowUpgradeModal(true)}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: 'var(--accent)',
-              fontSize: 12,
-              fontWeight: 700,
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 4,
-              padding: 0,
-            }}
-          >
-            <Sparkles size={12} />
-            {scanCount >= 3 ? 'Upgrade to Pro' : 'Unlock Unlimited'}
-          </button>
+          {!isPro && (
+            <button
+              onClick={() => setShowUpgradeModal(true)}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: 'var(--accent)',
+                fontSize: 12,
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 4,
+                padding: 0,
+              }}
+            >
+              <Sparkles size={12} />
+              {scanCount >= 3 ? 'Upgrade to Pro' : 'Unlock Unlimited'}
+            </button>
+          )}
         </div>
 
         <button

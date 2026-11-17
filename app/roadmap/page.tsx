@@ -3,6 +3,9 @@
 import { useEffect, useState, useMemo, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { useAuth, useUser } from '@clerk/nextjs';
+import { getStripeCheckoutUrl } from '@/lib/stripe';
+import LoggedOutState from '@/components/LoggedOutState';
 import { Award, Briefcase, ChevronRight, CheckCircle, Clock, BookOpen, AlertCircle, Sparkles, Map as MapIcon } from 'lucide-react';
 import { getSlug } from '@/lib/slug';
 import AddCertButton from '@/components/AddCertButton';
@@ -48,6 +51,7 @@ const INDUSTRY_ORDER = ['cloud', 'networking', 'cybersecurity', 'data', 'ai_ml',
 function RoadmapContent() {
   const searchParams = useSearchParams();
   const urlJobId = searchParams.get('jobId');
+  const { isLoaded, userId } = useAuth();
 
   const [loading, setLoading] = useState(true);
   const [mode, setMode] = useState<'job-specific' | 'generic'>('job-specific');
@@ -95,8 +99,13 @@ function RoadmapContent() {
   };
 
   useEffect(() => {
+    if (!isLoaded) return;
+    if (!userId) {
+      setLoading(false);
+      return;
+    }
     fetchRoadmapData(urlJobId || undefined);
-  }, [urlJobId]);
+  }, [urlJobId, isLoaded, userId]);
 
   const handleJobChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const val = e.target.value;
@@ -148,7 +157,7 @@ function RoadmapContent() {
   const roleStage2 = useMemo(() => roleCerts.filter(c => c.difficulty === 3), [roleCerts]);
   const roleStage3 = useMemo(() => roleCerts.filter(c => c.difficulty >= 4), [roleCerts]);
 
-  if (loading && jobs.length === 0) {
+  if (!isLoaded || (loading && jobs.length === 0 && !error)) {
     return (
       <div style={{
         maxWidth: 900,
@@ -163,46 +172,22 @@ function RoadmapContent() {
     );
   }
 
-  if (error) {
-    if (error === 'Unauthorized') {
-      return (
-        <div style={{
-          maxWidth: 600,
-          margin: '80px auto',
-          padding: '40px 24px',
-          textAlign: 'center',
-          background: 'var(--bg-secondary)',
-          borderRadius: 16,
-          border: '1px solid var(--border)',
-        }}>
-          <Award size={48} style={{ color: 'var(--accent)', marginBottom: 16 }} />
-          <h2 style={{ fontSize: 24, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 12 }}>
-            Unlock Your Career Roadmap
-          </h2>
-          <p style={{ color: 'var(--text-secondary)', fontSize: 15, lineHeight: 1.6, maxWidth: 460, margin: '0 auto 28px' }}>
-            Sign in to analyze your saved jobs, generate customized certification pathways, track your certification progress, and map out your next career moves.
-          </p>
-          <a
-            href="/sign-in?redirect_url=/roadmap"
-            style={{
-              display: 'inline-block',
-              padding: '12px 28px',
-              background: 'var(--accent)',
-              color: '#fff',
-              borderRadius: 10,
-              textDecoration: 'none',
-              fontWeight: 600,
-              transition: 'opacity 0.2s',
-            }}
-            onMouseOver={(e) => e.currentTarget.style.opacity = '0.9'}
-            onMouseOut={(e) => e.currentTarget.style.opacity = '1'}
-          >
-            Sign In / Register
-          </a>
-        </div>
-      );
-    }
+  if (!userId || error === 'Unauthorized') {
+    return (
+      <LoggedOutState
+        title="Unlock Your Career Roadmap"
+        description="Create an account or sign in to generate sequenced step-by-step learning paths tailored to your saved jobs and target skills."
+        features={[
+          "Personalized 3-stage credential pathways",
+          "Track prerequisites and recommended next steps",
+          "Bridge your skill gaps with targeted certifications",
+          "Track completed exams and monitor your career progress"
+        ]}
+      />
+    );
+  }
 
+  if (error) {
     return (
       <div style={{
         maxWidth: 900,
@@ -803,6 +788,12 @@ function TimelineStage({
   isLocked?: boolean;
   lockLastCertOnly?: boolean;
 }) {
+  const { user } = useUser();
+  const isPro = Boolean(user?.publicMetadata?.hasLifetimePass);
+  const checkoutUrl = getStripeCheckoutUrl(user?.id, user?.primaryEmailAddress?.emailAddress);
+  const effectiveIsLocked = !isPro && isLocked;
+  const effectiveLockLastCert = !isPro && lockLastCertOnly;
+
   const [showAlts, setShowAlts] = useState(false);
   const mainCerts = certs.slice(0, 3);
   const altCerts = certs.slice(3);
@@ -818,7 +809,7 @@ function TimelineStage({
         width: 24,
         height: 24,
         borderRadius: '50%',
-        background: isLocked ? '#f59e0b' : 'var(--accent)',
+        background: effectiveIsLocked ? '#f59e0b' : 'var(--accent)',
         border: '4px solid var(--bg-primary, #0c0a09)',
         display: 'flex',
         alignItems: 'center',
@@ -826,7 +817,7 @@ function TimelineStage({
         zIndex: 2,
       }}>
         <span style={{ fontSize: 11, fontWeight: 800, color: '#fff' }}>
-          {isLocked ? '🔒' : stepNumber}
+          {effectiveIsLocked ? '🔒' : stepNumber}
         </span>
       </div>
 
@@ -835,7 +826,7 @@ function TimelineStage({
           <h3 style={{ fontSize: 18, fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
             {title}
           </h3>
-          {isLocked && (
+          {effectiveIsLocked && (
             <span style={{
               background: 'var(--accent-dim, rgba(37,99,235,0.1))',
               border: '1px solid var(--accent, #2563eb)',
@@ -855,7 +846,7 @@ function TimelineStage({
         </p>
       </div>
 
-      {isLocked ? (
+      {effectiveIsLocked ? (
         <div style={{
           position: 'relative',
           borderRadius: 16,
@@ -910,7 +901,7 @@ function TimelineStage({
               Access the highest-salary specialist credentials, advanced authority paths, and unlimited job scans with the Lifetime Career Pass.
             </p>
             <a
-              href="https://buy.stripe.com/9B6eV69Tg85p3WAbiPdnW00"
+              href={checkoutUrl}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -939,7 +930,7 @@ function TimelineStage({
         <>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {mainCerts.map((cert, ci) => {
-              if (lockLastCertOnly && ci === mainCerts.length - 1) {
+              if (effectiveLockLastCert && ci === mainCerts.length - 1) {
                 return (
                   <div key={cert.id} style={{
                     position: 'relative',
@@ -984,7 +975,7 @@ function TimelineStage({
                         Unlock this certification, full ATS resume gap analysis, and senior career roadmaps with the Lifetime Career Pass.
                       </p>
                       <a
-                        href="https://buy.stripe.com/9B6eV69Tg85p3WAbiPdnW00"
+                        href={checkoutUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{

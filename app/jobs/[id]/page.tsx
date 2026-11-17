@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { useAuth } from '@clerk/nextjs';
+import { useAuth, useUser } from '@clerk/nextjs';
+import { getStripeCheckoutUrl } from '@/lib/stripe';
 import CertCard from '@/components/CertCard';
 import ScoreRing from '@/components/ScoreRing';
 
@@ -48,6 +49,9 @@ export default function JobDetailPage() {
   const [loading, setLoading] = useState(true);
   const [showFullDesc, setShowFullDesc] = useState(false);
   const { isLoaded, userId } = useAuth();
+  const { user } = useUser();
+  const isPro = Boolean(user?.publicMetadata?.hasLifetimePass);
+  const checkoutUrl = getStripeCheckoutUrl(user?.id, user?.primaryEmailAddress?.emailAddress);
   const [userSkills, setUserSkills] = useState<string[]>([]);
   const [completedCertSkills, setCompletedCertSkills] = useState<string[]>([]);
   const [showScorecard, setShowScorecard] = useState(false);
@@ -412,7 +416,7 @@ export default function JobDetailPage() {
                 </div>
               </div>
 
-              {/* Col 2 & 3: Detailed Breakdown & Bridge Score (Pro Locked) */}
+              {/* Col 2 & 3: Detailed Breakdown & Bridge Score */}
               <div style={{
                 flex: '3 1 500px',
                 position: 'relative',
@@ -423,69 +427,76 @@ export default function JobDetailPage() {
                 gap: 24,
                 flexWrap: 'wrap',
               }}>
-                {/* Frosted Lock Overlay */}
-                <div style={{
-                  position: 'absolute',
-                  inset: 0,
-                  zIndex: 10,
-                  background: 'linear-gradient(180deg, rgba(15,23,42,0.55) 0%, rgba(15,23,42,0.92) 100%)',
-                  backdropFilter: 'blur(5px)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  padding: 24,
-                  textAlign: 'center',
-                  borderRadius: 12,
-                  border: '1px solid var(--border)',
-                }}>
+                {/* Frosted Lock Overlay (hidden for Pro members) */}
+                {!isPro && (
                   <div style={{
-                    width: 38,
-                    height: 38,
-                    borderRadius: '50%',
-                    background: 'rgba(37,99,235,0.2)',
-                    border: '1px solid #3b82f6',
+                    position: 'absolute',
+                    inset: 0,
+                    zIndex: 10,
+                    background: 'linear-gradient(180deg, rgba(15,23,42,0.55) 0%, rgba(15,23,42,0.92) 100%)',
+                    backdropFilter: 'blur(5px)',
                     display: 'flex',
+                    flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: 18,
-                    marginBottom: 10,
+                    padding: 24,
+                    textAlign: 'center',
+                    borderRadius: 12,
+                    border: '1px solid var(--border)',
                   }}>
-                    🔒
-                  </div>
-                  <h4 style={{ fontSize: 16, fontWeight: 700, color: '#fff', margin: '0 0 6px' }}>
-                    Unlock ATS Resume Match & Skill Gap Breakdown
-                  </h4>
-                  <p style={{ fontSize: 12, color: '#cbd5e1', maxWidth: 420, margin: '0 0 16px', lineHeight: 1.4 }}>
-                    See every missing keyword your resume needs to pass recruiter filters and how recommended certifications boost your match rate.
-                  </p>
-                  <a
-                    href="https://buy.stripe.com/9B6eV69Tg85p3WAbiPdnW00"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      background: 'var(--accent, #2563eb)',
-                      color: '#fff',
-                      fontWeight: 700,
-                      fontSize: 13,
-                      padding: '10px 22px',
-                      borderRadius: 8,
-                      textDecoration: 'none',
-                      display: 'inline-flex',
+                    <div style={{
+                      width: 38,
+                      height: 38,
+                      borderRadius: '50%',
+                      background: 'rgba(37,99,235,0.2)',
+                      border: '1px solid #3b82f6',
+                      display: 'flex',
                       alignItems: 'center',
-                      gap: 6,
-                      boxShadow: '0 4px 14px rgba(37, 99, 235, 0.4)',
-                    }}
-                  >
-                    Unlock Lifetime Access — $9.99
-                  </a>
-                  <span style={{ fontSize: 10, color: '#94a3b8', marginTop: 8 }}>
-                    One-time payment · Instant unlock · Unlimited scans
-                  </span>
-                </div>
+                      justifyContent: 'center',
+                      fontSize: 18,
+                      marginBottom: 10,
+                    }}>
+                      🔒
+                    </div>
+                    <h4 style={{ fontSize: 16, fontWeight: 700, color: '#fff', margin: '0 0 6px' }}>
+                      Unlock ATS Resume Match & Skill Gap Breakdown
+                    </h4>
+                    <p style={{ fontSize: 12, color: '#cbd5e1', maxWidth: 420, margin: '0 0 16px', lineHeight: 1.4 }}>
+                      See every missing keyword your resume needs to pass recruiter filters and how recommended certifications boost your match rate.
+                    </p>
+                    <a
+                      href={checkoutUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        background: 'var(--accent, #2563eb)',
+                        color: '#fff',
+                        fontWeight: 700,
+                        fontSize: 13,
+                        padding: '10px 22px',
+                        borderRadius: 8,
+                        textDecoration: 'none',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 6,
+                        boxShadow: '0 4px 14px rgba(37, 99, 235, 0.4)',
+                      }}
+                    >
+                      Unlock Lifetime Access — $9.99
+                    </a>
+                    <span style={{ fontSize: 10, color: '#94a3b8', marginTop: 8 }}>
+                      One-time payment · Instant unlock · Unlimited scans
+                    </span>
+                  </div>
+                )}
 
                 {/* Col 2: The Skill Gap */}
-                <div style={{ flex: '2 1 260px', opacity: 0.3, pointerEvents: 'none', userSelect: 'none' }}>
+                <div style={{
+                  flex: '2 1 260px',
+                  opacity: isPro ? 1 : 0.3,
+                  pointerEvents: isPro ? 'auto' : 'none',
+                  userSelect: isPro ? 'auto' : 'none',
+                }}>
                   <h4 style={{ margin: '0 0 10px', fontSize: 12, color: 'var(--text-secondary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                     Skill Breakdown ({skills.length})
                   </h4>
@@ -529,7 +540,12 @@ export default function JobDetailPage() {
                 </div>
 
                 {/* Col 3: Roadmap Bridge Impact */}
-                <div style={{ flex: '1.5 1 240px', opacity: 0.3, pointerEvents: 'none', userSelect: 'none' }}>
+                <div style={{
+                  flex: '1.5 1 240px',
+                  opacity: isPro ? 1 : 0.3,
+                  pointerEvents: isPro ? 'auto' : 'none',
+                  userSelect: isPro ? 'auto' : 'none',
+                }}>
                   <div style={{
                     background: 'rgba(79, 110, 247, 0.04)',
                     border: '1px solid rgba(79, 110, 247, 0.08)',
@@ -584,26 +600,45 @@ export default function JobDetailPage() {
                 Sequenced step-by-step credential path tailored to this role
               </p>
             </div>
-            <a
-              href="https://buy.stripe.com/9B6eV69Tg85p3WAbiPdnW00"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                fontSize: 13,
-                fontWeight: 700,
-                color: '#fff',
-                background: 'var(--accent, #2563eb)',
-                padding: '8px 16px',
-                borderRadius: 8,
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 6,
-                boxShadow: '0 2px 8px rgba(37, 99, 235, 0.25)',
-              }}
-            >
-              ⚡ Lifetime Pass $9.99
-            </a>
+            {isPro ? (
+              <span
+                style={{
+                  fontSize: 12,
+                  fontWeight: 700,
+                  color: '#2563eb',
+                  background: 'var(--accent-dim, rgba(37, 99, 235, 0.08))',
+                  border: '1px solid rgba(37, 99, 235, 0.3)',
+                  padding: '6px 14px',
+                  borderRadius: 8,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                }}
+              >
+                ⚡ PRO PASS ACTIVE
+              </span>
+            ) : (
+              <a
+                href={checkoutUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  fontSize: 13,
+                  fontWeight: 700,
+                  color: '#fff',
+                  background: 'var(--accent, #2563eb)',
+                  padding: '8px 16px',
+                  borderRadius: 8,
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  boxShadow: '0 2px 8px rgba(37, 99, 235, 0.25)',
+                }}
+              >
+                ⚡ Lifetime Pass $9.99
+              </a>
+            )}
           </div>
 
           {stages.length === 0 ? (
@@ -617,8 +652,8 @@ export default function JobDetailPage() {
             }}>
               {stages.map((stage, stageIdx) => {
                 const isFinalStage = stageIdx === stages.length - 1;
-                const isStageLocked = isMultiStage && isFinalStage;
-                const lockLastCert = !isMultiStage && stage.certs.length >= 2;
+                const isStageLocked = !isPro && isMultiStage && isFinalStage;
+                const lockLastCert = !isPro && !isMultiStage && stage.certs.length >= 2;
 
                 return (
                   <div key={stage.stepNumber} style={{ marginBottom: 44, position: 'relative' }}>
@@ -736,7 +771,7 @@ export default function JobDetailPage() {
                             Access the highest-salary specialist credentials, advanced authority paths, and unlimited job scans with the Lifetime Career Pass.
                           </p>
                           <a
-                            href="https://buy.stripe.com/9B6eV69Tg85p3WAbiPdnW00"
+                            href={checkoutUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             style={{
@@ -833,7 +868,7 @@ export default function JobDetailPage() {
                                     Unlock the final certification on this career path, plus full ATS resume gap analysis with the Lifetime Career Pass.
                                   </p>
                                   <a
-                                    href="https://buy.stripe.com/9B6eV69Tg85p3WAbiPdnW00"
+                                    href={checkoutUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     style={{
