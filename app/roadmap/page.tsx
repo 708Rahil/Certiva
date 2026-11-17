@@ -619,7 +619,7 @@ function RoadmapContent() {
                       subtitle={stage.subtitle}
                       stepNumber={(index + 1).toString()}
                       certs={stage.certs}
-                      isLocked={index === filteredArr.length - 1 && filteredArr.length >= 3}
+                      isLocked={filteredArr.length >= 2 && index === filteredArr.length - 1}
                     />
                   ))
                 }
@@ -901,7 +901,7 @@ function TimelineStage({
               🔒
             </div>
             <h4 style={{ fontSize: 18, fontWeight: 700, color: '#fff', margin: '0 0 6px' }}>
-              Unlock Step 3: Senior Specialist Certifications
+              Unlock Step {stepNumber}: Advanced Specialist Certifications
             </h4>
             <p style={{ fontSize: 13, color: '#cbd5e1', maxWidth: 460, margin: '0 0 16px', lineHeight: 1.5 }}>
               Access the highest-salary specialist credentials, advanced authority paths, and unlimited job scans with the Lifetime Career Pass.
