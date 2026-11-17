@@ -95,8 +95,8 @@ function RoadmapContent() {
   };
 
   useEffect(() => {
-    fetchRoadmapData();
-  }, []);
+    fetchRoadmapData(urlJobId || undefined);
+  }, [urlJobId]);
 
   const handleJobChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const val = e.target.value;
@@ -620,6 +620,7 @@ function RoadmapContent() {
                       stepNumber={(index + 1).toString()}
                       certs={stage.certs}
                       isLocked={filteredArr.length >= 2 && index === filteredArr.length - 1}
+                      lockLastCertOnly={filteredArr.length === 1 && stage.certs.length >= 2}
                     />
                   ))
                 }
@@ -793,12 +794,14 @@ function TimelineStage({
   stepNumber,
   certs,
   isLocked,
+  lockLastCertOnly,
 }: {
   title: string;
   subtitle: string;
   stepNumber: string;
   certs: Cert[];
   isLocked?: boolean;
+  lockLastCertOnly?: boolean;
 }) {
   const [showAlts, setShowAlts] = useState(false);
   const mainCerts = certs.slice(0, 3);
@@ -935,9 +938,81 @@ function TimelineStage({
       ) : (
         <>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            {mainCerts.map(cert => (
-              <CertCard key={cert.id} cert={cert} />
-            ))}
+            {mainCerts.map((cert, ci) => {
+              if (lockLastCertOnly && ci === mainCerts.length - 1) {
+                return (
+                  <div key={cert.id} style={{
+                    position: 'relative',
+                    borderRadius: 16,
+                    overflow: 'hidden',
+                    border: '1px solid var(--border)',
+                    background: 'var(--bg-card)',
+                  }}>
+                    <div style={{ filter: 'blur(8px)', opacity: 0.35, pointerEvents: 'none', userSelect: 'none' }}>
+                      <CertCard cert={cert} />
+                    </div>
+                    <div style={{
+                      position: 'absolute',
+                      inset: 0,
+                      background: 'linear-gradient(180deg, rgba(15,23,42,0.45) 0%, rgba(15,23,42,0.92) 100%)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      padding: '24px 20px',
+                      textAlign: 'center',
+                      backdropFilter: 'blur(4px)',
+                    }}>
+                      <div style={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: '50%',
+                        background: 'rgba(37,99,235,0.2)',
+                        border: '1px solid #3b82f6',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: 18,
+                        marginBottom: 8,
+                      }}>
+                        🔒
+                      </div>
+                      <h4 style={{ fontSize: 17, fontWeight: 700, color: '#fff', margin: '0 0 6px' }}>
+                        Final Roadmap Certification Locked
+                      </h4>
+                      <p style={{ fontSize: 13, color: '#cbd5e1', maxWidth: 440, margin: '0 0 16px', lineHeight: 1.5 }}>
+                        Unlock this certification, full ATS resume gap analysis, and senior career roadmaps with the Lifetime Career Pass.
+                      </p>
+                      <a
+                        href="https://buy.stripe.com/9B6eV69Tg85p3WAbiPdnW00"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          background: 'var(--accent, #2563eb)',
+                          color: '#fff',
+                          fontWeight: 700,
+                          fontSize: 14,
+                          padding: '11px 22px',
+                          borderRadius: 10,
+                          textDecoration: 'none',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: 8,
+                          boxShadow: '0 4px 16px rgba(37, 99, 235, 0.4)',
+                          transition: 'transform 0.15s ease',
+                        }}
+                      >
+                        Unlock with Lifetime Pass — $9.99
+                      </a>
+                      <span style={{ fontSize: 11, color: '#94a3b8', marginTop: 8 }}>
+                        One-time payment · Instant unlock · Zero subscriptions
+                      </span>
+                    </div>
+                  </div>
+                );
+              }
+              return <CertCard key={cert.id} cert={cert} />;
+            })}
           </div>
 
           {/* Alternatives Expander */}
