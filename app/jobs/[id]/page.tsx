@@ -599,18 +599,20 @@ export default function JobDetailPage() {
                 href={`/roadmap?jobId=${job?.id}`}
                 style={{
                   fontSize: 13,
-                  fontWeight: 500,
-                  color: 'var(--accent)',
-                  background: 'var(--accent-dim)',
-                  padding: '6px 12px',
-                  borderRadius: 6,
+                  fontWeight: 600,
+                  color: '#fff',
+                  background: 'var(--accent)',
+                  padding: '7px 14px',
+                  borderRadius: 8,
                   textDecoration: 'none',
                   display: 'inline-flex',
                   alignItems: 'center',
-                  transition: 'background 0.2s',
+                  gap: 6,
+                  whiteSpace: 'nowrap',
+                  boxShadow: '0 2px 8px rgba(37, 99, 235, 0.25)',
+                  transition: 'opacity 0.15s ease',
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--bg-card)'; e.currentTarget.style.border = '1px solid var(--accent)'; e.currentTarget.style.padding = '5px 11px'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--accent-dim)'; e.currentTarget.style.border = 'none'; e.currentTarget.style.padding = '6px 12px'; }}
+                className="hover:opacity-90"
               >
                 View Job Roadmap →
               </Link>
@@ -644,9 +646,9 @@ export default function JobDetailPage() {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {filteredAndSorted.map((rec, i) => {
-                const isLastLocked = filteredAndSorted.length >= 2 && i === filteredAndSorted.length - 1;
+                const isLocked = i === 0;
 
-                if (isLastLocked) {
+                if (isLocked) {
                   return (
                     <div key={rec.id} style={{
                       position: 'relative',
@@ -663,7 +665,7 @@ export default function JobDetailPage() {
                         userSelect: 'none',
                       }}>
                         <CertCard
-                          rank={i + 1}
+                          rank={1}
                           certId={rec.cert_id}
                           name={rec.name}
                           provider={rec.provider}
@@ -709,10 +711,10 @@ export default function JobDetailPage() {
                           🔒
                         </div>
                         <h4 style={{ fontSize: 17, fontWeight: 700, color: '#fff', margin: '0 0 6px' }}>
-                          Final Recommendation #{i + 1} Locked
+                          Top Recommendation #1 Locked
                         </h4>
                         <p style={{ fontSize: 13, color: '#cbd5e1', maxWidth: 440, margin: '0 0 16px', lineHeight: 1.5 }}>
-                          Unlock this certification, full ATS resume gap analysis, and senior career roadmaps with the Lifetime Career Pass.
+                          Unlock the #1 ranked certification for this role, plus full ATS resume gap analysis with the Lifetime Career Pass.
                         </p>
                         <a
                           href="https://buy.stripe.com/9B6eV69Tg85p3WAbiPdnW00"
