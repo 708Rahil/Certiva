@@ -45,6 +45,8 @@ export default function UpgradeModal({
           borderRadius: 20,
           maxWidth: 480,
           width: '100%',
+          maxHeight: '90vh',
+          overflowY: 'auto',
           padding: '32px 28px',
           position: 'relative',
           boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',

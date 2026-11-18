@@ -102,7 +102,7 @@ export default function AnalyzePage() {
     borderRadius: 12,
     padding: '12px 16px',
     color: 'var(--text-primary)',
-    fontSize: 15,
+    fontSize: 16,
     fontFamily: 'var(--font-body)',
     outline: 'none',
     transition: 'border-color 0.2s',
@@ -180,7 +180,7 @@ export default function AnalyzePage() {
         borderRadius: 20,
         padding: '32px',
       }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, marginBottom: 16 }}>
           <div>
             <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>
               Job Title

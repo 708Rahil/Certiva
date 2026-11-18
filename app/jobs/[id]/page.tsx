@@ -667,7 +667,7 @@ export default function JobDetailPage() {
                       height: 24,
                       borderRadius: '50%',
                       background: isStageLocked ? '#f59e0b' : 'var(--accent)',
-                      border: '4px solid var(--bg-primary, #0c0a09)',
+                      border: '4px solid var(--bg, #ffffff)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
