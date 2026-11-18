@@ -6,7 +6,7 @@ export default function LandingPage() {
     <main style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text-primary)', overflowX: 'hidden' }}>
       
       {/* Hero Section Container */}
-      <div style={{
+      <div className="hero-container" style={{
         maxWidth: 1140,
         margin: '0 auto',
         padding: '80px 24px 80px',
@@ -14,13 +14,13 @@ export default function LandingPage() {
         {/* Two-Column Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
           gap: 40,
           alignItems: 'center',
         }}>
           
           {/* Left Column: Hero Text & Actions */}
-          <div style={{ textAlign: 'left' }}>
+          <div className="hero-text-col" style={{ textAlign: 'left' }}>
             <div style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -49,7 +49,7 @@ export default function LandingPage() {
               <span style={{ color: 'var(--accent)' }}>Next Certification.</span>
             </h1>
 
-            <p style={{
+            <p className="hero-subtitle" style={{
               fontSize: 17,
               color: 'var(--text-secondary)',
               maxWidth: 580,
@@ -60,7 +60,7 @@ export default function LandingPage() {
             </p>
 
             {/* CTAs */}
-            <div style={{
+            <div className="hero-ctas" style={{
               display: 'flex',
               gap: 16,
               flexWrap: 'wrap',
@@ -100,7 +100,7 @@ export default function LandingPage() {
           </div>
 
           {/* Right Column: Visual Dashboard Mockups (Side-by-Side/Stacked UI Shot) */}
-          <div style={{
+          <div className="hero-mockups-col" style={{
             position: 'relative',
             display: 'flex',
             flexDirection: 'column',
@@ -357,7 +357,7 @@ export default function LandingPage() {
           marginBottom: 80,
         }}>
           {/* Card 1 */}
-          <div style={{
+          <div className="feature-card" style={{
             background: 'var(--bg-card)',
             border: '1px solid var(--border)',
             borderRadius: 16,
@@ -371,7 +371,7 @@ export default function LandingPage() {
           </div>
 
           {/* Card 2 */}
-          <div style={{
+          <div className="feature-card" style={{
             background: 'var(--bg-card)',
             border: '1px solid var(--border)',
             borderRadius: 16,
@@ -385,7 +385,7 @@ export default function LandingPage() {
           </div>
 
           {/* Card 3 */}
-          <div style={{
+          <div className="feature-card" style={{
             background: 'var(--bg-card)',
             border: '1px solid var(--border)',
             borderRadius: 16,

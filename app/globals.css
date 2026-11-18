@@ -297,6 +297,39 @@ textarea {
   .cert-row-actions > * {
     flex: 1 1 120px !important;
   }
+
+  /* Landing Page Mobile Centering */
+  .hero-container {
+    padding: 48px 16px 60px !important;
+  }
+  .hero-text-col {
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .hero-subtitle {
+    margin: 0 auto 32px !important;
+    text-align: center !important;
+  }
+  .hero-ctas {
+    justify-content: center !important;
+    width: 100% !important;
+  }
+  .hero-ctas > a {
+    width: 100% !important;
+    text-align: center !important;
+  }
+  .hero-mockups-col {
+    max-width: 440px !important;
+    margin: 0 auto !important;
+  }
+  .feature-card {
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
 }
 
 
